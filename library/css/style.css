@@ -1,3 +1,106 @@
+@font-face {
+    font-family: 'Forum';
+    src: url('../assets/fonts/Forum-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Forum Bold';
+    src: url('../assets/fonts/Forum-Regular.ttf');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../assets/fonts/Inter-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter Bold';
+    src: url('../assets/fonts/Inter-Bold.ttf');
+    font-weight: bold;
+    font-style: normal;
+}
+
+body, header, main, footer {
+    box-sizing: border-box;
+}
+
+
+body {
+    color: white;
+    background-color: blanchedalmond;
+}
+
+#main-wrapper {
+    margin: 0 auto;
+    width: 1440px;
+    background-color: darkgray;
+}
+
+/* header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 90px;
+    padding: 20px;
+    color: white;
+    background-color: black;
+}
+
+#header-title {
+    font-family: Forum;
+    font-size: 30px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    font-family: Inter;
+    font-size: 20px;
+}
+
+nav ul {
+    margin-right: 10px;
+}
+
+nav li {
+    display: inline-block;    
+    margin-right: 30px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+/* header end */
+
+/* welcome */
+
+#welcome {
+    height: 600px;
+    background-color: black;
+    background-image: url(../assets/img/Welcome.jpg);
+}
+
+h1 {
+    width: 600px;
+    height: 220px;
+    font-family: Forum;
+    font-size: 40px;
+    line-height: 50px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background-color: black;
+}
+
+
 #carousel-pagination:active {
     color: #BB945F;
 }
