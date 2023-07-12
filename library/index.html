@@ -10,28 +10,28 @@
 <body>
     <div id="main-wrapper">
         <header>
-            <p id="header-title">Brooklyn Public Library</p>
+            <h1 id="header-title">Brooklyn Public Library</h1>
             <nav>
                 <ul>
-                    <li><a href="">About</a></li>
-                    <li><a href="">Favorites</a></li>
-                    <li><a href="">Coffee shop</a></li>
-                    <li><a href="">Contacts</a></li>
-                    <li><a href="">Library card</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#favorites">Favorites</a></li>
+                    <li><a href="#coffee-shop">Coffee shop</a></li>
+                    <li><a href="#contacts">Contacts</a></li>
+                    <li><a href="#library-card">Library card</a></li>
                 </ul>
                 <a href="http://">
-                    <img src="./assets/img/icon_profile.svg" alt="">
+                    <img src="./assets/img/icon_profile.svg" alt="profile">
                 </a>
             </nav>
         </header>
 
         <main>
+
             <section id="welcome">
                 <div id="overlay"></div>
 
-                <div id="welcom-bg">
-                    <h1>Welcome <br/> to the Brooklyn <br/> Library</h1>
-                </div>
+                <p id="welcome-title">Welcome <br/> to the Brooklyn <br/> Library</p>
+
             </section>
 
             <section id="about">
@@ -39,10 +39,16 @@
 
                 <p>The Brooklyn Library is a free workspace, a large number of books and a cozy coffee shop inside</p>
 
+                <div id="carousel">
+                    <img src="./assets/img/About-image1.jpg" alt="img1">
+                    <img src="./assets/img/About-image2.jpg" alt="img2">
+                    <img src="./assets/img/About-image3.jpg" alt="img3">
+                </div>
+
                 <ul id="carousel-pagination">
-                    <li></li>
-                    <li></li>
-                    <li></li>
+                    <li class="carousel-bullet-box"><div class="carousel-bullet"></div></li>
+                    <li class="carousel-bullet-box"><div class="carousel-bullet"></div></li>
+                    <li class="carousel-bullet-box"><div class="carousel-bullet"></div></li>
                 </ul>
 
             </section>

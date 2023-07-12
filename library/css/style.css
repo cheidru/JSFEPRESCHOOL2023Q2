@@ -42,6 +42,41 @@ body {
     background-color: darkgray;
 }
 
+/* common */
+h2 {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 60px;
+    width: auto;
+    height: 40px;
+    padding-top: 20px;    
+    text-align: center;
+    font-family: Forum;
+    font-size: 40px;
+    letter-spacing: 2px;
+    color: #0C0C0E;
+}
+
+h2::after {
+    content: ' ';
+    display: block;    
+    width: 50px;
+    height: 1px;
+    margin: 0 auto;
+    margin-top: 20px;
+    background-color: #0C0C0E;
+}
+
+p {
+    color: #000;
+    text-align: center;
+    font-family: Inter;
+    font-size: 20px;
+    line-height: 40px;
+}
+
+/* common end */
+
 /* header */
 header {
     display: flex;
@@ -56,6 +91,7 @@ header {
 #header-title {
     font-family: Forum;
     font-size: 30px;
+    color: white;
 }
 
 nav {
@@ -79,10 +115,13 @@ nav a {
     text-decoration: none;
 }
 
+nav a:hover {
+    font-weight: bold;
+}
 /* header end */
 
-/* welcome */
 
+/* welcome */
 #welcome {
     height: 600px;
     background-color: black;
@@ -94,32 +133,21 @@ nav a {
     background: linear-gradient(180deg, #0C0C0E 0%, #0C0C0E 0.01%, rgba(18, 18, 21, 0.10) 100%); ;
 }
 
-#welcome-bg {
-    display: flex;
-    width: 600px;
-    height: 220px;
-    padding: 35px 40px;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    background-color: black;
-}
-
-h1 {
-    display: flex;
+#welcome-title {
     width: 520px;
-    flex-direction: column;
-    justify-content: center;
-    flex-shrink: 0;
-    text-align: center;
+    height: 150px;
+    margin-top: -80px;
+    padding: 35px 40px;
     font-family: Forum;
     font-size: 40px;
     font-style: normal;
     font-weight: 400;
     line-height: 50px;
     letter-spacing: 3px;
+    text-align: center;
     text-transform: uppercase;
-    background-color: black;
+    color: white;
+    background-color:  #0C0C0E;
 }
 
 /* Welcome end */
@@ -132,9 +160,41 @@ h1 {
 
 }
 
-#carousel-pagination:active {
-    color: #BB945F;
+#carousel {
+    display: flex;
+    gap: 10px;
+    height: 560px;
+    margin-top: 20px;
+    padding: 0 20px;    
 }
+
+#carousel-pagination {
+    display: flex;
+    justify-content: space-between;
+    width: 58px;
+    height: 26px;
+    margin: 35px auto;
+}
+
+.carousel-bullet-box {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.carousel-bullet {
+    width: 16px;
+    height: 16px;
+    background-color: #0C0C0E;
+    border-radius: 50%;
+}
+
+.carousel-bullet-box:first-child .carousel-bullet {
+    background-color: #BB945F;
+}
+
 
 /* About end */
 
