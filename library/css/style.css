@@ -162,6 +162,7 @@ nav a:hover {
 
 #carousel {
     display: flex;
+    justify-content: space-between;
     gap: 10px;
     height: 560px;
     margin-top: 20px;
@@ -171,15 +172,13 @@ nav a:hover {
 #carousel-pagination {
     display: flex;
     justify-content: space-between;
-    width: 58px;
+    width: 78px;
     height: 26px;
     margin: 35px auto;
 }
 
 .carousel-bullet-box {
     display: inline-block;
-    width: 26px;
-    height: 26px;
     padding: 5px;
     cursor: pointer;
 }
@@ -203,4 +202,39 @@ nav a:hover {
 #favorites {
     height: 1437px;
     background-color: white;
+}
+
+#season-pick-radios {
+    margin-left: 20px;
+    padding-top: 40px;;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+        color: black;
+}
+
+#season-pick-radios div {
+    display: inline-block;
+    margin-right: 45px;
+    font-family: Inter;
+    font-size: 20px;
+    color: #000;
+}
+
+#season-pick-radios label {
+    margin-left: 20px;
+}
+
+#favorites-items-wrapper {
+    display: flex;
+    height: 1150px;
+    background-color: lightslategray;
+}
+
+.favorite-item {
+    display: flex;
+    height: 555px;
+
 }
