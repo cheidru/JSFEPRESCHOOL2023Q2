@@ -201,40 +201,122 @@ nav a:hover {
 
 #favorites {
     height: 1437px;
+    color: black;
     background-color: white;
 }
 
 #season-pick-radios {
     margin-left: 20px;
-    padding-top: 40px;;
+    margin-bottom: 40px;
+    padding-top: 40px;
     font-family: Inter;
     font-size: 20px;
     font-style: normal;
-    font-weight: 700;
     line-height: normal;
-        color: black;
+ 
+}
+
+#season-pick-radios, #season-pick-radios input:checked + label {
+    font-weight: 700;
 }
 
 #season-pick-radios div {
+    margin-left: -5px; /* подгонка */
     display: inline-block;
-    margin-right: 45px;
-    font-family: Inter;
-    font-size: 20px;
-    color: #000;
+    font-weight: 400;
+}
+
+input[name="season"] {
+    display: none;
 }
 
 #season-pick-radios label {
-    margin-left: 20px;
+    margin-right: 90px;
+}
+
+#season-pick-radios label:before {
+    content: "";
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    margin-right: 20px;
+    background-image: url(../assets/img/radio.svg);
+}
+
+#season-pick-radios input:checked + label:before {
+    background-image: url(../assets/img/radio-checked.svg);
 }
 
 #favorites-items-wrapper {
     display: flex;
-    height: 1150px;
-    background-color: lightslategray;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 40px;
+    height: 1439px;
+    width: 1440px;
+    padding: 0 20px 40px;
 }
 
 .favorite-item {
     display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: flex-start;
     height: 555px;
+    width: 550px;
+    padding: 15px 20px;
+    text-align: left;
+    border: 1px solid black;
+}
 
+#staff-picks {
+    margin-bottom: 20px;    
+    font-family: Forum;
+    font-size: 20px;
+    line-height: 40px; /* 200% */
+    letter-spacing: 2px;
+
+}
+
+#staff-picks::after {
+    content: ' ';
+    display: block;
+    left: 0;    
+    width: 60px;
+    height: 1px;
+    background-color: #0C0C0E;
+}
+
+#favorite-item-title {
+    margin-bottom: 20px;
+    text-align: left;
+    font-family: Inter;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 40px; /* 266.667% */
+    letter-spacing: 2px;
+}
+
+#favorite-item-description {
+    width: 355px;
+    margin-bottom: 15px;
+    text-align: left;
+    font-family: Inter;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 40px; /* 266.667% */
+    letter-spacing: 2px;
+    text-transform: capitalize; 
+}
+
+#favorite-button {
+    width: 75px;
+    height: 30px;
+}
+
+#favorite-book1 {
+    position: absolute;
+    bottom: 0;
+    right: -40px;
 }
