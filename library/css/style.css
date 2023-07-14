@@ -49,7 +49,6 @@ h2 {
     margin-bottom: 60px;
     width: auto;
     height: 40px;
-    padding-top: 20px;    
     text-align: center;
     font-family: Forum;
     font-size: 40px;
@@ -73,6 +72,12 @@ p {
     font-family: Inter;
     font-size: 20px;
     line-height: 40px;
+}
+
+section:not(#welcome) {
+    padding: 20px 20px 40px;
+    color: black;
+    background-color: white;
 }
 
 /* common end */
@@ -155,9 +160,9 @@ nav a:hover {
 /* About */
 
 #about {
+    box-sizing: border-box;
     height: 823px;
     background-color: white;
-
 }
 
 #carousel {
@@ -166,7 +171,7 @@ nav a:hover {
     gap: 10px;
     height: 560px;
     margin-top: 20px;
-    padding: 0 20px;    
+    padding-bottom: 40px;    
 }
 
 #carousel-pagination {
@@ -174,7 +179,7 @@ nav a:hover {
     justify-content: space-between;
     width: 78px;
     height: 26px;
-    margin: 35px auto;
+    margin: 0 auto;
 }
 
 .carousel-bullet-box {
@@ -200,9 +205,7 @@ nav a:hover {
 /* Favorites */
 
 #favorites {
-    height: 1437px;
-    color: black;
-    background-color: white;
+    height: 1439px;
 }
 
 #season-pick-radios {
@@ -252,14 +255,14 @@ input[name="season"] {
     flex-direction: column;
     align-items: flex-start;
     flex-wrap: wrap;
-    gap: 40px;
+    row-gap: 40px;
+    column-gap: 220px; /* подгонка */
     height: 1439px;
-    width: 1440px;
-    padding: 0 20px 40px;
 }
 
 .favorite-item {
     display: flex;
+    box-sizing: border-box;
     position: relative;
     flex-direction: column;
     align-items: flex-start;
@@ -296,6 +299,11 @@ input[name="season"] {
     font-weight: 700;
     line-height: 40px; /* 266.667% */
     letter-spacing: 2px;
+    text-transform: capitalize;
+}
+
+#favorite-item-title span {
+    text-transform: uppercase;
 }
 
 #favorite-item-description {
@@ -310,13 +318,81 @@ input[name="season"] {
     text-transform: capitalize; 
 }
 
-#favorite-button {
+.favorite-button {
+    position: absolute;
+    bottom: 15px;
+    left: 20px;
     width: 75px;
     height: 30px;
+    flex-shrink: 0;
+    font-family: Inter;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background-color: white;
+    border-radius: 2px;
+    border: 1px solid #0C0C0E;
 }
 
 #favorite-book1 {
     position: absolute;
-    bottom: 0;
-    right: -40px;
+    bottom: -1px;
+    right: -40px;    
 }
+
+/* Favorites end */
+
+/* Coffee shop */
+
+#coffee-shop {
+    height: 841px;
+}
+
+#coffee-shop-intro {
+    margin-bottom: 40px;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 40px;
+    letter-spacing: 2px;
+}
+
+#coffe-shop-menu-wrapper {
+    display: flex;
+    justify-content:space-between;
+    height: 841px;
+}
+/* 
+#coffee-shop table {
+    width:  ;
+} */
+
+th:first-child {
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 40px; /* 200% */
+    letter-spacing: 2px;
+    text-transform: capitalize;
+}
+
+#coffee-n-tee tr th:first-child {
+    text-align: left;
+}
+
+
+#desserts-n-caces tr th:first-child {
+    text-align: right;
+}
+
+.menu-title {
+    color: #BB945F;
+    font-family: Forum;
+    font-size: 40px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+/* Coffee shop end */
+
+/* Our Contacts */
