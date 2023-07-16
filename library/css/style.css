@@ -345,7 +345,7 @@ input[name="season"] {
 /* Coffee shop */
 
 #coffee-shop {
-    height: 841px;
+    height: 781px;
 }
 
 #coffee-shop-intro {
@@ -376,12 +376,16 @@ th:first-child {
     text-transform: capitalize;
 }
 
-#coffee-n-tee tr th:first-child {
+#coffee-n-tee {
+    text-align: left;
+}
+
+#coffee-n-tee caption {
     text-align: left;
 }
 
 
-#desserts-n-caces tr th:first-child {
+#desserts-n-caces {
     text-align: right;
 }
 
@@ -393,6 +397,82 @@ th:first-child {
     letter-spacing: 2px;
 }
 
+tr {
+    height: 40px;
+}
+
+tr th {
+    vertical-align: middle;
+}
+
+tr th:first-child {
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 40px; /* 200% */
+    letter-spacing: 2px;
+    text-transform: capitalize;
+}
+
+tr th:nth-child(2) {
+    width: 220px;
+    padding: 0 60px;
+
+}
+
+tr th:nth-child(2)::after {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 1px;
+    background-color: #BB945F;
+}
+
+tr th:nth-child(3) {
+    width: 21px;
+    text-align: left;
+    font-family: Forum;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 40px; /* 200% */
+    letter-spacing: 2px;
+}
+
 /* Coffee shop end */
 
 /* Our Contacts */
+#contacts {
+    height: 575px;
+}
+
+#contacts-wrapper {
+    display: flex;
+    gap: 201px;
+}
+
+#contacts-wrapper img {
+    height: 414px;
+
+}
+
+#contacts-text p {
+    text-align: left;
+}
+
+/* Our Contacts end */
+
+/* Digital Library Cards */
+#library-card {
+    height: 614px;
+}
+
+#library-card-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Digital Library Cards end */
+footer {
+    height: 250px;
+    background-color: black;
+}
