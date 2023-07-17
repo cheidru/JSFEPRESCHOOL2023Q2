@@ -167,34 +167,34 @@
                         <table>
                             <caption class="menu-title">Coffee & Tea</caption>
                             <tr>
-                                <th>Cold Brew Coffee</th>
-                                <th></th>
-                                <th>$3</th>
+                                <td>Cold Brew Coffee</td>
+                                <td></td>
+                                <td>$3</td>
                              </tr>
                              <tr>
-                                <th>French Press Pot</th>
-                                <th></th>
-                                <th>$5</th>
+                                <td>French Press Pot</td>
+                                <td></td>
+                                <td>$5</td>
                              </tr>
                              <tr>
-                                <th>Espresso</th>
-                                <th></th>
-                                <th>$2</th>
+                                <td>Espresso</td>
+                                <td></td>
+                                <td>$2</td>
                              </tr>
                              <tr>
-                                <th>Cappuccino</th>
-                                <th></th>
-                                <th>$4</th>
+                                <td>Cappuccino</td>
+                                <td></td>
+                                <td>$4</td>
                              </tr>
                              <tr>
-                                <th>Hot tea</th>
-                                <th></th>
-                                <th>$2</th>
+                                <td>Hot tea</td>
+                                <td></td>
+                                <td>$2</td>
                              </tr>
                              <tr>
-                                <th>Cold tea</th>
-                                <th></th>
-                                <th>$2</th>
+                                <td>Cold tea</td>
+                                <td></td>
+                                <td>$2</td>
                              </tr>
 
                         </table>
@@ -204,34 +204,34 @@
                         <table>
                             <caption class="menu-title">Desserts & Cakes</caption>
                             <tr>
-                                <th>Forest Gateau</th>
-                                <th></th>
-                                <th>$16</th>
+                                <td>Forest Gateau</td>
+                                <td></td>
+                                <td>$16</td>
                              </tr>
                              <tr>
-                                <th>Blue Moon</th>
-                                <th></th>
-                                <th>$16</th>
+                                <td>Blue Moon</td>
+                                <td></td>
+                                <td>$16</td>
                              </tr>
                              <tr>
-                                <th>Truffle Cake</th>
-                                <th></th>
-                                <th>$15</th>
+                                <td>Truffle Cake</td>
+                                <td></td>
+                                <td>$15</td>
                              </tr>
                              <tr>
-                                <th>Chocolate Cake</th>
-                                <th></th>
-                                <th>$18</th>
+                                <td>Chocolate Cake</td>
+                                <td></td>
+                                <td>$18</td>
                              </tr>
                              <tr>
-                                <th>Poet’s Dream Cake</th>
-                                <th></th>
-                                <th>$16</th>
+                                <td>Poet’s Dream Cake</td>
+                                <td></td>
+                                <td>$16</td>
                              </tr>
                              <tr>
-                                <th>Pineapple Cake</th>
-                                <th></th>
-                                <th>$14</th>
+                                <td>Pineapple Cake</td>
+                                <td></td>
+                                <td>$14</td>
                              </tr>
                         </table>
                     </div>
@@ -244,13 +244,14 @@
 
                 <div id="contacts-wrapper">
                     <div id="contacts-text">
-                        <p>For all Library inquiries:</p>
-                        <p>
-                        Please call (617) 730-2370 <br/>
-                        For TTY service, please call (617) 730-2370<br/>
-                        Putterham Library: (617) 730-2385
-                        </p>
-                        <p>Senior Staff</p>
+                        <p id="contacts-text-title">For all Library inquiries:</p>
+
+                        <p>Please call (617) 730-2370</p>
+                        <p>For TTY service, please call (617) 730-2370</p>
+                        <p>Putterham Library: (617) 730-2385</p>
+
+                        <p id="contacts-text-senior-staff">Senior Staff</p>
+
                         <p>Library Director: <span>Amanda Hirst</span></p>
 
                     </div>
@@ -262,10 +263,17 @@
                 <h2>Digital Library Cards</h2>
 
                 <div id="library-card-wrapper">
-                    <div id="find-card">
-                        <p id="find-card-title">Find your Library card</p>
-                        <form action="find-card-form">
 
+                    <div id="find-card-wrapper">
+                        <p id="find-card-title">Find your Library card</p>
+
+                        <form id="find-card-form" action="">
+                            <div id="find-card-form-input">
+                                <p>Brooklyn Public Library</p>
+                                <input type="text" placeholder="Reader's name">
+                                <input type="text" placeholder="Card number">
+                            </div>
+                            <button>Check the card</button>
                         </form>
 
                     </div>
@@ -276,18 +284,42 @@
                             logging into account or you can register 
                             a new account
                         </p>
-                        <button></button>
-                        <button></button>
+
+                        <div id="get-a-card-buttons">
+                            <button>Sign Up</button>
+                            <button>Log in</button>
+                        </div>
+
                     </div>
                 </div>
             </section>
         </main>
+
         <footer>
-            <ul>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-            </ul>
+            <div>
+                <p id="footer-address">286 Cadman Plaza, New York, NY 11238, United States</p>
+                <p class="work-hours">Mon - Fri <br/>08:00 am - 07:00 pm</p>
+            </div>
+
+            <div>
+                <div id="footer-social">
+                    <ul>
+                        <li><a href=""><img src="./assets/img/u_twitter-alt.svg" alt="twitter"></a></li>
+                        <li><a href=""><img src="./assets/img/u_instagram.svg" alt="instagram"></a></li>
+                        <li><a href=""><img src="./assets/img/u_facebook-f.svg" alt="facebook"></a></li>
+                    </ul>
+                </div>
+                <p class="work-hours">Sat - Sun <br/>10:00 am - 06:00 pm</p>                
+            </div>
+
+            <div id="devider-line"></div>
+            
+            <div id="footer-rs-school">
+                <p>2023</p>
+                <p>The Rolling Scopes School</p>
+                <p>Username</p>
+            </div>
+
         </footer>
     </div>
 </body>

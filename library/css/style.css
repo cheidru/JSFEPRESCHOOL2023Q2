@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'Forum';
     src: url('../assets/fonts/Forum-Regular.ttf');
-    font-weight: normal;
+    font-weight: 400;
     font-style: normal;
 }
 
@@ -15,7 +15,7 @@
 @font-face {
     font-family: 'Inter';
     src: url('../assets/fonts/Inter-Regular.ttf');
-    font-weight: normal;
+    font-weight: 400;
     font-style: normal;
 }
 
@@ -75,6 +75,7 @@ p {
 }
 
 section:not(#welcome) {
+    box-sizing: border-box;
     padding: 20px 20px 40px;
     color: black;
     background-color: white;
@@ -145,8 +146,6 @@ nav a:hover {
     padding: 35px 40px;
     font-family: Forum;
     font-size: 40px;
-    font-style: normal;
-    font-weight: 400;
     line-height: 50px;
     letter-spacing: 3px;
     text-align: center;
@@ -226,7 +225,6 @@ nav a:hover {
 #season-pick-radios div {
     margin-left: -5px; /* подгонка */
     display: inline-block;
-    font-weight: 400;
 }
 
 input[name="season"] {
@@ -235,6 +233,7 @@ input[name="season"] {
 
 #season-pick-radios label {
     margin-right: 90px;
+    cursor: pointer;
 }
 
 #season-pick-radios label:before {
@@ -257,7 +256,7 @@ input[name="season"] {
     flex-wrap: wrap;
     row-gap: 40px;
     column-gap: 220px; /* подгонка */
-    height: 1439px;
+    height: 1150px;
 }
 
 .favorite-item {
@@ -312,7 +311,6 @@ input[name="season"] {
     text-align: left;
     font-family: Inter;
     font-size: 15px;
-    font-weight: 400;
     line-height: 40px; /* 266.667% */
     letter-spacing: 2px;
     text-transform: capitalize; 
@@ -345,14 +343,13 @@ input[name="season"] {
 /* Coffee shop */
 
 #coffee-shop {
-    height: 781px;
+    height: 841px;
 }
 
 #coffee-shop-intro {
     margin-bottom: 40px;
     font-family: Inter;
     font-size: 20px;
-    font-weight: 400;
     line-height: 40px;
     letter-spacing: 2px;
 }
@@ -370,7 +367,6 @@ input[name="season"] {
 th:first-child {
     font-family: Inter;
     font-size: 20px;
-    font-weight: 400;
     line-height: 40px; /* 200% */
     letter-spacing: 2px;
     text-transform: capitalize;
@@ -384,8 +380,11 @@ th:first-child {
     text-align: left;
 }
 
-
 #desserts-n-caces {
+    text-align: right;
+}
+
+#desserts-n-caces caption {
     text-align: right;
 }
 
@@ -393,7 +392,6 @@ th:first-child {
     color: #BB945F;
     font-family: Forum;
     font-size: 40px;
-    font-weight: 400;
     letter-spacing: 2px;
 }
 
@@ -401,39 +399,40 @@ tr {
     height: 40px;
 }
 
-tr th {
+
+td {
     vertical-align: middle;
+    padding-top: 40px;
 }
 
-tr th:first-child {
+tr td:first-child {
     font-family: Inter;
     font-size: 20px;
-    font-weight: 400;
     line-height: 40px; /* 200% */
     letter-spacing: 2px;
     text-transform: capitalize;
 }
 
-tr th:nth-child(2) {
-    width: 220px;
+tr td:nth-child(2) {
+    width: 100px;
     padding: 0 60px;
 
 }
 
-tr th:nth-child(2)::after {
+tr td:nth-child(2)::after {
     content: "";
     display: block;
     width: 100px;
     height: 1px;
+    margin-top: 40px;
     background-color: #BB945F;
 }
 
-tr th:nth-child(3) {
+tr td:nth-child(3) {
     width: 21px;
     text-align: left;
     font-family: Forum;
     font-size: 20px;
-    font-weight: 400;
     line-height: 40px; /* 200% */
     letter-spacing: 2px;
 }
@@ -447,17 +446,43 @@ tr th:nth-child(3) {
 
 #contacts-wrapper {
     display: flex;
-    gap: 201px;
+    gap: 200px;
 }
 
 #contacts-wrapper img {
     height: 414px;
+    width: 696px;
+}
 
+#contacts-text {
+    width: 503px;
+    font-family: Inter;
+    font-size: 20px;
+    line-height: 40px; /* 200% */
+    letter-spacing: 2px;
+    text-transform: capitalize;
 }
 
 #contacts-text p {
     text-align: left;
 }
+
+#contacts-text p:not(#contacts-text-title) {
+    margin-bottom: 20px;
+}
+
+#contacts-text-title {
+    margin-bottom: 40px;
+}
+
+#contacts-text p:nth-child(3){
+    min-width: 505px;
+}
+
+#contacts-text-title, #contacts-text-senior-staff, #contacts-text span {
+    font-weight: 700;
+}
+
 
 /* Our Contacts end */
 
@@ -471,8 +496,188 @@ tr th:nth-child(3) {
     justify-content: space-between;
 }
 
+#find-card-title {
+    margin-bottom: 30px;
+    font-family: Inter;
+    font-size: 30px;
+    letter-spacing: 0.6px;
+}
+
+#find-card-form {
+    display: flex;
+    width: 600px;
+    height: 386px;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: center;
+    border: 3px solid #BB945F;
+}
+
+#find-card-form-input {
+    box-sizing: border-box;
+    width: 560px;
+    height: 272px;
+    padding: 20px;
+    margin: 20px;
+    flex-shrink: 0;
+    background: #BB945F;
+}
+
+#find-card-form-input p {
+    margin-bottom: 20px;
+    text-align: left;
+    font-family: Forum;
+    font-size: 30px;
+    line-height: 50px; /* 166.667% */
+    letter-spacing: 0.6px;
+}
+
+#find-card-form-input input {
+    box-sizing: border-box;
+    width: 520px;
+    height: 66px;
+    padding-left: 20px;
+    margin-bottom: 25px;
+    flex-shrink: 0;
+    font-family: Forum;
+    font-size: 30px;
+    line-height: 50px; /* 166.667% */
+    letter-spacing: 0.6px;
+    border: none;
+    border-radius: 10px;
+    background: #FFF;
+}
+
+#find-card-form button {
+    display: inline-flex;
+    padding: 10px 40px;
+    align-items: flex-end;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-radius: 2px;
+    border: 1px solid #0C0C0E;
+}
+
+#get-a-card {
+    width: 456px;
+    text-align: right;
+}
+
+#get-a-card p {
+    text-align: right;
+}
+
+#get-a-card-title {
+    margin-bottom: 35px;
+    font-family: Forum;
+    font-size: 30px;
+    letter-spacing: 0.6px;
+}
+
+#get-a-card-text {
+    margin-bottom: 35px;
+    font-family: Inter;
+    font-size: 20px;
+    line-height: 40px; /* 200% */
+    letter-spacing: 0.4px;
+}
+
+#get-a-card-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+#get-a-card button {
+    display: flex;
+    width: 75px;
+    height: 30px;
+    padding: 10px 0px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 2px;
+    border: 1px solid #0C0C0E;
+}
+
 /* Digital Library Cards end */
 footer {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 20px 20px 44px;
     height: 250px;
     background-color: black;
 }
+
+footer div {
+    display: flex;
+    justify-content: space-between;
+}
+
+footer div p {
+    color: #FFF;
+}
+
+footer div:first-child {
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+#footer-address {
+    width: 229px;
+    flex-shrink: 0;
+    font-family: Inter;
+    font-size: 15px;
+    line-height: 20px; /* 133.333% */
+    text-align: left;
+}
+
+.work-hours {
+    text-align: right;
+    font-family: Inter;
+    font-size: 15px;
+    line-height: 20px; /* 133.333% */
+}
+
+footer div:nth-child(2) {
+    height: 40px;
+}
+
+#footer-social ul {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+#footer-social li {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+
+#devider-line {
+    width: 1400px;
+    height: 1px;
+    margin: 30px 0 44px;
+    background: #FFF;
+}
+
+#footer-rs-school {
+    display: flex;
+    height: 22px;
+    justify-content: space-between;
+}
+
+#footer-rs-school p {
+    text-align: center;
+    font-family: Inter;
+    font-size: 20px;
+    line-height: 20px; /* 100% */
+    letter-spacing: 2px;
+}
+
+
+
