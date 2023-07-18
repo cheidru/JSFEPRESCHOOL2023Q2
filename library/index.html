@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/style.css">
     <title>Welcome to the Brooklyn Library</title>
 </head>
@@ -11,18 +10,18 @@
     <div id="main-wrapper">
         <header>
             <h1 id="header-title">Brooklyn Public Library</h1>
-            <nav>
-                <ul>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#favorites">Favorites</a></li>
-                    <li><a href="#coffee-shop">Coffee shop</a></li>
-                    <li><a href="#contacts">Contacts</a></li>
-                    <li><a href="#library-card">Library card</a></li>
-                </ul>
-                <a href="http://">
-                    <img src="./assets/img/icon_profile.svg" alt="profile">
-                </a>
-            </nav>
+            <div id="nav-wrapper">
+                <nav>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#favorites">Favorites</a></li>
+                        <li><a href="#coffee-shop">Coffee shop</a></li>
+                        <li><a href="#contacts">Contacts</a></li>
+                        <li><a href="#library-card">Library card</a></li>
+                    </ul>
+                </nav>
+                <a href="http://"><img src="./assets/img/icon_profile.svg" alt="profile"></a>
+            </div>
         </header>
 
         <main>
@@ -30,7 +29,7 @@
             <section id="welcome">
                 <div id="overlay"></div>
 
-                <p id="welcome-title">Welcome <br/> to the Brooklyn <br/> Library</p>
+                <p id="welcome-title">Welcome&nbsp<br/>to the Brooklyn<br/>Library</p>
 
             </section>
 
@@ -96,7 +95,7 @@
                             Not for the faint of heart.
                         </p>
                         <button class="favorite-button">Buy</button>
-                        <img id="favorite-book1" src="./assets/img/Favorite-Book1.jpg" alt="favorite book 1">
+                        <img id="favorite-book" src="./assets/img/Favorite-Book1.jpg" alt="favorite book 1">
                     </div>
 
 
@@ -114,7 +113,7 @@
                             inspired introduction to Dante's main themes.
                         </p>
                         <button class="favorite-button">Buy</button>
-                        <img id="favorite-book1" src="./assets/img/Favorite-Book2.jpg" alt="favorite book 2">
+                        <img id="favorite-book" src="./assets/img/Favorite-Book2.jpg" alt="favorite book 2">
                     </div>
 
 
@@ -131,7 +130,7 @@
                             in upstate New York and befriends a beautiful witch.
                         </p>
                         <button class="favorite-button">Buy</button>
-                        <img id="favorite-book1" src="./assets/img/Favorite-Book3.jpg" alt="favorite book 3">
+                        <img id="favorite-book" src="./assets/img/Favorite-Book3.jpg" alt="favorite book 3">
                     </div>
 
 
@@ -147,11 +146,209 @@
                             and thrived as the modern world has changed around them.
                         </p>
                         <button class="favorite-button">Buy</button>
-                        <img id="favorite-book1" src="./assets/img/Favorite-Book4.jpg" alt="favorite book 4">
+                        <img id="favorite-book" src="./assets/img/Favorite-Book4.jpg" alt="favorite book 4">
                     </div>
 
                 </div>
+
+
+                <div id="hidden-favorites">
+
+                    <div class="favorite-item" id="item5">
+
+                        <p id="staff-picks">Staff Picks</p>
+
+                        <p id="favorite-item-title"><span>The Body</span><br/>By Stephen King</p>
+
+                        <p id="favorite-item-description">
+                            Powerful novel that takes you back to a nostalgic time, 
+                            exploring both the beauty and danger and loss of innocence 
+                            that is youth.
+                        </p>
+                        <button class="favorite-button">Buy</button>
+                        <img id="favorite-book" src="./assets/img/Favorite-Book5.jpg" alt="favorite book 5">
+                    </div>
+
+                    <div class="favorite-item" id="item6">
+
+                        <p id="staff-picks">Staff Picks</p>                        
+                        
+                        <p id="favorite-item-title"><span>Days of Distraction</span><br/>By Alexandra Chang</p>
+
+                        <p id="favorite-item-description">
+                            A sardonic view of Silicon Valley culture, a meditation 
+                            on race, and a journal of displacement and belonging, all 
+                            in one form-defying package of spare prose.
+                        </p>
+                        <button class="favorite-button">Buy</button>
+                        <img id="favorite-book" src="./assets/img/Favorite-Book6.jpg" alt="favorite book 6">
+                    </div>
+
+                    <div class="favorite-item" id="item7">                        
+                        
+                        <p id="staff-picks">Staff Picks</p>
+
+                        <p id="favorite-item-title"><span>Crude: A Memoir</span><br/>By Pablo Fajardo &amp; Sophie Tardy-Joubert</p>
+
+                        <p id="favorite-item-description">
+                            Drawing and color by Damien Roudeau | This book 
+                            illustrates the struggles of a group of indigenous 
+                            Ecuadoreans as they try to sue the ChevronTexaco 
+                            company for damage their oil fields did to 
+                            the Amazon and her people
+                        </p>
+                        <button class="favorite-button">Buy</button>
+                        <img id="favorite-book" src="./assets/img/Favorite-Book7.jpg" alt="favorite book 7">
+                    </div>
+
+                    <div class="favorite-item" id="item8">
+
+                        <p id="staff-picks">Staff Picks</p>                        
+                        
+                        <p id="favorite-item-title"><span>The Octopus Museum: Poems</span><br/>By Brenda Shaughnessy</p>
+
+                        <p id="favorite-item-description">
+                            This collection of bold and scathingly beautiful feminist 
+                            poems imagines what comes after our current age of environmental 
+                            destruction, racism, sexism, and divisive politics.
+                        </p>
+                        <button class="favorite-button">Buy</button>
+                        <img id="favorite-book" src="./assets/img/Favorite-Book8.jpg" alt="favorite book 8">
+                    </div>
+
+                    <div class="favorite-item" id="item9">
+
+                        <p id="staff-picks">Staff Picks</p>                        
+                        
+                        <p id="favorite-item-title"><span>Casual Conversation</span><br/>By Renia White</p>
+
+                        <p id="favorite-item-description">
+                            White's impressive debut collection takes readers 
+                            through and beyond the concepts of conversation and 
+                            the casual - both what we say to each other and what 
+                            we don't, examining the possibilities around how we 
+                            construct and communicate identity. 
+                        </p>
+                        <button class="favorite-button">Buy</button>
+                        <img id="favorite-book" src="./assets/img/Favorite-Book9.jpg" alt="favorite book 9">
+                    </div>
+
+                    <div class="favorite-item" id="item10">
+
+                        <p id="staff-picks">Staff Picks</p>                        
+                        
+                        <p id="favorite-item-title"><span>Rickey: The Life and Legend</span><br/>By Howard Bryant</p>
+
+                        <p id="favorite-item-description">
+                            With the fall rolling around, one can't help but think of 
+                            baseball's postseason coming up! And what better way to prepare 
+                            for it than reading the biography of one of the game's all-time 
+                            greatest performers, the Man of Steal, Rickey Henderson?
+                        </p>
+                        <button class="favorite-button">Buy</button>
+                        <img id="favorite-book" src="./assets/img/Favorite-Book10.jpg" alt="favorite book 10">
+                    </div>
+
+                    <div class="favorite-item" id="item11">
+
+                        <p id="staff-picks">Staff Picks</p>
+                        
+                        <p id="favorite-item-title"><span>Carry: A Memoir of Survival on Stolen Land</span><br/>By Toni Jenson</p>
+
+                        <p id="favorite-item-description">
+                            This memoir about the author's relationship with 
+                            gun violence feels both expansive and intimate, 
+                            resulting in a lyrical indictment of the way things are.
+                        </p>
+                        <button class="favorite-button">Buy</button>
+                        <img id="favorite-book" src="./assets/img/Favorite-Book11.jpg" alt="favorite book 11">
+                    </div>
+
+                    <div class="favorite-item" id="item12">
+
+                        <p id="staff-picks">Staff Picks</p>                        
+                        
+                        <p id="favorite-item-title"><span>Dominicana</span><br/>By Angie Cruz</p>
+
+                        <p id="favorite-item-description">
+                            A fascinating story of a teenage girl who marries 
+                            a man twice her age with the promise to bring her 
+                            to America. Her marriage is an opportunity for her 
+                            family to eventually immigrate. For fans of Isabel 
+                            Allende and Julia Alvarez.
+                        </p>
+                        <button class="favorite-button">Buy</button>
+                        <img id="favorite-book" src="./assets/img/Favorite-Book12.jpg" alt="favorite book 12">
+                    </div>
+
+                    <div class="favorite-item" id="item13">
+
+                        <p id="staff-picks">Staff Picks</p>
+                                                
+                        <p id="favorite-item-title"><span>Let My People Go Surfing</span><br/>By Yvon Chouinard</p>
+
+                        <p id="favorite-item-description">
+                            Chouinard—climber, businessman, environmentalist—shares 
+                            tales of courage and persistence from his experience of 
+                            founding and leading Patagonia, Inc. Full title: Let My 
+                            People Go Surfing: The Education of a Reluctant Businessman, 
+                            Including 10 More Years of Business Unusual.
+                        </p>
+                        <button class="favorite-button">Buy</button>
+                        <img id="favorite-book" src="./assets/img/Favorite-Book13.jpg" alt="favorite book 13">
+                    </div>
+
+                    <div class="favorite-item" id="item14">
+
+                        <p id="staff-picks">Staff Picks</p>                        
+                        
+                        <p id="favorite-item-title"><span>Shark Dialogues: A Novel</span><br/>By Kiana Davenport</p>
+
+                        <p id="favorite-item-description">
+                            An epic saga of seven generations of one family encompasses 
+                            the tumultuous history of Hawaii as a Hawaiian woman gathers 
+                            her four granddaughters together in an erotic tale of villains 
+                            and dreamers, queens and revolutionaries, lepers and healers.
+                        </p>
+                        <button class="favorite-button">Buy</button>
+                        <img id="favorite-book" src="./assets/img/Favorite-Book14.jpg" alt="favorite book 14">
+                    </div>
+
+                    <div class="favorite-item" id="item15">
+
+                        <p id="staff-picks">Staff Picks</p>                        
+                        
+                        <p id="favorite-item-title"><span>The Great Fire</span><br/>By Lou Ureneck</p>
+
+                        <p id="favorite-item-description">
+                            The harrowing story of an ordinary American and 
+                            a principled Naval officer who, horrified by the burning 
+                            of Smyrna, led an extraordinary rescue effort that saved 
+                            a quarter of a million refugees from the Armenian Genocide
+                        </p>
+                        <button class="favorite-button">Buy</button>
+                        <img id="favorite-book" src="./assets/img/Favorite-Book15.jpg" alt="favorite book 15">
+                    </div>
+
+                    <div class="favorite-item" id="item16">
+
+                        <p id="staff-picks">Staff Picks</p>                        
+                        
+                        <p id="favorite-item-title"><span>Slug: And Other Stories</span><br/>By Megan Milks</p>
+
+                        <p id="favorite-item-description">
+                            Exes Tegan and Sara find themselves chained together 
+                            by hairballs of codependency. A father and child 
+                            experience the shared trauma of giving birth to gods 
+                            from their wounds.
+                        </p>
+                        <button class="favorite-button">Buy</button>
+                        <img id="favorite-book" src="./assets/img/Favorite-Book16.jpg" alt="favorite book 16">
+                    </div>
+                </div>
+
             </section>
+
 
             <section id="coffee-shop">
                 <h2>Coffee shop</h2>

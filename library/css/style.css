@@ -26,6 +26,43 @@
     font-style: normal;
 }
 
+
+/* Reset defaults */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+
+/* Reset end */
+
 body, header, main, footer {
     box-sizing: border-box;
 }
@@ -33,7 +70,7 @@ body, header, main, footer {
 
 body {
     color: white;
-    background-color: blanchedalmond;
+    background-color: rgb(239, 238, 238);
 }
 
 #main-wrapper {
@@ -90,30 +127,41 @@ header {
     justify-content: space-between;
     height: 90px;
     padding: 20px;
-    color: white;
+    color: #FFF;
     background-color: black;
 }
 
 #header-title {
     font-family: Forum;
     font-size: 30px;
-    color: white;
+    line-height: 50px; /* 166.667% */
+    letter-spacing: 0.6px;
+}
+
+#nav-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 40px;
 }
 
 nav {
     display: flex;
     align-items: center;
-    font-family: Inter;
-    font-size: 20px;
-}
-
-nav ul {
-    margin-right: 10px;
 }
 
 nav li {
     display: inline-block;    
     margin-right: 30px;
+    margin-left: -6px;
+    font-family: Inter;
+    font-size: 20px;
+    line-height: 50px; /* 250% */
+    letter-spacing: 0.36px;
+    cursor: pointer;
+}
+
+nav li:last-child {
+    margin-right: 0; 
 }
 
 nav a {
@@ -123,6 +171,12 @@ nav a {
 
 nav a:hover {
     font-weight: bold;
+}
+
+nav img {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
 }
 /* header end */
 
@@ -139,18 +193,22 @@ nav a:hover {
     background: linear-gradient(180deg, #0C0C0E 0%, #0C0C0E 0.01%, rgba(18, 18, 21, 0.10) 100%); ;
 }
 
+
+
 #welcome-title {
     width: 520px;
     height: 150px;
     margin-top: -80px;
     padding: 35px 40px;
+    flex-shrink: 0;
+    text-align: center;
+    line-height: 50px; /* 125% */
     font-family: Forum;
     font-size: 40px;
-    line-height: 50px;
     letter-spacing: 3px;
     text-align: center;
     text-transform: uppercase;
-    color: white;
+    color: #FFF;
     background-color:  #0C0C0E;
 }
 
@@ -160,7 +218,7 @@ nav a:hover {
 
 #about {
     box-sizing: border-box;
-    height: 823px;
+    height: 837px;
     background-color: white;
 }
 
@@ -169,7 +227,6 @@ nav a:hover {
     justify-content: space-between;
     gap: 10px;
     height: 560px;
-    margin-top: 20px;
     padding-bottom: 40px;    
 }
 
@@ -179,6 +236,7 @@ nav a:hover {
     width: 78px;
     height: 26px;
     margin: 0 auto;
+    margin-top: -5px;
 }
 
 .carousel-bullet-box {
@@ -198,8 +256,8 @@ nav a:hover {
     background-color: #BB945F;
 }
 
-
 /* About end */
+
 
 /* Favorites */
 
@@ -208,9 +266,8 @@ nav a:hover {
 }
 
 #season-pick-radios {
-    margin-left: 20px;
     margin-bottom: 40px;
-    padding-top: 40px;
+    padding-top: 37px;
     font-family: Inter;
     font-size: 20px;
     font-style: normal;
@@ -218,12 +275,19 @@ nav a:hover {
  
 }
 
+#season-pick-radios legend {
+    margin-bottom: 4px;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
 #season-pick-radios, #season-pick-radios input:checked + label {
     font-weight: 700;
 }
 
 #season-pick-radios div {
-    margin-left: -5px; /* подгонка */
     display: inline-block;
 }
 
@@ -232,7 +296,7 @@ input[name="season"] {
 }
 
 #season-pick-radios label {
-    margin-right: 90px;
+    margin-right: 86px;
     cursor: pointer;
 }
 
@@ -241,12 +305,12 @@ input[name="season"] {
     display: inline-block;
     width: 17px;
     height: 17px;
-    margin-right: 20px;
+    margin-right: 21px;
     background-image: url(../assets/img/radio.svg);
 }
 
 #season-pick-radios input:checked + label:before {
-    background-image: url(../assets/img/radio-checked.svg);
+    background-image: url(../assets/img/radio-checked.svg);    
 }
 
 #favorites-items-wrapper {
@@ -273,17 +337,21 @@ input[name="season"] {
 }
 
 #staff-picks {
+    margin-top: 0;
     margin-bottom: 20px;    
     font-family: Forum;
     font-size: 20px;
     line-height: 40px; /* 200% */
     letter-spacing: 2px;
 
+
+
 }
 
 #staff-picks::after {
     content: ' ';
     display: block;
+    top: -1px;
     left: 0;    
     width: 60px;
     height: 1px;
@@ -332,10 +400,14 @@ input[name="season"] {
     border: 1px solid #0C0C0E;
 }
 
-#favorite-book1 {
+#favorite-book {
     position: absolute;
     bottom: -1px;
     right: -40px;    
+}
+
+#hidden-favorites {
+    display: none;
 }
 
 /* Favorites end */
