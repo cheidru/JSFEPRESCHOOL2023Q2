@@ -145,7 +145,7 @@
                             (and her family) exploring how the Windsors have evolved 
                             and thrived as the modern world has changed around them.
                         </p>
-                        <button class="favorite-button">Buy</button>
+                        <button class="favorite-button" disabled>Own</button>
                         <img id="favorite-book" src="./assets/img/Favorite-Book4.jpg" alt="favorite book 4">
                     </div>
 
@@ -353,10 +353,12 @@
             <section id="coffee-shop">
                 <h2>Coffee shop</h2>
 
-                <p id="coffee-shop-intro">In our library, we have of cozy coffee shop, welcoming in customers with 
-                    frothy cappuccinos and friendly conversation. you can get a favorite book 
+                <p id="coffee-shop-intro">
+                    In our library, we have of cozy coffee shop, welcoming in customers with 
+                    frothy cappuccinos and friendly conversation. You can get a favorite book 
                     and read in coffee shop. Our barista to cook you best coffee, and also you 
-                    can try desserts from bakery.</p>
+                    can try desserts from bakery.
+                </p>
 
                 <div id="coffe-shop-menu-wrapper">
 
@@ -443,13 +445,13 @@
                     <div id="contacts-text">
                         <p id="contacts-text-title">For all Library inquiries:</p>
 
-                        <p>Please call (617) 730-2370</p>
-                        <p>For TTY service, please call (617) 730-2370</p>
-                        <p>Putterham Library: (617) 730-2385</p>
+                        <p>Please call <a href="tel:(617) 730-2370">(617) 730-2370</a></p>
+                        <p>For TTY service, please call <a href="tel:(617) 730-2370">(617) 730-2370</a></p>
+                        <p>Putterham Library: <a href="tel:(617) 730-2385">(617) 730-2385</a></p>
 
                         <p id="contacts-text-senior-staff">Senior Staff</p>
 
-                        <p>Library Director: <span>Amanda Hirst</span></p>
+                        <p>Library Director: <a id="mailto-lib-director" href="mailto:AmandaHirst@gmail.com">Amanda Hirst</a></p>
 
                     </div>
                     <img src="./assets/img/contacts-map.jpg" alt="contacts map">
@@ -467,8 +469,8 @@
                         <form id="find-card-form" action="">
                             <div id="find-card-form-input">
                                 <p>Brooklyn Public Library</p>
-                                <input type="text" placeholder="Reader's name">
-                                <input type="text" placeholder="Card number">
+                                <input type="text" pattern="[A-Za-z0-9]" placeholder="Reader's name">
+                                <input type="text" pattern="[A-Za-z0-9]" placeholder="Card number">
                             </div>
                             <button>Check the card</button>
                         </form>
@@ -494,7 +496,7 @@
 
         <footer>
             <div>
-                <p id="footer-address">286 Cadman Plaza, New York, NY 11238, United States</p>
+                <p id="footer-address"> <a href="https://goo.gl/maps/6Qi6z5zQC7ZSppWs5">286 Cadman Plaza, New York, NY 11238, United States</a></p>
                 <p class="work-hours">Mon - Fri <br/>08:00 am - 07:00 pm</p>
             </div>
 
