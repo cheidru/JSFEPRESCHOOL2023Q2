@@ -1,27 +1,27 @@
 @font-face {
     font-family: 'Forum';
-    src: url('../assets/fonts/Forum-Regular.ttf');
+    src: url('./assets/fonts/Forum-Regular.ttf');
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Forum Bold';
-    src: url('../assets/fonts/Forum-Regular.ttf');
+    src: url('./assets/fonts/Forum-Regular.ttf');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Inter';
-    src: url('../assets/fonts/Inter-Regular.ttf');
+    src: url('./assets/fonts/Inter-Regular.ttf');
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Inter Bold';
-    src: url('../assets/fonts/Inter-Bold.ttf');
+    src: url('./assets/fonts/Inter-Bold.ttf');
     font-weight: bold;
     font-style: normal;
 }
@@ -44,6 +44,7 @@ body {
 	line-height: 1;
     color: white;
     background-color: rgb(215, 215, 215);
+
 }
 
 ol, ul {
@@ -192,7 +193,7 @@ nav a:hover {
 #welcome {
     height: 600px;
     background: #0C0C0E;
-    background-image: url(../assets/img/Welcome.jpg);
+    background-image: url(./assets/img/Welcome.jpg);
 }
 
 #overlay {
@@ -284,10 +285,10 @@ nav a:hover {
 }
 
 #season-pick-radios legend {
-    margin-bottom: 3.4px;
     font-family: Inter;
     font-size: 20px;
     font-weight: 700;
+    margin-left: -4px;
     letter-spacing: 0.3px;
 }
 
@@ -310,17 +311,22 @@ input[name="season"] {
     cursor: pointer;
 }
 
+#season-pick-radios div label:hover {
+    font-weight: 400;
+}
+
 #season-pick-radios label:before {
     content: "";
     display: inline-block;
     width: 17px;
     height: 17px;
-    margin-right: 20px;
-    background-image: url(../assets/img/radio.svg);
+    margin-bottom: -4px;
+    margin-right: 20px;    
+    background-image: url(./assets/img/radio.svg);
 }
 
 #season-pick-radios input:checked + label:before {
-    background-image: url(../assets/img/radio-checked.svg);    
+    background-image: url(./assets/img/radio-checked.svg);    
 }
 
 #favorites-items-wrapper {
@@ -393,8 +399,8 @@ input[name="season"] {
 
 .favorite-button {
     position: absolute;
-    bottom: 15px;
-    left: 20px;
+    bottom: 14px;
+    left: 19px;
     width: 75px;
     height: 30px;
     flex-shrink: 0;
@@ -439,11 +445,11 @@ input[name="season"] {
 
 #coffee-shop-intro {
     margin-bottom: 40px;
-    margin-left: -3px;
+
     font-family: Inter;
     font-size: 20px;
     line-height: 40px;
-    letter-spacing: 2px;
+    letter-spacing: 1.96px;
 }
 
 #coffe-shop-menu-wrapper {
@@ -739,7 +745,7 @@ footer {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    padding: 5px 20px 44px;
+    padding: 20px 20px 44px;
     height: 250px;
     background-color: #0C0C0E;
 }
@@ -747,6 +753,7 @@ footer {
 footer div {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 footer div p {
@@ -755,7 +762,7 @@ footer div p {
 
 footer div:first-child {
     height: 40px;
-    margin-bottom: 25px;
+    margin-bottom: 9px;
 }
 
 #footer-address {
@@ -767,7 +774,11 @@ footer div:first-child {
     text-align: left;
 }
 
-#footer-address a {
+footer a:hover {
+    font-weight: bold;
+}
+
+footer a {
 text-decoration: none;
 color: #FFF;
 }
@@ -787,10 +798,13 @@ footer div:nth-child(2) {
     display: flex;
     gap: 15px;
     align-items: center;
+    margin-left: -3.5px;
 }
 
 #footer-social li {
+    box-sizing: border-box;
     display: inline-block;
+    padding: 5px;
     width: 24px;
     height: 24px;
 }
@@ -819,6 +833,10 @@ footer div:nth-child(2) {
     font-size: 20px;
     line-height: 20px; /* 100% */
     letter-spacing: 2px;
+}
+
+#footer-rs-school p:nth-child(2) {
+    margin-left: 128px;
 }
 
 
