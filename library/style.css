@@ -311,7 +311,7 @@ input[name="season"] {
     cursor: pointer;
 }
 
-#season-pick-radios div label:hover {
+#season-pick-radios div label:hover:not(#season-pick-radios input:checked + label) {
     font-weight: 400;
 }
 
