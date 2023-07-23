@@ -136,26 +136,27 @@ header {
 #nav-wrapper {
     display: flex;
     align-items: center;
-
-
 }
 
 nav {
-    display: flex;
+    display: flex;    
     align-items: center;
-    gap: 30px;
     margin-right: 40px;
+
+}
+
+nav ul {
+    display: flex;
+    gap: 30px;
 }
 
 nav li {
-    display: inline-block;    
-    margin-right: 30px;
-    padding: 0;
+    display: inline-block;
     font-family: Inter;
     font-size: 20px;
     line-height: 50px; /* 250% */
     font-weight: 400;
-    letter-spacing: 0.15px;
+    letter-spacing: 0.20px;
     cursor: pointer;
 }
 
