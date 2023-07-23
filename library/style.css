@@ -136,22 +136,26 @@ header {
 #nav-wrapper {
     display: flex;
     align-items: center;
-    gap: 40px;
+
+
 }
 
 nav {
     display: flex;
     align-items: center;
+    gap: 30px;
+    margin-right: 40px;
 }
 
 nav li {
     display: inline-block;    
     margin-right: 30px;
-    margin-left: -6px;
+    padding: 0;
     font-family: Inter;
     font-size: 20px;
     line-height: 50px; /* 250% */
-    letter-spacing: 0.36px;
+    font-weight: 400;
+    letter-spacing: 0.15px;
     cursor: pointer;
 }
 
@@ -201,7 +205,9 @@ nav a:hover {
     background: linear-gradient(180deg, #0C0C0E 0%, #0C0C0E 0.01%, rgba(18, 18, 21, 0.10) 100%); ;
 }
 
-
+#welcome h3 {
+    display: none;
+}
 
 #welcome-title {
     width: 520px;
@@ -352,7 +358,7 @@ input[name="season"] {
     border: 1px solid black;
 }
 
-#staff-picks {
+.staff-picks {
     margin-top: -0.8px;
     margin-bottom: 4px;    
     font-family: Forum;
@@ -361,7 +367,7 @@ input[name="season"] {
     letter-spacing: 2px;
 }
 
-#staff-picks::after {
+.staff-picks::after {
     content: ' ';
     display: block;
     top: 1px;
@@ -371,7 +377,7 @@ input[name="season"] {
     background-color: #0C0C0E;
 }
 
-#favorite-item-title {
+.favorite-item-title {
     margin-bottom: 5px;
     text-align: left;
     font-family: Inter;
@@ -382,11 +388,11 @@ input[name="season"] {
     text-transform: capitalize;
 }
 
-#favorite-item-title span {
+.favorite-item-title span {
     text-transform: uppercase;
 }
 
-#favorite-item-description {
+.favorite-item-description {
     width: 358px;
     margin-bottom: 15px;
     text-align: left;
@@ -425,7 +431,7 @@ input[name="season"] {
 }
 
 
-#favorite-book {
+.favorite-book {
     position: absolute;
     bottom: -1px;
     right: -40px;    
@@ -605,6 +611,9 @@ tr td:nth-child(3) {
     font-weight: 700;
 }
 
+#mailto-lib-director:hover {
+    color: gray;
+}
 /* Our Contacts end */
 
 
