@@ -438,7 +438,7 @@ input[name="season"] {
     right: -40px;    
 }
 
-[class^="hidden-"] {
+.hidden {
     display: none;
 }
 
@@ -849,15 +849,41 @@ footer div:nth-child(2) {
     margin-left: 128px;
 }
 
-@media (max-width: 1439px)  and (min-width: 1025px) {
-
-}
-
-@media (max-width: 1024px)  and (min-width: 769px) {
+@media (max-width: 1439px)  and (min-width: 1080px) {
     #main-wrapper {
-        width: 1024px;
+        width: 100%;
     }
 
+/* Header */
+    header, section {
+        max-width: auto;
+    }
+
+    #nav-wrapper {
+        /* width: auto; */
+    }
+
+    nav ul {
+        justify-content: space-between;
+    }
+
+/* About */    
+    #carousel {
+        max-width: auto;
+    }
+
+    #carousel img {
+        width: calc((100vw - 90px) / 3);
+        object-fit: contain;
+    }
+}
+
+@media (max-width: 1079px)  and (min-width: 769px) {
+    #main-wrapper {
+        /* width: 1024px; */
+    }
+
+    /* Header */
     header {
         flex-direction: column;
         align-items: center;
@@ -872,6 +898,9 @@ footer div:nth-child(2) {
     nav ul {
         justify-content: space-between;
     }
+
+    /* About */
+
 
 }
 
