@@ -438,7 +438,7 @@ input[name="season"] {
     right: -40px;    
 }
 
-#hidden-favorites {
+[class^="hidden-"] {
     display: none;
 }
 
@@ -849,12 +849,72 @@ footer div:nth-child(2) {
     margin-left: 128px;
 }
 
-@media (max-width: 1024px)  and (min-width: 769px) {
+@media (max-width: 1439px)  and (min-width: 1025px) {
 
 }
 
-@media (max-width: 768px)  and (min-width: 641px) {
+@media (max-width: 1024px)  and (min-width: 769px) {
+    #main-wrapper {
+        width: 1024px;
+    }
 
+    header {
+        flex-direction: column;
+        align-items: center;
+        min-width: 100%;
+    }
+
+    #nav-wrapper {
+        justify-content: center;
+        width: 100%;
+    }
+
+    nav ul {
+        justify-content: space-between;
+    }
+
+}
+
+@media (max-width: 768px) {
+    #main-wrapper {
+        max-width: 768px;
+    }
+
+    nav {
+        display: none;
+    }
+
+    #nav-wrapper a:hover {
+        animation: none;
+    }
+
+    #nav-wrapper img {
+        position: relative;
+        padding-right: 70px;
+    }
+
+    #nav-wrapper::before {
+        content: "";
+        position: absolute;
+        right: 10px;
+        width: 45px;
+        height: 2px;
+        padding: 9px 0;
+        color: #FFFFFF;
+        border-top: 2px solid #FFFFFF;
+        border-bottom: 2px solid #FFFFFF;
+        cursor: pointer;
+    }
+
+    #nav-wrapper::after {
+        content: "";
+        position: absolute;
+        right: 10px;
+        width: 45px;
+        height: 2px;
+        background-color: #FFFFFF;
+        cursor: pointer;
+    }
 }
 
 @media (max-width: 640px) {
