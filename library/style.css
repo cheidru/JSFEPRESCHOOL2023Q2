@@ -883,18 +883,7 @@ footer div:nth-child(2) {
     }
 /* Favourites */
     #favorites-items-wrapper {
-        /* item width 550px, book cover skew 40px, padding 20px */
         column-gap: calc(100vw - 1220px); 
-    }
-
-    #season-pick-radios {
-        width: fit-content;
-        margin-left: auto;
-        margin-right: auto;     
-    }
-
-    #autumn + label {
-        margin-right: 0;
     }
 
 /* Our contacts */
@@ -924,6 +913,17 @@ footer div:nth-child(2) {
         flex-wrap: nowrap;
         align-items: center;
     }
+    
+    #season-pick-radios {
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;     
+    }
+
+    #autumn + label {
+        margin-right: 0;
+    }
+
     
 }
 
