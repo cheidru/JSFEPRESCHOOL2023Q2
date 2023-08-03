@@ -857,37 +857,88 @@ footer div:nth-child(2) {
 /* Header */
     header, section {
         max-width: auto;
-    }
-
-    #nav-wrapper {
-        /* width: auto; */
+        height: auto;
     }
 
     nav ul {
         justify-content: space-between;
     }
 
-/* About */    
-    #carousel {
-        max-width: auto;
+/* About */
+    #about {
+        height: auto;
     }
-
+    #carousel-pagination {
+        display: flex;
+        align-items: flex-start;
+    }
+    #carousel {
+        align-items: flex-start;
+        max-width: auto;
+        height: auto;
+    }
     #carousel img {
         width: calc((100vw - 90px) / 3);
         object-fit: contain;
     }
+/* Favourites */
+    #favorites-items-wrapper {
+        /* item width 550px, book cover skew 40px, padding 20px */
+        column-gap: calc(100vw - 1220px); 
+    }
+
+    #season-pick-radios {
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;     
+    }
+
+    #autumn + label {
+        margin-right: 0;
+    }
+
+/* Our contacts */
+    #contacts-wrapper {
+        justify-content: space-between;
+        align-items: flex-start; 
+        gap: normal;
+    }
+
+    #contacts-wrapper img {       
+        min-width: calc(100vw - (1210px - 503px - 10px));
+        object-fit: contain;
+        margin-left: 20px;
+        /* margin-left: 20px; */
+    }
+}
+
+@media (max-width: 1250px) {
+    /* favourites' items layed out vertically */
+
+    #favorites {
+        height: auto;
+    }
+        
+    #favorites-items-wrapper {
+        height: auto;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+    
 }
 
 @media (max-width: 1079px)  and (min-width: 769px) {
+    /* header layed out vertically */
+
     #main-wrapper {
-        /* width: 1024px; */
+        width: 100%;
     }
 
     /* Header */
     header {
         flex-direction: column;
         align-items: center;
-        min-width: 100%;
+        width: 100%;
     }
 
     #nav-wrapper {
