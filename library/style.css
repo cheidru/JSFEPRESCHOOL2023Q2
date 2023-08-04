@@ -203,7 +203,7 @@ nav a:hover {
 
 #overlay {
     height: 300px;
-    background: linear-gradient(180deg, #0C0C0E 0%, #0C0C0E 0.01%, rgba(18, 18, 21, 0.10) 100%); ;
+    background: linear-gradient(180deg, #0C0C0E 0%, #0C0C0E 0.01%, rgba(18, 18, 21, 0.10) 100%);
 }
 
 #welcome h3 {
@@ -271,6 +271,10 @@ nav a:hover {
     background-color: #BB945F;
 }
 
+.about-more-controls {
+    display: none;
+}
+
 /* About end */
 
 
@@ -329,11 +333,11 @@ input[name="season"] {
     height: 17px;
     margin-bottom: -4px;
     margin-right: 20px;    
-    background-image: url(./assets/img/radio.svg);
+    background-image: url(./assets/img/favorite/radio.svg);
 }
 
 #season-pick-radios input:checked + label:before {
-    background-image: url(./assets/img/radio-checked.svg);    
+    background-image: url(./assets/img/favorite/radio-checked.svg);    
 }
 
 #favorites-items-wrapper {
@@ -482,11 +486,11 @@ th:first-child {
     text-align: left;
 }
 
-#desserts-n-caces {
+#desserts-n-cakes {
     text-align: right;
 }
 
-#desserts-n-caces caption {
+#desserts-n-cakes caption {
     text-align: right;
 }
 
@@ -515,7 +519,7 @@ tr td:first-child {
     text-transform: capitalize;
 }
 
-#desserts-n-caces tr td:nth-child(2) {
+#desserts-n-cakes tr td:nth-child(2) {
     padding-left: 57px;
 }
 
@@ -928,7 +932,8 @@ footer div:nth-child(2) {
 }
 
 @media (max-width: 1079px)  and (min-width: 769px) {
-    /* header layed out vertically */
+    /* header, coffee shop, contacts, and library car are  layed out vertically,
+     about is populated with one image */
 
     #main-wrapper {
         width: 100%;
@@ -951,7 +956,54 @@ footer div:nth-child(2) {
     }
 
     /* About */
+    .hidden-1078px {
+        display: none;
+    }
 
+    #carousel {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .about-more-controls {
+        display: block;
+    }
+
+    #carousel img[id$="-arrow"] {
+        width: 14px;
+        height: 23px;
+        padding: 20px;
+    }
+
+    /* Coffee shop */
+    #coffee-shop {
+        height: auto;
+    }
+
+    #coffe-shop-menu-wrapper {
+        flex-direction: column;
+        justify-content:space-between;
+        gap: 40px;
+        height: auto;
+    }
+
+    
+    #desserts-n-cakes{
+        display: flex;
+        justify-content: end;
+    }
+
+
+    /* Contacts */
+
+    #contacts {
+        height: auto;
+    }
+    
+    #contacts-wrapper {
+        flex-direction: column;
+        gap: 100px;
+    }
 
 }
 
