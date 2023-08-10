@@ -449,7 +449,6 @@ input[name="season"] {
 /* Favorites end */
 
 /* Coffee shop */
-
 #coffee-shop {
     height: 841px;
 }
@@ -463,7 +462,7 @@ input[name="season"] {
     letter-spacing: 1.96px;
 }
 
-#coffe-shop-menu-wrapper {
+#coffee-shop-menu-wrapper {
     display: flex;
     justify-content:space-between;
     height: 841px;
@@ -853,7 +852,7 @@ footer div:nth-child(2) {
     margin-left: 128px;
 }
 
-@media (max-width: 1439px)  and (min-width: 1080px) {
+@media (max-width: 1439px) {
     #main-wrapper {
         width: 100%;
     }
@@ -863,6 +862,10 @@ footer div:nth-child(2) {
         max-width: auto;
         height: auto;
     }
+}
+
+@media (max-width: 1439px) and (min-width: 1025px) {
+
 
     nav ul {
         justify-content: space-between;
@@ -872,10 +875,7 @@ footer div:nth-child(2) {
     #about {
         height: auto;
     }
-    #carousel-pagination {
-        display: flex;
-        align-items: flex-start;
-    }
+
     #carousel {
         align-items: flex-start;
         max-width: auto;
@@ -885,6 +885,7 @@ footer div:nth-child(2) {
         width: calc((100vw - 90px) / 3);
         object-fit: contain;
     }
+
 /* Favourites */
     #favorites-items-wrapper {
         column-gap: calc(100vw - 1220px); 
@@ -927,11 +928,15 @@ footer div:nth-child(2) {
     #autumn + label {
         margin-right: 0;
     }
-
+    
+    /* Coffee shop */
+    #coffee-shop, #coffee-shop-menu-wrapper {
+        height: auto;
+    }
     
 }
 
-@media (max-width: 1079px)  and (min-width: 769px) {
+@media (max-width: 1024px) and (min-width: 769px) {
     /* header, coffee shop, contacts, and library car are  layed out vertically,
      about is populated with one image */
 
@@ -954,8 +959,17 @@ footer div:nth-child(2) {
     nav ul {
         justify-content: space-between;
     }
+}
 
-    /* About */
+@media (max-width: 1024px) {
+    /* header, coffee shop, contacts, and library car are  layed out vertically,
+     about is populated with one image */
+
+    #main-wrapper {
+        width: 100%;
+    }
+
+   /* About */
     .hidden-1078px {
         display: none;
     }
@@ -963,6 +977,11 @@ footer div:nth-child(2) {
     #carousel {
         justify-content: center;
         align-items: center;
+    }
+    
+    #carousel-pagination {
+        width: auto;
+        justify-content: center;
     }
 
     .about-more-controls {
@@ -973,14 +992,11 @@ footer div:nth-child(2) {
         width: 14px;
         height: 23px;
         padding: 20px;
+        cursor: pointer;
     }
-
+        
     /* Coffee shop */
-    #coffee-shop {
-        height: auto;
-    }
-
-    #coffe-shop-menu-wrapper {
+    #coffee-shop-menu-wrapper {
         flex-direction: column;
         justify-content:space-between;
         gap: 40px;
@@ -993,9 +1009,7 @@ footer div:nth-child(2) {
         justify-content: end;
     }
 
-
     /* Contacts */
-
     #contacts {
         height: auto;
     }
@@ -1003,6 +1017,33 @@ footer div:nth-child(2) {
     #contacts-wrapper {
         flex-direction: column;
         gap: 100px;
+    }
+
+    #contacts-wrapper img {
+        width: auto;
+        height: auto;
+        padding: 20px;
+    }
+
+    /* Library card */
+    #library-card {
+        height: auto;
+    }
+
+    #library-card-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #get-a-card {
+        display: flex;
+        width: 600px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #get-a-card p {
+        text-align: center;
     }
 
 }
