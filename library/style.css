@@ -455,7 +455,6 @@ input[name="season"] {
 
 #coffee-shop-intro {
     margin-bottom: 40px;
-
     font-family: Inter;
     font-size: 20px;
     line-height: 40px;
@@ -586,7 +585,7 @@ tr td:nth-child(3) {
     text-align: left;
 }
 
-#contacts-text p:not(#contacts-text-title) {
+#contacts-text p:not(#contacts-text-title), #contacts-text p:not(#last-string) {
     margin-bottom: 20px;
 }
 
@@ -970,18 +969,30 @@ footer div:nth-child(2) {
     }
 
    /* About */
+    #about {
+        height: auto;
+    }
+
     .hidden-1078px {
         display: none;
     }
 
     #carousel {
+        width: auto;
         justify-content: center;
         align-items: center;
+        gap: unset;
+        padding-bottom: 30px;
     }
     
     #carousel-pagination {
         width: auto;
         justify-content: center;
+        margin: -10px 0 0;
+    }
+
+    #carousel img {
+        padding: 0 58px;
     }
 
     .about-more-controls {
@@ -989,12 +1000,43 @@ footer div:nth-child(2) {
     }
 
     #carousel img[id$="-arrow"] {
-        width: 14px;
-        height: 23px;
-        padding: 20px;
+        display: block;
+        width: 24px;
+        height: 24px;
+        margin-top: 40px;
+        padding: 0;
         cursor: pointer;
     }
-        
+
+    /* Favorites */
+    #favorites {
+        margin-top: -3px;
+    }
+
+    #favorites-wrapper {
+        padding-right: 25px;
+    }
+
+    #favorites-wrapper #favorites-items-wrapper {
+        padding-right: 15px;
+    }
+
+    #favorites-items-wrapper #item1 {
+        order: 1;
+    }
+
+    #favorites-items-wrapper #item2 {
+        order: 3;
+    }
+
+    #favorites-items-wrapper #item3 {
+        order: 2;
+    }
+
+    #favorites-items-wrapper #item4 {
+        order: 4;
+    }
+         
     /* Coffee shop */
     #coffee-shop-menu-wrapper {
         flex-direction: column;
@@ -1003,7 +1045,10 @@ footer div:nth-child(2) {
         height: auto;
     }
 
-    
+    #coffee-shop-intro {
+        letter-spacing: 1.9px;
+    }
+  
     #desserts-n-cakes{
         display: flex;
         justify-content: end;
@@ -1045,7 +1090,6 @@ footer div:nth-child(2) {
     #get-a-card p {
         text-align: center;
     }
-
 }
 
 @media (max-width: 768px) {
@@ -1057,37 +1101,34 @@ footer div:nth-child(2) {
         display: none;
     }
 
-    #nav-wrapper a:hover {
-        animation: none;
-    }
-
-    #nav-wrapper img {
+    #burger-button {
+        display: block;
         position: relative;
-        padding-right: 70px;
-    }
-
-    #nav-wrapper::before {
-        content: "";
-        position: absolute;
-        right: 10px;
         width: 45px;
-        height: 2px;
-        padding: 9px 0;
-        color: #FFFFFF;
+        height: 20px;
+        margin-left: 40px;
         border-top: 2px solid #FFFFFF;
         border-bottom: 2px solid #FFFFFF;
         cursor: pointer;
     }
 
-    #nav-wrapper::after {
+    #burger-button::after {
         content: "";
         position: absolute;
-        right: 10px;
+        top: 10px;
         width: 45px;
         height: 2px;
         background-color: #FFFFFF;
-        cursor: pointer;
+
     }
+
+    /* Welcome */
+    #welcome {
+        background: lightgray 50% / cover no-repeat url(./assets/img/Welcome768px.jpg);
+    }
+
+
+
 }
 
 @media (max-width: 640px) {
