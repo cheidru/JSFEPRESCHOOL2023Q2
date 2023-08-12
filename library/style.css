@@ -571,7 +571,7 @@ tr td:nth-child(3) {
     width: 696px;
 }
 
-#contacts-text {
+.contacts-text {
     width: 503px;
     margin-top: -20px;
     font-family: Inter;
@@ -581,13 +581,14 @@ tr td:nth-child(3) {
     text-transform: capitalize;
 }
 
-#contacts-text p {
+.contacts-text p {
     text-align: left;
 }
 
-#contacts-text p:not(#contacts-text-title), #contacts-text p:not(#last-string) {
+.contacts-text p:not(#contacts-text-title) {
     margin-bottom: 20px;
 }
+
 
 #contacts-text-title {
     margin-bottom: 40px;
@@ -603,7 +604,7 @@ tr td:nth-child(3) {
     letter-spacing: 2.3px;
 }
 
-#contacts-text p:nth-child(3){
+.contacts-text p:nth-child(3){
     min-width: 505px;
 }
 
@@ -858,7 +859,7 @@ footer div:nth-child(2) {
 
 /* Header */
     header, section {
-        max-width: auto;
+        width: auto;
         height: auto;
     }
 }
@@ -1014,11 +1015,11 @@ footer div:nth-child(2) {
     }
 
     #favorites-wrapper {
-        padding-right: 25px;
+        padding-right: 24px;
     }
 
     #favorites-wrapper #favorites-items-wrapper {
-        padding-right: 15px;
+        padding-right: 17px;
     }
 
     #favorites-items-wrapper #item1 {
@@ -1070,9 +1071,15 @@ footer div:nth-child(2) {
         padding: 20px;
     }
 
+    
+    #last-string {
+        margin-bottom: -16px !important;
+    }
+
     /* Library card */
     #library-card {
         height: auto;
+        padding-top: 4px !important;
     }
 
     #library-card-wrapper {
@@ -1085,10 +1092,22 @@ footer div:nth-child(2) {
         width: 600px;
         flex-direction: column;
         align-items: center;
+        margin-top: -10px;
+    }
+
+    #get-a-card-text {
+        margin-top: 4px;
+        margin-bottom: 40px;
     }
 
     #get-a-card p {
         text-align: center;
+    }
+
+    /* Footer */
+
+    #footer-rs-school p:nth-child(2) {
+        margin-left: 0;
     }
 }
 
