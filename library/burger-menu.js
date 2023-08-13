@@ -4,10 +4,8 @@ const navBurgerMenu = document.querySelector('.nav-ul');
 const profile = document.getElementById('profile-svg');
 
 navBurgerMenu.classList.add('nav-burger-menu-invisible');
-console.log('program started');
 
 burgerButton.addEventListener('click', (e) => {
-    console.log('burger button function enabled');
     e.stopImmediatePropagation();
     menuShowHide();
 })

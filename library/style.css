@@ -1169,7 +1169,7 @@ footer div:nth-child(2) {
     }
 
     #profile + .cross-button {
-        margin-left: 33px !important;
+        margin-left: 47px !important;
     }
 
     header {
@@ -1187,11 +1187,13 @@ footer div:nth-child(2) {
         width: 332px;
         height: 570px;
         background: #000;
+        transition: 20ms;
     }
 
     .nav-burger-menu-visible {
-        right: 0;
-        transition: 0.5s;
+        right: -332px;
+        transform: translateX(-332px);
+        transition: 2s;
     }
     
     .nav-burger-menu-invisible {
