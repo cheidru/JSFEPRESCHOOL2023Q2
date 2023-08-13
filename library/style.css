@@ -1124,14 +1124,11 @@ footer div:nth-child(2) {
 }
 
 @media (max-width: 768px) {
+
     #main-wrapper {
         max-width: 768px;
     }
-
-    nav {
-        display: none;
-    }
-    
+   
     .burger-button, .cross-button {
         display: block;
         position: relative;
@@ -1150,27 +1147,38 @@ footer div:nth-child(2) {
         width: 45px;
         height: 2px;
         background-color: #FFFFFF;
-
     }
 
     .cross-button {
-        border-top: none;
-        transform: translateY(-50%) rotate(45deg);
+        border: none;
+        height: 2px;
+        margin-right: -7px;
+        transform: rotate(45deg);
+        background-color: #FFFFFF;
         cursor: pointer;
     }
 
     .cross-button::after {
         content: "";
         position: absolute;
-        top: 9px;
         width: 45px;
         height: 2px;
         background-color: #FFFFFF;
-        transform: rotate(-45deg);
+        transform: rotate(270deg);
         cursor: pointer;
     }
 
-    .nav-burger-menu {
+    #profile + .cross-button {
+        margin-left: 33px !important;
+    }
+
+    header {
+        position:relative;
+    }
+
+    .nav-burger-menu-visible, .nav-burger-menu-invisible {
+        position: absolute;
+        top: 0;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -1179,6 +1187,21 @@ footer div:nth-child(2) {
         width: 332px;
         height: 570px;
         background: #000;
+    }
+
+    .nav-burger-menu-visible {
+        right: 0;
+        transition: 0.5s;
+    }
+    
+    .nav-burger-menu-invisible {
+        display: none;
+        right: -100%;
+    }
+
+    #nav-wrapper img {
+        position: relative;
+        z-index: 999;
     }
 
 
@@ -1193,7 +1216,7 @@ footer div:nth-child(2) {
         margin-left: 78px;
     }
 }
-
+/* 
 @media (max-width: 640px) {
 
-}
+} */
