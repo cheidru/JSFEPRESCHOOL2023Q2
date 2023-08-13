@@ -203,7 +203,7 @@ nav a:hover {
 
 #overlay {
     height: 300px;
-    background: linear-gradient(180deg, #0C0C0E 0%, #0C0C0E 0.01%, rgba(18, 18, 21, 0.10) 100%); ;
+    background: linear-gradient(180deg, #0C0C0E 0%, #0C0C0E 0.01%, rgba(18, 18, 21, 0.10) 100%);
 }
 
 #welcome h3 {
@@ -271,6 +271,10 @@ nav a:hover {
     background-color: #BB945F;
 }
 
+.about-more-controls {
+    display: none;
+}
+
 /* About end */
 
 
@@ -329,11 +333,11 @@ input[name="season"] {
     height: 17px;
     margin-bottom: -4px;
     margin-right: 20px;    
-    background-image: url(./assets/img/radio.svg);
+    background-image: url(./assets/img/favorite/radio.svg);
 }
 
 #season-pick-radios input:checked + label:before {
-    background-image: url(./assets/img/radio-checked.svg);    
+    background-image: url(./assets/img/favorite/radio-checked.svg);    
 }
 
 #favorites-items-wrapper {
@@ -438,28 +442,26 @@ input[name="season"] {
     right: -40px;    
 }
 
-#hidden-favorites {
+.hidden {
     display: none;
 }
 
 /* Favorites end */
 
 /* Coffee shop */
-
 #coffee-shop {
     height: 841px;
 }
 
 #coffee-shop-intro {
     margin-bottom: 40px;
-
     font-family: Inter;
     font-size: 20px;
     line-height: 40px;
     letter-spacing: 1.96px;
 }
 
-#coffe-shop-menu-wrapper {
+#coffee-shop-menu-wrapper {
     display: flex;
     justify-content:space-between;
     height: 841px;
@@ -482,11 +484,11 @@ th:first-child {
     text-align: left;
 }
 
-#desserts-n-caces {
+#desserts-n-cakes {
     text-align: right;
 }
 
-#desserts-n-caces caption {
+#desserts-n-cakes caption {
     text-align: right;
 }
 
@@ -515,7 +517,7 @@ tr td:first-child {
     text-transform: capitalize;
 }
 
-#desserts-n-caces tr td:nth-child(2) {
+#desserts-n-cakes tr td:nth-child(2) {
     padding-left: 57px;
 }
 
@@ -569,7 +571,7 @@ tr td:nth-child(3) {
     width: 696px;
 }
 
-#contacts-text {
+.contacts-text {
     width: 503px;
     margin-top: -20px;
     font-family: Inter;
@@ -579,13 +581,14 @@ tr td:nth-child(3) {
     text-transform: capitalize;
 }
 
-#contacts-text p {
+.contacts-text p {
     text-align: left;
 }
 
-#contacts-text p:not(#contacts-text-title) {
+.contacts-text p:not(#contacts-text-title) {
     margin-bottom: 20px;
 }
+
 
 #contacts-text-title {
     margin-bottom: 40px;
@@ -601,7 +604,7 @@ tr td:nth-child(3) {
     letter-spacing: 2.3px;
 }
 
-#contacts-text p:nth-child(3){
+.contacts-text p:nth-child(3){
     min-width: 505px;
 }
 
@@ -849,5 +852,373 @@ footer div:nth-child(2) {
     margin-left: 128px;
 }
 
+@media (max-width: 1439px) {
+    #main-wrapper {
+        width: 100%;
+    }
+
+/* Header */
+    header, section {
+        width: auto;
+        height: auto;
+    }
+}
+
+@media (max-width: 1439px) and (min-width: 1025px) {
 
 
+    nav ul {
+        justify-content: space-between;
+    }
+
+/* About */
+    #about {
+        height: auto;
+    }
+
+    #carousel {
+        align-items: flex-start;
+        max-width: auto;
+        height: auto;
+    }
+    #carousel img {
+        width: calc((100vw - 90px) / 3);
+        object-fit: contain;
+    }
+
+/* Favourites */
+    #favorites-items-wrapper {
+        column-gap: calc(100vw - 1220px); 
+    }
+
+/* Our contacts */
+    #contacts-wrapper {
+        justify-content: space-between;
+        align-items: flex-start; 
+        gap: normal;
+    }
+
+    #contacts-wrapper img {       
+        min-width: calc(100vw - (1210px - 503px - 10px));
+        object-fit: contain;
+        margin-left: 20px;
+        /* margin-left: 20px; */
+    }
+
+    #devider-line {
+        width: auto;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 1250px) {
+    /* favourites' items layed out vertically */
+
+    #favorites {
+        height: auto;
+    }
+        
+    #favorites-items-wrapper {
+        height: auto;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+    
+    #season-pick-radios {
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;     
+    }
+
+    #autumn + label {
+        margin-right: 0;
+    }
+    
+    /* Coffee shop */
+    #coffee-shop, #coffee-shop-menu-wrapper {
+        height: auto;
+    }
+    
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+    /* header, coffee shop, contacts, and library car are  layed out vertically,
+     about is populated with one image */
+
+    #main-wrapper {
+        width: 100%;
+    }
+
+    /* Header */
+    header {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    #nav-wrapper {
+        justify-content: center;
+        width: 100%;
+    }
+
+    nav ul {
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 1024px) {
+    /* header, coffee shop, contacts, and library car are  layed out vertically,
+     about is populated with one image */
+
+    #main-wrapper {
+        width: 100%;
+    }
+
+   /* About */
+    #about {
+        height: auto;
+    }
+
+    .hidden-1078px {
+        display: none;
+    }
+
+    #carousel {
+        width: auto;
+        justify-content: center;
+        align-items: center;
+        gap: unset;
+        padding-bottom: 30px;
+    }
+    
+    #carousel-pagination {
+        width: auto;
+        justify-content: center;
+        margin: -10px 0 0;
+    }
+
+    #carousel img {
+        padding: 0 58px;
+    }
+
+    .about-more-controls {
+        display: block;
+    }
+
+    #carousel img[id$="-arrow"] {
+        display: block;
+        width: 24px;
+        height: 24px;
+        margin-top: 40px;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    /* Favorites */
+    #favorites {
+        margin-top: -3px;
+    }
+
+    #favorites-wrapper {
+        padding-right: 24px;
+    }
+
+    #favorites-wrapper #favorites-items-wrapper {
+        padding-right: 17px;
+    }
+
+    #favorites-items-wrapper #item1 {
+        order: 1;
+    }
+
+    #favorites-items-wrapper #item2 {
+        order: 3;
+    }
+
+    #favorites-items-wrapper #item3 {
+        order: 2;
+    }
+
+    #favorites-items-wrapper #item4 {
+        order: 4;
+    }
+         
+    /* Coffee shop */
+    #coffee-shop-menu-wrapper {
+        flex-direction: column;
+        justify-content:space-between;
+        gap: 40px;
+        height: auto;
+    }
+
+    #coffee-shop-intro {
+        letter-spacing: 1.9px;
+    }
+  
+    #desserts-n-cakes{
+        display: flex;
+        justify-content: end;
+    }
+
+    /* Contacts */
+    #contacts {
+        height: auto;
+    }
+    
+    #contacts-wrapper {
+        flex-direction: column;
+        gap: 100px;
+    }
+
+    #contacts-wrapper img {
+        width: auto;
+        height: auto;
+        padding: 20px;
+    }
+
+    
+    #last-string {
+        margin-bottom: -16px !important;
+    }
+
+    /* Library card */
+    #library-card {
+        height: auto;
+        padding-top: 4px !important;
+    }
+
+    #library-card-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #get-a-card {
+        display: flex;
+        width: 600px;
+        flex-direction: column;
+        align-items: center;
+        margin-top: -10px;
+    }
+
+    #get-a-card-text {
+        margin-top: 4px;
+        margin-bottom: 40px;
+    }
+
+    #get-a-card p {
+        text-align: center;
+    }
+
+    /* Footer */
+
+    #footer-rs-school p:nth-child(2) {
+        margin-left: 0;
+    }
+    
+    #devider-line {
+        width: auto;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 768px) {
+
+    #main-wrapper {
+        max-width: 768px;
+    }
+   
+    .burger-button, .cross-button {
+        display: block;
+        position: relative;
+        width: 45px;
+        height: 20px;
+        margin-left: 40px;
+        border-top: 2px solid #FFFFFF;
+        border-bottom: 2px solid #FFFFFF;
+        cursor: pointer;
+    }
+
+    .burger-button::after {
+        content: "";
+        position: absolute;
+        top: 9px;
+        width: 45px;
+        height: 2px;
+        background-color: #FFFFFF;
+    }
+
+    .cross-button {
+        border: none;
+        height: 2px;
+        margin-right: -7px;
+        transform: rotate(45deg);
+        background-color: #FFFFFF;
+        cursor: pointer;
+    }
+
+    .cross-button::after {
+        content: "";
+        position: absolute;
+        width: 45px;
+        height: 2px;
+        background-color: #FFFFFF;
+        transform: rotate(270deg);
+        cursor: pointer;
+    }
+
+    #profile + .cross-button {
+        margin-left: 47px !important;
+    }
+
+    header {
+        position:relative;
+    }
+
+    .nav-burger-menu-visible, .nav-burger-menu-invisible {
+        position: absolute;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        width: 332px;
+        height: 570px;
+        background: #000;
+        transition: 20ms;
+    }
+
+    .nav-burger-menu-visible {
+        right: -332px;
+        transform: translateX(-332px);
+        transition: 2s;
+    }
+    
+    .nav-burger-menu-invisible {
+        display: none;
+        right: -100%;
+    }
+
+    #nav-wrapper img {
+        position: relative;
+        z-index: 999;
+    }
+
+
+    /* Welcome */
+    #welcome {
+        background: lightgray 50% / cover no-repeat url(./assets/img/Welcome768px.jpg);
+    }
+
+    /* Footer */
+
+    #footer-rs-school p:nth-child(2) {
+        margin-left: 78px;
+    }
+}
+/* 
+@media (max-width: 640px) {
+
+} */
