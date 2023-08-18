@@ -22,9 +22,9 @@
                     </ul>
                 </nav>
                 <a id="profile" href="#"><img src="./assets/img/icon_profile.svg" alt="profile" id="profile-svg"></a>
-                <div class="burger-button"> </div>                
-                
-                <div id="login-ini-popup" class="hidden-popup" style="display: flex">
+                <div class="burger-button"> </div>
+
+                <div id="login-ini-popup" class="hidden-popup">
                     <p>Profile</p>
                     <p>Log in</p>
                     <p>Register</p>
@@ -37,7 +37,28 @@
                 </div>
 
                 <div id="profile-extended-popup" class="hidden-popup"></div>
-                <div id="login-popup" class="hidden-popup"></div>
+
+                <div id="login-popup" class="hidden-popup" style="display: flex">
+                    <img class="close-window-btn" width=15 height=15 src="./assets/img/close_btn.svg" alt="close-window">
+                    
+                    <div class="login-popup-wrapper">
+                        <div class="login-popup-title">login</div>
+
+                        <label for="e-mail" class="login-popup-label">E-mail or readers card</label>
+                        <input type="text" class="login-popup-input" id="e-mail">
+
+                        <label for="password" class="login-popup-label">Password</label>
+                        <input type="text" class="login-popup-input" id="password">
+
+                        <button class="login-popup-button">Log In</button>
+
+                        <div class="login-popup-bottom-line-wrapper">
+                            <div></div>
+                            <div></div>
+                        </div>
+
+                    </div>
+                </div>
                 <div id="register-popup" class="hidden-popup"></div>
 
             </div>

@@ -196,6 +196,11 @@ nav a:hover {
     to {transform: rotate(0deg);}
 }
 
+[id*="popup"] {
+    color: #000;
+    background-color: #FFFFFF;
+}
+
 #login-ini-popup, #profile-mini-popup {
     position: absolute;
     top: 50px;
@@ -204,7 +209,6 @@ nav a:hover {
     align-items: center;
     width: 80px;
     height: 115px;
-    background-color: #FFFFFF;
 }
 
 #login-ini-popup p, #profile-mini-popup p {
@@ -243,6 +247,48 @@ nav a:hover {
     background-color: #BB945F;
 }
 
+#login-popup {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 250px;
+    height: 262px;
+}
+
+.close-window-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    max-width: 15px;
+    max-height: 15px;
+}
+
+.login-popup-title {
+    margin-bottom: 20px;
+    text-align: center;   
+    font-family: Forum;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 20px; /* 100% */
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+.login-popup-wrapper {
+    width: 100%;
+    margin: 20px 25px;
+    padding: 0;
+}
+
+.login-popup-label {
+    text-align: center;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 133.333% */
+    letter-spacing: 0.3px;
+}
 /* header end */
 
 
