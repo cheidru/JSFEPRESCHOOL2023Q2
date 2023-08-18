@@ -113,6 +113,10 @@ table {
 	border-spacing: 0;
 }
 
+.hidden-popup {
+    display: none;
+    position: absolute;
+}
 /* common end */
 
 /* header */
@@ -1193,11 +1197,6 @@ footer div:nth-child(2) {
         transition: 1s;
     }
 
-    .nav-burger-menu-visible {
-
-
-    }
-    
     .nav-burger-menu-invisible {
         visibility: hidden;
         top: -570px;
