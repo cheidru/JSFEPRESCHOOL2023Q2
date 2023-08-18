@@ -137,9 +137,10 @@ header {
     letter-spacing: 0.6px;
 }
 
-#nav-wrapper {
+#nav-wrapper {    
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 nav {
@@ -193,6 +194,53 @@ nav a:hover {
     25% {transform: rotate(0deg);}
     50% {transform: rotate(-20deg);}
     to {transform: rotate(0deg);}
+}
+
+#login-ini-popup, #profile-mini-popup {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+    height: 115px;
+    background-color: #FFFFFF;
+}
+
+#login-ini-popup p, #profile-mini-popup p {
+    padding: 0;
+    margin: 0;
+    line-height: 20px;
+    font-family: Inter;
+    font-size: 15px;
+}
+
+#login-ini-popup p:hover:not(p:first-child), #profile-mini-popup p:hover:not(p:first-child) {
+    cursor: pointer;
+    transform: scale(115%);
+    transition: 0.5s;
+}
+
+
+#login-ini-popup p:first-child, #profile-mini-popup p:first-child {
+    margin-top: 5px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+#login-ini-popup p:nth-child(2), #profile-mini-popup p:nth-child(2) {
+    margin-bottom: 10px;
+}
+
+#login-ini-popup p:first-child:after, #profile-mini-popup p:first-child::after {
+    content: ' ';
+    display: block;
+    width: 40px;
+    height: 1px;
+    position: relative;
+    top: 5px;
+    margin: 0 auto;
+    background-color: #BB945F;
 }
 
 /* header end */

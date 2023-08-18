@@ -6,14 +6,6 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <title>Welcome to the Brooklyn Library</title>
-
-    <div id="login-ini-popup" class="hidden-popup"></div>
-    <div id="profile-mini-popup" class="hidden-popup"></div>
-    <div id="profile-extended-popup" class="hidden-popup"></div>
-    <div id="login-popup" class="hidden-popup"></div>
-    <div id="register-popup" class="hidden-popup"></div>
-
-
 </head>
 <body>
     <div id="main-wrapper">
@@ -31,6 +23,23 @@
                 </nav>
                 <a id="profile" href="#"><img src="./assets/img/icon_profile.svg" alt="profile" id="profile-svg"></a>
                 <div class="burger-button"> </div>                
+                
+                <div id="login-ini-popup" class="hidden-popup" style="display: flex">
+                    <p>Profile</p>
+                    <p>Log in</p>
+                    <p>Register</p>
+                </div>
+
+                <div id="profile-mini-popup" class="hidden-popup">
+                    <p>Profile</p>
+                    <p>My profile</p>
+                    <p>Log Out</p>
+                </div>
+
+                <div id="profile-extended-popup" class="hidden-popup"></div>
+                <div id="login-popup" class="hidden-popup"></div>
+                <div id="register-popup" class="hidden-popup"></div>
+
             </div>
         </header>
 
