@@ -68,6 +68,11 @@ body, header, main, footer {
 }
 
 /* common */
+
+button {
+    background: white;
+}
+
 h2 {
     display: block;
     margin: 0 auto;
@@ -288,6 +293,31 @@ nav a:hover {
     font-weight: 400;
     line-height: 20px; /* 133.333% */
     letter-spacing: 0.3px;
+}
+
+.login-popup-input {
+    width: 200px;
+    height: 20px;
+    margin: 10px 0;
+    flex-shrink: 0;
+    border: 1px solid #BB945F;
+}
+
+.login-popup-button {
+    width: 75px;
+    height: 30px;
+    flex-shrink: 0;
+    margin-top: 10px;
+    border-radius: 2px;
+    border: 1px solid #0C0C0E;
+    color: #0C0C0E;
+    text-align: center;
+    font-family: Inter;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1px;
 }
 /* header end */
 
@@ -830,6 +860,7 @@ tr td:nth-child(3) {
     justify-content: flex-end;
     gap: 20px;
 }
+
 
 #get-a-card button {
     display: flex;
