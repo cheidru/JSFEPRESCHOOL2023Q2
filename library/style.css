@@ -589,9 +589,11 @@ nav a:hover {
 #carousel {
     display: flex;
     justify-content: space-between;
-    gap: 10px;
+    gap: 25px;
+    width: 1400px;
     height: 560px;
-    padding-bottom: 40px;    
+    padding-bottom: 40px;
+    overflow: hidden;  
 }
 
 #carousel-pagination {
@@ -618,6 +620,11 @@ nav a:hover {
 
 .carousel-bullet-box:first-child .carousel-bullet {
     background-color: #BB945F;
+    cursor: auto;
+}
+
+.carousel-bullet-box:first-child {
+    cursor: auto;
 }
 
 .about-more-controls {
@@ -1107,7 +1114,6 @@ tr td:nth-child(3) {
     position: absolute;
     top: 70px;
     right: 20px;
-    display: flex;
     flex-direction: column;
     width: 650px;
     height: 540px;

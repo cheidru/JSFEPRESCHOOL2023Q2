@@ -1,3 +1,17 @@
+let paginationBox = document.getElementById('carousel-pagination');
+let activeBullet = 1;
+
+paginationBox.addEventListener('click', () => {
+    // determine selected bullet number
+    // scroll pictures
+    // change active bullet to a new one
+})
+
+
+
+
+
+
 console.log(`Результаты самооценки:
     1. Вёрстка соответствует макету. Ширина экрана 768px +26
         - расстояние от картинки до точек сделано по макету (оценка за это не снижается)
