@@ -1125,7 +1125,7 @@ tr td:nth-child(3) {
 }
 
 #buy-a-card-header .close-window-btn {
-    right: 20px;
+    right: 15px;
     min-width: 18px;
     min-height: 18px;
 }
@@ -1144,14 +1144,18 @@ tr td:nth-child(3) {
     width: 45px;
 }
 
-#cvc, #city {
+#cvc {
     margin-bottom: 20px;
+}
+
+#city {
+    margin-bottom: 8px;
 }
 
 #credit-card-data-button {
     display: flex;
     align-items: flex-end;
-    gap: 25px;
+    gap: 23px;
 }
 
 #credit-card-data-button .popup-button {
@@ -1160,13 +1164,14 @@ tr td:nth-child(3) {
 
 #card-price {
     margin: 0;
+    margin-left: 2px;
     padding: 0;
     color: #0C0C0E;
     font-family: Inter;
     font-size: 20px;
     font-weight: 700;
     line-height: 20px; /* 100% */
-    letter-spacing: 2px;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
 }
 
