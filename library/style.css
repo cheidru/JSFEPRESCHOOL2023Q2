@@ -267,6 +267,11 @@ nav a:hover {
     max-height: 18px;
 }
 
+.popup-wrapper {
+    width: 100%;
+    padding: 0;
+}
+
 .popup-title {
     margin-bottom: 20px;
     text-align: center;   
@@ -276,11 +281,6 @@ nav a:hover {
     line-height: 20px; /* 100% */
     letter-spacing: 0.4px;
     text-transform: uppercase;
-}
-
-.popup-wrapper {
-    width: 100%;
-    padding: 0;
 }
 
 .popup-label {
@@ -417,15 +417,19 @@ nav a:hover {
     margin-right: 8px;
 }
 
-#white-field-title {
+.big-popup-title {
     font-family: Forum;
-    margin-bottom: 38px;
     font-size: 40px;
     font-weight: 400;
     line-height: 20px; /* 50% */
     letter-spacing: 0.8px;
     text-transform: uppercase;
 }
+
+#white-field-wrapper .big-popup-title {
+    margin-bottom: 38px;
+}
+
 
 #white-field-stats {
     display: flex;
@@ -1110,12 +1114,76 @@ tr td:nth-child(3) {
     border: 1px solid #000;
 }
 
-#buy-a-card-title {
+#buy-a-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 60px;
     color: #FFFFFF;
     background-color: #0C0C0E;
 }
+
+#buy-a-card-header .close-window-btn {
+    right: 20px;
+    min-width: 18px;
+    min-height: 18px;
+}
+
+#buy-a-card-wrapper {
+    display: flex;
+    padding: 30px 40px;
+}
+
+#exp-code-double-field {
+    display: flex;
+    gap: 10px;
+}
+
+.short-field {
+    width: 45px;
+}
+
+#cvc, #city {
+    margin-bottom: 20px;
+}
+
+#credit-card-data-button {
+    display: flex;
+    align-items: flex-end;
+    gap: 25px;
+}
+
+#credit-card-data-button .popup-button {
+    margin-bottom: 0;
+}
+
+#card-price {
+    margin: 0;
+    padding: 0;
+    color: #0C0C0E;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 20px; /* 100% */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+#buy-a-card-intro {    
+    flex-shrink: 0;
+    margin: 0;
+    width: 330px;
+    text-align: left;
+    color: #8E8E8E;
+    font-family: Inter;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 20px; /* 133.333% */
+    letter-spacing: 2px;
+}
+
+
 
 /* Digital Library Cards end */
 

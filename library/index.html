@@ -87,50 +87,49 @@
                     </div>
                 </div>
 
-                <div id="my-profile-popup" class="hidden-popup">
-                        <div id="my-profile-black-field">
-                            <div id="id-box">jd</div>
-                            <div id="name-box">john doe</div>
-                        </div>
-                        <div id="my-profile-white-field">
-                            <img class="close-window-btn" width=15 height=15 src="./assets/img/close_btn.svg" alt="close-window">
-                            <div id="white-field-wrapper">
-                                <div id="white-field-title">My profile</div>
-                                <div id="white-field-stats">
-                                    <div id="my-profile-visits">
-                                        <div class="stats-title">Visits</div>
-                                        <div class="stats-icon"><img src="./assets/img/visits.svg" alt="visits"></div>
-                                        <div class="stats-value">23</div>
-                                    </div>
-                                    <div id="my-profile-bonuses">
-                                        <div class="stats-title">Bonuses</div>
-                                        <div class="stats-icon"><img src="./assets/img/bonuses.svg" alt="bonuses"></div>
-                                        <div class="stats-value">1240</div>
-                                    </div>
-                                    <div id="my-profile-books">
-                                        <div class="stats-title">Books</div>
-                                        <div class="stats-icon"><img src="./assets/img/books.svg" alt="books"></div>
-                                        <div class="stats-value">2</div>
-                                    </div>
+                <div id="my-profile-popup" class="hidden-popup" style="display: flex;">
+                    <div id="my-profile-black-field">
+                        <div id="id-box">jd</div>
+                        <div id="name-box">john doe</div>
+                    </div>
+                    <div id="my-profile-white-field">
+                        <img class="close-window-btn" width=15 height=15 src="./assets/img/close_btn.svg" alt="close-window">
+                        <div id="white-field-wrapper">
+                            <div class="big-popup-title">My profile</div>
+                            <div id="white-field-stats">
+                                <div id="my-profile-visits">
+                                    <div class="stats-title">Visits</div>
+                                    <div class="stats-icon"><img src="./assets/img/visits.svg" alt="visits"></div>
+                                    <div class="stats-value">23</div>
                                 </div>
-                                <div id="white-field-rented-books">
-                                    <div id="rented-books-title">Rented books</div>
-                                    <div id="rented-books-list">
-                                        <ul id="">
-                                            <li><span>The Last Queen, Clive Irving</span></li>
-                                            <li><span>Dominicana, Angie Cruz</span></li>
-                                        </ul>
-                                    </div>
+                                <div id="my-profile-bonuses">
+                                    <div class="stats-title">Bonuses</div>
+                                    <div class="stats-icon"><img src="./assets/img/bonuses.svg" alt="bonuses"></div>
+                                    <div class="stats-value">1240</div>
                                 </div>
-                                <div id="white-field-card-number">
-                                    <div id="card-number-title">Card number</div>
-                                    <div id="card-number-code">F00234030</div>
-                                    <div id="card-number-copy"><img src="./assets/img/icon_copy.svg" alt="copy-card-number"></div>
+                                <div id="my-profile-books">
+                                    <div class="stats-title">Books</div>
+                                    <div class="stats-icon"><img src="./assets/img/books.svg" alt="books"></div>
+                                    <div class="stats-value">2</div>
                                 </div>
                             </div>
+                            <div id="white-field-rented-books">
+                                <div id="rented-books-title">Rented books</div>
+                                <div id="rented-books-list">
+                                    <ul id="">
+                                        <li><span>The Last Queen, Clive Irving</span></li>
+                                        <li><span>Dominicana, Angie Cruz</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div id="white-field-card-number">
+                                <div id="card-number-title">Card number</div>
+                                <div id="card-number-code">F00234030</div>
+                                <div id="card-number-copy"><img src="./assets/img/icon_copy.svg" alt="copy-card-number"></div>
+                            </div>
                         </div>
+                    </div>
                 </div>
-
             </div>
         </header>
 
@@ -617,45 +616,46 @@
 
 
                 <div id="buy-a-card-popup" class="hidden-popup" style="display: flex;">
-                    <div id="buy-a-card-title">
-                        <div id="id-box">Buy a library card</div>
-                        <img class="close-window-btn" width=15 height=15 src="./assets/img/close_btn.svg" alt="close-window">
+                    <div id="buy-a-card-header">
+                        <div class="big-popup-title">Buy a library card</div>
+                        <img class="close-window-btn" width=15 height=15 src="./assets/img/close_btn_white.svg" alt="close-window">
                     </div>
 
-                        <div id="buy-a-card-wrapper">
-                            <div id="white-field-title">My profile</div>
-                            <div id="white-field-stats">
-                                <div id="my-profile-visits">
-                                    <div class="stats-title">Visits</div>
-                                    <div class="stats-icon"><img src="./assets/img/visits.svg" alt="visits"></div>
-                                    <div class="stats-value">23</div>
-                                </div>
-                                <div id="my-profile-bonuses">
-                                    <div class="stats-title">Bonuses</div>
-                                    <div class="stats-icon"><img src="./assets/img/bonuses.svg" alt="bonuses"></div>
-                                    <div class="stats-value">1240</div>
-                                </div>
-                                <div id="my-profile-books">
-                                    <div class="stats-title">Books</div>
-                                    <div class="stats-icon"><img src="./assets/img/books.svg" alt="books"></div>
-                                    <div class="stats-value">2</div>
-                                </div>
+                    <div id="buy-a-card-wrapper">
+                        <form id="credit-card-data">
+                            <label for="card-number" class="popup-label">Bank card number</label>
+                            <input type="text" name="card-number" id="card-number" class="popup-input">
+
+                            <label for="exp-code" class="popup-label">Expiration code</label>
+                            <div id="exp-code-double-field">
+                                <input type="text" name="exp-code" id="exp-code" class="popup-input short-field">
+                                <input type="text" name="exp-code-ext" id="exp-code-ext" class="popup-input short-field">
                             </div>
-                            <div id="white-field-rented-books">
-                                <div id="rented-books-title">Rented books</div>
-                                <div id="rented-books-list">
-                                    <ul id="">
-                                        <li><span>The Last Queen, Clive Irving</span></li>
-                                        <li><span>Dominicana, Angie Cruz</span></li>
-                                    </ul>
-                                </div>
+
+                            <label for="cvc" class="popup-label">CVC</label><br>
+                            <input type="text" name="cvc" id="cvc" class="popup-input short-field"><br>
+
+                            <label for="holder-name" class="popup-label">Cardholder name</label>
+                            <input type="text" name="holder-name" id="holder-name" class="popup-input">
+
+                            <label for="postal" class="popup-label">Postal code</label>
+                            <input type="text" name="postal" id="postal" class="popup-input"><br>
+
+                            <label for="city" class="popup-label">City / Town</label>
+                            <input type="text" name="city" id="city" class="popup-input">
+
+                            <div id="credit-card-data-button">
+                                <button class="popup-button">Buy</button>
+                                <p id="card-price">$ 25.00</p>
                             </div>
-                            <div id="white-field-card-number">
-                                <div id="card-number-title">Card number</div>
-                                <div id="card-number-code">F00234030</div>
-                                <div id="card-number-copy"><img src="./assets/img/icon_copy.svg" alt="copy-card-number"></div>
-                            </div>
-                        </div>
+                        </form>
+                        
+                        <p id="buy-a-card-intro">If you are live, work, attend school, or pay property taxes in 
+                            New York State, you can get a $25 digital library card right 
+                            now using this online form. Visitors to New York State can 
+                            also use this form to apply for a temporary card.
+                        </p>
+                    </div>
                 </div>
 
 
