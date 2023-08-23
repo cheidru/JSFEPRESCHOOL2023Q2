@@ -1,40 +1,31 @@
 let paginationBox = document.getElementById('carousel-pagination');
 let activeBullet = 1;
 let aboutSliderPicSet = document.getElementById('carousel');
+aboutSliderPicSet.style.left = '0px';
 
 paginationBox.addEventListener('click', (e) => {
-    let sliderStyles = getComputedStyle(aboutSliderPicSet);
-    // console.log("bullet clicked", e.target.dataset.bulindex, e.target);
     if (e.target.dataset.bulindex == activeBullet) return;
    
     scrollPictures(e.target.dataset.bulindex - activeBullet);
 
     function scrollPictures (stepsNo) {
-        if (stepsNo > 0) {
-            console.log(stepsNo, sliderStyles.left);
-            for(i = 0; i < stepsNo; i++) {
-                let oldActiveBullet = document.querySelector(`[data-bulindex="${activeBullet}"]`);
-                oldActiveBullet.classList.toggle('active-bullet');
-                oldActiveBullet.parentElement.style.cursor = "pointer"
-                let onePictureShift = `${parseInt(sliderStyles.left) - 475}px`;
-                // shift pictures left
-                aboutSliderPicSet.style.transform = "translateX(" + onePictureShift + ")";
-                activeBullet++
-                console.log(e.target.classList);
-                e.target.classList.toggle('active-bullet');
-                e.target.parentElement.style.cursor = "auto";
-                console.log(e.target.classList);
+        let direction = stepsNo > 0 ? 1 : -1;
 
-                console.log("bullet changed");
-                // `${activeBullet - 1}`
-            }
-        }
+        for(i = 1; i <= Math.abs(stepsNo); i++) {
+            let oldActiveBullet = document.querySelector(`[data-bulindex="${activeBullet}"]`);
 
+            oldActiveBullet.classList.toggle('active-bullet');
+            oldActiveBullet.parentElement.style.cursor = "pointer"
 
+            aboutSliderPicSet.style.left = (parseInt(aboutSliderPicSet.style.left) - (475 * direction)) + "px";
+            activeBullet += direction;
 
+            let newActiveBullet = document.querySelector(`[data-bulindex="${activeBullet}"]`);
 
+            newActiveBullet.classList.toggle('active-bullet');
+            newActiveBullet.parentElement.style.cursor = "auto";
+        }        
     }
-    // change active bullet to a new one
 })
 
 
