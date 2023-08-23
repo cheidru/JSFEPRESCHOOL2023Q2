@@ -15,12 +15,14 @@ paginationBox.addEventListener('click', (e) => {
             for(i = 0; i < stepsNo; i++) {
                 let oldActiveBullet = document.querySelector(`[data-bulindex="${activeBullet}"]`);
                 oldActiveBullet.classList.toggle('active-bullet');
+                oldActiveBullet.parentElement.style.cursor = "pointer"
                 let onePictureShift = `${parseInt(sliderStyles.left) - 475}px`;
                 // shift pictures left
                 aboutSliderPicSet.style.transform = "translateX(" + onePictureShift + ")";
                 activeBullet++
                 console.log(e.target.classList);
                 e.target.classList.toggle('active-bullet');
+                e.target.parentElement.style.cursor = "auto";
                 console.log(e.target.classList);
 
                 console.log("bullet changed");
