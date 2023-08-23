@@ -148,24 +148,26 @@
             <section id="about">
                 <h2>About</h2>
 
-                <p>The Brooklyn Library is a free workspace, a large number of books and a cozy coffee shop inside</p>                
+                <p>The Brooklyn Library is a free workspace, a large number of books and a cozy coffee shop inside</p>
 
-                <div id="carousel">
-                    <img src="./assets/img/about/Arrow-to-the-left.svg" alt="left-arrow" class="about-more-controls" id="left-arrow">
-                    <img src="./assets/img/about/About-image1.jpg" alt="img1">
-                    <img src="./assets/img/about/About-image2.jpg" alt="img2" class="hidden-1078px">
-                    <img src="./assets/img/about/About-image3.jpg" alt="img3" class="hidden-1078px">
-                    <img src="./assets/img/about/About-image4.jpg" alt="img4">
-                    <img src="./assets/img/about/About-image5.jpg" alt="img5">
-                    <img src="./assets/img/about/Arrow-to-the-right.svg" alt="right-arrow" class="about-more-controls" id="right-arrow">
+                <div id="carousel-frame">
+                    <div id="carousel">
+                        <img src="./assets/img/about/Arrow-to-the-left.svg" alt="left-arrow" class="about-more-controls" id="left-arrow">
+                        <img src="./assets/img/about/About-image1.jpg" alt="img1">
+                        <img src="./assets/img/about/About-image2.jpg" alt="img2" class="hidden-1078px">
+                        <img src="./assets/img/about/About-image3.jpg" alt="img3" class="hidden-1078px">
+                        <img src="./assets/img/about/About-image4.jpg" alt="img4">
+                        <img src="./assets/img/about/About-image5.jpg" alt="img5">
+                        <img src="./assets/img/about/Arrow-to-the-right.svg" alt="right-arrow" class="about-more-controls" id="right-arrow">
+                    </div>
                 </div>
 
                 <ul id="carousel-pagination">
-                    <li class="carousel-bullet-box"><div class="carousel-bullet"></div></li>
-                    <li class="carousel-bullet-box"><div class="carousel-bullet"></div></li>
-                    <li class="carousel-bullet-box"><div class="carousel-bullet"></div></li>
-                    <li class="carousel-bullet-box"><div class="carousel-bullet about-more-controls"></div></li>
-                    <li class="carousel-bullet-box"><div class="carousel-bullet about-more-controls"></div></li>
+                    <li class="carousel-bullet-box"><div class="carousel-bullet active-bullet" data-bulindex="1"></div></li>
+                    <li class="carousel-bullet-box"><div class="carousel-bullet" data-bulindex="2"></div></li>
+                    <li class="carousel-bullet-box"><div class="carousel-bullet" data-bulindex="3"></div></li>
+                    <li class="carousel-bullet-box"><div class="carousel-bullet about-more-controls" data-bulindex="4"></div></li>
+                    <li class="carousel-bullet-box"><div class="carousel-bullet about-more-controls" data-bulindex="5"></div></li>
                 </ul>
 
             </section>

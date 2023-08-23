@@ -586,14 +586,22 @@ nav a:hover {
     background-color: white;
 }
 
+#carousel-frame {
+    position: relative;
+    width: 1400px;
+    height: 560px;
+    padding-bottom: 40px;
+    overflow: hidden;
+}
+
 #carousel {
+    position: relative;
     display: flex;
     justify-content: space-between;
     gap: 25px;
     width: 1400px;
     height: 560px;
-    padding-bottom: 40px;
-    overflow: hidden;  
+    transition: all 1s;
 }
 
 #carousel-pagination {
@@ -618,7 +626,7 @@ nav a:hover {
     border-radius: 50%;
 }
 
-.carousel-bullet-box:first-child .carousel-bullet {
+.active-bullet {
     background-color: #BB945F;
     cursor: auto;
 }

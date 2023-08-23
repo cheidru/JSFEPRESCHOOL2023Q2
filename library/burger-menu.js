@@ -3,7 +3,6 @@ const anyWhere = document.querySelector('body');
 const navBurgerMenu = document.querySelector('.nav-ul');
 const profile = document.getElementById('profile-svg');
 
-let activeBullet = 1;
 let activeSeason = 1; 
 
 navBurgerMenu.classList.add('nav-burger-menu-invisible');
