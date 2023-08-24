@@ -596,10 +596,11 @@ nav a:hover {
 
 #carousel {
     position: relative;
+    left: 0;
     display: flex;
     justify-content: space-between;
     gap: 25px;
-    width: 1400px;
+    width: auto;
     height: 560px;
     transition: all 0.8s;
 }
@@ -1328,12 +1329,19 @@ footer div:nth-child(2) {
         height: auto;
     }
 
-    #carousel {
-        align-items: flex-start;
-        max-width: auto;
+    #carousel-frame {
+        width: auto;
         height: auto;
     }
+    
+    #carousel {
+        align-items: flex-start;
+        width: auto;
+        height: auto;
+    }
+
     #carousel img {
+        /* (25px gap * 2) + (20px margin * 2) = 90px */
         width: calc((100vw - 90px) / 3);
         object-fit: contain;
     }
@@ -1432,16 +1440,19 @@ footer div:nth-child(2) {
         height: auto;
     }
 
-    .hidden-1078px {
-        display: none;
+    #carousel-frame {
+        display: flex;
+        justify-content: left;
+        width: 475px;
+        height: auto;
+        margin: 0 auto;
+        padding-bottom: 30px;
     }
 
     #carousel {
         width: auto;
         justify-content: center;
         align-items: center;
-        gap: unset;
-        padding-bottom: 30px;
     }
     
     #carousel-pagination {
@@ -1451,11 +1462,32 @@ footer div:nth-child(2) {
     }
 
     #carousel img {
-        padding: 0 58px;
+        width: auto;
+        object-fit: contain;
     }
 
+    [id$="-arrow"] {
+        display: block;
+        position: absolute;
+        top: 288.5px;
+    }
+
+    #left-arrow {
+        left: -58px;
+        border: 1px solid green;
+    }
+    
+    #right-arrow {
+        left: 558px;
+        border: 1px solid red;
+    }
+    
     .about-more-controls {
         display: block;
+    }
+
+    .arrow-disabled {
+        opacity: 50%;
     }
 
     #carousel img[id$="-arrow"] {
