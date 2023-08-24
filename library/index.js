@@ -43,10 +43,10 @@ function scrollPictures (stepsNo) {
         newActiveBullet.classList.toggle('active-bullet');
         newActiveBullet.parentElement.style.cursor = "auto";
 
-        if (activeBullet == 1) disableArrow(true, LEFT_ARROW);
-        if (activeBullet == 5) disableArrow(true, RIGHT_ARROW);
-        if (activeBullet > 1) disableArrow(false, LEFT_ARROW);
-        if (activeBullet < 5) disableArrow(false, RIGHT_ARROW);
+        // if (activeBullet == 1) disableArrow(true, LEFT_ARROW);
+        // if (activeBullet == 5) disableArrow(true, RIGHT_ARROW);
+        // if (activeBullet > 1) disableArrow(false, LEFT_ARROW);
+        // if (activeBullet < 5) disableArrow(false, RIGHT_ARROW);
     }        
 }
 
