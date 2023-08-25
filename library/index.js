@@ -42,11 +42,16 @@ function scrollPictures (stepsNo) {
 
         newActiveBullet.classList.toggle('active-bullet');
         newActiveBullet.parentElement.style.cursor = "auto";
-
-        // if (activeBullet == 1) disableArrow(true, LEFT_ARROW);
-        // if (activeBullet == 5) disableArrow(true, RIGHT_ARROW);
-        // if (activeBullet > 1) disableArrow(false, LEFT_ARROW);
-        // if (activeBullet < 5) disableArrow(false, RIGHT_ARROW);
+        if (activeBullet == 1) {
+            arrowLeft.classList.add('arrow-disabled');
+            arrowRight.classList.remove('arrow-disabled');
+        } else if (activeBullet == 5) {
+            arrowRight.classList.add('arrow-disabled');
+            arrowLeft.classList.remove('arrow-disabled');   
+        } else {
+            arrowLeft.classList.remove('arrow-disabled');
+            arrowRight.classList.remove('arrow-disabled');
+        }
     }        
 }
 

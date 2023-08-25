@@ -1448,6 +1448,7 @@ footer div:nth-child(2) {
         height: auto;
         margin: 0 auto;
         padding-bottom: 30px;
+        padding-left: 25px;
     }
 
     #carousel {
@@ -1467,27 +1468,28 @@ footer div:nth-child(2) {
         object-fit: contain;
     }
 
-    #left-arrow, #right-arrow {
+    .arrow {
+        padding: 20px;
         position: absolute;
-        top: 509.5px;
+        top: 489px;
+        cursor: pointer;
    }
 
     #left-arrow {
-        left: 77px;
-        border: 1px solid green;
+        left: 57px;
     }
     
     #right-arrow {
-        left: 667px;
-        border: 1px solid red;
+        right: 57px;
     }
     
     .about-more-controls {
         display: block;
     }
 
-    .arrow-disabled {
+ .arrow-disabled {
         opacity: 50%;
+        cursor: auto;
     }
 
     #carousel img[id$="-arrow"] {
@@ -1703,6 +1705,14 @@ footer div:nth-child(2) {
     
     #season-pick-radios label {
         margin-right: 3vw;
+    }
+
+    #left-arrow {
+        left: 7%;
+    }
+    
+    #right-arrow {
+        right: 7%;
     }
 
 }
