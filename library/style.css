@@ -104,6 +104,7 @@ p {
     font-family: Inter;
     font-size: 20px;
     line-height: 40px;
+    user-select: none;
 }
 
 section:not(#welcome) {
@@ -656,8 +657,7 @@ nav a:hover {
     font-family: Inter;
     font-size: 20px;
     font-style: normal;
-    line-height: normal;
- 
+    line-height: normal; 
 }
 
 #season-pick-radios legend {
@@ -715,16 +715,31 @@ input[name="season"] {
     height: 1150px;
 }
 
-.fade-out, .fade-in {
+.fade-out {
+    opacity: 0;
     transition: all 1s;
 }
 
-.fade-out {
+.fade-in {
     opacity: 1;
+    transition: all 1s;
 }
 
-.fade-in {
-    opacity: 0;
+
+.assignOrder1 {
+    order: 1;
+}
+
+.assignOrder2 {
+    order: 2;
+}
+
+.assignOrder3 {
+    order: 3;
+}
+
+.assignOrder4 {
+    order: 4;
 }
 
 .favorite-item {

@@ -16,11 +16,9 @@ aboutSliderPicSet.style.left = '0px';
 let aboutIMG = document.querySelectorAll('#carousel img')[1];
 
 paginationBox.addEventListener('click', (e) => {
-    
-    console.log("paginationBox start, activeBullet = ",activeBullet);
+
     if (e.target.dataset.bulindex == activeBullet) return;   
     scrollPictures(e.target.dataset.bulindex - activeBullet);
-    console.log("paginationBox end, activeBullet = ",activeBullet);
 })
 
 arrowLeft.addEventListener('click', () => {arrowClicked(LEFT_ARROW)});
@@ -65,7 +63,107 @@ function arrowClicked(arrow) {
 // About-slider END
 
 // Favourite season changer START
+let favouriteRadios = document.getElementById('season-pick-radios');
+let favouriteBooks = document.getElementById('favorites-items-wrapper');
+let activeSeason = 'Winter';
+let allSeasons = ['Winter', 'Spring', 'Summer', 'Autumn'];
+let seasonChangeInProgress = false;
+let seasonChangeBreakID = 0;
 
+let favourite1 = document.getElementById('item1');
+let favourite2 = document.getElementById('item2');
+let favourite3 = document.getElementById('item3');
+let favourite4 = document.getElementById('item4');
+let favourite5 = document.getElementById('item5');
+let favourite6 = document.getElementById('item6');
+let favourite7 = document.getElementById('item7');
+let favourite8 = document.getElementById('item8');
+let favourite9 = document.getElementById('item9');
+let favourite10 = document.getElementById('item10');
+let favourite11 = document.getElementById('item11');
+let favourite12 = document.getElementById('item12');
+let favourite13 = document.getElementById('item13');
+let favourite14 = document.getElementById('item14');
+let favourite15 = document.getElementById('item15');
+let favourite16 = document.getElementById('item16');
+
+favouriteRadios.addEventListener('click', (e) => {
+    if (e.target.textContent == activeSeason) return;
+    if (e.target.tagName == 'INPUT') return;
+    if (seasonChangeInProgress) clearTimeout(seasonChangeBreakID);
+    seasonChange(e.target.textContent);
+})
+
+favouriteBooks.addEventListener('click', () => {
+    if (seasonChangeInProgress) clearTimeout(seasonChangeBreakID);
+    let newSeason = activeSeason == 'Autumn' ? 'Winter' : allSeasons[allSeasons.indexOf(activeSeason) + 1];
+    seasonChange(newSeason);
+    // let radioButtonId = newSeason.toLowerCase();
+    document.getElementById(newSeason.toLowerCase()).checked = true;
+    // сделать активной новую кнопку
+})
+
+function seasonChange(newSeason) {
+    seasonChangeInProgress = true;
+    favouriteBooks.classList.add('fade-out');
+    favouriteBooks.classList.remove('fade-in');
+
+    seasonChangeBreakID = setTimeout(() => {
+        seasonBooksChange(activeSeason);
+        seasonBooksChange(newSeason);
+        activeSeason = newSeason;
+        favouriteBooks.classList.remove('fade-out');
+        favouriteBooks.classList.add('fade-in');
+        seasonChangeInProgress = false;
+    }, 1000);
+    
+
+}
+
+function seasonBooksChange(season) {
+    switch(season) {
+        case 'Winter':
+            favourite1.classList.toggle('hidden');
+            favourite1.classList.toggle('assignOrder1');
+            favourite2.classList.toggle('hidden');
+            favourite2.classList.toggle('assignOrder2');
+            favourite3.classList.toggle('hidden');
+            favourite3.classList.toggle('assignOrder3');
+            favourite4.classList.toggle('hidden');
+            favourite4.classList.toggle('assignOrder4');
+            break;
+        case 'Spring':
+            favourite5.classList.toggle('hidden');
+            favourite5.classList.toggle('assignOrder1');
+            favourite6.classList.toggle('hidden');
+            favourite6.classList.toggle('assignOrder2');
+            favourite7.classList.toggle('hidden');
+            favourite7.classList.toggle('assignOrder3');
+            favourite8.classList.toggle('hidden');
+            favourite8.classList.toggle('assignOrder4');
+            break;
+        case 'Summer':
+            favourite9.classList.toggle('hidden');
+            favourite9.classList.toggle('assignOrder1');
+            favourite10.classList.toggle('hidden');
+            favourite10.classList.toggle('assignOrder2');
+            favourite11.classList.toggle('hidden');
+            favourite11.classList.toggle('assignOrder3');
+            favourite12.classList.toggle('hidden');
+            favourite12.classList.toggle('assignOrder4');
+            break;
+        case 'Autumn':
+            favourite13.classList.toggle('hidden');
+            favourite13.classList.toggle('assignOrder1');
+            favourite14.classList.toggle('hidden');
+            favourite14.classList.toggle('assignOrder2');
+            favourite15.classList.toggle('hidden');
+            favourite15.classList.toggle('assignOrder3');
+            favourite16.classList.toggle('hidden');
+            favourite16.classList.toggle('assignOrder4');
+            break;
+    }
+}
 
 
 

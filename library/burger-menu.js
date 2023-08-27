@@ -3,8 +3,6 @@ const anyWhere = document.querySelector('body');
 const navBurgerMenu = document.querySelector('.nav-ul');
 const profile = document.getElementById('profile-svg');
 
-let activeSeason = 1; 
-
 navBurgerMenu.classList.add('nav-burger-menu-invisible');
 
 burgerButton.addEventListener('click', (e) => {
