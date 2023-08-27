@@ -44,11 +44,11 @@
                     <div class="popup-wrapper">
                         <div class="popup-title">login</div>
 
-                        <label for="e-mail" class="popup-label">E-mail or readers card</label>
-                        <input type="text" class="popup-input" id="e-mail">
+                        <label for="login-e-mail" class="popup-label">E-mail or readers card</label>
+                        <input type="text" class="popup-input" id="login-e-mail">
 
-                        <label for="password" class="popup-label">Password</label>
-                        <input type="text" class="popup-input" id="password">
+                        <label for="log-in-password" class="popup-label">Password</label>
+                        <input type="text" class="popup-input" id="log-in-password">
 
                         <button class="popup-button">Log In</button>
 
@@ -66,17 +66,17 @@
                     <div class="popup-wrapper">
                         <div class="popup-title">Register</div>
 
-                        <label for="e-mail" class="popup-label">First name</label>
-                        <input type="text" class="popup-input" id="e-mail">
+                        <label for="first-name" class="popup-label">First name</label>
+                        <input type="text" class="popup-input" id="first-name" autocomplete="given-name">
 
-                        <label for="password" class="popup-label">Last name</label>
-                        <input type="text" class="popup-input" id="password">
+                        <label for="last-name" class="popup-label">Last name</label>
+                        <input type="text" class="popup-input" id="last-name" autocomplete="family-name">
                         
-                        <label for="e-mail" class="popup-label">E-mail</label>
-                        <input type="text" class="popup-input" id="e-mail">
+                        <label for="register-e-mail" class="popup-label">E-mail</label>
+                        <input type="text" class="popup-input" id="register-e-mail">
 
-                        <label for="password" class="popup-label">Password</label>
-                        <input type="text" class="popup-input" id="password">
+                        <label for="register-password" class="popup-label">Password</label>
+                        <input type="text" class="popup-input" id="register-password">
 
                         <button class="popup-button">Log In</button>
 
@@ -592,8 +592,8 @@
                         <form id="find-card-form" action="#">
                             <div id="find-card-form-input">
                                 <p>Brooklyn Public Library</p>
-                                <input type="text" pattern="[A-Za-z0-9]" placeholder="Reader's name">
-                                <input type="text" pattern="[A-Za-z0-9]" placeholder="Card number">
+                                <input type="text" id="library-card-reader-name" pattern="[A-Za-z0-9]" placeholder="Reader's name">
+                                <input type="text" id="library-card-number" pattern="[A-Za-z0-9]" placeholder="Card number">
                             </div>
                             <button>Check the card</button>
                         </form>

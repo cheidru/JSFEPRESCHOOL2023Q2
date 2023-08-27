@@ -715,6 +715,18 @@ input[name="season"] {
     height: 1150px;
 }
 
+.fade-out, .fade-in {
+    transition: all 1s;
+}
+
+.fade-out {
+    opacity: 1;
+}
+
+.fade-in {
+    opacity: 0;
+}
+
 .favorite-item {
     display: flex;
     box-sizing: border-box;

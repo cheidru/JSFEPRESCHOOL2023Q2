@@ -1,3 +1,5 @@
+
+// About-slider START
 let paginationBox = document.getElementById('carousel-pagination');
 let activeBullet = 1;
 let arrowLeft = document.getElementById('left-arrow');
@@ -60,17 +62,16 @@ function arrowClicked(arrow) {
     let stepsNo = arrow == LEFT_ARROW ? -1 : 1;
     scrollPictures(stepsNo);
 }
+// About-slider END
 
-function disableArrow(disable, whichArrow) {
-    console.log("disableArrow anabled", ", activeBullet = ", activeBullet);
-    switch(+disable + '' + whichArrow) { // make action code
-        case '11': // disable = true; whichArrow = RIGHT_ARROW
-            arrowRightDisabled = true;
-            arrowLeftDisabled = false;           
+// Favourite season changer START
 
-    } 
 
-}
+
+
+// Favourite season changer END
+
+
 
 
 // console.log(`Результаты самооценки:
