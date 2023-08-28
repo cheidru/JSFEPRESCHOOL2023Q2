@@ -89,7 +89,7 @@ let favourite16 = document.getElementById('item16');
 
 favouriteRadios.addEventListener('click', (e) => {
     if (e.target.textContent == activeSeason) return;
-    if (e.target.tagName == 'INPUT') return;
+    if (e.target.tagName != 'LABEL') return;
     if (seasonChangeInProgress) clearTimeout(seasonChangeBreakID);
     seasonChange(e.target.textContent);
 })
@@ -115,7 +115,7 @@ function seasonChange(newSeason) {
         favouriteBooks.classList.remove('fade-out');
         favouriteBooks.classList.add('fade-in');
         seasonChangeInProgress = false;
-    }, 1000);
+    }, 700);
     
 
 }
@@ -164,12 +164,12 @@ function seasonBooksChange(season) {
             break;
     }
 }
-
-
-
 // Favourite season changer END
 
+// Register START
 
+
+// Register ENDS
 
 
 // console.log(`Результаты самооценки:

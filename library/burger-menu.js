@@ -1,7 +1,7 @@
+let activePopUp = {};
 const burgerButton = document.querySelector('.burger-button');
 const anyWhere = document.querySelector('body');
 const navBurgerMenu = document.querySelector('.nav-ul');
-const profile = document.getElementById('profile-svg');
 
 navBurgerMenu.classList.add('nav-burger-menu-invisible');
 
@@ -13,10 +13,6 @@ burgerButton.addEventListener('click', (e) => {
 navBurgerMenu.addEventListener('click', (e) => {
     e.stopImmediatePropagation();
     menuShowHide();
-})
-
-profile.addEventListener('click', (e) => {
-    e.stopImmediatePropagation();
 })
 
 anyWhere.addEventListener('click', (e) => {
@@ -33,12 +29,30 @@ function menuShowHide() {
 }
 
 function carouselSliderMove (direction) {
-    let scrWidth = screenWidth();
-    
+    let scrWidth = screenWidth();    
 }
 
 function seasonChange (season) {
     let scrWidth = screenWidth();
 }
 
+
+let userIsRegistered = false;
+const profileIcon = document.getElementById('profile');
+
+
+// Login START
+profileIcon.addEventListener('click', () => {
+    console.log("profile icon clicked");
+    if (!userIsRegistered) loginIniPopUp();
+    if (userIsRegistered) profileMiniPopUp();
+})
+
+function loginIniPopUp() {
+    console.log("login popup show");
+    const loginPopUp = document.getElementById('login-ini-popup');
+
+    loginPopUp.classList.remove('hidden-popup');
+    activePopUp = loginPopUp;
+}
 
