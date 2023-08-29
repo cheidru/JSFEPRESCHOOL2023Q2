@@ -1415,7 +1415,7 @@ footer div:nth-child(2) {
     
     #season-pick-radios {
         position: sticky;
-        top: 50px;
+        top: 30px;
         width: fit-content;
         margin-left: auto;
         margin-right: auto;
