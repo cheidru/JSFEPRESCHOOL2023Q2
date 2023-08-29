@@ -6,11 +6,13 @@ activePopUp.obj = {};
 
 const anyWhere = document.querySelector('body');
 
-anyWhere.addEventListener('click', (e) => {
-    console.log('anyWhere pressed');
+anyWhere.addEventListener('click', (event) => {
+
+    console.log('anyWhere pressed', event.target.parentElement);
     if (activePopUp.name == 'burgerMenu') {
         menuShowHide();
     } else {
+        if (event.target == activePopUp.obj || event.target.parentElement == activePopUp.obj) return;
         closeModalWindow(activePopUp.obj);
     }        
 })
