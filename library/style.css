@@ -652,7 +652,7 @@ nav a:hover {
 
 #season-pick-radios {
     margin-left: 2.4px;
-    margin-bottom: 40px;
+    padding-bottom: 40px;
     padding-top: 40px;
     font-family: Inter;
     font-size: 20px;
@@ -1096,6 +1096,7 @@ tr td:nth-child(3) {
     border: 1px solid #0C0C0E;
 }
 
+
 #get-a-card {
     width: 456px;
     text-align: right;
@@ -1140,7 +1141,7 @@ tr td:nth-child(3) {
 }
 
 #get-a-card button:hover, 
-#find-card-form button:hover {
+#find-card-form button:not([disabled]):hover {
     border: 1px solid #BB945F;
     background: #BB945F;
     transition: 1s;
@@ -1413,9 +1414,14 @@ footer div:nth-child(2) {
     }
     
     #season-pick-radios {
+        position: sticky;
+        top: 50px;
         width: fit-content;
         margin-left: auto;
-        margin-right: auto;     
+        margin-right: auto;
+        background: rgba(255, 255, 255, 0.7);
+        background-clip: border-box;
+        z-index: 99;
     }
 
     #autumn + label {
