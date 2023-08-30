@@ -213,9 +213,9 @@ nav a:hover {
 
 
 [id*="-popup"]:not([id$="ini-popup"]) {
-    top: 0.5vh;
-    left: 0.5vw;
-    transform: translate(100%, 50%);
+    top: 50vh;
+    right: 50vw;
+    transform: translate(50%, -50%);
     z-index: 3;
 }
 

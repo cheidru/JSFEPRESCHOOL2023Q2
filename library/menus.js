@@ -24,6 +24,8 @@ function closeModalWindow(modalWindow) {
     console.log('closeModal', modalWindow);
     powerLayer.classList.add('hidden-popup');
     modalWindow.classList.add('hidden-popup');
+    anyWhere.style.overflow = "visible";
+    // anyWhere.style.paddingRight = "0px";
     activePopUp.name = '';
     activePopUp.obj = {};
 }
@@ -31,6 +33,8 @@ function closeModalWindow(modalWindow) {
 function openModalWindow(modal, name) {
     console.log('openModal',modal, name);
     modal.classList.remove('hidden-popup');
+    anyWhere.style.overflow = "hidden";
+    // anyWhere.style.paddingRight = "15px";
     activePopUp.name = name;
     activePopUp.obj = modal;
 }
@@ -81,11 +85,13 @@ const loginIniBTN = document.getElementById('login-btn');
 const registerIniBTN = document.getElementById('register-btn');
 
 const loginPopUp = document.getElementById('login-popup');
+const loginPopUpBTN = document.getElementById('login-popup-btn');
 
 const goRegister = document.getElementById('go-to-register');
 const goLogin = document.getElementById('go-to-login');
 
 const registerPopUp = document.getElementById('register-popup');
+const registerSignUpBTN = document.getElementById('register-signup-btn');
 
 const signUpBTN = document.getElementById('sign-up-btn');
 
@@ -109,10 +115,18 @@ goRegister.addEventListener('click', (e) => {goRegisterFoo(e)}, true);
 
 signUpBTN.addEventListener('click', (e) => {goRegisterFoo(e)}, true);
 
+loginPopUpBTN.addEventListener('click', () => {
+
+})
+
+registerSignUpBTN.addEventListener('click', () => {
+
+})
+
 function goRegisterFoo(event) {
     event.stopImmediatePropagation();
-    console.log(event = signUpBTN);
-    if (event != signUpBTN) {
+    console.log(event.target, signUpBTN);
+    if (event.target !== signUpBTN) {
         closeModalWindow(activePopUp.obj);
     } else {
         document.documentElement.scrollTop = '0px';
@@ -123,6 +137,7 @@ function goRegisterFoo(event) {
 
 function goLoginFoo(event) {
     event.stopImmediatePropagation();
+    closeModalWindow(activePopUp.obj);
     powerLayer.classList.remove('hidden-popup');
     openModalWindow(loginPopUp, 'loginPopUp');
 }

@@ -44,6 +44,7 @@
 
             <div id="profile-extended-popup" class="hidden-popup"></div>
 
+
             <div id="login-popup" class="hidden-popup">
                 <img class="close-window-btn" width=15 height=15 src="./assets/img/close_btn.svg" alt="close-window">
                 
@@ -56,7 +57,7 @@
                     <label for="log-in-password" class="popup-label">Password</label>
                     <input type="text" class="popup-input" id="log-in-password">
 
-                    <button class="popup-button">Log In</button>
+                    <button class="popup-button" id="login-popup-btn">Log In</button>
 
                     <div class="popup-bottom-line-wrapper">
                         <div>Don't have an account?</div>
@@ -73,10 +74,10 @@
                     <div class="popup-title">Register</div>
 
                     <label for="first-name" class="popup-label">First name</label>
-                    <input type="text" class="popup-input" id="first-name" autocomplete="given-name">
+                    <input type="text" class="popup-input" id="first-name" pattern="[A-Za-zА-Яа-яЁё]" autocomplete="given-name" required>
 
                     <label for="last-name" class="popup-label">Last name</label>
-                    <input type="text" class="popup-input" id="last-name" autocomplete="family-name">
+                    <input type="text" class="popup-input" id="last-name" pattern="[A-Za-zА-Яа-яЁё]" autocomplete="family-name" required>
                     
                     <label for="register-e-mail" class="popup-label">E-mail</label>
                     <input type="text" class="popup-input" id="register-e-mail">
@@ -84,7 +85,7 @@
                     <label for="register-password" class="popup-label">Password</label>
                     <input type="text" class="popup-input" id="register-password">
 
-                    <button class="popup-button">Log In</button>
+                    <button class="popup-button" id="register-signup-btn">Sign Up</button>
 
                     <div class="popup-bottom-line-wrapper">
                         <div>Already have an account?</div>
