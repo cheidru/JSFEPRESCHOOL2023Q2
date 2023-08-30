@@ -94,8 +94,9 @@ favouriteRadios.addEventListener('click', (e) => {
     seasonChange(e.target.textContent);
 })
 
-favouriteBooks.addEventListener('click', () => {
+favouriteBooks.addEventListener('click', (e) => {
     if (seasonChangeInProgress) clearTimeout(seasonChangeBreakID);
+    if (e.target.classList.contains('favorite-button')) return;
     let newSeason = activeSeason == 'Autumn' ? 'Winter' : allSeasons[allSeasons.indexOf(activeSeason) + 1];
     seasonChange(newSeason);
     // let radioButtonId = newSeason.toLowerCase();

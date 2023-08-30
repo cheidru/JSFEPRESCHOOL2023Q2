@@ -1,24 +1,28 @@
 let activePopUp = {};
 activePopUp.name = '';
 activePopUp.obj = {};
-// loginPopUp
-// burgerMenu
 
 const anyWhere = document.querySelector('body');
 
 anyWhere.addEventListener('click', (event) => {
-
     console.log('anyWhere pressed', event.target.parentElement);
     if (activePopUp.name == 'burgerMenu') {
         menuShowHide();
     } else {
-        if (event.target == activePopUp.obj || event.target.parentElement == activePopUp.obj) return;
+        if (event.target == activePopUp.obj ||
+             ((event.target.parentElement == activePopUp.obj ||
+                event.target.parentElement.parentElement == activePopUp.obj ||
+                event.target.parentElement.parentElement.parentElement == activePopUp.obj) &&
+             !event.target.classList.contains('close-window-btn'))
+        ) return;
+        powerLayer.classList.add('hidden-popup');
         closeModalWindow(activePopUp.obj);
     }        
 })
 
 function closeModalWindow(modalWindow) {
     console.log('closeModal', modalWindow);
+    powerLayer.classList.add('hidden-popup');
     modalWindow.classList.add('hidden-popup');
     activePopUp.name = '';
     activePopUp.obj = {};
@@ -66,10 +70,11 @@ function menuShowHide() {
 }
 // Burger menu END
 
-// Login START
+// Modal windows START
 let userIsRegistered = false;
 
 const profileIcon = document.getElementById('profile');
+const powerLayer = document.getElementById('power-layer');
 
 const loginIniPopUp = document.getElementById('login-ini-popup');
 const loginIniBTN = document.getElementById('login-btn');
@@ -77,8 +82,12 @@ const registerIniBTN = document.getElementById('register-btn');
 
 const loginPopUp = document.getElementById('login-popup');
 
+const goRegister = document.getElementById('go-to-register');
+const goLogin = document.getElementById('go-to-login');
 
 const registerPopUp = document.getElementById('register-popup');
+
+const signUpBTN = document.getElementById('sign-up-btn');
 
 profileIcon.addEventListener('click', (event) => {
     console.log("profile icon clicked");
@@ -92,17 +101,32 @@ profileIcon.addEventListener('click', (event) => {
     if (userIsRegistered) profileMiniPopUp();
 })
 
-loginIniBTN.addEventListener('click', (event) => {
-    event.stopImmediatePropagation();
-    closeModalWindow(loginIniPopUp);
-    openModalWindow(loginPopUp, 'loginPopUp');
-}, true);
+loginIniBTN.addEventListener('click', (e) => {goLoginFoo(e)}, true);
+goLogin.addEventListener('click', (e) => {goLoginFoo(e)}, true);
 
-registerIniBTN.addEventListener('click', (event) => {
+registerIniBTN.addEventListener('click', (e) => {goRegisterFoo(e)}, true);
+goRegister.addEventListener('click', (e) => {goRegisterFoo(e)}, true);
+
+signUpBTN.addEventListener('click', (e) => {goRegisterFoo(e)}, true);
+
+function goRegisterFoo(event) {
     event.stopImmediatePropagation();
-    closeModalWindow(loginIniPopUp);
+    console.log(event = signUpBTN);
+    if (event != signUpBTN) {
+        closeModalWindow(activePopUp.obj);
+    } else {
+        document.documentElement.scrollTop = '0px';
+    }
+    powerLayer.classList.remove('hidden-popup');
     openModalWindow(registerPopUp, 'registerPopUp');
-}, true);
+}
+
+function goLoginFoo(event) {
+    event.stopImmediatePropagation();
+    powerLayer.classList.remove('hidden-popup');
+    openModalWindow(loginPopUp, 'loginPopUp');
+}
+
 
 
 
