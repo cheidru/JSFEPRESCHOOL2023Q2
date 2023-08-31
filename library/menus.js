@@ -3,6 +3,13 @@ activePopUp.name = '';
 activePopUp.obj = {};
 activePopUp.validationRule = []; // validationRule = [[field1 ID, field1 Label, field1 pattern], ...]
 
+let activeUser = {};
+activeUser.FirstName = '';
+activeUser.LastName = '';
+
+if (localStorage.getItem('readers') == undefined) localStorage.setItem('readers', []);
+
+
 const anyWhere = document.querySelector('body');
 
 anyWhere.addEventListener('click', (event) => {
@@ -14,7 +21,8 @@ anyWhere.addEventListener('click', (event) => {
              ((event.target.parentElement == activePopUp.obj ||
                 event.target.parentElement.parentElement == activePopUp.obj ||
                 event.target.parentElement.parentElement.parentElement == activePopUp.obj) &&
-             !event.target.classList.contains('close-window-btn'))
+             !event.target.classList.contains('close-window-btn')) ||
+             event.target == errorMessage
         ) return;
         powerLayer.classList.add('hidden-popup');
         closeModalWindow(activePopUp.obj);
@@ -113,8 +121,6 @@ goRegister.addEventListener('click', (e) => {goRegisterFoo(e)}, true);
 
 signUpBTN.addEventListener('click', (e) => {goRegisterFoo(e)}, true);
 
-
-
 function goRegisterFoo(event) {
     event.stopImmediatePropagation();
     if (event.target !== signUpBTN) {
@@ -122,6 +128,7 @@ function goRegisterFoo(event) {
     } else {
         document.documentElement.scrollTop = '0px';
     }
+    clearFields();
     powerLayer.classList.remove('hidden-popup');
     openModalWindow(registerPopUp, 'registerPopUp');
 }
@@ -131,6 +138,13 @@ function goLoginFoo(event) {
     closeModalWindow(activePopUp.obj);
     powerLayer.classList.remove('hidden-popup');
     openModalWindow(loginPopUp, 'loginPopUp');
+}
+
+function clearFields() {
+    let fieldArray = activePopUp.validationRule;
+    for (let i = 0; i < fieldArray.length; i++ ) {
+        document.getElementById(`${fieldArray[i][0]}`).value = null;
+    }
 }
 // Modal windows END
 
@@ -143,14 +157,27 @@ const errorMessagePowerLayer = document.getElementById('error-power-layer');
 registerSignUpBTN.addEventListener('click', (event) => {
     event.stopImmediatePropagation();
     activePopUp.validationRule = [
-        ['first-name', 'First name', /A-Za-zА-Яа-яЁё/, ' должно содержать только буквы'],
-        ['last-name', 'Last name', /A-Za-zА-Яа-яЁё/, ' должно содержать только буквы'],
-        ['register-e-mail', 'E-mail', /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, ' должно содержать адрес электронной почты'],
-        ['register-password', 'Password', /[A-Za-zА-Яа-яЁё0-9]{8,}/, ' должно быть не короче 8 символов и содержать буквы или цифры']
+        ['first-name', 'First name', /[A-Za-zА-Яа-яЁё]/, ' должно содержать только буквы', ''],
+        ['last-name', 'Last name', /[A-Za-zА-Яа-яЁё]/, ' должно содержать только буквы', ''],
+        ['register-e-mail', 'E-mail', /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, ' должно содержать адрес электронной почты', ''],
+        ['register-password', 'Password', /[A-Za-zА-Яа-яЁё0-9]{8,}/, ' должно быть не короче 8 символов и содержать буквы или цифры', '']
     ];
-    validateFormFields();
+    if (validateFormFields()) {
+        let reader = {};
+        reader.firstName = activePopUp.validationRule[0][4];
+        reader.lastName = activePopUp.validationRule[1][4];
+        reader.eMail = activePopUp.validationRule[2][4];
+        reader.password = activePopUp.validationRule[3][4];
+        let arrReaders = localStorage.readers;
+        arrReaders.push(reader);
+        localStorage.readers = arrReaders;
+        activeUser.FirstName = reader.firstName;
+        activeUser.LastName = reader.lastName;
+        
+        // ToDo
+        // изменить иконку профиля
+    }
 })
-
 
 loginPopUpBTN.addEventListener('click', () => {
 
@@ -171,17 +198,21 @@ function validateFormFields() {
             fieldValidationResult[i] = 0;
 
         } else if (!fieldArray[i][2].test(modalWindowField.value)) {
+            console.log("modalWindowField.value", modalWindowField.value);
             fieldValidationResult[i] = 1;
 
         } else {
-            fieldValidationResult[i] = 2;        
+            fieldValidationResult[i] = 2;
+            fieldArray[i][4] = modalWindowField.value;
         }
     }
 
     if (fieldValidationResult.includes(0) || fieldValidationResult.includes(1)) {
         validationErrorMessage(fieldArray, fieldValidationResult);
+        return false;
+    } else {
+        return true;
     }
-    return
 }
 
 function validationErrorMessage(fieldArray, fieldValidationResult) {
@@ -203,7 +234,6 @@ function validationErrorMessage(fieldArray, fieldValidationResult) {
     }
     errorMessage.style.width = maxStringLength * 8.5 < 500 ? (maxStringLength * 8.5) + 'px' : '500px';
     errorMessage.innerHTML = errorMessageText;
-    console.log("maxStringLength", maxStringLength, "errorMessage.style.width", errorMessage.style.width);
     errorMessage.classList.remove('hidden-popup');
     errorMessagePowerLayer.classList.remove('hidden-popup');
 }
@@ -214,3 +244,7 @@ errorMessagePowerLayer.addEventListener('click', (event) => {
     errorMessage.classList.add('hidden-popup');
     errorMessagePowerLayer.classList.add('hidden-popup');
 }, true)
+
+// Form input validation END
+
+// Local Storage saving START
