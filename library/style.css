@@ -205,12 +205,14 @@ nav a:hover {
 [id*="-popup"] {
     box-sizing: border-box;
     position: absolute;
-    top: 40px;
-    right: 0;
     color: #000;
     background-color: #FFFFFF;
 }
 
+[id$="ini-popup"] {
+    top: 40px;
+    right: 0;
+}
 
 [id*="-popup"]:not([id$="ini-popup"]) {
     top: 50vh;
@@ -227,6 +229,44 @@ nav a:hover {
     height: 100vh;
     background-color:rgba(0, 0, 0, 0.5);
     z-index: 2;
+}
+
+#error-message-box {
+    position: absolute;
+    top: 50vh;
+    right: 50vw;
+    padding: 20px;
+    height: auto;
+    color: #000;
+    text-align: center;
+    white-space: pre-line;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 30px; /* 133.333% */
+    letter-spacing: 0.3px;
+    background-color:antiquewhite;
+    border-radius: 10px;
+    transform: translate(50%, -50%);
+    z-index: 5;
+}
+
+#error-message-box p {
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    line-height: 25px; /* 133.333% */
+}
+
+#error-power-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color:rgba(0, 0, 0, 0.5);
+    z-index: 4;
 }
 
 #login-ini-popup, #profile-mini-popup {
@@ -1475,6 +1515,11 @@ footer div:nth-child(2) {
 
     nav ul {
         justify-content: space-between;
+    }
+    
+    [id$="ini-popup"] {
+        top: 40px;
+        right: calc((100vw - 700px) / 2);
     }
 }
 

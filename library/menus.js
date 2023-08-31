@@ -1,6 +1,7 @@
 let activePopUp = {};
 activePopUp.name = '';
 activePopUp.obj = {};
+activePopUp.validationRule = []; // validationRule = [[field1 ID, field1 Label, field1 pattern], ...]
 
 const anyWhere = document.querySelector('body');
 
@@ -85,18 +86,15 @@ const loginIniBTN = document.getElementById('login-btn');
 const registerIniBTN = document.getElementById('register-btn');
 
 const loginPopUp = document.getElementById('login-popup');
-const loginPopUpBTN = document.getElementById('login-popup-btn');
 
 const goRegister = document.getElementById('go-to-register');
 const goLogin = document.getElementById('go-to-login');
 
 const registerPopUp = document.getElementById('register-popup');
-const registerSignUpBTN = document.getElementById('register-signup-btn');
 
 const signUpBTN = document.getElementById('sign-up-btn');
 
 profileIcon.addEventListener('click', (event) => {
-    console.log("profile icon clicked");
         event.stopImmediatePropagation();
     if (activePopUp.name == 'burgerMenu') menuShowHide();
     if (activePopUp.name != '') {
@@ -115,17 +113,10 @@ goRegister.addEventListener('click', (e) => {goRegisterFoo(e)}, true);
 
 signUpBTN.addEventListener('click', (e) => {goRegisterFoo(e)}, true);
 
-loginPopUpBTN.addEventListener('click', () => {
 
-})
-
-registerSignUpBTN.addEventListener('click', () => {
-
-})
 
 function goRegisterFoo(event) {
     event.stopImmediatePropagation();
-    console.log(event.target, signUpBTN);
     if (event.target !== signUpBTN) {
         closeModalWindow(activePopUp.obj);
     } else {
@@ -141,8 +132,85 @@ function goLoginFoo(event) {
     powerLayer.classList.remove('hidden-popup');
     openModalWindow(loginPopUp, 'loginPopUp');
 }
+// Modal windows END
+
+// Form input validation START
+const registerSignUpBTN = document.getElementById('register-signup-btn');
+const loginPopUpBTN = document.getElementById('login-btn');
+const errorMessage = document.getElementById('error-message-box');
+const errorMessagePowerLayer = document.getElementById('error-power-layer');
+
+registerSignUpBTN.addEventListener('click', (event) => {
+    event.stopImmediatePropagation();
+    activePopUp.validationRule = [
+        ['first-name', 'First name', /A-Za-zА-Яа-яЁё/, ' должно содержать только буквы'],
+        ['last-name', 'Last name', /A-Za-zА-Яа-яЁё/, ' должно содержать только буквы'],
+        ['register-e-mail', 'E-mail', /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, ' должно содержать адрес электронной почты'],
+        ['register-password', 'Password', /[A-Za-zА-Яа-яЁё0-9]{8,}/, ' должно быть не короче 8 символов и содержать буквы или цифры']
+    ];
+    validateFormFields();
+})
 
 
+loginPopUpBTN.addEventListener('click', () => {
 
+})
 
+function validateFormFields() {
+    let fieldArray = activePopUp.validationRule;
+    let fieldNumber = fieldArray.length;
+    let fieldValidationResult = [];
+    // validationRule - field1 ID, field1 Label, field1 pattern
 
+    for (let i = 0; i < fieldNumber; i++ ) {
+
+        let modalWindowField = document.getElementById(`${fieldArray[i][0]}`);
+
+        if (modalWindowField.value.length == 0) {
+
+            fieldValidationResult[i] = 0;
+
+        } else if (!fieldArray[i][2].test(modalWindowField.value)) {
+            fieldValidationResult[i] = 1;
+
+        } else {
+            fieldValidationResult[i] = 2;        
+        }
+    }
+
+    if (fieldValidationResult.includes(0) || fieldValidationResult.includes(1)) {
+        validationErrorMessage(fieldArray, fieldValidationResult);
+    }
+    return
+}
+
+function validationErrorMessage(fieldArray, fieldValidationResult) {
+    let errorMessageText = "<p>Проверьте корректность заполнения полей:</p>";
+    let errorMessageBit = "";
+    let maxStringLength = 0;
+    for (let i = 0; i < fieldValidationResult.length; i++) {
+        switch (fieldValidationResult[i]) {
+            case 0:
+                errorMessageBit = "поле " + fieldArray[i][1] + " не должно быть пустым" + "<br>";
+                maxStringLength = errorMessageBit.length > maxStringLength ? errorMessageBit.length : maxStringLength;
+                errorMessageText += errorMessageBit;
+                break;
+            case 1:
+                errorMessageBit = "поле " + fieldArray[i][1] + fieldArray[i][3] + "<br>";
+                maxStringLength = errorMessageBit.length > maxStringLength ? errorMessageBit.length : maxStringLength;
+                errorMessageText += errorMessageBit;
+        }
+    }
+    errorMessage.style.width = maxStringLength * 8.5 < 500 ? (maxStringLength * 8.5) + 'px' : '500px';
+    errorMessage.innerHTML = errorMessageText;
+    console.log("maxStringLength", maxStringLength, "errorMessage.style.width", errorMessage.style.width);
+    errorMessage.classList.remove('hidden-popup');
+    errorMessagePowerLayer.classList.remove('hidden-popup');
+}
+
+errorMessagePowerLayer.addEventListener('click', (event) => {
+    event.stopImmediatePropagation();
+    errorMessage.textContent = "";
+    errorMessage.classList.add('hidden-popup');
+    errorMessagePowerLayer.classList.add('hidden-popup');
+}, true)
