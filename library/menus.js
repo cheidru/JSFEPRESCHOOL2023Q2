@@ -3,12 +3,11 @@ activePopUp.name = '';
 activePopUp.obj = {};
 activePopUp.validationRule = []; // validationRule = [[field1 ID, field1 Label, field1 pattern], ...]
 
+let readers = [{}];
+
 let activeUser = {};
 activeUser.FirstName = '';
 activeUser.LastName = '';
-
-if (localStorage.getItem('readers') == undefined) localStorage.setItem('readers', []);
-
 
 const anyWhere = document.querySelector('body');
 
@@ -22,7 +21,7 @@ anyWhere.addEventListener('click', (event) => {
                 event.target.parentElement.parentElement == activePopUp.obj ||
                 event.target.parentElement.parentElement.parentElement == activePopUp.obj) &&
              !event.target.classList.contains('close-window-btn')) ||
-             event.target == errorMessage
+             ( event.target == errorMessage || event.target.parentElement == errorMessage)
         ) return;
         powerLayer.classList.add('hidden-popup');
         closeModalWindow(activePopUp.obj);
@@ -163,19 +162,27 @@ registerSignUpBTN.addEventListener('click', (event) => {
         ['register-password', 'Password', /[A-Za-zА-Яа-яЁё0-9]{8,}/, ' должно быть не короче 8 символов и содержать буквы или цифры', '']
     ];
     if (validateFormFields()) {
+        console.log('localStorage.readers', localStorage.readers);
         let reader = {};
         reader.firstName = activePopUp.validationRule[0][4];
         reader.lastName = activePopUp.validationRule[1][4];
         reader.eMail = activePopUp.validationRule[2][4];
         reader.password = activePopUp.validationRule[3][4];
-        let arrReaders = localStorage.readers;
+        let arrReaders = [];
+
         arrReaders.push(reader);
-        localStorage.readers = arrReaders;
+        console.log('arrReaders =', arrReaders);
+        localStorage.setItem('readers', JSON.stringify(arrReaders));
         activeUser.FirstName = reader.firstName;
         activeUser.LastName = reader.lastName;
+        console.log('localStorage =', JSON.parse(localStorage.getItem('readers')));
         
         // ToDo
         // изменить иконку профиля
+        profileIcon.innerHTML = "<div id='profile'>" + activeUser.FirstName[0] + activeUser.LastName[0] + "</div>";
+        powerLayer.classList.remove('hidden-popup');
+        openModalWindow(registerPopUp, 'registerPopUp');
+        console.log(localStorage.readers);
     }
 })
 
