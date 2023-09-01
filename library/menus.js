@@ -177,12 +177,15 @@ registerSignUpBTN.addEventListener('click', (event) => {
         activeUser.LastName = reader.lastName;
         console.log('localStorage =', JSON.parse(localStorage.getItem('readers')));
         
-        // ToDo
-        // изменить иконку профиля
-        profileIcon.innerHTML = "<div id='profile'>" + activeUser.FirstName[0] + activeUser.LastName[0] + "</div>";
-        powerLayer.classList.remove('hidden-popup');
-        openModalWindow(registerPopUp, 'registerPopUp');
-        console.log(localStorage.readers);
+        // change profile icon to initials
+        profileIcon.classList.add('user-registered');
+        profileIcon.innerHTML = activeUser.FirstName[0] + activeUser.LastName[0];
+        
+        // enable library card check
+        document.getElementById('check-the-card-btn').removeAttribute("disabled");
+
+
+        closeModalWindow(activePopUp.obj);
     }
 })
 

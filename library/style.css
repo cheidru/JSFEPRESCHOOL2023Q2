@@ -184,7 +184,8 @@ nav a:hover {
     font-weight: bold;
 }
 
-#nav-wrapper img {
+/* #nav-wrapper img { */
+#profile img {
     width: 28px;
     height: 28px;
     flex-shrink: 0;
@@ -193,6 +194,12 @@ nav a:hover {
 #profile {
     width: 28px;
     height: 28px;
+}
+
+.user-registered {    
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
     color: #BB945F;
     font-family: Inter;
@@ -201,9 +208,10 @@ nav a:hover {
     font-weight: 400;
     line-height: 20px; /* 133.333% */
     border-radius: 50%;
+    background-color: #FFF;
 }
 
-#nav-wrapper #profile:hover {
+#profile:hover {
     animation: wag-img 0.3s;
     transition: 0.5s;
 }
