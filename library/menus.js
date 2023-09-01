@@ -6,8 +6,6 @@ activePopUp.validationRule = []; // validationRule = [[field1 ID, field1 Label, 
 let readers = [{}];
 
 let activeUser = {};
-activeUser.FirstName = '';
-activeUser.LastName = '';
 
 const anyWhere = document.querySelector('body');
 
@@ -168,18 +166,21 @@ registerSignUpBTN.addEventListener('click', (event) => {
         reader.lastName = activePopUp.validationRule[1][4];
         reader.eMail = activePopUp.validationRule[2][4];
         reader.password = activePopUp.validationRule[3][4];
+        reader.cardCode = libraryCardCode();
+
         let arrReaders = [];
 
         arrReaders.push(reader);
         console.log('arrReaders =', arrReaders);
         localStorage.setItem('readers', JSON.stringify(arrReaders));
-        activeUser.FirstName = reader.firstName;
-        activeUser.LastName = reader.lastName;
-        console.log('localStorage =', JSON.parse(localStorage.getItem('readers')));
+        activeUser.firstName = reader.firstName;
+        activeUser.lastName = reader.lastName;
+        activeUser.libCardCode = reader.cardCode;
+        // console.log('localStorage =', JSON.parse(localStorage.getItem('readers')));
         
         // change profile icon to initials
         profileIcon.classList.add('user-registered');
-        profileIcon.innerHTML = activeUser.FirstName[0] + activeUser.LastName[0];
+        profileIcon.innerHTML = activeUser.firstName[0] + activeUser.lastName[0];
         
         // enable library card check
         document.getElementById('check-the-card-btn').removeAttribute("disabled");
@@ -254,7 +255,15 @@ errorMessagePowerLayer.addEventListener('click', (event) => {
     errorMessage.classList.add('hidden-popup');
     errorMessagePowerLayer.classList.add('hidden-popup');
 }, true)
-
 // Form input validation END
 
-// Local Storage saving START
+// Generate Library Card Number
+
+function libraryCardCode() {
+    let hexAlphabet = "0123456789abcdef";
+    let generatedCode = '';
+    for (let i = 0 ; i < 9 ; i++) {
+        generatedCode += hexAlphabet[Math.floor(Math.random() * hexAlphabet.length)];
+    }
+    return generatedCode;
+}
