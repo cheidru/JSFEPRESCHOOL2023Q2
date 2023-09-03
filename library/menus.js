@@ -154,6 +154,7 @@ const errorMessagePowerLayer = document.getElementById('error-power-layer');
 registerSignUpBTN.addEventListener('click', (event) => {
     event.stopImmediatePropagation();
     activePopUp.validationRule = [
+        // field id, field name, pattern, error message, field value
         ['first-name', 'First name', /[A-Za-zА-Яа-яЁё]/, ' должно содержать только буквы', ''],
         ['last-name', 'Last name', /[A-Za-zА-Яа-яЁё]/, ' должно содержать только буквы', ''],
         ['register-e-mail', 'E-mail', /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, ' должно содержать адрес электронной почты', ''],
@@ -222,7 +223,19 @@ function validateFormFields() {
         validationErrorMessage(fieldArray, fieldValidationResult);
         return false;
     } else {
-        return true;
+        // check if the last name is already registered
+        let usersInLocalStorage = localStorage.getItem('readers');
+        let lastNameIndex = usersInLocalStorage.includes(activePopUp.validationRule[1][4])
+        let firstNameIndex = lastNameIndex - 14 - activePopUp.validationRule[0][4].length;
+        if (lastNameIndex !== -1 && firstNameIndex > 0) {
+
+            // user exists error message
+
+        } else {
+            // generate lib card code
+            // Registration successful message
+            return true;
+        }
     }
 }
 
