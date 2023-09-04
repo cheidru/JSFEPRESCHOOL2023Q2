@@ -9,6 +9,12 @@ let activeUser = {};
 activeUser.firstName = '';
 activeUser.lastName = '';
 activeUser.libCardCode = 0;
+activeUser.libCardStats = {
+    visits: 0,
+    bonuses: 0,
+    books: 0
+};
+
 
 const anyWhere = document.querySelector('body');
 
@@ -119,7 +125,9 @@ profileIcon.addEventListener('click', (event) => {
 loginIniBTN.addEventListener('click', (e) => {goLoginFoo(e)}, true);
 goLogin.addEventListener('click', (e) => {goLoginFoo(e)}, true);
 
-registerIniBTN.addEventListener('click', (e) => {goRegisterFoo(e)}, true);
+registerIniBTN.addEventListener('click', (e) => {
+    if (activeUser.firstName !== '') return;
+    goRegisterFoo(e)}, true);
 goRegister.addEventListener('click', (e) => {goRegisterFoo(e)}, true);
 
 signUpBTN.addEventListener('click', (e) => {goRegisterFoo(e)}, true);
@@ -310,7 +318,15 @@ checkLibCardBTN.addEventListener('click', (event) => {
             let messageInnerHTML = "<p>Please, check your input:</p> Card number is not correct"
             messageWindow(messageInnerHTML, windowWidth)
     } else {
-
+        const cardStats = document.getElementById('library-card-stats');
+        setTimeout(() => {
+            checkLibCardBTN.classList.add('hidden');
+            cardStats.classList.remove('hidden');
+            cardStats.style.display = 'flex';
+            document.getElementById('card-stats-visits-value').textContent = activeUser.libCardStats.visits;
+            document.getElementById('card-stats-bonuses-value').textContent = activeUser.libCardStats.bonuses;
+            document.getElementById('card-stats-books-value').textContent = activeUser.libCardStats.books;
+        }, 10000)
     }
 })
 
