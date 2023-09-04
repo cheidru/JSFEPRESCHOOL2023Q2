@@ -280,6 +280,11 @@ nav a:hover {
     line-height: 25px; /* 133.333% */
 }
 
+#error-message-box span {
+    font-weight: 600;
+    user-select: text;
+}
+
 #error-power-layer {
     position: absolute;
     top: 0;

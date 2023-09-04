@@ -6,11 +6,15 @@ activePopUp.validationRule = []; // validationRule = [[field1 ID, field1 Label, 
 let readers = [{}];
 
 let activeUser = {};
+activeUser.firstName = '';
+activeUser.lastName = '';
+activeUser.libCardCode = 0;
 
 const anyWhere = document.querySelector('body');
 
 anyWhere.addEventListener('click', (event) => {
-    console.log('anyWhere pressed', event.target.parentElement);
+    if (activePopUp.name == '') return;
+    // console.log('anyWhere pressed', event.target.parentElement);
     if (activePopUp.name == 'burgerMenu') {
         menuShowHide();
     } else {
@@ -27,7 +31,7 @@ anyWhere.addEventListener('click', (event) => {
 })
 
 function closeModalWindow(modalWindow) {
-    console.log('closeModal', modalWindow);
+    // console.log('closeModal', modalWindow);
     powerLayer.classList.add('hidden-popup');
     modalWindow.classList.add('hidden-popup');
     anyWhere.style.overflow = "visible";
@@ -37,7 +41,7 @@ function closeModalWindow(modalWindow) {
 }
 
 function openModalWindow(modal, name) {
-    console.log('openModal',modal, name);
+    // console.log('openModal',modal, name);
     modal.classList.remove('hidden-popup');
     anyWhere.style.overflow = "hidden";
     // anyWhere.style.paddingRight = "15px";
@@ -99,6 +103,8 @@ const registerPopUp = document.getElementById('register-popup');
 
 const signUpBTN = document.getElementById('sign-up-btn');
 
+const checkLibCardBTN = document.getElementById('check-the-card-btn');
+
 profileIcon.addEventListener('click', (event) => {
         event.stopImmediatePropagation();
     if (activePopUp.name == 'burgerMenu') menuShowHide();
@@ -155,10 +161,10 @@ registerSignUpBTN.addEventListener('click', (event) => {
     event.stopImmediatePropagation();
     activePopUp.validationRule = [
         // field id, field name, pattern, error message, field value
-        ['first-name', 'First name', /[A-Za-zА-Яа-яЁё]/, ' должно содержать только буквы', ''],
-        ['last-name', 'Last name', /[A-Za-zА-Яа-яЁё]/, ' должно содержать только буквы', ''],
-        ['register-e-mail', 'E-mail', /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, ' должно содержать адрес электронной почты', ''],
-        ['register-password', 'Password', /[A-Za-zА-Яа-яЁё0-9]{8,}/, ' должно быть не короче 8 символов и содержать буквы или цифры', '']
+        ['first-name', 'First name', /[A-Za-zА-Яа-яЁё]/, ' should consist of letters only', ''],
+        ['last-name', 'Last name', /[A-Za-zА-Яа-яЁё]/, ' should consist of letters only', ''],
+        ['register-e-mail', 'E-mail', /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, ' should consist of e-mail address', ''],
+        ['register-password', 'Password', /[A-Za-zА-Яа-яЁё0-9]{8,}/, ' shouldn be not lass than 8 symbols long and consist of letters or digits', '']
     ];
     if (validateFormFields()) {
         console.log('localStorage.readers', localStorage.readers);
@@ -167,7 +173,7 @@ registerSignUpBTN.addEventListener('click', (event) => {
         reader.lastName = activePopUp.validationRule[1][4];
         reader.eMail = activePopUp.validationRule[2][4];
         reader.password = activePopUp.validationRule[3][4];
-        reader.cardCode = libraryCardCode();
+        reader.cardCode = activeUser.libCardCode;
 
         let arrReaders = [];
 
@@ -176,7 +182,6 @@ registerSignUpBTN.addEventListener('click', (event) => {
         localStorage.setItem('readers', JSON.stringify(arrReaders));
         activeUser.firstName = reader.firstName;
         activeUser.lastName = reader.lastName;
-        activeUser.libCardCode = reader.cardCode;
         // console.log('localStorage =', JSON.parse(localStorage.getItem('readers')));
         
         // change profile icon to initials
@@ -184,7 +189,7 @@ registerSignUpBTN.addEventListener('click', (event) => {
         profileIcon.innerHTML = activeUser.firstName[0] + activeUser.lastName[0];
         
         // enable library card check
-        document.getElementById('check-the-card-btn').removeAttribute("disabled");
+        checkLibCardBTN.removeAttribute("disabled");
 
 
         closeModalWindow(activePopUp.obj);
@@ -210,7 +215,7 @@ function validateFormFields() {
             fieldValidationResult[i] = 0;
 
         } else if (!fieldArray[i][2].test(modalWindowField.value)) {
-            console.log("modalWindowField.value", modalWindowField.value);
+            // console.log("modalWindowField.value", modalWindowField.value);
             fieldValidationResult[i] = 1;
 
         } else {
@@ -224,40 +229,49 @@ function validateFormFields() {
         return false;
     } else {
         // check if the last name is already registered
-        let usersInLocalStorage = localStorage.getItem('readers');
-        let lastNameIndex = usersInLocalStorage.includes(activePopUp.validationRule[1][4])
+        let usersInLocalStorage = localStorage.getItem('readers') ? localStorage.getItem('readers') : '';
+
+        let lastNameIndex = usersInLocalStorage.indexOf(activePopUp.validationRule[1][4])
         let firstNameIndex = lastNameIndex - 14 - activePopUp.validationRule[0][4].length;
+        console.log("lastNameIndex = ", lastNameIndex, "firstNameIndex = ", firstNameIndex);
         if (lastNameIndex !== -1 && firstNameIndex > 0) {
-
-            // user exists error message
-
+            let messageHTML = "<p>Please, check your input:</p> User with such First and Last name<br> is already redistered"
+            messageWindow(messageHTML, '350px')
         } else {
+            activeUser.libCardCode = libraryCardCode();
+            let messageHTML = "<p>You are successfully registered! Enjoy!</p> Your library card number is " + "<span>" + activeUser.libCardCode + "</span>";
             // generate lib card code
             // Registration successful message
+            messageWindow(messageHTML, '350px')
             return true;
         }
     }
 }
 
 function validationErrorMessage(fieldArray, fieldValidationResult) {
-    let errorMessageText = "<p>Проверьте корректность заполнения полей:</p>";
+    let errorMessageText = "<p>Please, check your input:</p>";
     let errorMessageBit = "";
     let maxStringLength = 0;
     for (let i = 0; i < fieldValidationResult.length; i++) {
         switch (fieldValidationResult[i]) {
             case 0:
-                errorMessageBit = "поле " + fieldArray[i][1] + " не должно быть пустым" + "<br>";
+                errorMessageBit = "field '" + fieldArray[i][1] + "' shouldn't be blank" + "<br>";
                 maxStringLength = errorMessageBit.length > maxStringLength ? errorMessageBit.length : maxStringLength;
                 errorMessageText += errorMessageBit;
                 break;
             case 1:
-                errorMessageBit = "поле " + fieldArray[i][1] + fieldArray[i][3] + "<br>";
+                errorMessageBit = "field '" + fieldArray[i][1] + "'" + fieldArray[i][3] + "<br>";
                 maxStringLength = errorMessageBit.length > maxStringLength ? errorMessageBit.length : maxStringLength;
                 errorMessageText += errorMessageBit;
         }
     }
-    errorMessage.style.width = maxStringLength * 8.5 < 500 ? (maxStringLength * 8.5) + 'px' : '500px';
-    errorMessage.innerHTML = errorMessageText;
+    let errorMessageWidth = maxStringLength * 8.5 < 500 ? (maxStringLength * 8.5) + 'px' : '500px';
+    messageWindow(errorMessageText, errorMessageWidth)
+}
+
+function messageWindow(messageInnerHTML, windowWidth) {
+    errorMessage.style.width = windowWidth;
+    errorMessage.innerHTML = messageInnerHTML;
     errorMessage.classList.remove('hidden-popup');
     errorMessagePowerLayer.classList.remove('hidden-popup');
 }
@@ -280,3 +294,23 @@ function libraryCardCode() {
     }
     return generatedCode;
 }
+
+// Check Digital Library Card
+checkLibCardBTN.addEventListener('click', (event) => {
+    event.stopImmediatePropagation();
+    const readerName = document.getElementById('library-card-reader-name');
+    const readerCard = document.getElementById('library-card-number');
+    console.log("library-card-reader-name.value = ", library-card-reader-name.value);
+    if ((readerName.value !== activeUser.firstName + ' ' + activeUser.lastName || 
+        readerName.value !== activeUser.lastName + ' ' + activeUser.firstName)) {
+            let messageInnerHTML = "<p>Please, check your input:</p> Reader's name is not correct"
+            messageWindow(messageInnerHTML, windowWidth)
+
+        } else if (readerCard.value == activeUser.libCardCode) {
+            let messageInnerHTML = "<p>Please, check your input:</p> Card number is not correct"
+            messageWindow(messageInnerHTML, windowWidth)
+    } else {
+
+    }
+})
+
