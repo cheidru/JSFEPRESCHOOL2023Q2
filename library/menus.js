@@ -18,6 +18,12 @@ activeUser.libCardStats = {
 
 const anyWhere = document.querySelector('body');
 
+// Check if body element has a scroll bar
+let anyWhereHasScrollBar = true;
+anyWhere.addEventListener('resize', () => {
+    anyWhereHasScrollBar = div.scrollHeight < div.clientHeight; 
+})
+
 anyWhere.addEventListener('click', (event) => {
     if (activePopUp.name == '') return;
     // console.log('anyWhere pressed', event.target.parentElement);
@@ -41,7 +47,7 @@ function closeModalWindow(modalWindow) {
     powerLayer.classList.add('hidden-popup');
     modalWindow.classList.add('hidden-popup');
     anyWhere.style.overflow = "visible";
-    // anyWhere.style.paddingRight = "0px";
+    anyWhere.style.paddingRight = "0px";
     activePopUp.name = '';
     activePopUp.obj = {};
 }
@@ -49,8 +55,10 @@ function closeModalWindow(modalWindow) {
 function openModalWindow(modal, name) {
     // console.log('openModal',modal, name);
     modal.classList.remove('hidden-popup');
+    // Hide overflow to prevent window scroll down
     anyWhere.style.overflow = "hidden";
-    // anyWhere.style.paddingRight = "15px";
+    // Add 15px padding to compensate scroll bar removing when overflow is hidden
+    anyWhere.style.paddingRight = "16px";
     activePopUp.name = name;
     activePopUp.obj = modal;
 }
@@ -107,9 +115,13 @@ const goLogin = document.getElementById('go-to-login');
 
 const registerPopUp = document.getElementById('register-popup');
 
-const signUpBTN = document.getElementById('sign-up-btn');
+const profileMiniPopup = document.getElementById('profile-mini-popup');
 
+const signUpBTN = document.getElementById('sign-up-btn');
+const logInBTN = document.getElementById('log-in-btn');
 const checkLibCardBTN = document.getElementById('check-the-card-btn');
+
+const favouriteBTN = document.querySelector('.favorite-button');
 
 profileIcon.addEventListener('click', (event) => {
         event.stopImmediatePropagation();
@@ -118,8 +130,13 @@ profileIcon.addEventListener('click', (event) => {
         closeModalWindow(activePopUp.obj);
         return;
     }
-    if (!userIsRegistered) openModalWindow(loginIniPopUp, 'loginIniPopUp');
-    if (userIsRegistered) profileMiniPopUp();
+
+    // Check if user logged in or registered
+    if (activeUser.firstName == '') {  
+        // Open Profile LogIn/Register popup
+        openModalWindow(loginIniPopUp, 'loginIniPopUp');
+        // Open Profile MyProfile/LogOut popup
+    } else openModalWindow(profileMiniPopup, 'profileMiniPopup');
 })
 
 loginIniBTN.addEventListener('click', (e) => {goLoginFoo(e)}, true);
@@ -128,12 +145,16 @@ goLogin.addEventListener('click', (e) => {goLoginFoo(e)}, true);
 registerIniBTN.addEventListener('click', (e) => {
     if (activeUser.firstName !== '') return;
     goRegisterFoo(e)}, true);
+
 goRegister.addEventListener('click', (e) => {goRegisterFoo(e)}, true);
 
 signUpBTN.addEventListener('click', (e) => {goRegisterFoo(e)}, true);
 
+logInBTN.addEventListener('click', (e) => {goLoginFoo(e)}, true);
+
 function goRegisterFoo(event) {
     event.stopImmediatePropagation();
+    // Check if Sign Up button in Library Card section is clicked
     if (event.target !== signUpBTN) {
         closeModalWindow(activePopUp.obj);
     } else {
@@ -146,10 +167,21 @@ function goRegisterFoo(event) {
 
 function goLoginFoo(event) {
     event.stopImmediatePropagation();
-    closeModalWindow(activePopUp.obj);
+    // Check if Log In button in Library Card section is clicked
+    if (event.target !== logInBTN) {
+        closeModalWindow(activePopUp.obj);
+    } else {
+        console.log('logInBTN clicked');
+        document.documentElement.scrollTop = '0px';
+    }
+    clearFields();
     powerLayer.classList.remove('hidden-popup');
     openModalWindow(loginPopUp, 'loginPopUp');
 }
+
+favouriteBTN.addEventListener('click', (event) => {
+    if (activeUser.firstName == '') goLoginFoo(event);
+}, true)
 
 function clearFields() {
     let fieldArray = activePopUp.validationRule;
@@ -159,174 +191,6 @@ function clearFields() {
 }
 // Modal windows END
 
-// Form input validation START
-const registerSignUpBTN = document.getElementById('register-signup-btn');
-const loginPopUpBTN = document.getElementById('login-btn');
-const errorMessage = document.getElementById('error-message-box');
-const errorMessagePowerLayer = document.getElementById('error-power-layer');
-
-registerSignUpBTN.addEventListener('click', (event) => {
-    event.stopImmediatePropagation();
-    activePopUp.validationRule = [
-        // field id, field name, pattern, error message, field value
-        ['first-name', 'First name', /[A-Za-zА-Яа-яЁё]/, ' should consist of letters only', ''],
-        ['last-name', 'Last name', /[A-Za-zА-Яа-яЁё]/, ' should consist of letters only', ''],
-        ['register-e-mail', 'E-mail', /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, ' should consist of e-mail address', ''],
-        ['register-password', 'Password', /[A-Za-zА-Яа-яЁё0-9]{8,}/, ' shouldn be not lass than 8 symbols long and consist of letters or digits', '']
-    ];
-    if (validateFormFields()) {
-        console.log('localStorage.readers', localStorage.readers);
-        let reader = {};
-        reader.firstName = activePopUp.validationRule[0][4];
-        reader.lastName = activePopUp.validationRule[1][4];
-        reader.eMail = activePopUp.validationRule[2][4];
-        reader.password = activePopUp.validationRule[3][4];
-        reader.cardCode = activeUser.libCardCode;
-
-        let arrReaders = [];
-
-        arrReaders.push(reader);
-        console.log('arrReaders =', arrReaders);
-        localStorage.setItem('readers', JSON.stringify(arrReaders));
-        activeUser.firstName = reader.firstName;
-        activeUser.lastName = reader.lastName;
-        // console.log('localStorage =', JSON.parse(localStorage.getItem('readers')));
-        
-        // change profile icon to initials
-        profileIcon.classList.add('user-registered');
-        profileIcon.innerHTML = activeUser.firstName[0] + activeUser.lastName[0];
-        
-        // enable library card check
-        checkLibCardBTN.removeAttribute("disabled");
 
 
-        closeModalWindow(activePopUp.obj);
-    }
-})
-
-loginPopUpBTN.addEventListener('click', () => {
-
-})
-
-function validateFormFields() {
-    let fieldArray = activePopUp.validationRule;
-    let fieldNumber = fieldArray.length;
-    let fieldValidationResult = [];
-    // validationRule - field1 ID, field1 Label, field1 pattern
-
-    for (let i = 0; i < fieldNumber; i++ ) {
-
-        let modalWindowField = document.getElementById(`${fieldArray[i][0]}`);
-
-        if (modalWindowField.value.length == 0) {
-
-            fieldValidationResult[i] = 0;
-
-        } else if (!fieldArray[i][2].test(modalWindowField.value)) {
-            // console.log("modalWindowField.value", modalWindowField.value);
-            fieldValidationResult[i] = 1;
-
-        } else {
-            fieldValidationResult[i] = 2;
-            fieldArray[i][4] = modalWindowField.value;
-        }
-    }
-
-    if (fieldValidationResult.includes(0) || fieldValidationResult.includes(1)) {
-        validationErrorMessage(fieldArray, fieldValidationResult);
-        return false;
-    } else {
-        // check if the last name is already registered
-        let usersInLocalStorage = localStorage.getItem('readers') ? localStorage.getItem('readers') : '';
-
-        let lastNameIndex = usersInLocalStorage.indexOf(activePopUp.validationRule[1][4])
-        let firstNameIndex = lastNameIndex - 14 - activePopUp.validationRule[0][4].length;
-        console.log("lastNameIndex = ", lastNameIndex, "firstNameIndex = ", firstNameIndex);
-        if (lastNameIndex !== -1 && firstNameIndex > 0) {
-            let messageHTML = "<p>Please, check your input:</p> User with such First and Last name<br> is already redistered"
-            messageWindow(messageHTML, '350px')
-        } else {
-            activeUser.libCardCode = libraryCardCode();
-            let messageHTML = "<p>You are successfully registered! Enjoy!</p> Your library card number is " + "<span>" + activeUser.libCardCode + "</span>";
-            // generate lib card code
-            // Registration successful message
-            messageWindow(messageHTML, '350px')
-            return true;
-        }
-    }
-}
-
-function validationErrorMessage(fieldArray, fieldValidationResult) {
-    let errorMessageText = "<p>Please, check your input:</p>";
-    let errorMessageBit = "";
-    let maxStringLength = 0;
-    for (let i = 0; i < fieldValidationResult.length; i++) {
-        switch (fieldValidationResult[i]) {
-            case 0:
-                errorMessageBit = "field '" + fieldArray[i][1] + "' shouldn't be blank" + "<br>";
-                maxStringLength = errorMessageBit.length > maxStringLength ? errorMessageBit.length : maxStringLength;
-                errorMessageText += errorMessageBit;
-                break;
-            case 1:
-                errorMessageBit = "field '" + fieldArray[i][1] + "'" + fieldArray[i][3] + "<br>";
-                maxStringLength = errorMessageBit.length > maxStringLength ? errorMessageBit.length : maxStringLength;
-                errorMessageText += errorMessageBit;
-        }
-    }
-    let errorMessageWidth = maxStringLength * 8.5 < 500 ? (maxStringLength * 8.5) + 'px' : '500px';
-    messageWindow(errorMessageText, errorMessageWidth)
-}
-
-function messageWindow(messageInnerHTML, windowWidth) {
-    errorMessage.style.width = windowWidth;
-    errorMessage.innerHTML = messageInnerHTML;
-    errorMessage.classList.remove('hidden-popup');
-    errorMessagePowerLayer.classList.remove('hidden-popup');
-}
-
-errorMessagePowerLayer.addEventListener('click', (event) => {
-    event.stopImmediatePropagation();
-    errorMessage.textContent = "";
-    errorMessage.classList.add('hidden-popup');
-    errorMessagePowerLayer.classList.add('hidden-popup');
-}, true)
-// Form input validation END
-
-// Generate Library Card Number
-
-function libraryCardCode() {
-    let hexAlphabet = "0123456789abcdef";
-    let generatedCode = '';
-    for (let i = 0 ; i < 9 ; i++) {
-        generatedCode += hexAlphabet[Math.floor(Math.random() * hexAlphabet.length)];
-    }
-    return generatedCode;
-}
-
-// Check Digital Library Card
-checkLibCardBTN.addEventListener('click', (event) => {
-    event.stopImmediatePropagation();
-    const readerName = document.getElementById('library-card-reader-name');
-    const readerCard = document.getElementById('library-card-number');
-    console.log("library-card-reader-name.value = ", library-card-reader-name.value);
-    if ((readerName.value !== activeUser.firstName + ' ' + activeUser.lastName || 
-        readerName.value !== activeUser.lastName + ' ' + activeUser.firstName)) {
-            let messageInnerHTML = "<p>Please, check your input:</p> Reader's name is not correct"
-            messageWindow(messageInnerHTML, windowWidth)
-
-        } else if (readerCard.value == activeUser.libCardCode) {
-            let messageInnerHTML = "<p>Please, check your input:</p> Card number is not correct"
-            messageWindow(messageInnerHTML, windowWidth)
-    } else {
-        const cardStats = document.getElementById('library-card-stats');
-        setTimeout(() => {
-            checkLibCardBTN.classList.add('hidden');
-            cardStats.classList.remove('hidden');
-            cardStats.style.display = 'flex';
-            document.getElementById('card-stats-visits-value').textContent = activeUser.libCardStats.visits;
-            document.getElementById('card-stats-bonuses-value').textContent = activeUser.libCardStats.bonuses;
-            document.getElementById('card-stats-books-value').textContent = activeUser.libCardStats.books;
-        }, 10000)
-    }
-})
 

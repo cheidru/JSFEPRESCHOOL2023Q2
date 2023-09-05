@@ -167,10 +167,48 @@ function seasonBooksChange(season) {
 }
 // Favourite season changer END
 
-// Register START
 
+// Generate Library Card Number
 
-// Register ENDS
+function libraryCardCode() {
+    let hexAlphabet = "0123456789abcdef";
+    let generatedCode = '';
+    for (let i = 0 ; i < 9 ; i++) {
+        generatedCode += hexAlphabet[Math.floor(Math.random() * hexAlphabet.length)];
+    }
+    return generatedCode;
+}
+
+// Check Digital Library Card
+checkLibCardBTN.addEventListener('click', (event) => {
+    event.stopImmediatePropagation();
+    const readerName = document.getElementById('library-card-reader-name');
+    const readerCard = document.getElementById('library-card-number');
+    console.log("checkLibCardBTN pressed");
+    if ((readerName.value !== activeUser.firstName + ' ' + activeUser.lastName || 
+        readerName.value !== activeUser.lastName + ' ' + activeUser.firstName)) {
+            let messageInnerHTML = "<p>Please, check your input:</p> Reader's name is not correct";
+            let windowWidth = '300px';
+            messageWindow(messageInnerHTML, windowWidth)
+
+        } else if (readerCard.value == activeUser.libCardCode) {
+            let messageInnerHTML = "<p>Please, check your input:</p> Card number is not correct";
+            let windowWidth = '300px';
+            messageWindow(messageInnerHTML, windowWidth)
+    } else {
+        console.log("cardStats to show");
+        const cardStats = document.getElementById('library-card-stats');
+        setTimeout(() => {
+            checkLibCardBTN.classList.add('hidden');
+            cardStats.classList.remove('hidden');
+            cardStats.style.display = 'flex';
+            document.getElementById('card-stats-visits-value').textContent = activeUser.libCardStats.visits;
+            document.getElementById('card-stats-bonuses-value').textContent = activeUser.libCardStats.bonuses;
+            document.getElementById('card-stats-books-value').textContent = activeUser.libCardStats.books;
+        }, 10000)
+    }
+})
+
 
 
 // console.log(`Результаты самооценки:
