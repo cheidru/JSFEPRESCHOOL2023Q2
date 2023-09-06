@@ -137,6 +137,9 @@ function validateFormFields(validationDataHandler) {
         validationErrorMessage(fieldArray, fieldValidationResult);
         return false;
     } else {
+        // if (getLocalStoreArray() === null) {
+
+        // }
         if (activePopUp.obj === registerPopUp) {
             // check if the last name is already registered                
             if (isUserInLocalStorage(activePopUp.validationRule[0][4], activePopUp.validationRule[1][4])) {
@@ -156,11 +159,17 @@ function validateFormFields(validationDataHandler) {
 
 
         }
-
-
-
-
         
+    }
+}
+
+function getLocalStoreArray() {
+    let arrReaders = [];
+    if(localStorage.getItem('readers')) {
+        arrReaders = JSON.parse(localStorage.getItem('readers'));
+        return arrReaders;
+    } else {
+        return null;
     }
 }
 
