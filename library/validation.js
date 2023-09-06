@@ -5,6 +5,9 @@ const loginPopUpBTN = document.getElementById('login-login-btn');
 const errorMessage = document.getElementById('error-message-box');
 const errorMessagePowerLayer = document.getElementById('error-power-layer');
 
+const getCardIntro = document.getElementById('get-a-card');
+const visitProfileIntro = document.getElementById('visit-your-profile');
+
 registerSignUpBTN.addEventListener('click', (event) => {
     event.stopImmediatePropagation();
     activePopUp.validationRule = [
@@ -37,17 +40,25 @@ registerSignUpBTN.addEventListener('click', (event) => {
         
         // enable library card check
         checkLibCardBTN.removeAttribute("disabled");
+
+        // Change 'get-a-card' block
+        getCardIntro.classList.add('hidden-element');
+        visitProfileIntro.classList.remove('hidden-element');
+        
         closeModalWindow(activePopUp.obj);
     }
 })
 
-loginPopUpBTN.addEventListener('click', () => {
+loginPopUpBTN.addEventListener('click', (event) => {
     event.stopImmediatePropagation();
+    const loginMail = document.getElementById('login-e-mail');
+    const loginPass = document.getElementById('log-in-password');
+
     activePopUp.validationRule = [
         // field id, field name, pattern, error message, field value
         ['login-e-mail', 'E-mail or readers card', /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, ' should consist of e-mail address or card number', ''],
-        ['login-e-mail', 'E-mail or readers card', /[a-fA-F0-9]{9,}/, ' should consist of e-mail address or card number', ''],
-        ['register-password', 'Password', /[A-Za-zА-Яа-яЁё0-9]{8,}/, ' shouldn be not lass than 8 symbols long and consist of letters or digits', '']
+        ['login-e-mail', 'E-mail or readers card', /[a-fA-F0-9]{9}/, ' should consist of e-mail address or card number', ''],
+        ['log-in-password', 'Password', /[A-Za-zА-Яа-яЁё0-9]{8,}/, ' shouldn be not lass than 8 symbols long and consist of letters or digits', '']
     ];
     if (validateFormFields(handleLoginPopupFiledValidation)) {
   
@@ -72,23 +83,31 @@ loginPopUpBTN.addEventListener('click', () => {
         
         // enable library card check
         checkLibCardBTN.removeAttribute("disabled");
+
+        // Change 'get-a-card' block
+        getCardIntro.classList.add('hidden-element');
+        visitProfileIntro.classList.remove('hidden-element');
+
         closeModalWindow(activePopUp.obj);
     }
 })
 
-function handleLoginPopupFiledValidation() {
-
+function handleLoginPopupFiledValidation(validationResult) {
+    if (validationResult[0] == 2 || validationResult[1] == 2) {
+        validationResult[0] = 2;
+        validationResult[1] = 2;
+    } else if (validationResult[0] == 0) {
+        // fake correct validation to avoid duplicate error message for field 'E-mail or readers card'
+        validationResult[1] = 2;
+    }
 }
-
-
-
 
 function validateFormFields(validationDataHandler) {
     let fieldArray = activePopUp.validationRule;
     let fieldNumber = fieldArray.length;
     let fieldValidationResult = [];
-    // validationRule - field1 ID, field1 Label, field1 pattern, fiels value
 
+    // validationRule - field1 ID, field1 Label, field1 pattern, fiels value
     for (let i = 0; i < fieldNumber; i++ ) {
 
         let modalWindowField = document.getElementById(`${fieldArray[i][0]}`);
@@ -109,30 +128,39 @@ function validateFormFields(validationDataHandler) {
         }
     }
 
-    if (validationDataHandler != null) {
-            // enable special validation data handling rule
-            validationDataHandler();
+    // enable special validation data handling rule
+    if (validationDataHandler != null) validationDataHandler(fieldValidationResult);
+
+    // standard validation data handling
+    if (fieldValidationResult.includes(0) || fieldValidationResult.includes(1)) {
+        // Validation ended up with errors. Show error message
+        validationErrorMessage(fieldArray, fieldValidationResult);
+        return false;
     } else {
-            // standard validation data handling
-        if (fieldValidationResult.includes(0) || fieldValidationResult.includes(1)) {
-            // Validation ended up with errors. Show error message
-            validationErrorMessage(fieldArray, fieldValidationResult);
-            return false;
-        } else {
-            // check if the last name is already registered
-                    
+        if (activePopUp.obj === registerPopUp) {
+            // check if the last name is already registered                
             if (isUserInLocalStorage(activePopUp.validationRule[0][4], activePopUp.validationRule[1][4])) {
                 let messageHTML = "<p>Please, check your input:</p> User with such First and Last name<br> is already redistered"
-                messageWindow(messageHTML, '350px')
+                messageWindow(messageHTML, '350px');
             } else {
                 activeUser.libCardCode = libraryCardCode();
                 let messageHTML = "<p>You are successfully registered! Enjoy!</p> Your library card number is " + "<span>" + activeUser.libCardCode + "</span>";
                 // generate lib card code
                 // Registration successful message
-                messageWindow(messageHTML, '350px')
+                messageWindow(messageHTML, '350px');
                 return true;
             }
+        } else if (activePopUp.obj === loginPopUp) {
+            // check if password and e-mail or card code match the one recorder in local storage
+            // otherwise show error message
+
+
         }
+
+
+
+
+        
     }
 }
 

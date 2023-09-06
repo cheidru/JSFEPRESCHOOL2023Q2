@@ -8,12 +8,13 @@
     <title>Welcome to the Brooklyn Library</title>
 </head>
 <body>
-    <div id="error-message-box" class="hidden-popup"></div>
-    <div id="error-power-layer" class="hidden-popup"></div>
-
-    <div id="power-layer" class="hidden-popup"></div>
 
     <div id="main-wrapper">
+
+        <div id="error-message-box" class="hidden-popup"></div>
+        <div id="error-power-layer" class="hidden-popup"></div>
+    
+        <div id="power-layer" class="hidden-popup"></div>
 
         <header>          
             <h1 id="header-title">Brooklyn Public Library</h1>
@@ -634,9 +635,21 @@
                             <button id="sign-up-btn">Sign Up</button>
                             <button id="log-in-btn">Log in</button>
                         </div>
-
                     </div>
-                </div>
+
+                    <div id="visit-your-profile" class="hidden-element">
+                        <p id="visit-your-profile-title">Visit your profile</p>
+                        <p id="visit-your-profile-text">
+                            With a digital library card you get free access to 
+                            the Library’s wide array of digital resources including 
+                            e-books, databases, educational resources, and more.
+                        </p>
+    
+                        <div id="visit-your-profile-button">
+                            <button id="visit-your-profile-profile-btn">Profile</button>
+                        </div>
+                    </div>
+                </div>                                  
 
                 <div id="buy-a-card-popup" class="hidden-popup">
                     <div id="buy-a-card-header">
@@ -708,7 +721,6 @@
                 <p><a href="https://rs.school/js-stage0/">The Rolling Scopes School</a></p>
                 <p><a href="https://github.com/cheidru">Igor Checheurov</a></p>
             </div>
-
         </footer>
 
     </div>

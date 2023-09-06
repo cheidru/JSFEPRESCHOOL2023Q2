@@ -1213,23 +1213,23 @@ tr td:nth-child(3) {
 }
 
 
-#get-a-card {
+#get-a-card, #visit-your-profile {
     width: 456px;
     text-align: right;
 }
 
-#get-a-card p {
+#get-a-card p,  #visit-your-profile p {
     text-align: right;
 }
 
-#get-a-card-title {
+#get-a-card-title, #visit-your-profile-title {
     margin-bottom: 30px;
     font-family: Forum;
     font-size: 30px;
     letter-spacing: 0.6px;
 }
 
-#get-a-card-text {
+#get-a-card-text, #visit-your-profile-text {
     margin-bottom: 35px;
     font-family: Inter;
     font-size: 20px;
@@ -1243,7 +1243,12 @@ tr td:nth-child(3) {
     gap: 20px;
 }
 
-#get-a-card button {
+#visit-your-profile-button {
+    display: flex;
+    justify-content: right;
+}
+
+#get-a-card button, #visit-your-profile-button button {
     display: flex;
     width: 75px;
     height: 30px;
@@ -1256,7 +1261,7 @@ tr td:nth-child(3) {
 }
 
 #get-a-card button:hover, 
-#find-card-form button:not([disabled]):hover {
+#find-card-form button:not([disabled]):hover, #visit-your-profile-button button:hover {
     border: 1px solid #BB945F;
     background: #BB945F;
     transition: 1s;
