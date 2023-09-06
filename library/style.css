@@ -918,7 +918,7 @@ input[name="season"] {
     right: -40px;    
 }
 
-.hidden {
+.hidden-element {
     display: none;
 }
 

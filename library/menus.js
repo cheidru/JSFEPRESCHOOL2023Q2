@@ -121,8 +121,6 @@ const signUpBTN = document.getElementById('sign-up-btn');
 const logInBTN = document.getElementById('log-in-btn');
 const checkLibCardBTN = document.getElementById('check-the-card-btn');
 
-const favouriteBTN = document.querySelector('.favorite-button');
-
 profileIcon.addEventListener('click', (event) => {
         event.stopImmediatePropagation();
     if (activePopUp.name == 'burgerMenu') menuShowHide();
@@ -168,20 +166,16 @@ function goRegisterFoo(event) {
 function goLoginFoo(event) {
     event.stopImmediatePropagation();
     // Check if Log In button in Library Card section is clicked
-    if (event.target !== logInBTN) {
+    console.log('event.target =', event.target);
+    if (event.target !== logInBTN && !event.target.classList.contains("favorite-button")) {
         closeModalWindow(activePopUp.obj);
     } else {
-        console.log('logInBTN clicked');
         document.documentElement.scrollTop = '0px';
     }
     clearFields();
     powerLayer.classList.remove('hidden-popup');
     openModalWindow(loginPopUp, 'loginPopUp');
 }
-
-favouriteBTN.addEventListener('click', (event) => {
-    if (activeUser.firstName == '') goLoginFoo(event);
-}, true)
 
 function clearFields() {
     let fieldArray = activePopUp.validationRule;

@@ -8,14 +8,14 @@
     <title>Welcome to the Brooklyn Library</title>
 </head>
 <body>
+    <div id="error-message-box" class="hidden-popup"></div>
+    <div id="error-power-layer" class="hidden-popup"></div>
+
+    <div id="power-layer" class="hidden-popup"></div>
 
     <div id="main-wrapper">
-        <header>
-            <div id="error-message-box" class="hidden-popup"></div>
-            <div id="error-power-layer" class="hidden-popup"></div>
 
-            <div id="power-layer" class="hidden-popup"></div>
-          
+        <header>          
             <h1 id="header-title">Brooklyn Public Library</h1>
             <div id="nav-wrapper">
                 <nav>
@@ -279,7 +279,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book4.jpg" alt="favorite book 4">
                         </div>
 
-                        <div class="favorite-item hidden" id="item5">
+                        <div class="favorite-item hidden-element" id="item5">
 
                             <p class="staff-picks">Staff Picks</p>
 
@@ -294,7 +294,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book5.jpg" alt="favorite book 5">
                         </div>
 
-                        <div class="favorite-item hidden" id="item6">
+                        <div class="favorite-item hidden-element" id="item6">
 
                             <p class="staff-picks">Staff Picks</p>                        
                             
@@ -309,7 +309,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book6.jpg" alt="favorite book 6">
                         </div>
 
-                        <div class="favorite-item hidden" id="item7">                        
+                        <div class="favorite-item hidden-element" id="item7">                        
                             
                             <p class="staff-picks">Staff Picks</p>
 
@@ -326,7 +326,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book7.jpg" alt="favorite book 7">
                         </div>
 
-                        <div class="favorite-item hidden" id="item8">
+                        <div class="favorite-item hidden-element" id="item8">
 
                             <p class="staff-picks">Staff Picks</p>                        
                             
@@ -341,7 +341,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book8.jpg" alt="favorite book 8">
                         </div>
 
-                        <div class="favorite-item hidden" id="item9">
+                        <div class="favorite-item hidden-element" id="item9">
 
                             <p class="staff-picks">Staff Picks</p>                        
                             
@@ -358,7 +358,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book9.jpg" alt="favorite book 9">
                         </div>
 
-                        <div class="favorite-item hidden" id="item10">
+                        <div class="favorite-item hidden-element" id="item10">
 
                             <p class="staff-picks">Staff Picks</p>                        
                             
@@ -374,7 +374,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book10.jpg" alt="favorite book 10">
                         </div>
 
-                        <div class="favorite-item hidden" id="item11">
+                        <div class="favorite-item hidden-element" id="item11">
 
                             <p class="staff-picks">Staff Picks</p>
                             
@@ -389,7 +389,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book11.jpg" alt="favorite book 11">
                         </div>
 
-                        <div class="favorite-item hidden" id="item12">
+                        <div class="favorite-item hidden-element" id="item12">
 
                             <p class="staff-picks">Staff Picks</p>                        
                             
@@ -406,7 +406,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book12.jpg" alt="favorite book 12">
                         </div>
 
-                        <div class="favorite-item hidden" id="item13">
+                        <div class="favorite-item hidden-element" id="item13">
 
                             <p class="staff-picks">Staff Picks</p>
                                                     
@@ -423,7 +423,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book13.jpg" alt="favorite book 13">
                         </div>
 
-                        <div class="favorite-item hidden" id="item14">
+                        <div class="favorite-item hidden-element" id="item14">
 
                             <p class="staff-picks">Staff Picks</p>                        
                             
@@ -439,7 +439,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book14.jpg" alt="favorite book 14">
                         </div>
 
-                        <div class="favorite-item hidden" id="item15">
+                        <div class="favorite-item hidden-element" id="item15">
 
                             <p class="staff-picks">Staff Picks</p>                        
                             
@@ -455,7 +455,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book15.jpg" alt="favorite book 15">
                         </div>
 
-                        <div class="favorite-item hidden" id="item16">
+                        <div class="favorite-item hidden-element" id="item16">
 
                             <p class="staff-picks">Staff Picks</p>                        
                             
@@ -598,7 +598,7 @@
                                 <input type="text" id="library-card-number" placeholder="Card number">
                             </div>
 
-                            <div id="library-card-stats" class="hidden">
+                            <div id="library-card-stats" class="hidden-element">
                                 <div id="card-stats-visits">
                                     <p>Visits</p>
                                     <img src="./assets/img/visits.svg" alt="visits">
@@ -710,7 +710,9 @@
             </div>
 
         </footer>
+
     </div>
+
     <script src="menus.js"></script>
     <script src="validation.js"></script>    
     <script src="index.js"></script>

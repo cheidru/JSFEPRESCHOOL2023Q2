@@ -96,7 +96,11 @@ favouriteRadios.addEventListener('click', (e) => {
 
 favouriteBooks.addEventListener('click', (e) => {
     if (seasonChangeInProgress) clearTimeout(seasonChangeBreakID);
-    if (e.target.classList.contains('favorite-button')) return;
+    // If Buy button pressed
+    if (e.target.classList.contains('favorite-button')) {
+        if (activeUser.firstName == '') goLoginFoo(e);
+        return;
+    };
     let newSeason = activeSeason == 'Autumn' ? 'Winter' : allSeasons[allSeasons.indexOf(activeSeason) + 1];
     seasonChange(newSeason);
     // let radioButtonId = newSeason.toLowerCase();
@@ -124,43 +128,43 @@ function seasonChange(newSeason) {
 function seasonBooksChange(season) {
     switch(season) {
         case 'Winter':
-            favourite1.classList.toggle('hidden');
+            favourite1.classList.toggle('hidden-element');
             favourite1.classList.toggle('assignOrder1');
-            favourite2.classList.toggle('hidden');
+            favourite2.classList.toggle('hidden-element');
             favourite2.classList.toggle('assignOrder2');
-            favourite3.classList.toggle('hidden');
+            favourite3.classList.toggle('hidden-element');
             favourite3.classList.toggle('assignOrder3');
-            favourite4.classList.toggle('hidden');
+            favourite4.classList.toggle('hidden-element');
             favourite4.classList.toggle('assignOrder4');
             break;
         case 'Spring':
-            favourite5.classList.toggle('hidden');
+            favourite5.classList.toggle('hidden-element');
             favourite5.classList.toggle('assignOrder1');
-            favourite6.classList.toggle('hidden');
+            favourite6.classList.toggle('hidden-element');
             favourite6.classList.toggle('assignOrder2');
-            favourite7.classList.toggle('hidden');
+            favourite7.classList.toggle('hidden-element');
             favourite7.classList.toggle('assignOrder3');
-            favourite8.classList.toggle('hidden');
+            favourite8.classList.toggle('hidden-element');
             favourite8.classList.toggle('assignOrder4');
             break;
         case 'Summer':
-            favourite9.classList.toggle('hidden');
+            favourite9.classList.toggle('hidden-element');
             favourite9.classList.toggle('assignOrder1');
-            favourite10.classList.toggle('hidden');
+            favourite10.classList.toggle('hidden-element');
             favourite10.classList.toggle('assignOrder2');
-            favourite11.classList.toggle('hidden');
+            favourite11.classList.toggle('hidden-element');
             favourite11.classList.toggle('assignOrder3');
-            favourite12.classList.toggle('hidden');
+            favourite12.classList.toggle('hidden-element');
             favourite12.classList.toggle('assignOrder4');
             break;
         case 'Autumn':
-            favourite13.classList.toggle('hidden');
+            favourite13.classList.toggle('hidden-element');
             favourite13.classList.toggle('assignOrder1');
-            favourite14.classList.toggle('hidden');
+            favourite14.classList.toggle('hidden-element');
             favourite14.classList.toggle('assignOrder2');
-            favourite15.classList.toggle('hidden');
+            favourite15.classList.toggle('hidden-element');
             favourite15.classList.toggle('assignOrder3');
-            favourite16.classList.toggle('hidden');
+            favourite16.classList.toggle('hidden-element');
             favourite16.classList.toggle('assignOrder4');
             break;
     }
@@ -185,29 +189,40 @@ checkLibCardBTN.addEventListener('click', (event) => {
     const readerName = document.getElementById('library-card-reader-name');
     const readerCard = document.getElementById('library-card-number');
     console.log("checkLibCardBTN pressed");
-    if ((readerName.value !== activeUser.firstName + ' ' + activeUser.lastName || 
-        readerName.value !== activeUser.lastName + ' ' + activeUser.firstName)) {
+
+    if (readerName.value !== (activeUser.firstName + ' ' + activeUser.lastName)) {
+        //  || readerName.value !== (activeUser.lastName + ' ' + activeUser.firstName))) {
+            console.log(readerName.value, "|", activeUser.lastName + ' ' + activeUser.firstName);
             let messageInnerHTML = "<p>Please, check your input:</p> Reader's name is not correct";
             let windowWidth = '300px';
             messageWindow(messageInnerHTML, windowWidth)
 
-        } else if (readerCard.value == activeUser.libCardCode) {
-            let messageInnerHTML = "<p>Please, check your input:</p> Card number is not correct";
-            let windowWidth = '300px';
-            messageWindow(messageInnerHTML, windowWidth)
+    } else if (readerCard.value !== activeUser.libCardCode) {
+        let messageInnerHTML = "<p>Please, check your input:</p> Card number is not correct";
+        let windowWidth = '300px';
+        // errorMessage.offsetTop = event.target.offsetTop;
+        messageWindow(messageInnerHTML, windowWidth)
     } else {
         console.log("cardStats to show");
+        event.preventDefault();
         const cardStats = document.getElementById('library-card-stats');
+        checkLibCardBTN.style.display = "none";
+        cardStats.classList.remove('hidden-element');
+        cardStats.style.display = 'flex';
+        document.getElementById('card-stats-visits-value').textContent = activeUser.libCardStats.visits;
+        document.getElementById('card-stats-bonuses-value').textContent = activeUser.libCardStats.bonuses;
+        document.getElementById('card-stats-books-value').textContent = activeUser.libCardStats.books;
+
         setTimeout(() => {
-            checkLibCardBTN.classList.add('hidden');
-            cardStats.classList.remove('hidden');
-            cardStats.style.display = 'flex';
-            document.getElementById('card-stats-visits-value').textContent = activeUser.libCardStats.visits;
-            document.getElementById('card-stats-bonuses-value').textContent = activeUser.libCardStats.bonuses;
-            document.getElementById('card-stats-books-value').textContent = activeUser.libCardStats.books;
+            console.log("cardStats to hide");
+            checkLibCardBTN.style.display = "inline-flex"
+            cardStats.style.display = 'none';
+            cardStats.classList.add('hidden-element');
+            readerName.value = '';
+            readerCard.value = '';
         }, 10000)
     }
-})
+}, true)
 
 
 
