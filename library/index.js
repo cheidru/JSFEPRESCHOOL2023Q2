@@ -187,6 +187,7 @@ function authorisationCommitted (flag) {
     } else {
         // increase activeUser.cardStats.visits
         // update localStorage
+        // update activeUser with localStorage data
     }
 
     // ToDo
@@ -194,6 +195,13 @@ function authorisationCommitted (flag) {
     // После покупки абонемента нажатие на Buy добавляет книгу в профиль и заменяет на неактивную кнопку Own
     // При этом увеличивается кол-во книг в статистике activeUser и в localStorage
 
+    // Show reader stats in Library Card block
+
+    document.getElementById('library-card-reader-name').textContent = activeUser.firstName + ' ' + activeUser.firstName;
+    document.getElementById('library-card-number').textContent = activeUser.cardCode;
+    document.getElementById('card-stats-visits-value').textContent = activeUser.cardStats.visits;
+    document.getElementById('card-stats-bonuses-value').textContent = activeUser.cardStats.bonuses;
+    document.getElementById('card-stats-books-value').textContent = activeUser.cardStats.books;
 
     
     // change profile icon to initials
@@ -211,6 +219,26 @@ function authorisationCommitted (flag) {
     getCardIntro.classList.add('hidden-element');
     visitProfileIntro.classList.remove('hidden-element');
 
+}
+
+// Check id localStorage has reader with keys/values contained in keyObject
+// Returns an array with object from localStore which meets keyObject keys, otherwise empty array
+function checkLocalStore(keyObject) {
+    let result = [];
+    if (localStorage.getItem('readers') === null) return result;    
+    let arrReaders = JSON.parse(localStorage.getItem('readers'));
+    for (let reader of arrReaders) {
+        let allParametersFit = false;
+        for (let parameter in keyObject) {
+            allParametersFit = keyObject[parameter] == reader[parameter] ? true : false;
+            if (allParametersFit == false) break;
+        }
+        if (allParametersFit == true) {
+            result.push(reader);
+            console.log('result = ', result);
+            return result;
+        }
+    }
 }
 
 // Update user profile data

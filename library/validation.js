@@ -61,36 +61,48 @@ checkLibCardBTN.addEventListener('click', (event) => {
     const readerName = document.getElementById('library-card-reader-name');
     const readerCard = document.getElementById('library-card-number');
 
-    if (readerName.value !== (activeUser.firstName + ' ' + activeUser.lastName)) {
-            let messageInnerHTML = "<p>Please, check your input:</p> Reader's name is not correct";
-            let windowWidth = '300px';
-            messageWindow(messageInnerHTML, windowWidth)
-
-    } else if (readerCard.value !== activeUser.cardCode) {
-        let messageInnerHTML = "<p>Please, check your input:</p> Card number is not correct";
-        let windowWidth = '300px';
-        messageWindow(messageInnerHTML, windowWidth)
-    } else {
+    // If any field is empty button doesn't work
+    if (readerName.value.trim() == '' || readerCard .value.trim() == '') {
         event.preventDefault();
-        const cardStats = document.getElementById('library-card-stats');
+        return;
+    }
+
+    // Проверить соотвествие введенных данных профилю в localStorage
+    let checkLibCardUser = {};
+    checkLibCardUser.firstName = readerName.value.split(' ')[0];
+    checkLibCardUser.lastName = readerName.value.split(' ')[1];
+    checkLibCardUser.cardCode = readerCard .value;
+
+    let searchResult = checkLocalStore(checkLibCardUser);
+    
+    // checkLocalStore returned not empty array
+    if (searchResult.length > 0) {
+        event.preventDefault();
+
+        const libCardCardStats = document.getElementById('library-card-stats');
         checkLibCardBTN.style.display = "none";
-        cardStats.classList.remove('hidden-element');
-        cardStats.style.display = 'flex';
-        document.getElementById('card-stats-visits-value').textContent = activeUser.cardStats.visits;
-        document.getElementById('card-stats-bonuses-value').textContent = activeUser.cardStats.bonuses;
-        document.getElementById('card-stats-books-value').textContent = activeUser.cardStats.books;
+        libCardCardStats.classList.remove('hidden-element');
+        libCardCardStats.style.display = 'flex';
+
+        document.getElementById('card-stats-visits-value').textContent = searchResult.cardStats.visits;
+        document.getElementById('card-stats-bonuses-value').textContent = searchResult.cardStats.bonuses;
+        document.getElementById('card-stats-books-value').textContent = searchResult.cardStats.books;
 
         setTimeout(() => {
             checkLibCardBTN.style.display = "inline-flex"
-            cardStats.style.display = 'none';
-            cardStats.classList.add('hidden-element');
+            libCardCardStats.style.display = 'none';
+            libCardCardStats.classList.add('hidden-element');
             readerName.value = '';
             readerCard.value = '';
         }, 10000)
+
+    } else {
+        let messageInnerHTML = "<p>Please, check your input:</p> There is no such reader registered";
+        let windowWidth = '300px';
+        messageWindow(messageInnerHTML, windowWidth);    
     }
+    
 }, true)
-
-
 
 function handleLoginPopupFiledValidation(validationResult) {
     if (validationResult[0] == 2 || validationResult[1] == 2) {
@@ -168,24 +180,6 @@ function validateFormFields(validationDataHandler) {
                 messageWindow(messageHTML, '350px');
             }
         }        
-    }
-}
-
-function checkLocalStore(keyObject) {
-    let result = [];
-    if (localStorage.getItem('readers') === null) return result;    
-    let arrReaders = JSON.parse(localStorage.getItem('readers'));
-    for (let reader of arrReaders) {
-        let allParametersFit = false;
-        for (let parameter in keyObject) {
-            allParametersFit = keyObject[parameter] == reader[parameter] ? true : false;
-            if (allParametersFit == false) break;
-        }
-        if (allParametersFit == true) {
-            result.push(reader);
-            console.log('result = ', result);
-            return result;
-        }
     }
 }
 
