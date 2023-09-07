@@ -167,7 +167,6 @@ function goRegisterFoo(event) {
 function goLoginFoo(event) {
     event.stopImmediatePropagation();
     // Check if Log In button in Library Card section is clicked
-    // console.log('event.target =', event.target);
     if (event.target !== logInBTN && !event.target.classList.contains("favorite-button")) {
         closeModalWindow(activePopUp.obj);
     } else {

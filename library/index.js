@@ -98,6 +98,7 @@ favouriteBooks.addEventListener('click', (e) => {
     if (seasonChangeInProgress) clearTimeout(seasonChangeBreakID);
     // If Buy button pressed
     if (e.target.classList.contains('favorite-button')) {
+        // if user is not authorized yet, open Login popup
         if (activeUser.firstName == '') goLoginFoo(e);
         return;
     };
@@ -121,8 +122,6 @@ function seasonChange(newSeason) {
         favouriteBooks.classList.add('fade-in');
         seasonChangeInProgress = false;
     }, 700);
-    
-
 }
 
 function seasonBooksChange(season) {
@@ -171,9 +170,7 @@ function seasonBooksChange(season) {
 }
 // Favourite season changer END
 
-
 // Generate Library Card Number
-
 function libraryCardCode() {
     let hexAlphabet = "0123456789abcdef";
     let generatedCode = '';
@@ -183,47 +180,44 @@ function libraryCardCode() {
     return generatedCode;
 }
 
-// Check Digital Library Card
-checkLibCardBTN.addEventListener('click', (event) => {
-    event.stopImmediatePropagation();
-    const readerName = document.getElementById('library-card-reader-name');
-    const readerCard = document.getElementById('library-card-number');
-    console.log("checkLibCardBTN pressed");
-
-    if (readerName.value !== (activeUser.firstName + ' ' + activeUser.lastName)) {
-        //  || readerName.value !== (activeUser.lastName + ' ' + activeUser.firstName))) {
-            console.log(readerName.value, "|", activeUser.lastName + ' ' + activeUser.firstName);
-            let messageInnerHTML = "<p>Please, check your input:</p> Reader's name is not correct";
-            let windowWidth = '300px';
-            messageWindow(messageInnerHTML, windowWidth)
-
-    } else if (readerCard.value !== activeUser.cardCode) {
-        console.log('readerCard.value = ', readerCard.value, 'activeUser.cardCode = ', activeUser.cardCode);
-        let messageInnerHTML = "<p>Please, check your input:</p> Card number is not correct";
-        let windowWidth = '300px';
-        // errorMessage.offsetTop = event.target.offsetTop;
-        messageWindow(messageInnerHTML, windowWidth)
+// Change interface when authorisation commited 
+function authorisationCommitted (flag) {
+    if (flag === 'newReader') {
+        updateLocalStorageData();
     } else {
-        console.log("cardStats to show");
-        event.preventDefault();
-        const cardStats = document.getElementById('library-card-stats');
-        checkLibCardBTN.style.display = "none";
-        cardStats.classList.remove('hidden-element');
-        cardStats.style.display = 'flex';
-        document.getElementById('card-stats-visits-value').textContent = activeUser.cardStats.visits;
-        document.getElementById('card-stats-bonuses-value').textContent = activeUser.cardStats.bonuses;
-        document.getElementById('card-stats-books-value').textContent = activeUser.cardStats.books;
-
-        setTimeout(() => {
-            console.log("cardStats to hide");
-            checkLibCardBTN.style.display = "inline-flex"
-            cardStats.style.display = 'none';
-            cardStats.classList.add('hidden-element');
-            readerName.value = '';
-            readerCard.value = '';
-        }, 10000)
+        // increase activeUser.cardStats.visits
+        // update localStorage
     }
-}, true)
+
+    // ToDo
+    // Атрибут title в иконку профиля для отображения полного имени при наведении курсора
+    // Заменить заголовок Profile на номер карты
+    // При нажатии на любую кнопку Buy до покупки абонемента появляется окно BUY A LIBRARY CARD
+    // После покупки абонемента нажатие на Buy добавляет книгу в профиль и заменяет на неактивную кнопку Own
+    // При этом увеличивается кол-во книг в статистике activeUser и в localStorage
+    
+
+    
+    // change profile icon to initials
+    profileIcon.classList.add('user-registered');
+    profileIcon.innerHTML = activeUser.firstName[0] + activeUser.lastName[0];
+    
+    // enable library card check
+    checkLibCardBTN.removeAttribute("disabled");
+
+    // Change 'get-a-card' block
+    getCardIntro.classList.add('hidden-element');
+    visitProfileIntro.classList.remove('hidden-element');
+
+}
+
+// Update user profile data
+function updateLocalStorageData() {
+    let arrReaders = [];
+
+    arrReaders.push(activeUser);
+    localStorage.setItem('readers', JSON.stringify(arrReaders));
+}
 
 
 
