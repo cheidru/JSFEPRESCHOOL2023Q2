@@ -117,10 +117,14 @@ const goLogin = document.getElementById('go-to-login');
 const registerPopUp = document.getElementById('register-popup');
 
 const profileMiniPopup = document.getElementById('profile-mini-popup');
+const profileMiniPopupTitle = document.getElementById('profile-minipopup-title');
 
 const signUpBTN = document.getElementById('sign-up-btn');
 const logInBTN = document.getElementById('log-in-btn');
 const checkLibCardBTN = document.getElementById('check-the-card-btn');
+
+const myProfileBTN = document.getElementById('my-profile-btn');
+const myProfilePopUp = document.getElementById('my-profile-popup');
 
 profileIcon.addEventListener('click', (event) => {
         event.stopImmediatePropagation();
@@ -151,6 +155,8 @@ signUpBTN.addEventListener('click', (e) => {goRegisterFoo(e)}, true);
 
 logInBTN.addEventListener('click', (e) => {goLoginFoo(e)}, true);
 
+myProfileBTN.addEventListener('click', (e) => {goMyProfileFoo(e)}, true);
+
 function goRegisterFoo(event) {
     event.stopImmediatePropagation();
     // Check if Sign Up button in Library Card section is clicked
@@ -176,6 +182,14 @@ function goLoginFoo(event) {
     powerLayer.classList.remove('hidden-popup');
     openModalWindow(loginPopUp, 'loginPopUp');
 }
+
+function goMyProfileFoo(event) {
+    event.stopImmediatePropagation();
+        clearFields();
+        powerLayer.classList.remove('hidden-popup');
+        openModalWindow(myProfilePopUp, 'myProfilePopUp');
+}
+
 
 function clearFields() {
     let fieldArray = activePopUp.validationRule;

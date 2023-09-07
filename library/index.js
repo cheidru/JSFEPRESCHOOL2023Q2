@@ -190,17 +190,19 @@ function authorisationCommitted (flag) {
     }
 
     // ToDo
-    // Атрибут title в иконку профиля для отображения полного имени при наведении курсора
-    // Заменить заголовок Profile на номер карты
     // При нажатии на любую кнопку Buy до покупки абонемента появляется окно BUY A LIBRARY CARD
     // После покупки абонемента нажатие на Buy добавляет книгу в профиль и заменяет на неактивную кнопку Own
     // При этом увеличивается кол-во книг в статистике activeUser и в localStorage
-    
+
 
     
     // change profile icon to initials
     profileIcon.classList.add('user-registered');
     profileIcon.innerHTML = activeUser.firstName[0] + activeUser.lastName[0];
+    profileIcon.setAttribute('title', activeUser.firstName + ' ' + activeUser.lastName);
+
+    profileMiniPopupTitle.style.fontSize = '13px';
+    profileMiniPopupTitle.textContent = activeUser.cardCode;
     
     // enable library card check
     checkLibCardBTN.removeAttribute("disabled");
