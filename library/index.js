@@ -197,7 +197,8 @@ checkLibCardBTN.addEventListener('click', (event) => {
             let windowWidth = '300px';
             messageWindow(messageInnerHTML, windowWidth)
 
-    } else if (readerCard.value !== activeUser.libCardCode) {
+    } else if (readerCard.value !== activeUser.cardCode) {
+        console.log('readerCard.value = ', readerCard.value, 'activeUser.cardCode = ', activeUser.cardCode);
         let messageInnerHTML = "<p>Please, check your input:</p> Card number is not correct";
         let windowWidth = '300px';
         // errorMessage.offsetTop = event.target.offsetTop;
@@ -209,9 +210,9 @@ checkLibCardBTN.addEventListener('click', (event) => {
         checkLibCardBTN.style.display = "none";
         cardStats.classList.remove('hidden-element');
         cardStats.style.display = 'flex';
-        document.getElementById('card-stats-visits-value').textContent = activeUser.libCardStats.visits;
-        document.getElementById('card-stats-bonuses-value').textContent = activeUser.libCardStats.bonuses;
-        document.getElementById('card-stats-books-value').textContent = activeUser.libCardStats.books;
+        document.getElementById('card-stats-visits-value').textContent = activeUser.cardStats.visits;
+        document.getElementById('card-stats-bonuses-value').textContent = activeUser.cardStats.bonuses;
+        document.getElementById('card-stats-books-value').textContent = activeUser.cardStats.books;
 
         setTimeout(() => {
             console.log("cardStats to hide");

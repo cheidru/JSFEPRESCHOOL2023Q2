@@ -24,7 +24,8 @@ registerSignUpBTN.addEventListener('click', (event) => {
         reader.lastName = activePopUp.validationRule[1][4];
         reader.eMail = activePopUp.validationRule[2][4];
         reader.password = activePopUp.validationRule[3][4];
-        reader.cardCode = activeUser.libCardCode;
+        reader.cardCode = activeUser.cardCode;
+        reader.cardStats = activeUser.cardStats;
 
         let arrReaders = [];
 
@@ -51,8 +52,6 @@ registerSignUpBTN.addEventListener('click', (event) => {
 
 loginPopUpBTN.addEventListener('click', (event) => {
     event.stopImmediatePropagation();
-    const loginMail = document.getElementById('login-e-mail');
-    const loginPass = document.getElementById('log-in-password');
 
     activePopUp.validationRule = [
         // field id, field name, pattern, error message, field value
@@ -60,22 +59,17 @@ loginPopUpBTN.addEventListener('click', (event) => {
         ['login-e-mail', 'E-mail or readers card', /[a-fA-F0-9]{9}/, ' should consist of e-mail address or card number', ''],
         ['log-in-password', 'Password', /[A-Za-zА-Яа-яЁё0-9]{8,}/, ' shouldn be not lass than 8 symbols long and consist of letters or digits', '']
     ];
+
+    console.log('about to start login validation');
     if (validateFormFields(handleLoginPopupFiledValidation)) {
-  
-        // let reader = {};
-        // reader.firstName = activePopUp.validationRule[0][4];
-        // reader.lastName = activePopUp.validationRule[1][4];
-        // reader.eMail = activePopUp.validationRule[2][4];
-        // reader.password = activePopUp.validationRule[3][4];
-        // reader.cardCode = activeUser.libCardCode;
+        console.log('login validation was successful');
+        // let arrReaders = [];
 
-        let arrReaders = [];
-
-        arrReaders.push(reader);
-        console.log('arrReaders =', arrReaders);
-        localStorage.setItem('readers', JSON.stringify(arrReaders));
-        activeUser.firstName = reader.firstName;
-        activeUser.lastName = reader.lastName;
+        // arrReaders.push(reader);
+        // console.log('arrReaders =', arrReaders);
+        // localStorage.setItem('readers', JSON.stringify(arrReaders));
+        // activeUser.firstName = reader.firstName;
+        // activeUser.lastName = reader.lastName;
         
         // change profile icon to initials
         profileIcon.classList.add('user-registered');
@@ -137,51 +131,56 @@ function validateFormFields(validationDataHandler) {
         validationErrorMessage(fieldArray, fieldValidationResult);
         return false;
     } else {
-        // if (getLocalStoreArray() === null) {
-
-        // }
+        // Check data in Register popup fields 
         if (activePopUp.obj === registerPopUp) {
-            // check if the last name is already registered                
-            if (isUserInLocalStorage(activePopUp.validationRule[0][4], activePopUp.validationRule[1][4])) {
+            // check if the last name is already registered ie checkLocalStore returns not empty array
+            if (checkLocalStore({firstName: `${fieldArray[0][4]}`, lastName: `${fieldArray[1][4]}`}).length > 0) {
                 let messageHTML = "<p>Please, check your input:</p> User with such First and Last name<br> is already redistered"
                 messageWindow(messageHTML, '350px');
             } else {
-                activeUser.libCardCode = libraryCardCode();
-                let messageHTML = "<p>You are successfully registered! Enjoy!</p> Your library card number is " + "<span>" + activeUser.libCardCode + "</span>";
                 // generate lib card code
+                activeUser.cardCode = libraryCardCode();
+                let messageHTML = "<p>You are successfully registered! Enjoy!</p> Your library card number is " + "<span>" + activeUser.cardCode + "</span>";
+
                 // Registration successful message
                 messageWindow(messageHTML, '350px');
                 return true;
             }
+        // Check data in Login popup fields 
         } else if (activePopUp.obj === loginPopUp) {
+            // Keys to search depend on whether e-mail or readers card was entered in the first field
+            let searchKeys = fieldArray[0][4] == '' ? {cardCode: `${fieldArray[1][4]}`, password: `${fieldArray[2][4]}`} : {eMail: `${fieldArray[0][4]}`, password: `${fieldArray[2][4]}`};
             // check if password and e-mail or card code match the one recorder in local storage
-            // otherwise show error message
+            let checkResult = checkLocalStore(searchKeys);
+            if (checkResult.length > 0) {
+                // assign stored reader obj to activePopUp.obj
+                activeUser = checkResult[0];
+                return true;
+            } else {
+                // otherwise show error message
+                let messageHTML = "<p>Please, check your input:</p>User with such e-mail or reader's card<br>and password is not registered yet"
+                messageWindow(messageHTML, '350px');
+            }
+        }        
+    }
+}
 
-
+function checkLocalStore(keyObject) {
+    let result = [];
+    if (localStorage.getItem('readers') === null) return result;    
+    let arrReaders = JSON.parse(localStorage.getItem('readers'));
+    for (let reader of arrReaders) {
+        let allParametersFit = false;
+        for (let parameter in keyObject) {
+            allParametersFit = keyObject[parameter] == reader[parameter] ? true : false;
+            if (allParametersFit == false) break;
         }
-        
+        if (allParametersFit == true) {
+            result.push(reader);
+            console.log('result = ', result);
+            return result;
+        }
     }
-}
-
-function getLocalStoreArray() {
-    let arrReaders = [];
-    if(localStorage.getItem('readers')) {
-        arrReaders = JSON.parse(localStorage.getItem('readers'));
-        return arrReaders;
-    } else {
-        return null;
-    }
-}
-
-function isUserInLocalStorage(firstName, lastName) {
-    if (!localStorage.getItem('readers')) return false;
-    let usersInLocalStorage = localStorage.getItem('readers');
-
-    let lastNameIndex = usersInLocalStorage.indexOf(lastName)
-    let firstNameIndex = lastNameIndex - 14 - firstName.length;
-    // console.log("lastNameIndex = ", lastNameIndex, "firstNameIndex = ", firstNameIndex);
-
-    return (lastNameIndex !== -1 && firstNameIndex > 0) ? true : false;
 }
 
 function validationErrorMessage(fieldArray, fieldValidationResult) {

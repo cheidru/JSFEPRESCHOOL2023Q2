@@ -8,8 +8,9 @@ let readers = [{}];
 let activeUser = {};
 activeUser.firstName = '';
 activeUser.lastName = '';
-activeUser.libCardCode = 0;
-activeUser.libCardStats = {
+activeUser.cardCode = 0;
+activeUser.password = '';
+activeUser.cardStats = {
     visits: 0,
     bonuses: 0,
     books: 0
@@ -166,7 +167,7 @@ function goRegisterFoo(event) {
 function goLoginFoo(event) {
     event.stopImmediatePropagation();
     // Check if Log In button in Library Card section is clicked
-    console.log('event.target =', event.target);
+    // console.log('event.target =', event.target);
     if (event.target !== logInBTN && !event.target.classList.contains("favorite-button")) {
         closeModalWindow(activePopUp.obj);
     } else {
