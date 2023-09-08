@@ -10,6 +10,11 @@ const visitProfileIntro = document.getElementById('visit-your-profile');
 
 const libCardCardStats = document.getElementById('library-card-stats');
 
+const libCardReaderName = document.getElementById('library-card-reader-name');
+const libCardNumber = document.getElementById('library-card-number');
+const libCardVisitNumber = document.getElementById('card-stats-visits-value');
+const libCardBonusNumber = document.getElementById('card-stats-bonuses-value');
+const libCardBookNumber = document.getElementById('card-stats-books-value');
 
 // Check Register popup fields and write User data to LocalStorage
 registerSignUpBTN.addEventListener('click', (event) => {
@@ -59,11 +64,9 @@ loginPopUpBTN.addEventListener('click', (event) => {
 // Check Digital Library Card fields and show card stats
 checkLibCardBTN.addEventListener('click', (event) => {
     event.stopImmediatePropagation();
-    const readerName = document.getElementById('library-card-reader-name');
-    const readerCard = document.getElementById('library-card-number');
 
     // If any field is empty button doesn't work
-    if (readerName.value.trim() == '' || readerCard .value.trim() == '') {
+    if (libCardReaderName.value.trim() == '' || libCardNumber.value.trim() == '') {
         event.preventDefault();
         return;
     }
@@ -76,8 +79,6 @@ checkLibCardBTN.addEventListener('click', (event) => {
 
     let searchResult = checkLocalStore(checkLibCardUser);
 
-    console.log('checkLibCardUser = ', checkLibCardUser, 'searchResult = ', searchResult, 'searchResult length = ', searchResult.length);
-
     // checkLocalStore returned not empty array
     if (searchResult.length > 0) {
         event.preventDefault();
@@ -86,9 +87,9 @@ checkLibCardBTN.addEventListener('click', (event) => {
         libCardCardStats.classList.remove('hidden-element');
         libCardCardStats.style.display = 'flex';
 
-        document.getElementById('card-stats-visits-value').textContent = searchResult[0].cardStats.visits;
-        document.getElementById('card-stats-bonuses-value').textContent = searchResult[0].cardStats.bonuses;
-        document.getElementById('card-stats-books-value').textContent = searchResult[0].cardStats.books;
+        libCardVisitNumber.textContent = searchResult[0].cardStats.visits;
+        libCardBonusNumber.textContent = searchResult[0].cardStats.bonuses;
+        libCardBookNumber.textContent = searchResult[0].cardStats.books;
 
         setTimeout(() => {
             checkLibCardBTN.style.display = "inline-flex"

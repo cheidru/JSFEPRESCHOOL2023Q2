@@ -436,6 +436,7 @@ nav a:hover {
 }
 
 #my-profile-popup {
+    flex-direction: row;
     width: 600px;
     height: 400px;
 }
@@ -622,7 +623,7 @@ nav a:hover {
 #card-number-copy {
     width: 14px;
     height: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 /* header end */

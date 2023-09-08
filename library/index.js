@@ -205,11 +205,16 @@ function authorisationCommitted (flag) {
 
     console.log('show statistics and name', activeUser.firstName + ' ' + activeUser.lastName, "and card ", activeUser.cardCode);
 
-    document.getElementById('library-card-reader-name').value = activeUser.firstName + ' ' + activeUser.lastName;
-    document.getElementById('library-card-number').value = activeUser.cardCode;
-    document.getElementById('card-stats-visits-value').textContent = activeUser.cardStats.visits;
-    document.getElementById('card-stats-bonuses-value').textContent = activeUser.cardStats.bonuses;
-    document.getElementById('card-stats-books-value').textContent = activeUser.cardStats.books;
+    libCardReaderName.value = activeUser.firstName + ' ' + activeUser.lastName;
+    libCardNumber.value = activeUser.cardCode;
+
+    // Prevent changing library card user name and card code after authorisation
+    libCardReaderName.setAttribute('readonly', true);
+    libCardNumber.setAttribute('readonly', true);
+
+    libCardVisitNumber.textContent = activeUser.cardStats.visits;
+    libCardBonusNumber.textContent = activeUser.cardStats.bonuses;
+    libCardBookNumber.textContent = activeUser.cardStats.books;
 
     
     // change profile icon to initials

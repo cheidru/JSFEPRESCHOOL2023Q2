@@ -27,6 +27,7 @@ anyWhere.addEventListener('resize', () => {
 
 anyWhere.addEventListener('click', (event) => {
     if (activePopUp.name == '') return;
+    if (activePopUp.name == 'myProfilePopUp') myProfilePopUp.style.display = 'none';
     // console.log('anyWhere pressed', event.target.parentElement);
     if (activePopUp.name == 'burgerMenu') {
         menuShowHide();
@@ -126,6 +127,9 @@ const checkLibCardBTN = document.getElementById('check-the-card-btn');
 
 const myProfileBTN = document.getElementById('my-profile-btn');
 const myProfilePopUp = document.getElementById('my-profile-popup');
+const myProfileVisitNumber = document.getElementById('my-profile-visits-value');
+const myProfileBonusNumber = document.getElementById('my-profile-bonuses-value');
+const myProfileBookNumber = document.getElementById('my-profile-books-value');
 
 profileIcon.addEventListener('click', (event) => {
         event.stopImmediatePropagation();
@@ -198,7 +202,11 @@ function goMyProfileFoo(event) {
         profileName.style.padding = '5px';
     }
 
+    myProfileVisitNumber.textContent = activeUser.cardStats.visits;
+    myProfileBonusNumber.textContent = activeUser.cardStats.bonuses;
+    myProfileBookNumber.textContent = activeUser.cardStats.books;
 
+    myProfilePopUp.style.display = 'flex';
     powerLayer.classList.remove('hidden-popup');
     openModalWindow(myProfilePopUp, 'myProfilePopUp');
 }
