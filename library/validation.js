@@ -8,6 +8,8 @@ const errorMessagePowerLayer = document.getElementById('error-power-layer');
 const getCardIntro = document.getElementById('get-a-card');
 const visitProfileIntro = document.getElementById('visit-your-profile');
 
+const libCardCardStats = document.getElementById('library-card-stats');
+
 
 // Check Register popup fields and write User data to LocalStorage
 registerSignUpBTN.addEventListener('click', (event) => {
@@ -47,7 +49,6 @@ loginPopUpBTN.addEventListener('click', (event) => {
         ['log-in-password', 'Password', /[A-Za-zА-Яа-яЁё0-9]{8,}/, ' shouldn be not lass than 8 symbols long and consist of letters or digits', '']
     ];
 
-    console.log('about to start login validation');
     if (validateFormFields(handleLoginPopupFiledValidation)) {
 
         authorisationCommitted();
@@ -67,26 +68,27 @@ checkLibCardBTN.addEventListener('click', (event) => {
         return;
     }
 
-    // Проверить соотвествие введенных данных профилю в localStorage
+    // Check field input against localStorage data
     let checkLibCardUser = {};
     checkLibCardUser.firstName = readerName.value.split(' ')[0];
     checkLibCardUser.lastName = readerName.value.split(' ')[1];
     checkLibCardUser.cardCode = readerCard .value;
 
     let searchResult = checkLocalStore(checkLibCardUser);
-    
+
+    console.log('checkLibCardUser = ', checkLibCardUser, 'searchResult = ', searchResult, 'searchResult length = ', searchResult.length);
+
     // checkLocalStore returned not empty array
     if (searchResult.length > 0) {
         event.preventDefault();
 
-        const libCardCardStats = document.getElementById('library-card-stats');
         checkLibCardBTN.style.display = "none";
         libCardCardStats.classList.remove('hidden-element');
         libCardCardStats.style.display = 'flex';
 
-        document.getElementById('card-stats-visits-value').textContent = searchResult.cardStats.visits;
-        document.getElementById('card-stats-bonuses-value').textContent = searchResult.cardStats.bonuses;
-        document.getElementById('card-stats-books-value').textContent = searchResult.cardStats.books;
+        document.getElementById('card-stats-visits-value').textContent = searchResult[0].cardStats.visits;
+        document.getElementById('card-stats-bonuses-value').textContent = searchResult[0].cardStats.bonuses;
+        document.getElementById('card-stats-books-value').textContent = searchResult[0].cardStats.books;
 
         setTimeout(() => {
             checkLibCardBTN.style.display = "inline-flex"
@@ -97,7 +99,7 @@ checkLibCardBTN.addEventListener('click', (event) => {
         }, 10000)
 
     } else {
-        let messageInnerHTML = "<p>Please, check your input:</p> There is no such reader registered";
+        let messageInnerHTML = "<p>Please, check your input:</p> There is no such reader registered <br>or card number is not correct";
         let windowWidth = '300px';
         messageWindow(messageInnerHTML, windowWidth);    
     }
@@ -209,6 +211,8 @@ function messageWindow(messageInnerHTML, windowWidth) {
     errorMessage.innerHTML = messageInnerHTML;
     errorMessage.classList.remove('hidden-popup');
     errorMessagePowerLayer.classList.remove('hidden-popup');
+    // prevent scroll
+    anyWhere.style.overflow = "hidden";
 }
 
 errorMessagePowerLayer.addEventListener('click', (event) => {
@@ -216,6 +220,8 @@ errorMessagePowerLayer.addEventListener('click', (event) => {
     errorMessage.textContent = "";
     errorMessage.classList.add('hidden-popup');
     errorMessagePowerLayer.classList.add('hidden-popup');
+    // allow scroll
+    anyWhere.style.overflow = "visible";
 }, true)
 
 // Form input validation END

@@ -182,6 +182,8 @@ function libraryCardCode() {
 
 // Change interface when authorisation commited 
 function authorisationCommitted (flag) {
+    console.log('authorisationCommitted inacted', "flag = ", flag);
+
     if (flag === 'newReader') {
         updateLocalStorageData();
     } else {
@@ -197,8 +199,14 @@ function authorisationCommitted (flag) {
 
     // Show reader stats in Library Card block
 
-    document.getElementById('library-card-reader-name').textContent = activeUser.firstName + ' ' + activeUser.firstName;
-    document.getElementById('library-card-number').textContent = activeUser.cardCode;
+    checkLibCardBTN.style.display = "none";
+    libCardCardStats.classList.remove('hidden-element');
+    libCardCardStats.style.display = 'flex';
+
+    console.log('show statistics and name', activeUser.firstName + ' ' + activeUser.lastName, "and card ", activeUser.cardCode);
+
+    document.getElementById('library-card-reader-name').value = activeUser.firstName + ' ' + activeUser.lastName;
+    document.getElementById('library-card-number').value = activeUser.cardCode;
     document.getElementById('card-stats-visits-value').textContent = activeUser.cardStats.visits;
     document.getElementById('card-stats-bonuses-value').textContent = activeUser.cardStats.bonuses;
     document.getElementById('card-stats-books-value').textContent = activeUser.cardStats.books;
@@ -221,24 +229,33 @@ function authorisationCommitted (flag) {
 
 }
 
-// Check id localStorage has reader with keys/values contained in keyObject
+// Check if localStorage has reader with keys/values contained in keyObject
 // Returns an array with object from localStore which meets keyObject keys, otherwise empty array
 function checkLocalStore(keyObject) {
     let result = [];
-    if (localStorage.getItem('readers') === null) return result;    
+    // There's no 'readers' key in localStorage
+    if (localStorage.getItem('readers') === null) return result;
+
     let arrReaders = JSON.parse(localStorage.getItem('readers'));
+
+    // search in each reader record
     for (let reader of arrReaders) {
+        // True only if every reader's key meets keyObject key
         let allParametersFit = false;
         for (let parameter in keyObject) {
             allParametersFit = keyObject[parameter] == reader[parameter] ? true : false;
+
+            // The first mismatch means this readers object doesn't fit
             if (allParametersFit == false) break;
         }
+        console.log('allParametersFit in external for = ', allParametersFit, ' result = ', result);
         if (allParametersFit == true) {
             result.push(reader);
             console.log('result = ', result);
             return result;
         }
     }
+    return result;
 }
 
 // Update user profile data

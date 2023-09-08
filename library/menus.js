@@ -123,6 +123,7 @@ const signUpBTN = document.getElementById('sign-up-btn');
 const logInBTN = document.getElementById('log-in-btn');
 const checkLibCardBTN = document.getElementById('check-the-card-btn');
 
+
 const myProfileBTN = document.getElementById('my-profile-btn');
 const myProfilePopUp = document.getElementById('my-profile-popup');
 
@@ -185,9 +186,21 @@ function goLoginFoo(event) {
 
 function goMyProfileFoo(event) {
     event.stopImmediatePropagation();
-        clearFields();
-        powerLayer.classList.remove('hidden-popup');
-        openModalWindow(myProfilePopUp, 'myProfilePopUp');
+    closeModalWindow(activePopUp.obj);
+    clearFields();
+
+    const profileInitials = document.getElementById('id-box');
+    profileInitials.textContent = activeUser.firstName[0] + activeUser.lastName[0];
+    const profileName = document.getElementById('name-box');
+    profileName.textContent = activeUser.firstName + ' ' + activeUser.lastName;
+    if (activeUser.firstName.length + activeUser.lastName.length > 10) {
+        profileName.style.height = 'auto';
+        profileName.style.padding = '5px';
+    }
+
+
+    powerLayer.classList.remove('hidden-popup');
+    openModalWindow(myProfilePopUp, 'myProfilePopUp');
 }
 
 

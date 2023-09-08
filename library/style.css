@@ -312,7 +312,7 @@ nav a:hover {
 
 #login-ini-popup p:hover:not(p:first-child), #profile-mini-popup p:hover:not(p:first-child) {
     cursor: pointer;
-    transform: scale(110%);
+    transform: scale(108%);
     transition: 0.5s;
 }
 
