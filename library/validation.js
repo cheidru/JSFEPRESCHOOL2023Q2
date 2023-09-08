@@ -39,7 +39,7 @@ registerSignUpBTN.addEventListener('click', (event) => {
             books: 0
         };
 
-        authorisationCommitted('newReader');
+        authorisationComplete('newReader');
         closeModalWindow(activePopUp.obj);
     }
 })
@@ -56,7 +56,7 @@ loginPopUpBTN.addEventListener('click', (event) => {
 
     if (validateFormFields(handleLoginPopupFiledValidation)) {
 
-        authorisationCommitted();
+        authorisationComplete();
         closeModalWindow(activePopUp.obj);
     }
 })

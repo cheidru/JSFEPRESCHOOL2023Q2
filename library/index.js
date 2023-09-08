@@ -181,8 +181,8 @@ function libraryCardCode() {
 }
 
 // Change interface when authorisation commited 
-function authorisationCommitted (flag) {
-    console.log('authorisationCommitted inacted', "flag = ", flag);
+function authorisationComplete(flag) {
+    console.log('authorisationComplete inacted', "flag = ", flag);
 
     if (flag === 'newReader') {
         updateLocalStorageData();
@@ -267,8 +267,27 @@ function checkLocalStore(keyObject) {
 function updateLocalStorageData() {
     let arrReaders = [];
 
-    arrReaders.push(activeUser);
-    localStorage.setItem('readers', JSON.stringify(arrReaders));
+    if (localStorage.getItem('readers') === null) {
+        // There's no 'readers' key in localStorage
+        arrReaders.push(activeUser);
+    } else {    
+        let storedReaders = JSON.parse(localStorage.getItem('readers'))
+
+        // check each reader against activeUser
+        for(reader of storedReaders) {
+            if (reader.firstName == activeUser.firstName 
+                && reader.lastName == activeUser.lastName
+                && reader.password == activeUser.password
+                && reader.cardCode == activeUser.cardCode) {
+                    // Update with activeUser data
+                    arrReaders.push(activeUser);
+            } else {
+                    arrReaders.push(reader);
+            }
+        }
+    }
+    let newReadersString = JSON.stringify(arrReaders)   
+    localStorage.setItem('readers', newReadersString);
 }
 
 
