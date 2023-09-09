@@ -211,6 +211,14 @@ nav a:hover {
     background-color: #FFF;
 }
 
+#profile:hover[class="user-registered"] {
+    animation: none;
+    font-weight: bold;
+    animation: none;
+    font-size: 17px;
+    transition: 0.3s;
+}
+
 #profile:hover {
     animation: wag-img 0.3s;
     transition: 0.5s;
@@ -248,7 +256,7 @@ nav a:hover {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color:rgba(0, 0, 0, 0.5);
+    background-color:rgba(16, 44, 28, 0.528);
     z-index: 2;
 }
 
@@ -525,7 +533,6 @@ nav a:hover {
     margin-bottom: 20px;
 }
 
-
 #white-field-stats div {
     display: flex;
     flex-direction: column;
@@ -624,6 +631,88 @@ nav a:hover {
     width: 14px;
     height: 12px;
     margin-bottom: 15px;
+}
+
+
+#buy-a-card-popup {
+    flex-direction: column;
+    width: 650px;
+    height: 540px;
+    border: 1px solid #000;
+}
+
+#buy-a-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 60px;
+    color: #FFFFFF;
+    background-color: #0C0C0E;
+}
+
+#buy-a-card-header .close-window-btn {
+    right: 15px;
+    min-width: 18px;
+    min-height: 18px;
+}
+
+#buy-a-card-wrapper {
+    display: flex;
+    padding: 30px 40px;
+}
+
+#exp-code-double-field {
+    display: flex;
+    gap: 10px;
+}
+
+.short-field {
+    width: 45px;
+}
+
+#cvc {
+    margin-bottom: 20px;
+}
+
+#city {
+    margin-bottom: 8px;
+}
+
+#credit-card-data-button {
+    display: flex;
+    align-items: flex-end;
+    gap: 23px;
+}
+
+#credit-card-data-button .popup-button {
+    margin-bottom: 0;
+}
+
+#card-price {
+    margin: 0;
+    margin-left: 2px;
+    padding: 0;
+    color: #0C0C0E;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 20px; /* 100% */
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+}
+
+#buy-a-card-intro {    
+    flex-shrink: 0;
+    margin: 0;
+    width: 330px;
+    text-align: left;
+    color: #8E8E8E;
+    font-family: Inter;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 20px; /* 133.333% */
+    letter-spacing: 2px;
 }
 
 /* header end */
@@ -1267,92 +1356,6 @@ tr td:nth-child(3) {
     background: #BB945F;
     transition: 1s;
 }
-
-#buy-a-card-popup {
-    position: absolute;
-    top: 70px;
-    right: 20px;
-    flex-direction: column;
-    width: 650px;
-    height: 540px;
-    border: 1px solid #000;
-}
-
-#buy-a-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 60px;
-    color: #FFFFFF;
-    background-color: #0C0C0E;
-}
-
-#buy-a-card-header .close-window-btn {
-    right: 15px;
-    min-width: 18px;
-    min-height: 18px;
-}
-
-#buy-a-card-wrapper {
-    display: flex;
-    padding: 30px 40px;
-}
-
-#exp-code-double-field {
-    display: flex;
-    gap: 10px;
-}
-
-.short-field {
-    width: 45px;
-}
-
-#cvc {
-    margin-bottom: 20px;
-}
-
-#city {
-    margin-bottom: 8px;
-}
-
-#credit-card-data-button {
-    display: flex;
-    align-items: flex-end;
-    gap: 23px;
-}
-
-#credit-card-data-button .popup-button {
-    margin-bottom: 0;
-}
-
-#card-price {
-    margin: 0;
-    margin-left: 2px;
-    padding: 0;
-    color: #0C0C0E;
-    font-family: Inter;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 20px; /* 100% */
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-}
-
-#buy-a-card-intro {    
-    flex-shrink: 0;
-    margin: 0;
-    width: 330px;
-    text-align: left;
-    color: #8E8E8E;
-    font-family: Inter;
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 20px; /* 133.333% */
-    letter-spacing: 2px;
-}
-
-
 
 /* Digital Library Cards end */
 

@@ -9,12 +9,15 @@ let activeUser = {};
 activeUser.firstName = '';
 activeUser.lastName = '';
 activeUser.cardCode = 0;
+activeUser.cardPurchased = false;
 activeUser.password = '';
+activeUser.bookList = [4, 12];
 activeUser.cardStats = {
-    visits: 0,
+    visits: 1,
     bonuses: 0,
-    books: 0
+    books() {return this.bookList.length}
 };
+
 
 
 const anyWhere = document.querySelector('body');
@@ -27,20 +30,30 @@ anyWhere.addEventListener('resize', () => {
 
 anyWhere.addEventListener('click', (event) => {
     if (activePopUp.name == '') return;
-    if (activePopUp.name == 'myProfilePopUp') myProfilePopUp.style.display = 'none';
+
     // console.log('anyWhere pressed', event.target.parentElement);
     if (activePopUp.name == 'burgerMenu') {
         menuShowHide();
     } else {
+        // if clicked inside popup and not close-window-btn, skip it
         if (event.target == activePopUp.obj ||
              ((event.target.parentElement == activePopUp.obj ||
                 event.target.parentElement.parentElement == activePopUp.obj ||
-                event.target.parentElement.parentElement.parentElement == activePopUp.obj) &&
+                event.target.parentElement.parentElement.parentElement == activePopUp.obj ||
+                event.target.parentElement.parentElement.parentElement.parentElement == activePopUp.obj
+                ) &&
              !event.target.classList.contains('close-window-btn')) ||
              ( event.target == errorMessage || event.target.parentElement == errorMessage)
-        ) return;
-        powerLayer.classList.add('hidden-popup');
-        closeModalWindow(activePopUp.obj);
+        ) {
+            return;
+        } else {
+            powerLayer.classList.add('hidden-popup');
+            if (activePopUp.name == 'buyCardPopUp') buyCardPopUp.style.display = 'none';
+            if (activePopUp.name == 'myProfilePopUp') myProfilePopUp.style.display = 'none';
+            closeModalWindow(activePopUp.obj);
+        }
+
+
     }        
 })
 
@@ -123,13 +136,15 @@ const profileMiniPopupTitle = document.getElementById('profile-minipopup-title')
 const signUpBTN = document.getElementById('sign-up-btn');
 const logInBTN = document.getElementById('log-in-btn');
 const checkLibCardBTN = document.getElementById('check-the-card-btn');
-
+const visitProfileLibCardIntroBTN = document.getElementById('visit-your-profile-btn');
 
 const myProfileBTN = document.getElementById('my-profile-btn');
 const myProfilePopUp = document.getElementById('my-profile-popup');
 const myProfileVisitNumber = document.getElementById('my-profile-visits-value');
 const myProfileBonusNumber = document.getElementById('my-profile-bonuses-value');
 const myProfileBookNumber = document.getElementById('my-profile-books-value');
+
+const buyCardPopUp = document.getElementById('buy-a-card-popup');
 
 profileIcon.addEventListener('click', (event) => {
         event.stopImmediatePropagation();
@@ -162,6 +177,9 @@ logInBTN.addEventListener('click', (e) => {goLoginFoo(e)}, true);
 
 myProfileBTN.addEventListener('click', (e) => {goMyProfileFoo(e)}, true);
 
+visitProfileLibCardIntroBTN.addEventListener('click', (e) => {goMyProfileFoo(e)});
+
+
 function goRegisterFoo(event) {
     event.stopImmediatePropagation();
     // Check if Sign Up button in Library Card section is clicked
@@ -190,8 +208,12 @@ function goLoginFoo(event) {
 
 function goMyProfileFoo(event) {
     event.stopImmediatePropagation();
-    closeModalWindow(activePopUp.obj);
-    clearFields();
+    if (event.target !== visitProfileLibCardIntroBTN) {
+        closeModalWindow(activePopUp.obj);
+        clearFields();
+    } else {
+        document.documentElement.scrollTop = '0px';
+    }
 
     const profileInitials = document.getElementById('id-box');
     profileInitials.textContent = activeUser.firstName[0] + activeUser.lastName[0];
@@ -209,6 +231,16 @@ function goMyProfileFoo(event) {
     myProfilePopUp.style.display = 'flex';
     powerLayer.classList.remove('hidden-popup');
     openModalWindow(myProfilePopUp, 'myProfilePopUp');
+}
+
+function goBuyCard(event) {
+    event.stopImmediatePropagation();
+    
+    document.documentElement.scrollTop = '0px';
+    buyCardPopUp.style.display = 'flex';
+    powerLayer.classList.remove('hidden-popup');
+    openModalWindow(buyCardPopUp, 'buyCardPopUp');
+
 }
 
 

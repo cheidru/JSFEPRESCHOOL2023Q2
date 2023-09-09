@@ -6,7 +6,7 @@ const errorMessage = document.getElementById('error-message-box');
 const errorMessagePowerLayer = document.getElementById('error-power-layer');
 
 const getCardIntro = document.getElementById('get-a-card');
-const visitProfileIntro = document.getElementById('visit-your-profile');
+const visitProfileLibCardIntro = document.getElementById('visit-your-profile');
 
 const libCardCardStats = document.getElementById('library-card-stats');
 
@@ -51,7 +51,7 @@ loginPopUpBTN.addEventListener('click', (event) => {
         // field id, field name, pattern, error message, field value
         ['login-e-mail', 'E-mail or readers card', /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, ' should consist of e-mail address or card number', ''],
         ['login-e-mail', 'E-mail or readers card', /[a-fA-F0-9]{9}/, ' should consist of e-mail address or card number', ''],
-        ['log-in-password', 'Password', /[A-Za-zА-Яа-яЁё0-9]{8,}/, ' shouldn be not lass than 8 symbols long and consist of letters or digits', '']
+        ['log-in-password', 'Password', /[A-Za-zА-Яа-яЁё0-9]{8,}/, ' should be not lass than 8 symbols long and consist of letters or digits', '']
     ];
 
     if (validateFormFields(handleLoginPopupFiledValidation)) {
@@ -73,9 +73,9 @@ checkLibCardBTN.addEventListener('click', (event) => {
 
     // Check field input against localStorage data
     let checkLibCardUser = {};
-    checkLibCardUser.firstName = readerName.value.split(' ')[0];
-    checkLibCardUser.lastName = readerName.value.split(' ')[1];
-    checkLibCardUser.cardCode = readerCard .value;
+    checkLibCardUser.firstName = libCardReaderName.value.split(' ')[0];
+    checkLibCardUser.lastName = libCardReaderName.value.split(' ')[1];
+    checkLibCardUser.cardCode = libCardNumber.value;
 
     let searchResult = checkLocalStore(checkLibCardUser);
 

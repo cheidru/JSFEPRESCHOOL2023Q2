@@ -96,10 +96,17 @@ favouriteRadios.addEventListener('click', (e) => {
 
 favouriteBooks.addEventListener('click', (e) => {
     if (seasonChangeInProgress) clearTimeout(seasonChangeBreakID);
+
     // If Buy button pressed
     if (e.target.classList.contains('favorite-button')) {
-        // if user is not authorized yet, open Login popup
-        if (activeUser.firstName == '') goLoginFoo(e);
+        // if user is not authorized yet, open Login popup 
+        // otherwise open Buy a Library Card popup if the card is not purchased yet
+        if (activeUser.firstName == '') {
+            goLoginFoo(e);
+        } else if (activeUser.cardPurchased === false) {
+            console.log('Go buy card');
+            goBuyCard(e);
+        }
         return;
     };
     let newSeason = activeSeason == 'Autumn' ? 'Winter' : allSeasons[allSeasons.indexOf(activeSeason) + 1];
@@ -230,7 +237,7 @@ function authorisationComplete(flag) {
 
     // Change 'get-a-card' block
     getCardIntro.classList.add('hidden-element');
-    visitProfileIntro.classList.remove('hidden-element');
+    visitProfileLibCardIntro.classList.remove('hidden-element');
 
 }
 
