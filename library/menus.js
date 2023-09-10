@@ -11,8 +11,8 @@ activeUser.lastName = '';
 activeUser.cardCode = 0;
 activeUser.cardPurchased = false;
 activeUser.password = '';
-activeUser.bookList = [4, 12];
-activeUser.cardStats = {visits: 1, bonuses: 0, books: 2};
+activeUser.bookList = [];
+activeUser.cardStats = {visits: 0, bonuses: 0, books: 0};
 
 const anyWhere = document.querySelector('body');
 
@@ -145,6 +145,8 @@ const creditCardData = document.getElementById('carddata');
 
 const creditCardSubmitBTN = document.getElementById('credit-card-submit-btn');
 
+const logOutBTN = document.getElementById('log-out-btn');
+
 profileIcon.addEventListener('click', (event) => {
         event.stopImmediatePropagation();
     if (activePopUp.name == 'burgerMenu') menuShowHide();
@@ -173,6 +175,8 @@ goRegister.addEventListener('click', (e) => {goRegisterFoo(e)}, true);
 signUpBTN.addEventListener('click', (e) => {goRegisterFoo(e)}, true);
 
 logInBTN.addEventListener('click', (e) => {goLoginFoo(e)}, true);
+
+logOutBTN.addEventListener('click', (e) => {loOutFoo(e)}, true);
 
 myProfileBTN.addEventListener('click', (e) => {goMyProfileFoo(e)}, true);
 
@@ -297,6 +301,13 @@ function clearFields() {
 const copyToClipboard = (text) => navigator.clipboard.writeText(text);
 // Modal windows END
 
+function loOutFoo(event) {
+    event.stopImmediatePropagation();
+
+    updateLocalStorageData();
+    location.reload ();
+    // activePopUp.obj = {};
+}
 
 
 

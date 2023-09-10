@@ -195,9 +195,13 @@ function validateFormFields(validationDataHandler) {
             // check if password and e-mail or card code match the one recorder in local storage
             let checkResult = checkLocalStore(searchKeys);
             if (checkResult.length > 0) {
+
                 // assign stored reader obj to activePopUp.obj
                 activeUser = checkResult[0];
+
+                console.log('activeUser = ', activeUser);
                 return true;
+
             } else {
                 // otherwise show error message
                 let messageHTML = "<p>Please, check your input:</p>User with such e-mail or reader's card<br>and password is not registered yet"

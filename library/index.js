@@ -211,18 +211,10 @@ function authorisationComplete(flag) {
     if (flag === 'newReader') {
         updateLocalStorageData();
     } else {
-        // increase activeUser.cardStats.visits
-        // update localStorage
-        // update activeUser with localStorage data
+        activeUser.cardStats.visits++;
     }
 
-    // ToDo
-    // При нажатии на любую кнопку Buy до покупки абонемента появляется окно BUY A LIBRARY CARD
-    // После покупки абонемента нажатие на Buy добавляет книгу в профиль и заменяет на неактивную кнопку Own
-    // При этом увеличивается кол-во книг в статистике activeUser и в localStorage
-
     // Show reader stats in Library Card block
-
     checkLibCardBTN.style.display = "none";
     libCardCardStats.classList.remove('hidden-element');
     libCardCardStats.style.display = 'flex';
