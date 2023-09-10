@@ -18,6 +18,44 @@ const anyWhere = document.querySelector('body');
 
 // Check if body element has a scroll bar
 let anyWhereHasScrollBar = true;
+
+const profileIcon = document.getElementById('profile');
+const powerLayer = document.getElementById('power-layer');
+
+const loginIniPopUp = document.getElementById('login-ini-popup');
+const loginIniBTN = document.getElementById('login-btn');
+const registerIniBTN = document.getElementById('register-btn');
+
+const loginPopUp = document.getElementById('login-popup');
+
+const goRegister = document.getElementById('go-to-register');
+const goLogin = document.getElementById('go-to-login');
+
+const registerPopUp = document.getElementById('register-popup');
+
+const profileMiniPopup = document.getElementById('profile-mini-popup');
+const profileMiniPopupTitle = document.getElementById('profile-minipopup-title');
+
+const signUpBTN = document.getElementById('sign-up-btn');
+const logInBTN = document.getElementById('log-in-btn');
+const checkLibCardBTN = document.getElementById('check-the-card-btn');
+const visitProfileLibCardIntroBTN = document.getElementById('visit-your-profile-btn');
+
+const myProfileBTN = document.getElementById('my-profile-btn');
+const myProfilePopUp = document.getElementById('my-profile-popup');
+const myProfileVisitNumber = document.getElementById('my-profile-visits-value');
+const myProfileBonusNumber = document.getElementById('my-profile-bonuses-value');
+const myProfileBookNumber = document.getElementById('my-profile-books-value');
+
+const buyCardPopUp = document.getElementById('buy-a-card-popup');
+
+const creditCardData = document.getElementById('carddata');
+
+const creditCardSubmitBTN = document.getElementById('credit-card-submit-btn');
+
+const logOutBTN = document.getElementById('log-out-btn');
+
+
 anyWhere.addEventListener('resize', () => {
     anyWhereHasScrollBar = div.scrollHeight < div.clientHeight; 
 })
@@ -111,41 +149,6 @@ function menuShowHide() {
 // Modal windows START
 let userIsRegistered = false;
 
-const profileIcon = document.getElementById('profile');
-const powerLayer = document.getElementById('power-layer');
-
-const loginIniPopUp = document.getElementById('login-ini-popup');
-const loginIniBTN = document.getElementById('login-btn');
-const registerIniBTN = document.getElementById('register-btn');
-
-const loginPopUp = document.getElementById('login-popup');
-
-const goRegister = document.getElementById('go-to-register');
-const goLogin = document.getElementById('go-to-login');
-
-const registerPopUp = document.getElementById('register-popup');
-
-const profileMiniPopup = document.getElementById('profile-mini-popup');
-const profileMiniPopupTitle = document.getElementById('profile-minipopup-title');
-
-const signUpBTN = document.getElementById('sign-up-btn');
-const logInBTN = document.getElementById('log-in-btn');
-const checkLibCardBTN = document.getElementById('check-the-card-btn');
-const visitProfileLibCardIntroBTN = document.getElementById('visit-your-profile-btn');
-
-const myProfileBTN = document.getElementById('my-profile-btn');
-const myProfilePopUp = document.getElementById('my-profile-popup');
-const myProfileVisitNumber = document.getElementById('my-profile-visits-value');
-const myProfileBonusNumber = document.getElementById('my-profile-bonuses-value');
-const myProfileBookNumber = document.getElementById('my-profile-books-value');
-
-const buyCardPopUp = document.getElementById('buy-a-card-popup');
-
-const creditCardData = document.getElementById('carddata');
-
-const creditCardSubmitBTN = document.getElementById('credit-card-submit-btn');
-
-const logOutBTN = document.getElementById('log-out-btn');
 
 profileIcon.addEventListener('click', (event) => {
         event.stopImmediatePropagation();

@@ -124,6 +124,16 @@ favouriteBooks.addEventListener('click', (e) => {
             goLoginFoo(e);
         } else if (activeUser.cardPurchased === false) {
             goBuyCard(e);
+        } else {
+            e.target.setAttribute('disabled', 'disabled');
+            e.target.textContent = 'Own';
+
+            // Slice book number from id of wrapper div
+            activeUser.bookList.push(Number((e.target.parentElement.getAttribute('id')).slice(4)));            
+
+            activeUser.cardStats.books++
+            // Update info in Library Card stats section
+            libCardBookNumber.textContent = activeUser.cardStats.books;
         }
         return;
     };
@@ -229,6 +239,14 @@ function authorisationComplete(flag) {
     libCardVisitNumber.textContent = activeUser.cardStats.visits;
     libCardBonusNumber.textContent = activeUser.cardStats.bonuses;
     libCardBookNumber.textContent = activeUser.cardStats.books;
+
+    for (let purchasedBook of activeUser.bookList) {
+        let bookWrapper = document.getElementById(`item${purchasedBook}`);
+        console.log('purchasedBook = ', purchasedBook, 'bookWrapper = ', bookWrapper, 'bookWrapper.children[3] = ', bookWrapper.children[3]);
+        bookWrapper.children[3].setAttribute('disabled', 'disabled');
+        bookWrapper.children[3].textContent = 'Own';
+
+    }
 
     
     // change profile icon to initials

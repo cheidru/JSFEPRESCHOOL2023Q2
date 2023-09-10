@@ -30,6 +30,7 @@ creditCardSubmitBTN.addEventListener('click', (event) => {
     ];
 
     if (validateFormFields()) {
+        event.preventDefault();
         buyCardPopUp.style.display = 'none';
         activeUser.cardPurchased = true;
         closeModalWindow(activePopUp.obj);
