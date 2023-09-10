@@ -12,13 +12,7 @@ activeUser.cardCode = 0;
 activeUser.cardPurchased = false;
 activeUser.password = '';
 activeUser.bookList = [4, 12];
-activeUser.cardStats = {
-    visits: 1,
-    bonuses: 0,
-    books() {return this.bookList.length}
-};
-
-
+activeUser.cardStats = {visits: 1, bonuses: 0, books: 2};
 
 const anyWhere = document.querySelector('body');
 
@@ -48,12 +42,13 @@ anyWhere.addEventListener('click', (event) => {
             return;
         } else {
             powerLayer.classList.add('hidden-popup');
-            if (activePopUp.name == 'buyCardPopUp') buyCardPopUp.style.display = 'none';
+            if (activePopUp.name == 'buyCardPopUp') {
+                buyCardPopUp.style.display = 'none';
+                clearFields();
+            }
             if (activePopUp.name == 'myProfilePopUp') myProfilePopUp.style.display = 'none';
             closeModalWindow(activePopUp.obj);
         }
-
-
     }        
 })
 
@@ -146,6 +141,10 @@ const myProfileBookNumber = document.getElementById('my-profile-books-value');
 
 const buyCardPopUp = document.getElementById('buy-a-card-popup');
 
+const creditCardData = document.getElementById('carddata');
+
+const creditCardSubmitBTN = document.getElementById('credit-card-submit-btn');
+
 profileIcon.addEventListener('click', (event) => {
         event.stopImmediatePropagation();
     if (activePopUp.name == 'burgerMenu') menuShowHide();
@@ -179,6 +178,29 @@ myProfileBTN.addEventListener('click', (e) => {goMyProfileFoo(e)}, true);
 
 visitProfileLibCardIntroBTN.addEventListener('click', (e) => {goMyProfileFoo(e)});
 
+creditCardData.addEventListener('input', () => {
+
+    let creditCardNumber = document.getElementById('credit-card-number');
+    let expCode = document.getElementById('exp-code');
+    let expCodeExt = document.getElementById('exp-code-ext');
+    let cvc = document.getElementById('cvc');
+    let holderName = document.getElementById('holder-name');
+    let postalCode = document.getElementById('postal');
+    let city = document.getElementById('city');
+
+    if (creditCardNumber.value !== '' &&
+        expCode.value !== '' &&
+        expCodeExt.value !== '' &&
+        cvc.value !== '' &&
+        holderName.value !== '' &&
+        postalCode.value !== '' &&
+        city.value !== '') {
+            creditCardSubmitBTN.removeAttribute("disabled");
+        } else {
+            creditCardSubmitBTN.setAttribute("disabled", "disabled");
+        }
+})
+
 
 function goRegisterFoo(event) {
     event.stopImmediatePropagation();
@@ -208,9 +230,9 @@ function goLoginFoo(event) {
 
 function goMyProfileFoo(event) {
     event.stopImmediatePropagation();
+
     if (event.target !== visitProfileLibCardIntroBTN) {
         closeModalWindow(activePopUp.obj);
-        clearFields();
     } else {
         document.documentElement.scrollTop = '0px';
     }
@@ -218,15 +240,37 @@ function goMyProfileFoo(event) {
     const profileInitials = document.getElementById('id-box');
     profileInitials.textContent = activeUser.firstName[0] + activeUser.lastName[0];
     const profileName = document.getElementById('name-box');
+
     profileName.textContent = activeUser.firstName + ' ' + activeUser.lastName;
     if (activeUser.firstName.length + activeUser.lastName.length > 10) {
         profileName.style.height = 'auto';
         profileName.style.padding = '5px';
     }
 
+    let profileBookList = document.getElementById('my-profile-ul');
+    const bookList = document.getElementById('rented-books-list');
+
+    profileBookList.innerHTML = activeUser.bookList.map((book) => {
+        // fill the list of purchased books with activeUser data
+        return `<li>${favouriteBookTitle[book]}</li>`}).join('\n');
+    
+        profileBookList.classList.add('add-overflow');
+
+        console.log('profileBookList = ', profileBookList, 'activeUser.bookList = ', activeUser.bookList, 'activeUser.cardStats.books =', activeUser.cardStats.books);
+
     myProfileVisitNumber.textContent = activeUser.cardStats.visits;
     myProfileBonusNumber.textContent = activeUser.cardStats.bonuses;
     myProfileBookNumber.textContent = activeUser.cardStats.books;
+
+    const cardCode = document.getElementById('card-number-code');
+    
+    cardCode.textContent = activeUser.cardCode;
+
+    const cardCodeCopy = document.getElementById('card-number-copy');
+    const copyToClipboard = (text) => navigator.clipboard.writeText(text);
+
+    cardCodeCopy.onclick = copyToClipboard(activeUser.cardCode);
+
 
     myProfilePopUp.style.display = 'flex';
     powerLayer.classList.remove('hidden-popup');
@@ -243,13 +287,14 @@ function goBuyCard(event) {
 
 }
 
-
 function clearFields() {
     let fieldArray = activePopUp.validationRule;
     for (let i = 0; i < fieldArray.length; i++ ) {
         document.getElementById(`${fieldArray[i][0]}`).value = null;
     }
 }
+
+const copyToClipboard = (text) => navigator.clipboard.writeText(text);
 // Modal windows END
 
 

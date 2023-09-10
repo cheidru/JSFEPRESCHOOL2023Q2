@@ -16,6 +16,26 @@ const libCardVisitNumber = document.getElementById('card-stats-visits-value');
 const libCardBonusNumber = document.getElementById('card-stats-bonuses-value');
 const libCardBookNumber = document.getElementById('card-stats-books-value');
 
+creditCardSubmitBTN.addEventListener('click', (event) => {
+    event.stopImmediatePropagation();
+    activePopUp.validationRule = [
+        // field id, field name, pattern, error message, field value
+        ['credit-card-number', 'Bank card number', /[0-9]{16}/, ' should include 16 digits', ''],
+        ['exp-code', 'Expiration code', /[0-9]{2}/, ' should include two digits of expiration month', ''],
+        ['exp-code-ext', 'Expiration code', /[0-9]{2}/, ' should include two LAST digits of expiration year', ''],
+        ['cvc', 'CVC', /[0-9]{3}/, ' should include three digits of CVC code', ''],
+        ['holder-name', 'Cardholder name', /[A-Z]+\s[A-Z]+/, ' first and last name of the card holder in upper case letters', ''],
+        ['postal', 'Postal code', /./, '',''],
+        ['city', 'City', /[A-Za-z]+/, ' should consist of letters','']
+    ];
+
+    if (validateFormFields()) {
+        buyCardPopUp.style.display = 'none';
+        activeUser.cardPurchased = true;
+        closeModalWindow(activePopUp.obj);
+    }
+})
+
 // Check Register popup fields and write User data to LocalStorage
 registerSignUpBTN.addEventListener('click', (event) => {
     event.stopImmediatePropagation();
@@ -31,7 +51,6 @@ registerSignUpBTN.addEventListener('click', (event) => {
         activeUser.firstName = activePopUp.validationRule[0][4];
         activeUser.lastName = activePopUp.validationRule[1][4];
         activeUser.eMail = activePopUp.validationRule[2][4];
-        activeUser.cardCode = activeUser.cardCode;
         activeUser.password = activePopUp.validationRule[3][4];
         activeUser.cardStats = {
             visits: 1,
@@ -148,6 +167,8 @@ function validateFormFields(validationDataHandler) {
 
     // standard validation data handling
     if (fieldValidationResult.includes(0) || fieldValidationResult.includes(1)) {
+
+        console.log(fieldValidationResult);
         // Validation ended up with errors. Show error message
         validationErrorMessage(fieldArray, fieldValidationResult);
         return false;
@@ -182,7 +203,13 @@ function validateFormFields(validationDataHandler) {
                 let messageHTML = "<p>Please, check your input:</p>User with such e-mail or reader's card<br>and password is not registered yet"
                 messageWindow(messageHTML, '350px');
             }
-        }        
+        } else if (activePopUp.obj === buyCardPopUp) {
+            let messageHTML = "<p>Thank You for purchasing your library card!</p>";
+
+            // Registration successful message
+            messageWindow(messageHTML, '350px');
+            return true;
+        }  
     }
 }
 
@@ -214,15 +241,15 @@ function messageWindow(messageInnerHTML, windowWidth) {
     errorMessagePowerLayer.classList.remove('hidden-popup');
     // prevent scroll
     anyWhere.style.overflow = "hidden";
-}
 
-errorMessagePowerLayer.addEventListener('click', (event) => {
-    event.stopImmediatePropagation();
-    errorMessage.textContent = "";
-    errorMessage.classList.add('hidden-popup');
-    errorMessagePowerLayer.classList.add('hidden-popup');
-    // allow scroll
-    anyWhere.style.overflow = "visible";
-}, true)
+    errorMessagePowerLayer.addEventListener('click', (event) => {
+        event.stopImmediatePropagation();
+        errorMessage.textContent = "";
+        errorMessage.classList.add('hidden-popup');
+        errorMessagePowerLayer.classList.add('hidden-popup');
+        // allow scroll
+        anyWhere.style.overflow = "visible";
+    }, true);
+}
 
 // Form input validation END

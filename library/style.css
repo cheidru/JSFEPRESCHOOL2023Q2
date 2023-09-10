@@ -582,6 +582,32 @@ nav a:hover {
     line-height: 20px; /* 80% */
 }
 
+#my-profile-ul {
+    width: 370px;
+    height: 80px;
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+#my-profile-ul li{
+    white-space: nowrap
+}
+
+#card-number-copy {
+    cursor: pointer;    
+}
+
+#my-profile-ul li:last-child{
+    margin-bottom: -5px;
+}
+
+/* .add-overflow {
+    width: 370px;
+    height: 70px;
+    overflow: scroll;
+} */
+
 #rented-books-list ul {    
     padding-left: 10px;
     color: #000;
@@ -635,10 +661,9 @@ nav a:hover {
 
 
 #buy-a-card-popup {
-    flex-direction: column;
-    width: 650px;
+    flex-direction: column;    
+    width: 640px;
     height: 540px;
-    border: 1px solid #000;
 }
 
 #buy-a-card-header {
@@ -652,14 +677,15 @@ nav a:hover {
 }
 
 #buy-a-card-header .close-window-btn {
-    right: 15px;
+    right: 10px;
     min-width: 18px;
     min-height: 18px;
 }
 
 #buy-a-card-wrapper {
     display: flex;
-    padding: 30px 40px;
+    height: 100%;
+    padding: 30px 35px;
 }
 
 #exp-code-double-field {
@@ -990,13 +1016,13 @@ input[name="season"] {
     border: 1px solid #0C0C0E;
 }
 
-.favorite-button:hover:not([disabled]) {
+.favorite-button:hover:not([disabled]), .popup-button:hover:not([disabled]) {
     border: 1px solid #BB945F;
     background: #BB945F;
     transition: 1s;
 }
 
-.favorite-button[disabled] {
+[disabled] {
     color: #BB945F;
     border-color: #BB945F;
 }

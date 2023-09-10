@@ -87,6 +87,25 @@ let favourite14 = document.getElementById('item14');
 let favourite15 = document.getElementById('item15');
 let favourite16 = document.getElementById('item16');
 
+let favouriteBookTitle = [
+    "The Book Eaters, Sunyi Dean",
+    "Dante: Poet of the Secular World, Erich Auerbach",
+    "Cackle, Rachel Harrison",
+    "The Last Queen, Clive Irving",
+    "The Body, Stephen King",
+    "Days of Distraction, Alexandra Chang",
+    "Crude: A Memoir, Pablo Fajardo &amp; Sophie Tardy-Joubert",
+    "The Octopus Museum: Poems, Brenda Shaughnessy",
+    "Casual Conversation, Renia White",
+    "Rickey: The Life and Legend, Howard Bryant",
+    "Carry: A Memoir of Survival on Stolen Land, Toni Jenson",
+    "Dominicana, Angie Cruz",
+    "Let My People Go Surfing, Yvon Chouinard",
+    "Shark Dialogues: A Novel, Kiana Davenport",
+    "The Great Fire, Lou Ureneck",
+    "Slug: And Other Stories, Megan Milks"
+];
+
 favouriteRadios.addEventListener('click', (e) => {
     if (e.target.textContent == activeSeason) return;
     if (e.target.tagName != 'LABEL') return;
@@ -104,7 +123,6 @@ favouriteBooks.addEventListener('click', (e) => {
         if (activeUser.firstName == '') {
             goLoginFoo(e);
         } else if (activeUser.cardPurchased === false) {
-            console.log('Go buy card');
             goBuyCard(e);
         }
         return;
@@ -189,7 +207,6 @@ function libraryCardCode() {
 
 // Change interface when authorisation commited 
 function authorisationComplete(flag) {
-    console.log('authorisationComplete inacted', "flag = ", flag);
 
     if (flag === 'newReader') {
         updateLocalStorageData();
@@ -209,8 +226,6 @@ function authorisationComplete(flag) {
     checkLibCardBTN.style.display = "none";
     libCardCardStats.classList.remove('hidden-element');
     libCardCardStats.style.display = 'flex';
-
-    console.log('show statistics and name', activeUser.firstName + ' ' + activeUser.lastName, "and card ", activeUser.cardCode);
 
     libCardReaderName.value = activeUser.firstName + ' ' + activeUser.lastName;
     libCardNumber.value = activeUser.cardCode;
@@ -260,10 +275,10 @@ function checkLocalStore(keyObject) {
             // The first mismatch means this readers object doesn't fit
             if (allParametersFit == false) break;
         }
-        console.log('allParametersFit in external for = ', allParametersFit, ' result = ', result);
+
         if (allParametersFit == true) {
             result.push(reader);
-            console.log('result = ', result);
+
             return result;
         }
     }

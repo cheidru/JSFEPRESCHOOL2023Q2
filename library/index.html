@@ -131,7 +131,7 @@
                         </div>
                         <div id="white-field-card-number">
                             <div id="card-number-title">Card number</div>
-                            <div id="card-number-code">F00234030</div>
+                            <div id="card-number-code"></div>
                             <div id="card-number-copy"><img src="./assets/img/icon_copy.svg" alt="copy-card-number"></div>
                         </div>
                     </div>
@@ -145,9 +145,9 @@
                 </div>
 
                 <div id="buy-a-card-wrapper">
-                    <form id="credit-card-data">
-                        <label for="card-number" class="popup-label">Bank card number</label>
-                        <input type="text" name="card-number" id="card-number" class="popup-input">
+                    <form id="carddata">
+                        <label for="credit-card-number" class="popup-label">Bank card number</label>
+                        <input type="text" name="credit-card-number" id="credit-card-number" class="popup-input">
 
                         <label for="exp-code" class="popup-label">Expiration code</label>
                         <div id="exp-code-double-field">
@@ -168,7 +168,7 @@
                         <input type="text" name="city" id="city" class="popup-input">
 
                         <div id="credit-card-data-button">
-                            <button class="popup-button">Buy</button>
+                            <button class="popup-button" id="credit-card-submit-btn" disabled>Buy</button>
                             <p id="card-price">$ 25.00</p>
                         </div>
                     </form>
