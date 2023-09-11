@@ -242,7 +242,6 @@ function authorisationComplete(flag) {
 
     for (let purchasedBook of activeUser.bookList) {
         let bookWrapper = document.getElementById(`item${purchasedBook}`);
-        console.log('purchasedBook = ', purchasedBook, 'bookWrapper = ', bookWrapper, 'bookWrapper.children[3] = ', bookWrapper.children[3]);
         bookWrapper.children[3].setAttribute('disabled', 'disabled');
         bookWrapper.children[3].textContent = 'Own';
 
@@ -262,6 +261,7 @@ function authorisationComplete(flag) {
 
     // Change 'get-a-card' block
     getCardIntro.classList.add('hidden-element');
+    getCardIntro.style.display = 'none';
     visitProfileLibCardIntro.classList.remove('hidden-element');
 
 }
