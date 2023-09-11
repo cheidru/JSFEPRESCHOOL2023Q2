@@ -29,8 +29,9 @@ creditCardSubmitBTN.addEventListener('click', (event) => {
         ['city', 'City', /[A-Za-z]+/, ' should consist of letters','']
     ];
 
+    event.preventDefault();
     if (validateFormFields()) {
-        event.preventDefault();
+
         buyCardPopUp.style.display = 'none';
         activeUser.cardPurchased = true;
         closeModalWindow(activePopUp.obj);
@@ -169,9 +170,9 @@ function validateFormFields(validationDataHandler) {
     // standard validation data handling
     if (fieldValidationResult.includes(0) || fieldValidationResult.includes(1)) {
 
-        console.log(fieldValidationResult);
         // Validation ended up with errors. Show error message
         validationErrorMessage(fieldArray, fieldValidationResult);
+
         return false;
     } else {
         // Check data in Register popup fields 
@@ -200,7 +201,6 @@ function validateFormFields(validationDataHandler) {
                 // assign stored reader obj to activePopUp.obj
                 activeUser = checkResult[0];
 
-                console.log('activeUser = ', activeUser);
                 return true;
 
             } else {
@@ -235,7 +235,7 @@ function validationErrorMessage(fieldArray, fieldValidationResult) {
                 errorMessageText += errorMessageBit;
         }
     }
-    let errorMessageWidth = maxStringLength * 8.5 < 500 ? (maxStringLength * 8.5) + 'px' : '500px';
+    let errorMessageWidth = maxStringLength * 8.5 < 550 ? (maxStringLength * 8.5) + 'px' : '550px';
     messageWindow(errorMessageText, errorMessageWidth)
 }
 
@@ -246,15 +246,15 @@ function messageWindow(messageInnerHTML, windowWidth) {
     errorMessagePowerLayer.classList.remove('hidden-popup');
     // prevent scroll
     anyWhere.style.overflow = "hidden";
-
-    errorMessagePowerLayer.addEventListener('click', (event) => {
-        event.stopImmediatePropagation();
-        errorMessage.textContent = "";
-        errorMessage.classList.add('hidden-popup');
-        errorMessagePowerLayer.classList.add('hidden-popup');
-        // allow scroll
-        anyWhere.style.overflow = "visible";
-    }, true);
 }
+
+errorMessagePowerLayer.addEventListener('click', (event) => {
+    event.stopImmediatePropagation();
+    errorMessage.textContent = "";
+    errorMessage.classList.add('hidden-popup');
+    errorMessagePowerLayer.classList.add('hidden-popup');
+    // allow scroll
+    anyWhere.style.overflow = "visible";
+});
 
 // Form input validation END

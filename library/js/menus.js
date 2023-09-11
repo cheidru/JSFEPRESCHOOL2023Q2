@@ -63,7 +63,6 @@ anyWhere.addEventListener('resize', () => {
 anyWhere.addEventListener('click', (event) => {
     if (activePopUp.name == '') return;
 
-    // console.log('anyWhere pressed', event.target.parentElement);
     if (activePopUp.name == 'burgerMenu') {
         menuShowHide();
     } else {
@@ -72,7 +71,8 @@ anyWhere.addEventListener('click', (event) => {
              ((event.target.parentElement == activePopUp.obj ||
                 event.target.parentElement.parentElement == activePopUp.obj ||
                 event.target.parentElement.parentElement.parentElement == activePopUp.obj ||
-                event.target.parentElement.parentElement.parentElement.parentElement == activePopUp.obj
+                event.target.parentElement.parentElement.parentElement.parentElement == activePopUp.obj ||
+                (activePopUp.obj == myProfilePopUp && event.target.parentElement.parentElement.parentElement.parentElement.parentElement == myProfilePopUp)
                 ) &&
              !event.target.classList.contains('close-window-btn')) ||
              ( event.target == errorMessage || event.target.parentElement == errorMessage)
@@ -91,7 +91,6 @@ anyWhere.addEventListener('click', (event) => {
 })
 
 function closeModalWindow(modalWindow) {
-    // console.log('closeModal', modalWindow);
     powerLayer.classList.add('hidden-popup');
     modalWindow.classList.add('hidden-popup');
     anyWhere.style.overflow = "visible";
@@ -101,7 +100,7 @@ function closeModalWindow(modalWindow) {
 }
 
 function openModalWindow(modal, name) {
-    // console.log('openModal',modal, name);
+
     modal.classList.remove('hidden-popup');
     // Hide overflow to prevent window scroll down
     anyWhere.style.overflow = "hidden";
@@ -185,8 +184,9 @@ myProfileBTN.addEventListener('click', (e) => {goMyProfileFoo(e)}, true);
 
 visitProfileLibCardIntroBTN.addEventListener('click', (e) => {goMyProfileFoo(e)});
 
-creditCardData.addEventListener('input', () => {
 
+creditCardData.addEventListener('input', (event) => {
+    event.stopImmediatePropagation();
     let creditCardNumber = document.getElementById('credit-card-number');
     let expCode = document.getElementById('exp-code');
     let expCodeExt = document.getElementById('exp-code-ext');
@@ -235,6 +235,18 @@ function goLoginFoo(event) {
     openModalWindow(loginPopUp, 'loginPopUp');
 }
 
+function goBuyCard(event) {
+    event.stopImmediatePropagation();
+    
+    document.documentElement.scrollTop = '0px';
+    buyCardPopUp.style.display = 'flex';
+    powerLayer.classList.remove('hidden-popup');
+    openModalWindow(buyCardPopUp, 'buyCardPopUp');
+}
+
+
+
+
 function goMyProfileFoo(event) {
     event.stopImmediatePropagation();
 
@@ -261,9 +273,7 @@ function goMyProfileFoo(event) {
         // fill the list of purchased books with activeUser data
         return `<li>${favouriteBookTitle[book]}</li>`}).join('\n');
     
-        profileBookList.classList.add('add-overflow');
-
-        console.log('profileBookList = ', profileBookList, 'activeUser.bookList = ', activeUser.bookList, 'activeUser.cardStats.books =', activeUser.cardStats.books);
+    profileBookList.classList.add('add-overflow');        
 
     myProfileVisitNumber.textContent = activeUser.cardStats.visits;
     myProfileBonusNumber.textContent = activeUser.cardStats.bonuses;
@@ -278,20 +288,9 @@ function goMyProfileFoo(event) {
 
     cardCodeCopy.onclick = copyToClipboard(activeUser.cardCode);
 
-
     myProfilePopUp.style.display = 'flex';
     powerLayer.classList.remove('hidden-popup');
     openModalWindow(myProfilePopUp, 'myProfilePopUp');
-}
-
-function goBuyCard(event) {
-    event.stopImmediatePropagation();
-    
-    document.documentElement.scrollTop = '0px';
-    buyCardPopUp.style.display = 'flex';
-    powerLayer.classList.remove('hidden-popup');
-    openModalWindow(buyCardPopUp, 'buyCardPopUp');
-
 }
 
 function clearFields() {
