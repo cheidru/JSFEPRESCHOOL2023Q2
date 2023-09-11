@@ -19,6 +19,7 @@ const anyWhere = document.querySelector('body');
 // Check if body element has a scroll bar
 let anyWhereHasScrollBar = true;
 
+const mainWrapper = document.getElementById('main-wrapper');
 const profileIcon = document.getElementById('profile');
 const powerLayer = document.getElementById('power-layer');
 
@@ -72,7 +73,7 @@ anyWhere.addEventListener('click', (event) => {
                 event.target.parentElement.parentElement == activePopUp.obj ||
                 event.target.parentElement.parentElement.parentElement == activePopUp.obj ||
                 event.target.parentElement.parentElement.parentElement.parentElement == activePopUp.obj ||
-                (activePopUp.obj == myProfilePopUp && event.target.parentElement.parentElement.parentElement.parentElement.parentElement == myProfilePopUp)
+                ((activePopUp.obj == myProfilePopUp && event.target != powerLayer) && event.target.parentElement.parentElement.parentElement.parentElement.parentElement == myProfilePopUp)
                 ) &&
              !event.target.classList.contains('close-window-btn')) ||
              ( event.target == errorMessage || event.target.parentElement == errorMessage)
@@ -105,7 +106,7 @@ function openModalWindow(modal, name) {
     // Hide overflow to prevent window scroll down
     anyWhere.style.overflow = "hidden";
     // Add 15px padding to compensate scroll bar removing when overflow is hidden
-    anyWhere.style.paddingRight = "16px";
+    if(window.innerWidth !== document.documentElement.clientWidth) anyWhere.paddingRight = (window.innerWidth - document.documentElement.clientWidth) + "px";
     activePopUp.name = name;
     activePopUp.obj = modal;
 }
