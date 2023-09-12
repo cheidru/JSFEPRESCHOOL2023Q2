@@ -101,12 +101,15 @@ function closeModalWindow(modalWindow) {
 }
 
 function openModalWindow(modal, name) {
+    // Compensate scrollbar disappearance when overflow hidden on
+    let compensateScrollBarWidth = (window.innerWidth - document.documentElement.clientWidth) + 'px';
 
     modal.classList.remove('hidden-popup');
     // Hide overflow to prevent window scroll down
     anyWhere.style.overflow = "hidden";
-    // Add 15px padding to compensate scroll bar removing when overflow is hidden
-    if(window.innerWidth !== document.documentElement.clientWidth) anyWhere.paddingRight = (window.innerWidth - document.documentElement.clientWidth) + "px";
+    // Add padding to compensate scroll bar removing when overflow is hidden
+    anyWhere.style.paddingRight = compensateScrollBarWidth;
+
     activePopUp.name = name;
     activePopUp.obj = modal;
 }
