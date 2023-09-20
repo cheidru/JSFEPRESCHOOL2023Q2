@@ -102,3 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Local setting specific
+git.bat
+
+# Keep this gitignore for local
+.gitignore
