@@ -82,30 +82,31 @@ body {
 }
 
 #thumb-wrapper {
+    position: absolute;
     width: 30px;
     height: 80px;
 }
 
 #progress-bar-thumb {
     position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items:flex-start;
+    justify-content: center;
     top:0;
     left: 0;
     width: 30px;
-    border-top: 80px solid rgba(171, 229, 213, 0.5);
+    border-top: 60px solid rgba(171, 229, 213, 0.5);
     border-left: 10px solid transparent ;
     border-right: 10px solid transparent;
 }
 
 #thumb-needle {
-    display: block;
-    position: absolute;
-    top:0;
-    left: 50px;
-    height: 80px;
-    width: 30px;
-    margin: 0 auto;
-    color: red;
-    z-index: 99;
+    position: relative;
+    height: 60px;
+    width: 3px;
+    background-color: red;
+    transform: translateY(-60px);
 }
 
 [id$="-btn"] {
@@ -114,28 +115,27 @@ body {
     margin: 30px 0;
     border-radius: 15px;
     background-color: rgb(245, 240, 215);
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
     cursor: pointer;
 }
 
 #backward-btn {
     background-image:url('./assets/controls/backward.png');
-    background-size: 80%;
-    background-position: center;
-    background-repeat: no-repeat;
+
 }
 
 #forward-btn {
     background-image:url('./assets/controls/forward.png');
-    background-size: 80%;
-    background-position: center;
-    background-repeat: no-repeat;
 }
 
-#play-btn {
+.play {
     background-image:url('./assets/controls/play.png');
-    background-size: 80%;
-    background-position: center;
-    background-repeat: no-repeat;
+}
+
+.pause {
+    background-image:url('./assets/controls/pause.png');
 }
 
 #player-time {

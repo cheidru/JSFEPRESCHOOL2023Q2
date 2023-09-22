@@ -7,19 +7,20 @@ const songCover = document.getElementById('cover-img');
 const sliderThumb = document.getElementById('thumb-wrapper');
 const timeIndicator = document.getElementById('player-time');
 const sliderTrack = document.getElementById('progress-bar-track');
+const playTime = document.getElementById('player-time');
+const progressBarThumb = document.getElementById('thumb-wrapper');
+const progressBarLine = document.getElementById('progress-bar-track');
 
 let audioList = [{src: './assets/audio/beyonce.mp3', time: 3.53, img: './assets/img/lemonade.png'}, {src: './assets/audio/assets_audio_dontstartnow.mp3', time: 3.23, img: './assets/img/dontstartnow.png'}];
+let startPlayAt = 0;
+let thumbOffset = 0;
 
 audioTrack.src = audioList[0].src;
-console.log(audioTrack.src);
-
 audioTrack.number = 0;
 
-
-playBTN.addEventListener('click', (e) => {
-    console.log('play BTM clicked');
-    audioTrack.play();
-})
+playBTN.addEventListener('click', () => {
+    audioTrack.paused ? playLoops() : stopPlaying()
+});
 
 forwardBTN.addEventListener('click', (e) => {
     changeAudio();
@@ -30,101 +31,54 @@ backwardBTN.addEventListener('click', (e) => {
 })
 
 function changeAudio() {
+    let startPlayAt = 0;
     audioTrack.number = audioTrack.number == 0 ? 1 : 0;
     audioTrack.src = audioList[audioTrack.number].src;
     songCover.src = audioList[audioTrack.number].img;
-
-}
-
-function switchPlayPause () {
-
 }
 
 let playTimeFormat = function makePlayerTimeFormatString(trackPosition, durationRounded) {
     return `${Math.round(trackPosition)} / ${durationRounded}`;
 }
 
+function stopPlaying() {    
+    audioTrack.pause();
+    clearInterval(intervalsId);
+    startPlayAt = audioTrack.currentTime;
+    playBTN.classList.remove('pause');
+    playBTN.classList.add('play');
+}
 
-sliderMoveHandler(sliderThumb, sliderTrack, audioList[audioTrack.number].time, 0, undefined, timeIndicator, playTimeFormat);
+sliderMoveHandler(sliderThumb, sliderTrack, audioList[audioTrack.number].time, 0, 0, undefined, timeIndicator, playTimeFormat);
+// function sliderMoveHandler(thumbObject, trackObject, sliderMaxValue, thumbPosition, offsetKey, sliderHandlerFoo, valueDisplayObject, valueDisplayTextFormat)
 
+function playLoops() {
+    audioTrack.currentTime = startPlayAt;
+    playBTN.classList.remove('play');
+    playBTN.classList.add('pause');
+    audioTrack.play();
 
-function sliderMoveHandler(thumbObject, trackObject, sliderMaxValue, thumbPosition, offsetKey, sliderHandlerFoo, valueDisplayObject, valueDisplayTextFormat) {
-
-    // Initialise objects coordinates
-    let thumbOffset = (thumbObject.getBoundingClientRect().width / 2) * offsetKey;
-    let sliderUnit = trackObject.getBoundingClientRect().width / sliderMaxValue;
-    let thumbInitialPosition = thumbPosition.position == 0 ? 0 - thumbOffset : (thumbPosition.position * sliderUnit) - thumbOffset;
- 
-    let originX = trackObject.getBoundingClientRect().x;
-    console.log("sliderUnit: ", sliderUnit);
-
-    let trackPosition = 0;
-    let sliderMaxValueRounded = Math.round(sliderMaxValue);
-
-    // prevent default brauser action for drag'n'drop operation
-    thumbObject.ondragstart = () => false;
-    thumbObject.style.left = thumbInitialPosition + 'px';
-
-    // Listeners to control player thumb position when it is changed manually
-    thumbObject.onpointerdown = function(event) {
-
-        // prevent selection start (browser action)
-        // event.preventDefault();
-
-        // начать отслеживание перемещения указателя и переопределить их на ползунок
-        thumbObject.setPointerCapture(event.pointerId);
-
-        thumbObject.onpointermove = function(event) {
-
-                // if pointer movement should initiate other actions, anable the provided function
-                if (typeof sliderHandlerFoo !== 'undefined') sliderHandlerFoo(event);
-
-                let lineRightEnd = trackObject.getBoundingClientRect().right;
-                let startPosition = originX;
-    
-                if (event.pageX < startPosition) {
-                    thumbObject.style.left = 0 - thumbOffset + 'px';
-                    trackPosition = 0;
-                } else if (event.pageX > lineRightEnd) {
-                    // console.log("event.pageX, startPosition, lineRightEnd", event.pageX, startPosition, lineRightEnd);
-                    thumbObject.style.left = lineRightEnd - startPosition - thumbOffset  + 'px';
-                    trackPosition = durationRounded;
-                } else {
-                    thumbObject.style.left = event.pageX - startPosition - thumbOffset + 'px';
-                    trackPosition = (event.pageX - startPosition) / sliderUnit;
-                }
-                thumbPosition.position = trackPosition;
-                if (typeof valueDisplayObject !== 'undefined') valueDisplayObject.textContent = valueDisplayTextFormat(trackPosition, sliderMaxValueRounded);
-        }
-
-        thumbObject.onpointerup = () => {
-            thumbObject.onpointermove = null;
-            thumbObject.onpointerup = null;
-        }
-
-    }   
-    
-    trackObject.addEventListener('pointerdown', function(event) {
-        // if pointer movement should initiate other actions, anable the provided function
-        if (typeof sliderHandlerFoo !== 'undefined') sliderHandlerFoo(event);
-
-        let lineRightEnd = trackObject.getBoundingClientRect().right;
-        let startPosition = originX;
-
-        if (event.pageX < startPosition) {
-            thumbObject.style.left = originX - thumbOffset + 'px';
-            trackPosition = 0;
-        } else if (event.pageX > lineRightEnd) {
-            thumbObject.style.left = lineRightEnd - startPosition  + 'px';
-            trackPosition = durationRounded;
+    intervalsId = setInterval(() => {
+        // display current play time on screen
+        playTime.textContent = `${Math.round(audioTrack.currentTime)} / ${Math.round(audioTrack.duration)}`;
+        // move progress bar Thumb according to the current play time
+        let progressBarThumbPosition = audioTrack.currentTime/audioTrack.duration;
+          // console.log("startPlayAt:", startPlayAt);
+        if (progressBarThumbPosition < 1) {
+            // progressBarThumb.style.left = (audioTrack.currentTime / (audioTrack.duration / progressBarLine.getBoundingClientRect().width)) - thumbOffset + 'px';
+            progressBarThumb.style.transform = `translateX(${(audioTrack.currentTime / (audioTrack.duration / progressBarLine.getBoundingClientRect().width)) - thumbOffset}px)`;
+            console.log();
         } else {
-            thumbObject.style.left = event.pageX - startPosition - thumbOffset + 'px';
-            trackPosition = (event.pageX - startPosition) / sliderUnit;
-        }
-        // console.log("event.pageX, startPosition, originX, lineRightEnd", event.pageX, startPosition, originX, lineRightEnd);
-        if (typeof valueDisplayObject !== 'undefined') valueDisplayObject.textContent = valueDisplayTextFormat(trackPosition, sliderMaxValueRounded);
-        // aFile.currentTime = startPlayAt;
-        thumbPosition.position = trackPosition;
-    })
+            clearInterval(intervalsId);
+            playBTN.classList.remove('pause');
+            playBTN.classList.add('play');
 
+            progressBarThumb.style.left = 0 - thumbOffset + 'px';
+
+            // progressBarThumb.style.left = thumbInitialPosition - originX + 'px';
+            // startPlayAt = thumbInitialPosition * (audioTrack.duration / progressBarLine.getBoundingClientRect().width);
+            startPlayAt = 0;
+            playTime.textContent = `${Math.round(startPlayAt)} / ${Math.round(audioTrack.duration)}`;
+        }
+    }, 30);
 }
