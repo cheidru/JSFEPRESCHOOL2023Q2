@@ -1,0 +1,145 @@
+
+/* Reset defaults */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    height: 100vh;
+    width: 100vw;
+    background-image: url(./assets/img/mahagoni.jpg);
+}
+
+#main-wrapper {
+    display: flex;
+    flex-direction: column; 
+    height: 90%;
+    width: 70%;
+    padding: 40px;
+    padding-top: 20px;
+    gap: 20px;
+    border-radius: 20px;
+    background-image: url(./assets/img/nutwood.jpg); 
+}
+
+#top-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    justify-content:space-between;
+    gap: 50px;
+}
+
+#controls {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: auto;
+}
+
+.hidden-control {
+    display: none;
+}
+
+#screen {
+    flex-grow: 1;
+}
+
+#screen img {
+    width: auto;
+    height: 55vh;
+    border-radius: 30px;
+}
+
+#indication-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+#progress-bar-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+}
+
+#progress-bar-track {
+    position: relative;
+    width: 50vw;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 25px;
+    background-color: rgba(255, 249, 196, 0.873);
+    z-index: 1;
+}
+
+#thumb-wrapper {
+    position: absolute;
+    width: 30px;
+    height: 80px;
+}
+
+#progress-bar-thumb {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items:flex-start;
+    justify-content: center;
+    top:0;
+    left: 0;
+    width: 30px;
+    border-top: 60px solid rgba(171, 229, 213, 0.5);
+    border-left: 10px solid transparent ;
+    border-right: 10px solid transparent;
+}
+
+#thumb-needle {
+    position: relative;
+    height: 60px;
+    width: 3px;
+    background-color: red;
+    transform: translateY(-60px);
+}
+
+[id$="-btn"] {
+    width: 100px;
+    height: 100px;
+    margin: 30px 0;
+    border-radius: 15px;
+    background-color: rgb(245, 240, 215);
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+#backward-btn {
+    background-image:url('./assets/controls/backward.png');
+
+}
+
+#forward-btn {
+    background-image:url('./assets/controls/forward.png');
+}
+
+.play {
+    background-image:url('./assets/controls/play.png');
+}
+
+.pause {
+    background-image:url('./assets/controls/pause.png');
+}
+
+#player-time {
+    width:max-content;
+    font-size: 50px;
+    color: brown;
+}
