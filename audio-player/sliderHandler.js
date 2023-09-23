@@ -53,9 +53,7 @@ function sliderMoveHandler(thumbObject, trackObject, sliderMaxValue, thumbPositi
             thumbObject.onpointermove = null;
             thumbObject.onpointerup = null;
         }
-
     }
-
     
     trackObject.addEventListener('pointerdown', function(event) {
         // if pointer movement should initiate other actions, anable the provided function
