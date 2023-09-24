@@ -2,20 +2,18 @@
 function sliderMoveHandler(thumbObject, trackObject, sliderMaxValue, thumbPosition, offsetKey, sliderHandlerFoo, valueDisplayObject, valueDisplayTextFormat) {
 
     // Initialise objects coordinates
-    // let thumbOffset = (thumbObject.getBoundingClientRect().width / 2) * offsetKey;
-    let thumbOffset = 0;
+    let thumbOffset = Math.round((thumbObject.getBoundingClientRect().width / 2) * offsetKey);
     let sliderUnit = trackObject.getBoundingClientRect().width / sliderMaxValue;
-    let thumbInitialPosition = thumbPosition.position == 0 ? 0 - thumbOffset : (thumbPosition.position * sliderUnit) - thumbOffset;
+    let thumbInitialPosition = thumbPosition.position == 0 ? 0 : (thumbPosition.position * sliderUnit) - thumbOffset;
  
     let originX = trackObject.getBoundingClientRect().x;
-    console.log("sliderUnit: ", sliderUnit);
 
     let trackPosition = 0;
     let sliderMaxValueRounded = Math.round(sliderMaxValue);
 
     // prevent default brauser action for drag'n'drop operation
     thumbObject.ondragstart = () => false;
-    thumbObject.style.left = thumbInitialPosition + 'px';
+    thumbObject.style.transform = `translateX(${thumbInitialPosition}px)`;
 
     // Listeners to control player thumb position when it is changed manually
     thumbObject.onpointerdown = function(event) {
@@ -35,17 +33,17 @@ function sliderMoveHandler(thumbObject, trackObject, sliderMaxValue, thumbPositi
                 let startPosition = originX;
     
                 if (event.pageX < startPosition) {
-                    thumbObject.style.left = 0 - thumbOffset + 'px';
+                    thumbObject.style.transform = 'translateX(0px)';
                     trackPosition = 0;
-                } else if (event.pageX > lineRightEnd) {
-                    // console.log("event.pageX, startPosition, lineRightEnd", event.pageX, startPosition, lineRightEnd);
-                    thumbObject.style.left = lineRightEnd - startPosition - thumbOffset  + 'px';
-                    trackPosition = durationRounded;
+                } else if (event.pageX > lineRightEnd) {                    
+                    thumbObject.style.transform = `translateX(${trackObject.getBoundingClientRect().width - thumbOffset - 50}px)`
+                    trackPosition = audioList[audioTrack.number].time;
                 } else {
-                    thumbObject.style.left = event.pageX - startPosition - thumbOffset + 'px';
+                    thumbObject.style.transform = `translateX(${event.pageX - startPosition - thumbOffset}px)`;
                     trackPosition = (event.pageX - startPosition) / sliderUnit;
                 }
                 thumbPosition.position = trackPosition;
+                // console.log('startPlayAt.position = ', startPlayAt.position);
                 if (typeof valueDisplayObject !== 'undefined') valueDisplayObject.textContent = valueDisplayTextFormat(trackPosition, sliderMaxValueRounded);
         }
 
@@ -63,23 +61,24 @@ function sliderMoveHandler(thumbObject, trackObject, sliderMaxValue, thumbPositi
         let startPosition = originX;
 
         if (event.pageX < startPosition) {
-            thumbObject.style.left = originX - thumbOffset + 'px';
+            thumbObject.style.transform = `translateX(0px)`;
             trackPosition = 0;
         } else if (event.pageX > lineRightEnd) {
-            thumbObject.style.left = lineRightEnd - startPosition  + 'px';
-            trackPosition = durationRounded;
+            thumbObject.style.transform = `translateX(${lineRightEnd - startPosition}px)`;
+            trackPosition = audioList[audioTrack.number].time;
         } else {
-            thumbObject.style.left = event.pageX - startPosition - thumbOffset + 'px';
+            thumbObject.style.transform = `translateX(${event.pageX - startPosition - thumbOffset}px)`;
             trackPosition = (event.pageX - startPosition) / sliderUnit;
         }
         // console.log("event.pageX, startPosition, originX, lineRightEnd", event.pageX, startPosition, originX, lineRightEnd);
         if (typeof valueDisplayObject !== 'undefined') valueDisplayObject.textContent = valueDisplayTextFormat(trackPosition, sliderMaxValueRounded);
-        // aFile.currentTime = startPlayAt;
+        // audioTrack.currentTime = startPlayAt.position;
+        console.log('trackPosition =', trackPosition);
         thumbPosition.position = trackPosition;
     })
 
 }
 
 function stopPlayerWhenSliderClicked(event) {
-    if (!aFile.paused & event.target != playBTN) stopPlaying();
+    if (!audioTrack.paused & event.target != playBTN) stopPlaying();
 }

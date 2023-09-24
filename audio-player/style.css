@@ -134,6 +134,7 @@ body {
 
 #thumb-wrapper {
     position: absolute;
+    left: -15px;
     width: 30px;
     height: 80px;
 }
@@ -144,14 +145,13 @@ body {
     flex-direction: row;
     align-items:flex-start;
     justify-content: center;
-    top:0;
+    top:-20px;
     left: 0;
     width: 30px;
     border-top: 60px solid rgba(171, 229, 213, 0.5);
     border-left: 10px solid transparent ;
     border-right: 10px solid transparent;
     box-shadow: 40px 43px 16px -25px rgba(34, 60, 80, 0.22);
-
     cursor: pointer;
 }
 
@@ -165,9 +165,9 @@ body {
 
 #scale {
     position: absolute;
-    left: -10px;
+    left: 10px;
     top: 20px;
-    right: -10px;
+    right: 10px;
     bottom: 50px;
     background-image: linear-gradient(to left, transparent 80%, rgb(40, 40, 40) 80%);
     background-size: 8px;
@@ -208,9 +208,10 @@ body {
     padding: 0 10px;
     line-height: 100px;
     border-radius: 25px;
-    font-size: 50px;
+    font-size: 40px;
     color: brown;
     background-color: rgba(255, 249, 196);
+    box-shadow: -32px 34px 16px -21px rgba(34, 60, 80, 0.56) inset;
 }
 
 footer {
