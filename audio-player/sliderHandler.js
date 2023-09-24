@@ -36,14 +36,14 @@ function sliderMoveHandler(thumbObject, trackObject, sliderMaxValue, thumbPositi
                     thumbObject.style.transform = 'translateX(0px)';
                     trackPosition = 0;
                 } else if (event.pageX > lineRightEnd) {                    
-                    thumbObject.style.transform = `translateX(${trackObject.getBoundingClientRect().width - thumbOffset - 50}px)`
+                    thumbObject.style.transform = `translateX(${trackObject.getBoundingClientRect().width}px)`
                     trackPosition = audioList[audioTrack.number].time;
                 } else {
-                    thumbObject.style.transform = `translateX(${event.pageX - startPosition - thumbOffset}px)`;
+                    thumbObject.style.transform = `translateX(${event.pageX - startPosition}px)`;
                     trackPosition = (event.pageX - startPosition) / sliderUnit;
                 }
                 thumbPosition.position = trackPosition;
-                // console.log('startPlayAt.position = ', startPlayAt.position);
+
                 if (typeof valueDisplayObject !== 'undefined') valueDisplayObject.textContent = valueDisplayTextFormat(trackPosition, sliderMaxValueRounded);
         }
 
@@ -67,13 +67,13 @@ function sliderMoveHandler(thumbObject, trackObject, sliderMaxValue, thumbPositi
             thumbObject.style.transform = `translateX(${lineRightEnd - startPosition}px)`;
             trackPosition = audioList[audioTrack.number].time;
         } else {
-            thumbObject.style.transform = `translateX(${event.pageX - startPosition - thumbOffset}px)`;
+            thumbObject.style.transform = `translateX(${event.pageX - startPosition}px)`;
             trackPosition = (event.pageX - startPosition) / sliderUnit;
         }
-        // console.log("event.pageX, startPosition, originX, lineRightEnd", event.pageX, startPosition, originX, lineRightEnd);
+
         if (typeof valueDisplayObject !== 'undefined') valueDisplayObject.textContent = valueDisplayTextFormat(trackPosition, sliderMaxValueRounded);
         // audioTrack.currentTime = startPlayAt.position;
-        console.log('trackPosition =', trackPosition);
+
         thumbPosition.position = trackPosition;
     })
 

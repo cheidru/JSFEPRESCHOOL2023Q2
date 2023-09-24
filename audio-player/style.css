@@ -36,7 +36,7 @@
 body {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;  
     height: 100vh;
     width: 100vw;
@@ -46,10 +46,9 @@ body {
 #main-wrapper {
     display: flex;
     flex-direction: column; 
-    height: 90%;
-    width: 70%;
+    height: auto;
+    width: auto;
     padding: 40px;
-    padding-top: 20px;
     margin: 40px 0;
     gap: 20px;
     border-radius: 20px;
@@ -99,6 +98,21 @@ body {
     color: white;
 }
 
+#right-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    height: 100%;
+    padding: 20px 0;
+    justify-content: space-between;
+}
+
+#logo {
+    font-family: 'Inter Bold';
+    font-size: 3rem;
+    color: goldenrod;
+}
+
 #author {
     font-size: 2.5rem;    
 }
@@ -122,6 +136,9 @@ body {
 }
 
 #progress-bar-track {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
     position: relative;
     width: 50vw;
     height: 100px;
@@ -173,6 +190,29 @@ body {
     background-size: 8px;
 }
 
+#lyrics {
+    align-self: center;
+    font-family: 'Forum';
+    font-size: 1rem;
+    padding: 3px 20px;
+    margin-bottom: 10px;
+    border: 1px dashed black;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+#song-text {
+    visibility: hidden;
+    height: 100%;
+    cursor: pointer;
+}
+
+#lyrics:hover {
+    font-weight: bold;
+    transform: 0.5s;
+}
+
 [id$="-btn"] {
     width: 100px;
     height: 100px;
@@ -187,7 +227,6 @@ body {
 
 #backward-btn {
     background-image:url('./assets/controls/backward.png');
-
 }
 
 #forward-btn {
