@@ -77,10 +77,12 @@ playBTN.addEventListener('click', () => {
 
 forwardBTN.addEventListener('click', (e) => {
     changeAudio(1);
+    playLoops();
 })
 
 backwardBTN.addEventListener('click', (e) => {
     changeAudio(-1);
+    playLoops();
 })
 
 // lyricsBTN.addEventListener('dblclick', () => {
