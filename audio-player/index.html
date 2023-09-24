@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>audio-player</title>
+</head>
+<body>
+    <audio id="mymusic" src="./assets/audio/beyonce.mp3"></audio>
+
+    <div id="main-wrapper">
+        <div id="top-wrapper">
+            <div id="controls">
+                <div id="backward-btn"></div>
+                <div id="forward-btn"></div>
+                <div id="play-btn" class="play"></div>
+            </div>
+
+            <div id="screen">
+                <img id="cover-img" src="./assets/img/lemonade.png" alt="lemonade">
+            </div>
+
+            <div id="right-wrapper">
+                <div id="logo">Grandpa's<br> Retro Player</div>
+
+                <div id="audio-info">
+                    <div id="author"></div>
+                    <div id="song-name"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="indication-wrapper">
+            <div id="progress-bar-wrapper">
+                <div id="progress-bar-track">
+                    <div id="scale">
+                        <div id="thumb-wrapper">
+                            <div id="progress-bar-thumb">
+                                <div id="thumb-needle"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div id="lyrics">Double click to play lyrics
+                        <div id="song-text"></div>
+                    </div> -->
+                </div>
+            </div>
+            <div id="player-time">0 / 157</div>
+        </div>
+    </div>
+
+    <footer>
+        <div id="footer-wrapper">   
+            <p>2023</p>
+            <p><a href="https://github.com/cheidru">Igor Checheurov</a></p>
+            <div id="rsschool"><a href="https://rs.school/js-stage0/"><img src="./assets/img/rs_school_js.svg" alt=""></a></div>
+        </div> 
+    </footer>
+
+    <script src="./sliderHandler.js"></script>
+    <script src="./index.js"></script>
+
+
+</body>
+</html>
