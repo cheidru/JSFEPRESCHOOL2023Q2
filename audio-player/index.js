@@ -65,11 +65,13 @@ let thumbOffset = 0;
 
 let intervalsId = 0;
 audioTrack.number = 0;
-audioTrack.src = audioList[audioTrack.number].src;
+let durationRounded = 0;
+
 author.textContent = audioList[audioTrack.number].author;
 title.textContent = audioList[audioTrack.number].title;
 songCover.src = audioList[audioTrack.number].img;
-let durationRounded = Math.round(audioTrack.duration);
+durationRounded = audioList[audioTrack.number].time;
+audioTrack.src = audioList[audioTrack.number].src;
 
 playBTN.addEventListener('click', () => {
     audioTrack.paused ? playLoops() : stopPlaying()
@@ -102,12 +104,21 @@ function changeAudio(number) {
     songCover.src = audioList[audioTrack.number].img;
     author.textContent = audioList[audioTrack.number].author;
     title.textContent = audioList[audioTrack.number].title;
+    durationRounded = audioList[audioTrack.number].time;
     stopPlaying();
     startPlayAt.position = 0;
-    playTime.textContent = `0 / ${audioList[audioTrack.number].time}`;
+    playTime.textContent = `0 / ${durationRounded}`;
     progressBarThumb.style.transform = 'translateX(0)';
     
-    sliderMoveHandler(sliderThumb, progressBarTrack, audioList[audioTrack.number].time, startPlayAt, 1, stopPlayerWhenSliderClicked, timeIndicator, playTimeFormat);
+// Parameters function sliderMoveHandler(thumbObject, trackObject, sliderMaxValue, thumbPosition, offsetKey, sliderHandlerFoo, valueDisplayObject, valueDisplayTextFormat)    
+    sliderMoveHandler(sliderThumb, progressBarTrack, durationRounded, startPlayAt, 1, undefined, timeIndicator, playTimeFormat);
+}
+
+function stopPlayerWhenSliderClicked(event) {
+    if (!audioTrack.paused & event.target != playBTN) {
+        // stopPlaying();
+        // playLoops();
+    }
 }
 
 let playTimeFormat = function makePlayerTimeFormatString(trackPosition, durationRounded) {
@@ -122,22 +133,21 @@ function stopPlaying() {
     playBTN.classList.add('play');
 }
 
-sliderMoveHandler(sliderThumb, progressBarTrack, audioList[audioTrack.number].time, startPlayAt, 1, stopPlayerWhenSliderClicked, timeIndicator, playTimeFormat);
+sliderMoveHandler(sliderThumb, progressBarTrack, audioList[audioTrack.number].time, startPlayAt, 1, undefined, timeIndicator, playTimeFormat);
 
 function playLoops() {
-    audioTrack.currentTime = startPlayAt.position == audioTrack.duration ? 0 : startPlayAt.position;
+    audioTrack.currentTime = startPlayAt.position == audioList[audioTrack.number].time ? 0 : startPlayAt.position;
     playBTN.classList.remove('play');
     playBTN.classList.add('pause');
     audioTrack.play();
 
     intervalsId = setInterval(() => {
         // display current play time on screen
-        playTime.textContent = `${Math.round(audioTrack.currentTime)} / ${Math.round(audioTrack.duration)}`;
+        playTime.textContent = `${Math.round(audioTrack.currentTime)} / ${audioList[audioTrack.number].time}`;
         // move progress bar Thumb according to the current play time
-        let progressBarThumbPosition = audioTrack.currentTime/audioTrack.duration;
+        let progressBarThumbPosition = audioTrack.currentTime/audioList[audioTrack.number].time;
 
         if (progressBarThumbPosition < 1) {
-            // progressBarThumb.style.left = (audioTrack.currentTime / (audioTrack.duration / progressBarTrack.getBoundingClientRect().width)) - thumbOffset + 'px';
             progressBarThumb.style.transform = `translateX(${(progressBarThumbPosition * progressBarTrack.getBoundingClientRect().width)}px)`;
         } else {
             clearInterval(intervalsId);
@@ -145,7 +155,7 @@ function playLoops() {
             playBTN.classList.add('play');
             startPlayAt.position = 0;
             progressBarThumb.style.transform = 'translateX(0px)';
-            playTime.textContent = `${Math.round(startPlayAt.position)} / ${Math.round(audioTrack.duration)}`;
+            playTime.textContent = `${Math.round(startPlayAt.position)} / ${audioList[audioTrack.number].time}`;
         }
     }, 30);
 }
