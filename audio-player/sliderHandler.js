@@ -43,6 +43,7 @@ function sliderMoveHandler(thumbObject, trackObject, sliderMaxValue, thumbPositi
                     trackPosition = (event.pageX - startPosition) / sliderUnit;
                 }
                 thumbPosition.position = trackPosition;
+                audioTrack.currentTime = trackPosition;
 
                 if (typeof valueDisplayObject !== 'undefined') valueDisplayObject.textContent = valueDisplayTextFormat(trackPosition, sliderMaxValueRounded);
         }
@@ -75,10 +76,8 @@ function sliderMoveHandler(thumbObject, trackObject, sliderMaxValue, thumbPositi
         // audioTrack.currentTime = startPlayAt.position;
 
         thumbPosition.position = trackPosition;
+        audioTrack.currentTime = trackPosition;
     })
 
 }
 
-function stopPlayerWhenSliderClicked(event) {
-    if (!audioTrack.paused & event.target != playBTN) stopPlaying();
-}
