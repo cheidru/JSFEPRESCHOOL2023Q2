@@ -114,15 +114,18 @@ function changeAudio(number) {
     sliderMoveHandler(sliderThumb, progressBarTrack, durationRounded, startPlayAt, 1, undefined, timeIndicator, playTimeFormat);
 }
 
-function stopPlayerWhenSliderClicked(event) {
-    if (!audioTrack.paused & event.target != playBTN) {
-        // stopPlaying();
-        // playLoops();
-    }
-}
-
 let playTimeFormat = function makePlayerTimeFormatString(trackPosition, durationRounded) {
-    return `${Math.round(trackPosition)} / ${durationRounded}`;
+    // ToDo
+    // Add hours for real application if needed
+    const currentTime = Math.round(trackPosition);
+    const durationSeconds = durationRounded % 60;
+    const durationMinutes = Math.floor(durationRounded / 60);
+    const currentSeconds = currentTime % 60;
+    const currentMinutes = Math.floor(currentTime / 60);
+    const durationSecondsString = ('' + durationSeconds).length == 1 ? '0' + durationSeconds : '' + durationSeconds;
+    const currentSecondsString = ('' + currentSeconds).length == 1 ? '0' + currentSeconds : '' + currentSeconds;
+
+    return `${currentMinutes}:${currentSecondsString} / ${durationMinutes}:${durationSecondsString}`;
 }
 
 function stopPlaying() {    
@@ -143,7 +146,8 @@ function playLoops() {
 
     intervalsId = setInterval(() => {
         // display current play time on screen
-        playTime.textContent = `${Math.round(audioTrack.currentTime)} / ${audioList[audioTrack.number].time}`;
+        playTime.textContent = playTimeFormat(audioTrack.currentTime, audioList[audioTrack.number].time);
+        //  `${Math.round(audioTrack.currentTime)} / ${audioList[audioTrack.number].time}`;
         // move progress bar Thumb according to the current play time
         let progressBarThumbPosition = audioTrack.currentTime/audioList[audioTrack.number].time;
 
@@ -155,7 +159,8 @@ function playLoops() {
             playBTN.classList.add('play');
             startPlayAt.position = 0;
             progressBarThumb.style.transform = 'translateX(0px)';
-            playTime.textContent = `${Math.round(startPlayAt.position)} / ${audioList[audioTrack.number].time}`;
+            playTime.textContent = playTimeFormat(startPlayAt.position, udioList[audioTrack.number].time);
+            // playTime.textContent = `${Math.round(startPlayAt.position)} / ${audioList[audioTrack.number].time}`;
         }
     }, 30);
 }
