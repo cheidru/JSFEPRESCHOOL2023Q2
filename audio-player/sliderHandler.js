@@ -68,8 +68,8 @@ function sliderMoveHandler(thumbObject, trackObject, sliderMaxValue, thumbPositi
             thumbObject.style.transform = `translateX(${lineRightEnd - startPosition}px)`;
             trackPosition = audioList[audioTrack.number].time;
         } else {
-            thumbObject.style.transform = `translateX(${event.pageX - startPosition}px)`;
-            trackPosition = (event.pageX - startPosition) / sliderUnit;
+            thumbObject.style.transform = `translateX(${event.pageX - startPosition + thumbOffset}px)`;
+            trackPosition = (event.pageX - startPosition + thumbOffset) / sliderUnit;
         }
 
         if (typeof valueDisplayObject !== 'undefined') valueDisplayObject.textContent = valueDisplayTextFormat(trackPosition, sliderMaxValueRounded);
