@@ -84,11 +84,16 @@ body {
     height: 100%;
     justify-content: start;
     align-items: center;
+
 }
 
 #screen img {
+    height: auto;
+    width: auto;
     max-height: 100%;
-    border-radius: 30px;
+    max-width: 100%;
+    /* object-fit: contain; */
+    border-radius: 20px;
 }
 
 #audio-info {
@@ -355,8 +360,6 @@ footer a {
         font-size: 35px;
     }    
 }
-
-
 
 @media (max-width: 699px) {
     #main-wrapper {
