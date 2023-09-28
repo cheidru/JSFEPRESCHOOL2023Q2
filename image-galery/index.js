@@ -1,6 +1,35 @@
 const getPicBTN = document.querySelector('button');
-const picture = document.querySelector('img');
-const url = "https://api.unsplash.com/";
+const galleryCell = document.querySelectorAll('.gallery-item');
+const lastPicture = document.getElementById('item-9');
+const unsplashURL = "https://api.unsplash.com/photos/?client_id=kohkTo9ZcV19ZIATEKoz3NcmhVAUERsr5At0ENH2GQk";
+// const unsplashURL = "https://api.unsplash.com/";
+
+async function loadImage() {
+    try {
+        const response = await fetch(unsplashURL);
+        const data = await response.json();
+        console.log(data);
+        dispensePictures(data);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+getPicBTN.addEventListener('click', () => {
+    if (lastPicture.complete) loadImage();
+})
+
+window.addEventListener('load', () => {
+    loadImage();
+})
+
+function dispensePictures(data) {
+    console.log('dispensing pics')
+    for(let i = 0; i < 9; i++) {
+        console.log(galleryCell[i].style);
+        galleryCell[i].style.backgroundImage = `url(${data[i].links.download})`;
+    }
+}
 
 // we require the image URLs returned by the API to be directly 
 // used or embedded in your applications (generally referred to 
