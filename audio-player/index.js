@@ -16,18 +16,6 @@ const lyricsDisplay = document.getElementById('song-text');
 
 
 let audioList = [
-//     {src: './assets/audio/beyonce.mp3',
-//     time: 234,
-//     img: './assets/img/lemonade.png', 
-//     author: 'Beyoncé', 
-//     title: 'Don’t Hurt Yourself'
-//    },
-//    {src: './assets/audio/dont_start_now.mp3', 
-//     time: 203, 
-//     img: './assets/img/dontstartnow.png', 
-//     author: 'Dua Lipa', 
-//     title: 'Don’t Start Now'
-//    },
     {src: './assets/audio/doris_day-tic_tic__tic.mp3',
      time: 157,
      img: './assets/img/doris_day.jpg', 
@@ -147,22 +135,22 @@ function playLoops() {
     intervalsId = setInterval(() => {
         // display current play time on screen
         playTime.textContent = playTimeFormat(audioTrack.currentTime, audioList[audioTrack.number].time);
-        //  `${Math.round(audioTrack.currentTime)} / ${audioList[audioTrack.number].time}`;
         // move progress bar Thumb according to the current play time
         let progressBarThumbPosition = audioTrack.currentTime/audioList[audioTrack.number].time;
-
-        if (progressBarThumbPosition < 1) {
+        // Add 0.001 to avoid endless cycle because audioList[audioTrack.number].time manually set to integer
+        if ((progressBarThumbPosition + 0.001) < 1) {
             progressBarThumb.style.transform = `translateX(${(progressBarThumbPosition * progressBarTrack.getBoundingClientRect().width)}px)`;
         } else {
             clearInterval(intervalsId);
             playBTN.classList.remove('pause');
             playBTN.classList.add('play');
             startPlayAt.position = 0;
-            progressBarThumb.style.transform = 'translateX(0px)';
-            playTime.textContent = playTimeFormat(startPlayAt.position, udioList[audioTrack.number].time);
-            // playTime.textContent = `${Math.round(startPlayAt.position)} / ${audioList[audioTrack.number].time}`;
+            progressBarThumb.style.transform = 'translateX(0)';
+            playTime.textContent = playTimeFormat(startPlayAt.position, audioList[audioTrack.number].time);
         }
+        console.log('progressBarThumbPosition =', progressBarThumbPosition);
     }, 30);
+
 }
 
 audioList[0].lyrics = `
