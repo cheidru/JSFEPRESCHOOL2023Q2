@@ -4,6 +4,45 @@ const lastPicture = document.getElementById('item-9');
 const unsplashURL = "https://api.unsplash.com/photos/?client_id=kohkTo9ZcV19ZIATEKoz3NcmhVAUERsr5At0ENH2GQk";
 // const unsplashURL = "https://api.unsplash.com/";
 
+const altLocalImage = [
+    "a man standing next to a tent in the desert",
+    "a lone tree in the middle of a field at night",
+    "a scenic view of the ocean and a road",
+    "a table topped with figs and flowers on top of a cloth",
+    "a path through a grove of trees in a forest",
+    "a group of men standing next to each other",
+    "a road lined with lots of tall bamboo trees",
+    "a woman in a white dress and hat standing in tall grass",
+    "an aerial view of a road and a river",
+    "two old cars sitting in a field with the aurora in the background"
+];
+
+const localSmallImageSRC = [
+    "./assets/img/small/photo-0-small.jpg",
+    "./assets/img/small/photo-1-small.jpg",
+    "./assets/img/small/photo-2-small.jpg",
+    "./assets/img/small/photo-3-small.jpg",
+    "./assets/img/small/photo-4-small.jpg",
+    "./assets/img/small/photo-5-small.jpg",
+    "./assets/img/small/photo-6-small.jpg",
+    "./assets/img/small/photo-7-small.jpg",
+    "./assets/img/small/photo-8-small.jpg",
+    "./assets/img/small/photo-9-small.jpg"
+];
+
+const localThumbImageSRC = [
+    "./assets/img/thumb/photo-0-thumb.jpg",
+    "./assets/img/thumb/photo-1-thumb.jpg",
+    "./assets/img/thumb/photo-2-thumb.jpg",
+    "./assets/img/thumb/photo-3-thumb.jpg",
+    "./assets/img/thumb/photo-4-thumb.jpg",
+    "./assets/img/thumb/photo-5-thumb.jpg",
+    "./assets/img/thumb/photo-6-thumb.jpg",
+    "./assets/img/thumb/photo-7-thumb.jpg",
+    "./assets/img/thumb/photo-8-thumb.jpg",
+    "./assets/img/thumb/photo-9-thumb.jpg"
+];
+
 async function loadImage() {
     try {
         const response = await fetch(unsplashURL);
@@ -15,17 +54,25 @@ async function loadImage() {
     }
 }
 
+function loadLocalImage() {
+    for(let i = 0; i < 10; i++) {
+        galleryCell[i].src = localSmallImageSRC[i];
+        console.log(galleryCell[i].src);
+    }
+}
+
 getPicBTN.addEventListener('click', () => {
     if (lastPicture.complete) loadImage();
 })
 
 window.addEventListener('load', () => {
-    loadImage();
+    loadLocalImage();
+    // loadImage();
 })
 
 function dispensePictures(data) {
     console.log('dispensing pics')
-    for(let i = 0; i < 9; i++) {
+    for(let i = 0; i < 10; i++) {
         console.log(galleryCell[i].style);
         galleryCell[i].style.backgroundImage = `url(${data[i].links.download})`;
     }
