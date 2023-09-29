@@ -2,7 +2,8 @@ const getPicBTN = document.querySelector('button');
 const galleryCell = document.querySelectorAll('.gallery-item');
 const lastPicture = document.getElementById('item-9');
 const unsplashURL = "https://api.unsplash.com/photos/?client_id=kohkTo9ZcV19ZIATEKoz3NcmhVAUERsr5At0ENH2GQk";
-// const unsplashURL = "https://api.unsplash.com/";
+//  в запросе ?qwery=image&per_page=16 должно дать 16
+// по тегу image Выдост фото на разные темы
 
 const altLocalImage = [
     "a man standing next to a tent in the desert",
@@ -59,6 +60,14 @@ function loadLocalImage() {
         galleryCell[i].src = localSmallImageSRC[i];
         console.log(galleryCell[i].src);
     }
+}
+
+function imageDistribution(inputImgArray) {
+    let outputArray = [];
+    let totalWidth = inputImgArray.reduce((totalWidth, picture) => (totalWidth + picture.getBoundingClientRect.width), 0);
+
+    
+
 }
 
 getPicBTN.addEventListener('click', () => {

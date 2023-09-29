@@ -31,7 +31,22 @@ header {
     height: 10vh;
     width: 100%;
     padding: 30px 10px;
+    background-color: rgb(161, 161, 161);
 }
+
+#search-field {
+    width: 400px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+}
+
+#search-field::placeholder {
+    padding-left: 15px;
+    font-size: 20px;
+    color: rgb(175, 175, 175);
+}
+
 /* 
 #gallery-wrapper {
     display: grid;
@@ -69,12 +84,19 @@ header {
     background-color: burlywood;
     background-size: contain;
     background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.gallery-item:hover {
+    transform: scale(103%);
+    transition: 0.3s;
 }
 
 
 button {
-    padding: 5px 20px;
+    padding: 10px 30px;
     margin: 20px 0;
+    font-size: 20px;
 }
 
 footer {
