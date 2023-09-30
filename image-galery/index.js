@@ -58,7 +58,6 @@ async function loadImage() {
 function loadLocalImage() {
     for(let i = 0; i < 10; i++) {
         galleryCell[i].src = localSmallImageSRC[i];
-        console.log(galleryCell[i].src);
     }
 }
 
@@ -80,10 +79,8 @@ window.addEventListener('load', () => {
 })
 
 function dispensePictures(data) {
-    console.log('dispensing pics')
     for(let i = 0; i < 10; i++) {
-        console.log(galleryCell[i].style);
-        galleryCell[i].style.backgroundImage = `url(${data[i].links.download})`;
+        galleryCell[i].src  = data[i].urls.thumb;
     }
 }
 
