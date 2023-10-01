@@ -76,9 +76,10 @@ h1 {
 
 #search-field {
     appearance: none;
-    width: 400px;
+    width: 600px;
     height: 40px;
     padding-left: 45px;
+    padding-right: 45px;
     font-size: 20px;
     border: none;
     border-radius: 20px;
@@ -243,21 +244,18 @@ footer a {
     border-radius: 5px;
 }
 
-@media (max-width: 1700px) {    
-    #gallery-wrapper {
-        height: 1500px;
-    }    
+@media (max-width: 800px) {    
+    #search-field {
+        width: 50vw;
+    }
 }
 
-@media (max-width: 1400px) {    
-    #gallery-wrapper {
-        height: 1300px;
-    }    
-}
-
-
-@media (max-width: 1200px) {    
-    #gallery-wrapper {
-        height: 1100px;
-    }    
+@media (max-width: 800px) {    
+    h1 {
+        font-size: 30px;
+    }
+    
+    #footer-wrapper {
+        width: 100%;
+    }
 }
