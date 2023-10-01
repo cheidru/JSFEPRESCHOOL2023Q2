@@ -140,8 +140,8 @@ h1 {
 #blank-field::before {
     content: '';
     position: absolute;
-    top: 13.5px;
-    right: 4.5px;
+    top: 13px;
+    right: 4px;
     width: 20px;
     height: 4px;
     border-radius: 2px;
@@ -152,8 +152,8 @@ h1 {
 #blank-field::after {
     content: '';
     position: absolute;
-    top: 13.5px;
-    right: 4.5px;
+    top: 13px;
+    right: 4px;
     width: 20px;
     height: 4px;
     border-radius: 2px;
