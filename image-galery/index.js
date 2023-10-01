@@ -1,7 +1,17 @@
-const getPicBTN = document.querySelector('button');
 const galleryCell = document.querySelectorAll('.gallery-item');
-const lastPicture = document.getElementById('item-9');
-const unsplashURL = "https://api.unsplash.com/photos/?client_id=kohkTo9ZcV19ZIATEKoz3NcmhVAUERsr5At0ENH2GQk";
+const galleryWrapper = document.getElementById('gallery-wrapper');
+const lastPicture = document.getElementById('item-15');
+const searchField = document.getElementById('search-field');
+const frame = document.querySelector('body');
+const searchBTN = document.getElementById('magni-glass');
+const cancelBTN = document.getElementById('blank-field');
+
+const unsplashURL = "https://api.unsplash.com/photos/?client_id=kohkTo9ZcV19ZIATEKoz3NcmhVAUERsr5At0ENH2GQk&per_page=16";
+let searchString = "query=image"
+
+let windowGotLoaded = false;
+let searchEnabled = false;
+
 //  в запросе ?qwery=image&per_page=16 должно дать 16
 // по тегу image Выдост фото на разные темы
 
@@ -28,7 +38,13 @@ const localSmallImageSRC = [
     "./assets/img/small/photo-6-small.jpg",
     "./assets/img/small/photo-7-small.jpg",
     "./assets/img/small/photo-8-small.jpg",
-    "./assets/img/small/photo-9-small.jpg"
+    "./assets/img/small/photo-9-small.jpg",
+    "./assets/img/small/photo-10-small.jpg",
+    "./assets/img/small/photo-11-small.jpg",
+    "./assets/img/small/photo-12-small.jpg",
+    "./assets/img/small/photo-13-small.jpg",
+    "./assets/img/small/photo-14-small.jpg",
+    "./assets/img/small/photo-15-small.jpg"
 ];
 
 const localThumbImageSRC = [
@@ -41,12 +57,18 @@ const localThumbImageSRC = [
     "./assets/img/thumb/photo-6-thumb.jpg",
     "./assets/img/thumb/photo-7-thumb.jpg",
     "./assets/img/thumb/photo-8-thumb.jpg",
-    "./assets/img/thumb/photo-9-thumb.jpg"
+    "./assets/img/thumb/photo-9-thumb.jpg",
+    "./assets/img/thumb/photo-10-thumb.jpg",
+    "./assets/img/thumb/photo-11-thumb.jpg",
+    "./assets/img/thumb/photo-12-thumb.jpg",
+    "./assets/img/thumb/photo-13-thumb.jpg",
+    "./assets/img/thumb/photo-14-thumb.jpg",
+    "./assets/img/thumb/photo-15-thumb.jpg"
 ];
 
 async function loadImage() {
     try {
-        const response = await fetch(unsplashURL);
+        const response = await fetch(unsplashURL + '&' + searchString);
         const data = await response.json();
         console.log(data);
         dispensePictures(data);
@@ -56,106 +78,58 @@ async function loadImage() {
 }
 
 function loadLocalImage() {
-    for(let i = 0; i < 10; i++) {
-        galleryCell[i].src = localSmallImageSRC[i];
+    galleryWrapper.style.height = imageDistribution() + 'px';
+}
+
+function imageDistribution() {
+    let imgHeight = [];
+    for(let pic of galleryCell) {
+        imgHeight.push(parseInt(getComputedStyle(pic).height));
     }
+    let totalHeight = imgHeight.reduce((totalHeight, height) => (totalHeight + height + 20), 0);
+    console.log('totalHeight =', totalHeight);
+    return (totalHeight / 4) * 1.2
 }
 
-function imageDistribution(inputImgArray) {
-    let outputArray = [];
-    let totalWidth = inputImgArray.reduce((totalWidth, picture) => (totalWidth + picture.getBoundingClientRect.width), 0);
-
-    
-
+function renderLocalImg(foo) {
+    for(let i = 0; i < 16; i++) {
+        galleryCell[i].src = localThumbImageSRC[i];
+    }
+    lastPicture.onload = () => foo();
 }
-
-getPicBTN.addEventListener('click', () => {
-    if (lastPicture.complete) loadImage();
-})
-
-window.addEventListener('load', () => {
-    loadLocalImage();
-    // loadImage();
-})
 
 function dispensePictures(data) {
-    for(let i = 0; i < 10; i++) {
+    for(let i = 0; i < 16; i++) {
         galleryCell[i].src  = data[i].urls.thumb;
     }
 }
 
-// we require the image URLs returned by the API to be directly 
-// used or embedded in your applications (generally referred to 
-// as hotlinking https://help.unsplash.com/api-guidelines/guideline-hotlinking-images)
-// https://unsplash.com/documentation#dynamically-resizable-images
-//  By using our CDN and embedding the photo URLs in your application
+window.addEventListener('load', () => {
+    if(!windowGotLoaded) {
+    searchField.focus();
+    renderLocalImg(loadLocalImage);
+    windowGotLoaded = true;
+    }
+})
 
-// All requests receive the v1 version of the API. We encourage you to specifically 
-// request this via the Accept-Version header:
-// Accept-Version: v1
+window.addEventListener('resize', () => {
+    location.reload();
+})
 
-// HTTP Verbs
-// GET	- Retrieving resources.
-// POST	- Creating resources.
-// PUT	- Updating resources.
-// DELETE  - Deleting resources.
+searchField.addEventListener('input', () => {
+        console.log('search changed', searchField.value);
+    if(searchField.value.length > 0) {
+        searchEnabled = true;
+        frame.style.setProperty('--disabled-color', 'rgb(15, 174, 227)');
+        cancelBTN.style.display = 'block';
+    } else {
+        searchEnabled = false;
+        frame.style.setProperty('--disabled-color', 'darkgray');
+        cancelBTN.style.display = 'none';
+    }
+})
 
-// Error messages
-// If an error occurs, whether on the server or client side, 
-// the error message(s) will be returned in an errors array.
-// { "errors": ["Username is missing", "Password cannot be blank"] }
-
-// We use conventional HTTP response codes to indicate the success or 
-// failure of an API request.
-// Common Status Codes
-// 200 - OK	Everything worked as expected
-// 400 - Bad Request	The request was unacceptable, often due to missing a required parameter
-// 401 - Unauthorized	Invalid Access Token
-// 403 - Forbidden	Missing permissions to perform request
-// 404 - Not Found	The requested resource doesn’t exist
-// 500, 503	Something went wrong on our end
-
-// Authorization
-// akey: kohkTo9ZcV19ZIATEKoz3NcmhVAUERsr5At0ENH2GQk
-// Most actions can be performed without requiring authentication from a specific user.
-// For example, searching, fetching, or downloading a photo does not require a user to log in
-// To authenticate requests in this way, pass your application’s access key via the HTTP Authorization header:
-// Authorization: Client-ID YOUR_ACCESS_KEY
-//
-// You can also pass this value using a client_id query parameter:
-// https://api.unsplash.com/photos/?client_id=YOUR_ACCESS_KEY
-// Most Unsplash API applications use this form of authentication as it doesn't 
-// require users to login or join, and it's generally cacheable by our system, 
-// resulting in even faster response times.
-//
-// If only your access key is sent, attempting to perform non-public actions that require user authorization
-// will result in a 401 Unauthorized response.
-
-// If you’re building an API application which requires that responses be customized 
-// per user (i.e. have they liked a photo, fetch their private collections, etc.) or 
-// requires taking actions on behalf of users, then you’ll need to use the user authentication 
-// workflow to create individual user bearer tokens for authentication.
-// https://unsplash.com/documentation/user-authentication-workflow
-
-// Pagination
-// Requests that return multiple items (a list of photos, for example) will be paginated into pages 
-// of 10 items by default, up to a maximum of 30. The optional page and per_page query parameters 
-// can be supplied to define which page and the number of items per page to be returned, respectively.
-// If page is not supplied, the first page will be returned.
-// 
-// Additional pagination information is returned in the response headers:
-// Per-page and Total
-// The X-Per-Page and X-Total headers give the number of elements returned 
-// on each page and the total number of elements respectively.
-// 
-// URL’s for the first, last, next, and previous pages are supplied, if applicable. 
-// They are comma-separated and differentiated with a rel attribute.
-// For example, after requesting page 3 of the photo list:
-// 
-// Link: <https://api.unsplash.com/photos?page=1>; rel="first",
-// <https://api.unsplash.com/photos?page=2>; rel="prev",
-// <https://api.unsplash.com/photos?page=346>; rel="last",
-// <https://api.unsplash.com/photos?page=4>; rel="next"
-
-
-// https://unsplash.com/documentation#rate-limiting
+cancelBTN.addEventListener('click', () => {
+    searchField.value = '';   
+    cancelBTN.style.display = 'none'; 
+})
