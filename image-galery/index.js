@@ -9,26 +9,25 @@ const splashBOX = document.getElementById('splashBox');
 const powerLayer = document.getElementById('power-layer');
 
 
-const unsplashURL = "https://api.unsplash.com/photos/?client_id=kohkTo9ZcV19ZIATEKoz3NcmhVAUERsr5At0ENH2GQk&per_page=16";
+const unsplashURL = "https://api.unsplash.com/search/photos/?client_id=kohkTo9ZcV19ZIATEKoz3NcmhVAUERsr5At0ENH2GQk&per_page=16";
 let searchString = "query=image";
 
 let windowGotLoaded = false;
 let searchEnabled = false;
 let regularIMG = [];
 
+
+// https://api.unsplash.com/search/photos?query=london&per_page=16&client_id=kohkTo9ZcV19ZIATEKoz3NcmhVAUERsr5At0ENH2GQk`
+
+
 //  в запросе ?qwery=image&per_page=16 должно дать 16
 // по тегу image Выдост фото на разные темы
 
-async function loadImage() {
-    try {
-        const response = await fetch(unsplashURL + '&' + searchString);
-        console.log('request string =', unsplashURL + '&' + searchString);
+async function loadImage(codeWord) {
+        const response = await fetch(`https://api.unsplash.com/search/photos/?query=${codeWord}&per_page=16&client_id=kohkTo9ZcV19ZIATEKoz3NcmhVAUERsr5At0ENH2GQk`);
+        // const response = await fetch(unsplashURL + '&' + searchString);
         const data = await response.json();
-        console.log(data);
-        renderImg(data, resizeGalleryWrapper);
-    } catch (error) {
-        console.log(error);
-    }
+        renderImg(data.results, resizeGalleryWrapper);
 }
 
 function resizeGalleryWrapper() {
@@ -57,7 +56,7 @@ function renderImg(data, foo) {
 window.addEventListener('load', () => {
     if(!windowGotLoaded) {
     searchField.focus();
-    loadImage();
+    loadImage('image');
     windowGotLoaded = true;
     }
 })
@@ -88,10 +87,8 @@ searchBTN.addEventListener('click', () => {
 })
 
 function sendRequest() {
-    console.log('request sent');
     searchString = "query=" + searchField.value;
-    console.log('searchField.value =', searchField.value);
-    loadImage();
+    loadImage(searchString);
 }
 
 cancelBTN.addEventListener('click', () => {
