@@ -16,10 +16,6 @@ let windowGotLoaded = false;
 let searchEnabled = false;
 let regularIMG = [];
 
-
-// https://api.unsplash.com/search/photos?query=london&per_page=16&client_id=kohkTo9ZcV19ZIATEKoz3NcmhVAUERsr5At0ENH2GQk`
-
-
 //  в запросе ?qwery=image&per_page=16 должно дать 16
 // по тегу image Выдост фото на разные темы
 
@@ -31,7 +27,7 @@ async function loadImage(codeWord) {
 }
 
 function resizeGalleryWrapper() {
-    galleryWrapper.style.height = imageDistribution() + 'px';
+    if(parseInt(getComputedStyle(frame).width) > 783) galleryWrapper.style.height = imageDistribution() + 'px';
 }
 
 function imageDistribution() {
@@ -48,7 +44,6 @@ function renderImg(data, foo) {
     for(let i = 0; i < 16; i++) {
         galleryCell[i].src = data[i].urls.thumb;
         regularIMG[i] = data[i].urls.regular;
-        // galleryCell[i].src = localThumbImageSRC[i];
     }
     lastPicture.onload = () => foo();
 }
@@ -92,10 +87,11 @@ function sendRequest() {
 }
 
 cancelBTN.addEventListener('click', () => {
-    searchField.value = '';   
+    searchField.value = '';
+    searchEnabled = false;
+    frame.style.setProperty('--disabled-color', 'darkgray');
     cancelBTN.style.display = 'none'; 
 })
-
 galleryWrapper.addEventListener('click', (event) => {
     if(event.target.tagName == 'IMG') {
         console.log(event.target.id, powerLayer.style, splashBOX.style);
