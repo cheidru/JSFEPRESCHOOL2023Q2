@@ -124,17 +124,17 @@ h1 {
 #blank-field {
     display: none;
     position: absolute;
-    top: 5px;
-    right: 7px;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: darkgray;
+    top: 0;
+    right: 2px;
+    width: 40px;
+    height: 40px;
+    fill: darkgray;
+    stroke: white;
     cursor: pointer;
 }
 
 #blank-field:hover {
-    background-color: rgb(255, 37, 29);
+    fill: rgb(255, 37, 29);
 }
 
 #blank-field::before {
@@ -244,18 +244,26 @@ footer a {
     border-radius: 5px;
 }
 
-@media (max-width: 800px) {    
+@media (max-width: 800px) { 
+
     #search-field {
         width: 50vw;
     }
-}
 
-@media (max-width: 800px) {    
     h1 {
         font-size: 30px;
     }
     
     #footer-wrapper {
         width: 100%;
+    }
+
+    #gallery-wrapper {
+        height: 10000px;
+    }
+
+    .gallery-item {
+        width: 100%;
+        padding: 0;
     }
 }

@@ -92,10 +92,11 @@ function sendRequest() {
 }
 
 cancelBTN.addEventListener('click', () => {
-    searchField.value = '';   
+    searchField.value = '';
+    searchEnabled = false;
+    frame.style.setProperty('--disabled-color', 'darkgray');
     cancelBTN.style.display = 'none'; 
 })
-
 galleryWrapper.addEventListener('click', (event) => {
     if(event.target.tagName == 'IMG') {
         console.log(event.target.id, powerLayer.style, splashBOX.style);
