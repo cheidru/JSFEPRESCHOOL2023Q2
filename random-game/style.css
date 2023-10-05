@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    --main-width: 1000px;
 }
 
 body {
@@ -29,9 +30,28 @@ header {
     z-index: 2;
 }
 
+#score-display {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#coordinates {
+    width: 10rem;
+    height: 40px;
+    font-size: 1rem;
+    line-height: 2rem;
+    text-align: center;
+    color: cornflowerblue;
+    background-color: black;
+    border-radius: 5px;
+}
+
 main {
     display: flex;
-    width: 1000px;
+    width: var(--main-width);
     height: 80vh;
     padding: 20px;
     background-color: goldenrod;
@@ -120,7 +140,7 @@ footer a {
     justify-content: space-between;
     align-items: center;
     color: white;
-    width: 60%;
+    width: var(--main-width);
     margin: 0 auto;
     padding: 0;
     text-decoration: none;
