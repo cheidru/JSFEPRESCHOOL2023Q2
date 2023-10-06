@@ -68,7 +68,7 @@ main {
 #ball {
     position: absolute;
     bottom: 60px;
-    left: 60px;    
+    left: 40px;    
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -78,7 +78,7 @@ main {
 #launch-pad {
     position: absolute;
     bottom: 40px;
-    left: 40px;
+    left: 0;
     width: 100px;
     height: 20px;
     background-color:aqua;

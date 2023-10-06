@@ -6,7 +6,7 @@ const coord = document.getElementById('coordinates');
 let padPosition = {};
 padPosition.startX = pad.getBoundingClientRect().x;
 padPosition.actualX = pad.getBoundingClientRect().x;
-padPosition.endX = playField.getBoundingClientRect().x + playField.getBoundingClientRect().width - 40 - pad.getBoundingClientRect().width;
+padPosition.endX = playField.getBoundingClientRect().x + playField.getBoundingClientRect().width - pad.getBoundingClientRect().width;
 
 // function dragPad() {
 //     console.log('stopPropagation');
@@ -16,7 +16,9 @@ padPosition.endX = playField.getBoundingClientRect().x + playField.getBoundingCl
 
     // Listeners to control player thumb position when it is changed manually
     pad.onpointerdown = function(event) {
-    console.log('pointer down');
+        console.log('pointer down');
+        let pointerOffset = event.pageX - pad.getBoundingClientRect().x;
+        let ballOffset = event.pageX - ball.getBoundingClientRect().x;
         // prevent selection start (browser action)
         // event.preventDefault();
 
@@ -29,14 +31,15 @@ padPosition.endX = playField.getBoundingClientRect().x + playField.getBoundingCl
                 let startPosition = padPosition.startX;
                 let offset = pad.getBoundingClientRect().width / 2;
     
-                if (event.pageX < startPosition) {
+                if (event.pageX - pointerOffset < startPosition) {
                     pad.style.transform = 'translateX(0px)';
-                } else if (event.pageX > lineRightEnd) {                    
-                    pad.style.transform = `translateX(${lineRightEnd}px)`
-                    console.log('pad.style.transform =', pad.style.transform);
+                    ball.style.transform = 'translateX(0px)';
+                } else if (event.pageX - pointerOffset > lineRightEnd) {                    
+                    pad.style.transform = `translateX(${lineRightEnd - startPosition}px)`;
+                    ball.style.transform = `translateX(${lineRightEnd - startPosition}px)`;
                 } else {
                     pad.style.transform = `translateX(${event.pageX - startPosition - offset}px)`;
-                    console.log('pad X', pad.getBoundingClientRect().x);
+                    ball.style.transform = `translateX(${event.pageX - startPosition - offset}px)`;
                 }
                 coord.textContent = pad.getBoundingClientRect().x;
                 console.log('event.pageX =', event.pageX, 'lineRightEnd =', lineRightEnd, 'startPosition =', startPosition);
