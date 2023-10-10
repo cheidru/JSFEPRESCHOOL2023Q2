@@ -50,11 +50,34 @@ header {
 }
 
 main {
+    position: relative;
     width: calc(var(--main-width) + 80px) ;
     height: 80vh;
     margin: 0 auto;
     padding: 20px;
     /* background-color: goldenrod; */
+}
+
+#power-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100vw;
+    background-color: rgba(28, 95, 72, 0.5);
+    z-index: 1;
+}
+
+#popup {
+    position: relative;
+    width: 350px;
+    height: 200px;
+    background-color: bisque;
+    border-color: 2px solid rgb(192, 192, 141);
+    z-index: 2;
 }
 
 #play-field-wrapper {
@@ -78,11 +101,22 @@ main {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    gap: 15%;
+    justify-content: space-between;
     width: 70%;
     height: 100%;
-    padding: 20px;
+    padding: 20px 40px;
+}
+
+.color-box .color {
+    background-color: gray;
+}
+
+.result-color {
+    background-color: goldenrod;
+}
+
+.result-place {
+    background-color: wheat;
 }
 
 #palette {
@@ -101,7 +135,7 @@ main {
     width: 60px;
     height: 60px;
     border-radius: 10px;
-    border: 2px solid white;
+    border: 2px solid yellowgreen;
     background-color: green;
 }
 
@@ -173,7 +207,7 @@ main {
     cursor: pointer;
 } */
 
-#power-layer {
+/* #power-layer {
     display: none;
     position: fixed;
     align-items: center;
@@ -184,7 +218,7 @@ main {
     height: 100vh;
     background-color:rgba(0, 0, 0, 0.8);
     z-index: 2;
-}
+} */
 
 
 #splashBox {
