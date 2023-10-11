@@ -7,31 +7,38 @@
     <title>Document</title>
 </head>
 <body>
+    <div id="power-layer">
+        <div id="popup"></div>
+    </div>
+
     <header>
+        <h1>Master Mind</h1>
         <div id="score-display">
-            <h1>Master Mind</h1>
-            <div id="attempts"></div>
+            <div id="statistics"></div>
+            <div id="secret-code">
+                <div class="color" id="secret-color-1"></div>
+                <div class="color" id="secret-color-2"></div>
+                <div class="color" id="secret-color-3"></div>
+                <div class="color" id="secret-color-4"></div>
+                <div class="color" id="secret-color-5"></div>
+                <div class="color" id="secret-color-6"></div>
+            </div>
+            <div id="settings"></div>
         </div>
     </header>
 
     <main>
-        <div id="power-layer">
-            <div id="popup"></div>
-        </div>
-
-
         <div id="play-field-wrapper">
             <!-- <div class="hidden" id="secret-code">
                 <div class="color" id="secret-num1"></div>
             </div> -->
+            <div id="start-button">Start playing</div>
             
             <div id="palette">
                 <div class="palette-color-box" id="palette-1"></div>
                 <div class="palette-color-box" id="palette-2"></div>
                 <div class="palette-color-box" id="palette-3"></div>
                 <div class="palette-color-box" id="palette-4"></div>
-                <div class="palette-color-box" id="palette-5"></div>
-                <div class="palette-color-box" id="palette-6"></div>
             </div>
 
             <div id="field">

@@ -38,6 +38,22 @@ header {
     align-items: center;
 }
 
+#secret-code {
+    display: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 10px;
+    padding: 10px 20px;
+    background-color:deepskyblue;
+    border-radius: 10px;
+    border: 2px solid white;
+}
+
+#secret-code .color {
+    display: none;
+}
+
 #attempts {
     width: 10rem;
     height: 40px;
@@ -67,7 +83,7 @@ main {
     justify-content: center;
     height: 100%;
     width: 100vw;
-    background-color: rgba(28, 95, 72, 0.5);
+    background-color: rgba(28, 55, 95, 0.8);
     z-index: 1;
 }
 
@@ -90,6 +106,24 @@ main {
     overflow: hidden;
 }
 
+#start-button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 100px;
+    font-size: 30px;
+    color: tomato;
+    background-color: bisque;
+    border-color: 2px solid rgb(192, 192, 141);
+    border-radius: 10px;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
 .color {
     width: 40px;
     height: 40px;
@@ -108,7 +142,9 @@ main {
 }
 
 .color-box .color {
+    display: none;
     background-color: gray;
+    cursor: pointer;
 }
 
 .result-color {
@@ -125,18 +161,20 @@ main {
     align-items: center;
     justify-content: center;
     height: 100%;
-    width: auto;
+    width: 100px;
     gap: 40px;
     padding: 20px;
     background-color: gray;
 }
 
 .palette-color-box {
+    display: none;
     width: 60px;
     height: 60px;
     border-radius: 10px;
     border: 2px solid yellowgreen;
     background-color: green;
+    cursor: pointer;
 }
 
 #field {
@@ -151,7 +189,7 @@ main {
 }
 
 .attempt {
-    display: flex;
+    display: none;
     flex-direction: row;
     align-items: center;
     justify-content:center;
