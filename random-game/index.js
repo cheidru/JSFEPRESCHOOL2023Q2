@@ -10,6 +10,7 @@ const resultPlace = document.querySelectorAll('.result-place');
 const secretCodeDisplay = document.getElementById('secret-code');
 const secretColors = document.querySelectorAll('#secret-code > .color');
 const startBTN = document.getElementById('start-button');
+const checkBTN = document.getElementById('check-button');
 
 const player = {};
 player.level = 0;
@@ -18,26 +19,75 @@ player.games = 0;
 player.visits = 0;
 player.selectedPalette = 1;
 
-const gameLevel = [
-    {colors: 2, positions: 4},
-    {colors: 3, positions: 4},
-    {colors: 4, positions: 4},
-    {colors: 4, positions: 5},
-    {colors: 4, positions: 6}
-];
-
 const colorPalette = [
     ['white', 'black'],
     ['OrangeRed', 'DeepPink', 'BlueViolet', 'LimeGreen']];
+
+const gameLevel = [
+    {colors: 2, positions: 4, palette: colorPalette[0]},
+    {colors: 3, positions: 4, palette: colorPalette[1]},
+    {colors: 4, positions: 4, palette: colorPalette[1]},
+    {colors: 4, positions: 5, palette: colorPalette[1]},
+    {colors: 4, positions: 6, palette: colorPalette[1]}
+];
+
 
 const selectedLevel = player.level;
 
 // This is the code to puzzle out
 let secretCode = [];
+let yourChoice = [];
 let gamePalette = []; // Random selection of colors to code later on
-let paintWithColor = '';
+let paintWithColor = {};
+let attemptIndex = 0;
 
-startBTN.addEventListener('click', () => gameIni());
+startBTN.addEventListener('click', () => {
+    startBTN.style.display = 'none';
+    gameIni();});
+
+checkBTN.addEventListener('click', () => {
+    let placeMatch = 0;
+    let colorMatch = 0;
+    let remainingCodeColors = [];
+    let remainingChoiceColors = [];
+
+    // Check for color & place match
+    for (let i = 0; i < secretCode.length; i++) {
+        if (secretCode[i] == yourChoice[i]) {
+            placeMatch++
+            continue;
+        }
+        remainingCodeColors.push(secretCode[i]);
+        remainingChoiceColors.push(yourChoice[i]);
+    }
+    resultPlace[attemptIndex].textContent = placeMatch;
+
+    // Check for color match
+    let remainingCodeColorsSet = new Set(remainingCodeColors);
+    let remainingChoiceColorsSet = new Set(remainingChoiceColors);
+    let remainingCodeColorsQty = {};
+
+    // define number of the same color in code
+    for(let color of remainingCodeColorsSet) {
+        remainingCodeColorsQty[color] = remainingCodeColors.reduce((sum, item) => {if(item == color)  sum++; return sum;}, 0);
+        console.log('color =', color, 'remainingCodeColorsQty[color] =', remainingCodeColorsQty[color], 'remainingCodeColorsSet =', remainingCodeColorsSet, 'remainingCodeColors =', remainingCodeColors);
+    }
+
+    // define number of choices of the same color
+    let thisColorMatches = 0;
+    for(let color of remainingChoiceColorsSet) {
+        let qty = remainingChoiceColors.reduce((sum, item) => {if(item == color) sum++; return sum}, 0);
+
+        if(remainingCodeColorsQty[color]) {
+            thisColorMatches = remainingCodeColorsQty[color] >= qty ? qty : remainingCodeColorsQty[color];
+        }
+        colorMatch += thisColorMatches;
+
+        console.log('color =', color, 'remainingCodeColorsQty =', remainingCodeColorsQty, 'qty =', qty);
+
+    }
+    resultColor[attemptIndex].textContent = colorMatch;
+})
 
 function gameIni() {
     // fill in palette with colors
@@ -50,7 +100,7 @@ function gameIni() {
     }
 
     // fill in colorBox with empty colors
-    attempt[0].style.display = 'flex';
+    attempt[attemptIndex].style.display = 'flex';
     for (let i = 0; i < gameLevel[selectedLevel].positions; i++) {
         color[i].style.display = 'block';
     }
@@ -62,10 +112,9 @@ function gameIni() {
     secretCodeDisplay.style.display = 'flex';
     for (let i = 0; i < secretCode.length; i++) {
         secretColors[i].style.display = 'block';
-        secretColors[i].style.backgroundColor = colorPalette[selectedLevel][secretCode[i]];
+        secretColors[i].style.backgroundColor = secretCode[i];
     }
 
-    startBTN.style.display = 'none';
     if (player.visits == 0) playDemo();
 
     // show Player settings and stat (and secret code in design ver)
@@ -76,17 +125,32 @@ function codeGenerator() {
         // Getting a random number between two values
         // Math.random() * (max - min) + min
         // value is equal or no lower than min and less than max
-        secretCode[i] = Math.floor(Math.random() * gameLevel[selectedLevel].colors)
+        secretCode[i] = gameLevel[selectedLevel].palette[Math.floor(Math.random() * gameLevel[selectedLevel].colors)];
     }
 }
 
 function playDemo() {};
 
 palette.addEventListener('click', (event) => {
+    if (!event.target.classList.contains('palette-color-box')) return;
 
-    event.target.style.border = '5px solid red';
-    paintWithColor = gamePalette[event.target.id[8] - 1];
-    console.log(event.target, paintWithColor);
+    let newColor = gamePalette[event.target.id[8] - 1];
+    if (paintWithColor.color == newColor) return;
+
+    if (paintWithColor.object !== undefined) paintWithColor.object.style.border = 'none';
+
+    paintWithColor.object = event.target;
+    paintWithColor.object.style.border = '5px solid red';
+    paintWithColor.color = newColor;
+    // console.log(event.target, paintWithColor);
+})
+
+colorBox[attemptIndex].addEventListener('click', (event) => {
+    if (!event.target.classList.contains('color')) return;
+    event.target.style.backgroundColor = paintWithColor.color;
+    yourChoice[event.target.id[6] - 1] = paintWithColor.color;
+    
+    if (yourChoice.length == secretCode.length) checkBTN.style.display = 'flex';
 })
 
 

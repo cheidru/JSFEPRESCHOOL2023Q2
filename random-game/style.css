@@ -106,22 +106,26 @@ main {
     overflow: hidden;
 }
 
-#start-button {
+[id$="-button"] {
     position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
     top: 50%;
     left: 50%;
-    width: 200px;
     height: 100px;
+    width: 200px;
     font-size: 30px;
     color: tomato;
     background-color: bisque;
-    border-color: 2px solid rgb(192, 192, 141);
     border-radius: 10px;
     transform: translate(-50%, -50%);
     cursor: pointer;
+}
+
+#check-button {
+    display: none;
+    width: 300px;
 }
 
 .color {
@@ -147,11 +151,19 @@ main {
     cursor: pointer;
 }
 
-.result-color {
+.result-place {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
     background-color: goldenrod;
 }
 
-.result-place {
+.result-color {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
     background-color: wheat;
 }
 
@@ -172,8 +184,6 @@ main {
     width: 60px;
     height: 60px;
     border-radius: 10px;
-    border: 2px solid yellowgreen;
-    background-color: green;
     cursor: pointer;
 }
 
