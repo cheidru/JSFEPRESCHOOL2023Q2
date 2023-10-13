@@ -1,12 +1,14 @@
 const palette = document.getElementById('palette');
-const paletteColorBox = document.querySelectorAll('.palette-color-box');
-const attempt = document.querySelectorAll('.attempt');
-const attemptNumber = document.querySelectorAll('.attempt-number');
-const colorBox = document.querySelectorAll('.color-box');
-const color = document.querySelectorAll('.color-box > .color');
-const resultBox = document.querySelectorAll('.attempt-result-box');
-const resultColor = document.querySelectorAll('.result-color');
-const resultPlace = document.querySelectorAll('.result-place');
+let paletteColorBox = document.querySelectorAll('.palette-color-box');
+const playField = document.getElementById('field');
+let attempt = document.querySelectorAll('.attempt');
+let attemptNumber = document.querySelectorAll('.attempt-number');
+let colorBox = document.querySelectorAll('.color-box');
+let color = document.querySelectorAll('.color-box > .color');
+let resultBox = document.querySelectorAll('.attempt-result-box');
+let resultColor = document.querySelectorAll('.result-color');
+let resultPlace = document.querySelectorAll('.result-place');
+let shutter = document.querySelectorAll('.shutter');
 const secretCodeDisplay = document.getElementById('secret-code');
 const secretColors = document.querySelectorAll('#secret-code > .color');
 const startBTN = document.getElementById('start-button');
@@ -31,7 +33,6 @@ const gameLevel = [
     {colors: 4, positions: 6, palette: colorPalette[1]}
 ];
 
-
 const selectedLevel = player.level;
 
 // This is the code to puzzle out
@@ -39,55 +40,100 @@ let secretCode = [];
 let yourChoice = [];
 let gamePalette = []; // Random selection of colors to code later on
 let paintWithColor = {};
-let attemptIndex = 0;
+let currentAttemptNumber = 0;
 
 startBTN.addEventListener('click', () => {
     startBTN.style.display = 'none';
     gameIni();});
 
 checkBTN.addEventListener('click', () => {
-    let placeMatch = 0;
-    let colorMatch = 0;
-    let remainingCodeColors = [];
-    let remainingChoiceColors = [];
-
+    let check = {};
+    check.placeMatch = 0;
+    check.colorMatch = 0;
+    check.remainingCodeColors = [];
+    check.remainingChoiceColors = [];
     // Check for color & place match
+    placeMatchCheck(check);
+    // Check for color match
+    colorMatchCheck(check);
+    // Show results
+    resultPlace[currentAttemptNumber].textContent = check.placeMatch;
+    resultColor[currentAttemptNumber].textContent = check.colorMatch;
+    // Lock current attempt and create new attempt
+    startNewAttempt();
+});
+
+function placeMatchCheck(check) {
     for (let i = 0; i < secretCode.length; i++) {
         if (secretCode[i] == yourChoice[i]) {
-            placeMatch++
+            check.placeMatch++
             continue;
         }
-        remainingCodeColors.push(secretCode[i]);
-        remainingChoiceColors.push(yourChoice[i]);
+        check.remainingCodeColors.push(secretCode[i]);
+        check.remainingChoiceColors.push(yourChoice[i]);
     }
-    resultPlace[attemptIndex].textContent = placeMatch;
+}
 
-    // Check for color match
-    let remainingCodeColorsSet = new Set(remainingCodeColors);
-    let remainingChoiceColorsSet = new Set(remainingChoiceColors);
+function colorMatchCheck(check) {    
+    let remainingCodeColorsSet = new Set(check.remainingCodeColors);
+    let remainingChoiceColorsSet = new Set(check.remainingChoiceColors);
     let remainingCodeColorsQty = {};
-
     // define number of the same color in code
     for(let color of remainingCodeColorsSet) {
-        remainingCodeColorsQty[color] = remainingCodeColors.reduce((sum, item) => {if(item == color)  sum++; return sum;}, 0);
-        console.log('color =', color, 'remainingCodeColorsQty[color] =', remainingCodeColorsQty[color], 'remainingCodeColorsSet =', remainingCodeColorsSet, 'remainingCodeColors =', remainingCodeColors);
+        remainingCodeColorsQty[color] = check.remainingCodeColors.reduce((sum, item) => {if(item == color)  sum++; return sum;}, 0);
     }
-
     // define number of choices of the same color
     let thisColorMatches = 0;
     for(let color of remainingChoiceColorsSet) {
-        let qty = remainingChoiceColors.reduce((sum, item) => {if(item == color) sum++; return sum}, 0);
-
+        let qty = check.remainingChoiceColors.reduce((sum, item) => {if(item == color) sum++; return sum}, 0);
         if(remainingCodeColorsQty[color]) {
             thisColorMatches = remainingCodeColorsQty[color] >= qty ? qty : remainingCodeColorsQty[color];
         }
-        colorMatch += thisColorMatches;
-
-        console.log('color =', color, 'remainingCodeColorsQty =', remainingCodeColorsQty, 'qty =', qty);
-
+        check.colorMatch += thisColorMatches;
     }
-    resultColor[attemptIndex].textContent = colorMatch;
-})
+}
+
+function startNewAttempt() {    
+    checkBTN.style.display = 'none';
+    // Remove cursor:pointer from complete attempt
+    for (let child of attempt[currentAttemptNumber].children) {
+        child.style.cursor = 'default';
+    }
+    shutter[currentAttemptNumber].style.display = 'block';
+
+    let newAttempt = attempt[currentAttemptNumber].cloneNode(true); // clone with all inner elements
+    playField.prepend(newAttempt);
+    
+    attempt = document.querySelectorAll('.attempt');
+    attemptNumber = document.querySelectorAll('.attempt-number');
+    colorBox = document.querySelectorAll('.color-box');
+    color = document.querySelectorAll('.color-box > .color');
+    resultBox = document.querySelectorAll('.attempt-result-box');
+    resultPlace = document.querySelectorAll('.result-place');
+    resultColor = document.querySelectorAll('.result-color');
+    shutter = document.querySelectorAll('.shutter');
+
+    currentAttemptNumber++;
+    shutter[currentAttemptNumber].style.display = 'none';
+    attemptNumber[currentAttemptNumber].textContent = currentAttemptNumber + 1;
+    resultPlace[currentAttemptNumber].textContent = '';
+    resultColor[currentAttemptNumber].textContent = '';
+    attempt[currentAttemptNumber].style.order = currentAttemptNumber-1;
+    attempt[currentAttemptNumber-1].style.order = currentAttemptNumber;
+
+
+
+    // for (col in colorBox[currentAttemptNumber]) {
+    //     console.log('colorBox[currentAttemptNumber] = ', colorBox[currentAttemptNumber], 'col.style =', col.style);
+    //     col.style.backgroundColor = 'unset'
+    // };
+
+
+    // Show new attempt
+
+
+
+}
 
 function gameIni() {
     // fill in palette with colors
@@ -100,7 +146,7 @@ function gameIni() {
     }
 
     // fill in colorBox with empty colors
-    attempt[attemptIndex].style.display = 'flex';
+    attempt[currentAttemptNumber].style.display = 'flex';
     for (let i = 0; i < gameLevel[selectedLevel].positions; i++) {
         color[i].style.display = 'block';
     }
@@ -142,81 +188,14 @@ palette.addEventListener('click', (event) => {
     paintWithColor.object = event.target;
     paintWithColor.object.style.border = '5px solid red';
     paintWithColor.color = newColor;
-    // console.log(event.target, paintWithColor);
 })
 
-colorBox[attemptIndex].addEventListener('click', (event) => {
+let numOfChoices = 0;
+colorBox[currentAttemptNumber].addEventListener('click', (event) => {
     if (!event.target.classList.contains('color')) return;
     event.target.style.backgroundColor = paintWithColor.color;
     yourChoice[event.target.id[6] - 1] = paintWithColor.color;
-    
-    if (yourChoice.length == secretCode.length) checkBTN.style.display = 'flex';
+    numOfChoices ++;
+    console.log('numOfChoices =', numOfChoices);
+    if (numOfChoices == secretCode.length) checkBTN.style.display = 'flex';
 })
-
-
-// let padPosition = {};
-// padPosition.startX = pad.getBoundingClientRect().x;
-// padPosition.actualX = pad.getBoundingClientRect().x;
-// padPosition.endX = playField.getBoundingClientRect().x + playField.getBoundingClientRect().width - pad.getBoundingClientRect().width;
-
-// let gameRunning = false;
-
-// body.addEventListener('keydown', (event) => {
-//     if (event.target == "Enter" && !gameRunning) startGame();
-// })
-
-// body.addEventListener('dblclick', (event) => {
-//     if (!gameRunning) startGame();
-// })
-
-// function startGame() {
-//     // ball moving 45 deg up to the right
-//     // pad can move
-//     // ball hits a wall and change direction
-//     // when getting to the bottom line, ball
-//     // eithe hits the pad and change direction
-//     // or fall down and disappear
-// }
-
-// // function dragPad() {
-// //     console.log('stopPropagation');
-
-//     // pad.ondragstart = () => false;
-//     // pad.style.transform = `translateX(${padPosition.startX}px)`;
-
-//     // Listeners to control player thumb position when it is changed manually
-//     pad.onpointerdown = function(event) {
-//         console.log('pointer down');
-//         let pointerOffset = event.pageX - pad.getBoundingClientRect().x;
-//         let ballOffset = event.pageX - ball.getBoundingClientRect().x;
-//         // prevent selection start (browser action)
-//         // event.preventDefault();
-
-//         // начать отслеживание перемещения указателя и переопределить их на ползунок
-//         pad.setPointerCapture(event.pointerId);
-
-//         pad.onpointermove = function(event) {
-//             console.log('pointer move');
-//                 let lineRightEnd = padPosition.endX;
-//                 let startPosition = padPosition.startX;
-//                 let offset = pad.getBoundingClientRect().width / 2;
-    
-//                 if (event.pageX - pointerOffset < startPosition) {
-//                     pad.style.transform = 'translateX(0px)';
-//                     if (!gameRunning) ball.style.transform = 'translateX(0px)';
-//                 } else if (event.pageX - pointerOffset > lineRightEnd) {                    
-//                     pad.style.transform = `translateX(${lineRightEnd - startPosition}px)`;
-//                     if (!gameRunning) ball.style.transform = `translateX(${lineRightEnd - startPosition}px)`;
-//                 } else {
-//                     pad.style.transform = `translateX(${event.pageX - startPosition - offset}px)`;
-//                     if (!gameRunning) ball.style.transform = `translateX(${event.pageX - startPosition - offset}px)`;
-//                 }
-//                 coord.textContent = pad.getBoundingClientRect().x;
-//                 console.log('event.pageX =', event.pageX, 'lineRightEnd =', lineRightEnd, 'startPosition =', startPosition);
-//         }
-
-//         pad.onpointerup = () => {
-//             pad.onpointermove = null;
-//             pad.onpointerup = null;
-//         }
-//     }
