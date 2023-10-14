@@ -14,23 +14,42 @@
     <header>
         <h1>Master Mind</h1>
         <div id="score-display">
-            <div id="statistics"></div>
-            <div id="secret-code">
-                <div class="color" id="secret-color-1"></div>
-                <div class="color" id="secret-color-2"></div>
-                <div class="color" id="secret-color-3"></div>
-                <div class="color" id="secret-color-4"></div>
-                <div class="color" id="secret-color-5"></div>
-                <div class="color" id="secret-color-6"></div>
+            <div id="statistics">Your score is
+                <div id="score"></div>               
             </div>
             <div id="settings"></div>
+        </div>
+
+        <div id="secret-code">
+            <div class="color" id="secret-color-1"></div>
+            <div class="color" id="secret-color-2"></div>
+            <div class="color" id="secret-color-3"></div>
+            <div class="color" id="secret-color-4"></div>
+            <div class="color" id="secret-color-5"></div>
+            <div class="color" id="secret-color-6"></div>
         </div>
     </header>
 
     <main>
+        <!-- <audio src="./assets/audio/background.ogg" id="back-audio"></audio> -->
+        <audio src="./assets/audio/background_mini.ogg" id="ini-audio"></audio>
+        <audio src="./assets/audio/win.ogg" id="win-audio"></audio>
+        <audio src="./assets/audio/tap.ogg" id="tap-audio"></audio>
+        <!-- <audio src="./assets/audio/palette.ogg" id="palette"></audio> -->
+        <audio src="./assets/audio/new-attempt.ogg" id="new-attempt"></audio>
+        <!-- <audio src="./assets/audio/celebration.ogg" id="celeb-audio"></audio> -->
+        <!-- <audio src="./assets/audio/divine.ogg" id="divine-audio"></audio> -->
+
         <div id="play-field-wrapper">
-            <div id="start-button">Start playing</div>
-            <div id="check-button">Check the match</div>
+            <div id="start-window">Start playing</div>
+            <div id="check-window">Check the match</div>
+            <div id="win-window">
+                <p>Great! You win!</p>
+                <div id="win-buttons">
+                    <div id="win-play-again">Play again?</div>
+                    <div id="win-play-next-level">Go to the next level?</div>
+                </div>
+            </div>
             
             <div id="palette">
                 <div class="palette-color-box" id="palette-1"></div>

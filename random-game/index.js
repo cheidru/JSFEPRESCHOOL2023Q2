@@ -1,3 +1,4 @@
+const anywhere = document.querySelector('body');
 const palette = document.getElementById('palette');
 let paletteColorBox = document.querySelectorAll('.palette-color-box');
 const playField = document.getElementById('field');
@@ -11,8 +12,18 @@ let resultPlace = document.querySelectorAll('.result-place');
 let shutter = document.querySelectorAll('.shutter');
 const secretCodeDisplay = document.getElementById('secret-code');
 const secretColors = document.querySelectorAll('#secret-code > .color');
-const startBTN = document.getElementById('start-button');
-const checkBTN = document.getElementById('check-button');
+const startBTN = document.getElementById('start-window');
+const checkBTN = document.getElementById('check-window');
+const youWinBTN = document.getElementById('win-window');
+const playAgainBTN = document.getElementById('win-play-again');
+const nextLevelBTN = document.getElementById('win-play-next-level');
+
+const audioIni = document.getElementById('ini-audio');
+const audioTap = document.getElementById('tap-audio');
+const audioWin = document.getElementById('win-audio');
+// const audioDivine = document.getElementById('divine-audio');
+// const audioCelebrate = document.getElementById('celeb-audio');
+const audioNewAttempt = document.getElementById('new-attempt');
 
 const player = {};
 player.level = 0;
@@ -33,7 +44,7 @@ const gameLevel = [
     {colors: 4, positions: 6, palette: colorPalette[1]}
 ];
 
-const selectedLevel = player.level;
+let selectedLevel = player.level;
 
 // This is the code to puzzle out
 let secretCode = [];
@@ -42,11 +53,15 @@ let gamePalette = []; // Random selection of colors to code later on
 let paintWithColor = {};
 let currentAttemptNumber = 0;
 
-startBTN.addEventListener('click', () => {
+startBTN.addEventListener('click', (event) => {
+    event.stopPropagation();
     startBTN.style.display = 'none';
-    gameIni();});
+    audioIni.play();
+    gameIni();
+});
 
-checkBTN.addEventListener('click', () => {
+checkBTN.addEventListener('click', (event) => {
+    event.stopPropagation();
     let check = {};
     check.placeMatch = 0;
     check.colorMatch = 0;
@@ -60,8 +75,32 @@ checkBTN.addEventListener('click', () => {
     resultPlace[currentAttemptNumber].textContent = check.placeMatch;
     resultColor[currentAttemptNumber].textContent = check.colorMatch;
     // Lock current attempt and create new attempt
-    startNewAttempt();
+    // console.log('check.placeMatch =', check.placeMatch, 'gameLevel[selectedLevel].positions =', gameLevel[selectedLevel].positions);
+    if (check.placeMatch == gameLevel[selectedLevel].positions) {
+        winWindow();
+    } else {
+        startNewAttempt();
+    }
 });
+
+function winWindow() {    
+    checkBTN.style.display = 'none';
+    youWinBTN.style.display = 'flex';
+    audioWin.play();
+}
+
+playAgainBTN.addEventListener('click', () => {
+    youWinBTN.style.display = 'none';
+    audioNewAttempt.play();
+    gameIni()
+});
+
+nextLevelBTN.addEventListener('click', () => {
+    selectedLevel++;
+    audioNewAttempt.play();
+    gameIni();
+});
+
 
 function placeMatchCheck(check) {
     for (let i = 0; i < secretCode.length; i++) {
@@ -126,10 +165,9 @@ function startNewAttempt() {
         attempt[Number(attemptNumber[currentAttemptNumber - i].textContent) - 1].style.order = i;
     }
 
-
     console.log('gameLevel[selectedLevel].positions =', gameLevel[selectedLevel].positions);
     for (let i = 0; i < gameLevel[selectedLevel].positions; i++) {
-        colorBox[currentAttemptNumber].children[i].style.backgroundColor = 'grey';
+        colorBox[currentAttemptNumber].children[i].style.backgroundColor = 'gray';
     };
 
     numOfChoices = 0;
@@ -177,7 +215,14 @@ function codeGenerator() {
 
 function playDemo() {};
 
+
+anywhere.addEventListener('click', () => {
+    audioIni.pause();
+    audioWin.pause();
+});
+
 palette.addEventListener('click', (event) => {
+
     if (!event.target.classList.contains('palette-color-box')) return;
 
     let newColor = gamePalette[event.target.id[8] - 1];
@@ -188,13 +233,20 @@ palette.addEventListener('click', (event) => {
     paintWithColor.object = event.target;
     paintWithColor.object.style.border = '5px solid red';
     paintWithColor.color = newColor;
+    audioTap.play();
 })
 
 let numOfChoices = 0;
+
 colorBox[currentAttemptNumber].addEventListener('click', (event) => {
     if (!event.target.classList.contains('color')) return;
+
+    console.log('event.target.style.backgroundColor =', event.target.style.backgroundColor, 'numOfChoices =', numOfChoices);
+    
+    if (event.target.style.backgroundColor == 'gray' || event.target.style.backgroundColor == '') numOfChoices++;
     event.target.style.backgroundColor = paintWithColor.color;
     yourChoice[event.target.id[6] - 1] = paintWithColor.color;
-    numOfChoices ++;
+
     if (numOfChoices == secretCode.length) checkBTN.style.display = 'flex';
+    audioTap.play();
 })

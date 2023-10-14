@@ -106,7 +106,7 @@ main {
     overflow: hidden;
 }
 
-[id$="-button"] {
+[id$="-window"] {
     position: absolute;
     display: flex;
     align-items: center;
@@ -123,9 +123,39 @@ main {
     cursor: pointer;
 }
 
-#check-button {
+#check-window {
     display: none;
     width: 300px;
+    z-index: 2;
+}
+
+#win-window {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 300px;
+    padding: 10px;
+    font-size: 50px;
+    z-index: 2;
+}
+
+#win-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 30px;
+    gap: 20px;
+    font-size: 30px;
+    color: rgb(9, 9, 62);
+    cursor: pointer;
+}
+
+[id^='win-play-']:hover {
+    transform: scale(1.05);
+    transition: 0.5s;
 }
 
 .color {
