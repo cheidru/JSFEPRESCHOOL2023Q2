@@ -87,15 +87,6 @@ main {
     z-index: 1;
 }
 
-#popup {
-    position: relative;
-    width: 350px;
-    height: 200px;
-    background-color: bisque;
-    border-color: 2px solid rgb(192, 192, 141);
-    z-index: 2;
-}
-
 #play-field-wrapper {
     box-sizing: border-box;
     display: flex;
@@ -240,6 +231,7 @@ main {
     border-radius: 40px;
     overflow: hidden;
     margin-top: 10px;
+    transition: 2s;
 }
 
 .attempt-number {

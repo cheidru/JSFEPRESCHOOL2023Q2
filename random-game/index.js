@@ -17,6 +17,7 @@ const checkBTN = document.getElementById('check-window');
 const youWinBTN = document.getElementById('win-window');
 const playAgainBTN = document.getElementById('win-play-again');
 const nextLevelBTN = document.getElementById('win-play-next-level');
+const powerLayer = document.getElementById('power-layer');
 
 const audioIni = document.getElementById('ini-audio');
 const audioTap = document.getElementById('tap-audio');
@@ -85,22 +86,37 @@ checkBTN.addEventListener('click', (event) => {
 
 function winWindow() {    
     checkBTN.style.display = 'none';
+    powerLayer.style.display = 'flex';
     youWinBTN.style.display = 'flex';
     audioWin.play();
 }
 
 playAgainBTN.addEventListener('click', () => {
+    powerLayer.style.display = 'none';
     youWinBTN.style.display = 'none';
     audioNewAttempt.play();
+    cleanField();
     gameIni()
 });
 
 nextLevelBTN.addEventListener('click', () => {
     selectedLevel++;
     audioNewAttempt.play();
+    cleanField();
     gameIni();
 });
 
+function cleanField() {
+    // Remove old attempts
+    for(let attmp of attempt) {
+        attmp.style.transform = 'translateX(150%)';
+    }
+    attempt = [];
+
+    // Clean palette
+
+    
+}
 
 function placeMatchCheck(check) {
     for (let i = 0; i < secretCode.length; i++) {
