@@ -101,7 +101,9 @@ function startNewAttempt() {
     }
     shutter[currentAttemptNumber].style.display = 'block';
 
+    // Clone attempt element
     let newAttempt = attempt[currentAttemptNumber].cloneNode(true); // clone with all inner elements
+
     playField.prepend(newAttempt);
     
     attempt = document.querySelectorAll('.attempt');
@@ -118,21 +120,19 @@ function startNewAttempt() {
     attemptNumber[currentAttemptNumber].textContent = currentAttemptNumber + 1;
     resultPlace[currentAttemptNumber].textContent = '';
     resultColor[currentAttemptNumber].textContent = '';
-    attempt[currentAttemptNumber].style.order = currentAttemptNumber-1;
-    attempt[currentAttemptNumber-1].style.order = currentAttemptNumber;
+
+    for (let i = 0; i < attempt.length; i++) {
+        console.log('attemptNumber[currentAttemptNumber].textContent =', attemptNumber[currentAttemptNumber].textContent, 'i =', 0);
+        attempt[Number(attemptNumber[currentAttemptNumber - i].textContent) - 1].style.order = i;
+    }
 
 
+    console.log('gameLevel[selectedLevel].positions =', gameLevel[selectedLevel].positions);
+    for (let i = 0; i < gameLevel[selectedLevel].positions; i++) {
+        colorBox[currentAttemptNumber].children[i].style.backgroundColor = 'grey';
+    };
 
-    // for (col in colorBox[currentAttemptNumber]) {
-    //     console.log('colorBox[currentAttemptNumber] = ', colorBox[currentAttemptNumber], 'col.style =', col.style);
-    //     col.style.backgroundColor = 'unset'
-    // };
-
-
-    // Show new attempt
-
-
-
+    numOfChoices = 0;
 }
 
 function gameIni() {
@@ -196,6 +196,5 @@ colorBox[currentAttemptNumber].addEventListener('click', (event) => {
     event.target.style.backgroundColor = paintWithColor.color;
     yourChoice[event.target.id[6] - 1] = paintWithColor.color;
     numOfChoices ++;
-    console.log('numOfChoices =', numOfChoices);
     if (numOfChoices == secretCode.length) checkBTN.style.display = 'flex';
 })
