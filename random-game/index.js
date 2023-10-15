@@ -11,7 +11,9 @@ let resultColor = document.querySelectorAll('.result-color');
 let resultPlace = document.querySelectorAll('.result-place');
 let score = document.getElementById('score');
 let shutter = document.querySelectorAll('.shutter');
+const secretCodeBTN = document.getElementById('code-wrapper');
 const secretCodeDisplay = document.getElementById('secret-code');
+const secretCodeHide = document.getElementById('code-btn');
 const secretColors = document.querySelectorAll('#secret-code > .color');
 const startBTN = document.getElementById('start-btn');
 const checkBTN = document.getElementById('check-window');
@@ -21,6 +23,7 @@ const winAgainBTN = document.getElementById('win-play-again');
 const failAgainBTN = document.getElementById('fail-play-again');
 const nextLevelBTN = document.getElementById('win-play-next-level');
 const exitBTN = document.getElementById('exit-play-game');
+const winExitBTN = document.getElementById('win-play-exit')
 const powerLayer = document.getElementById('power-layer');
 const intro = document.getElementById('intro-screen');
 const readIntro = document.getElementById('read-intro');
@@ -35,6 +38,7 @@ const audioIntro = document.getElementById('back-audio');
 const audioDivine = document.getElementById('divine-audio');
 const audioFail = document.getElementById('fail-audio');
 const audioNewAttempt = document.getElementById('new-attempt');
+const registerWindow = document.getElementById('register-popup');
 
 const player = {};
 player.level = 0;
@@ -66,6 +70,19 @@ let currentAttemptNumber = 0;
 
 let fieldHeight = playField.getBoundingClientRect().height;
 
+secretCodeBTN.addEventListener('click', (event) => {
+    event.stopPropagation();
+    if(event.target.id == 'code-btn') {
+        secretCodeDisplay.style.display = 'flex';
+        secretCodeHide.style.display = 'none';
+    }
+
+    if(event.target.id == 'secret-code' || event.target.classList.contains('color')) {
+        secretCodeDisplay.style.display = 'none';
+        secretCodeHide.style.display = 'flex';
+    }
+})
+
 readIntro.addEventListener('click', (event) => {
     event.stopPropagation();
     introTextEng.style.display = 'block';
@@ -92,6 +109,10 @@ startBTN.addEventListener('click', (event) => {
 });
 
 exitBTN.addEventListener('click', () => {
+    location.reload ();
+})
+
+winExitBTN.addEventListener('click', () => {
     location.reload ();
 })
 
@@ -150,7 +171,6 @@ nextLevelBTN.addEventListener('click', () => {
     selectedLevel++;
     audioNewAttempt.play();
     cleanField();
-
 });
 
 function cleanField() {
@@ -174,7 +194,6 @@ function cleanField() {
     currentAttemptNumber = 0;
     attempt = document.querySelectorAll('.attempt');
     gameIni();
-
     // Clean palette    
 }
 
@@ -275,16 +294,14 @@ function gameIni() {
     codeGenerator();
 
     // show Secret Code
-    secretCodeDisplay.style.display = 'flex';
-    for (let i = 0; i < secretCode.length; i++) {
+    for (let i = 0; i < gameLevel[selectedLevel].positions; i++) {
         secretColors[i].style.display = 'block';
         secretColors[i].style.backgroundColor = secretCode[i];
     }
 
     colorBox[currentAttemptNumber].addEventListener('click', (event) => {
-        event.stopImmediatePropagation();
-        console.log('colorBox clicked');
-        if (!event.target.classList.contains('color')) return;
+        event.stopPropagation();
+        if (!event.target.classList.contains('color') || paintWithColor.color == undefined) return;
         
         if (event.target.style.backgroundColor == 'gray' || event.target.style.backgroundColor == '') numOfChoices++;
         event.target.style.backgroundColor = paintWithColor.color;
@@ -316,7 +333,7 @@ palette.addEventListener('click', (event) => {
     if (paintWithColor.object !== undefined) paintWithColor.object.style.border = 'none';
 
     paintWithColor.object = event.target;
-    paintWithColor.object.style.border = '5px solid red';
+    paintWithColor.object.style.border = '5px solid gold';
     paintWithColor.color = newColor;
     audioTap.play();
 })
