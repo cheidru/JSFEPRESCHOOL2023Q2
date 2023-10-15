@@ -9,26 +9,36 @@ let color = document.querySelectorAll('.color-box > .color');
 let resultBox = document.querySelectorAll('.attempt-result-box');
 let resultColor = document.querySelectorAll('.result-color');
 let resultPlace = document.querySelectorAll('.result-place');
+let score = document.getElementById('score');
 let shutter = document.querySelectorAll('.shutter');
 const secretCodeDisplay = document.getElementById('secret-code');
 const secretColors = document.querySelectorAll('#secret-code > .color');
-const startBTN = document.getElementById('start-window');
+const startBTN = document.getElementById('start-btn');
 const checkBTN = document.getElementById('check-window');
 const youWinBTN = document.getElementById('win-window');
-const playAgainBTN = document.getElementById('win-play-again');
+const youFailBTN = document.getElementById('fail-window');
+const winAgainBTN = document.getElementById('win-play-again');
+const failAgainBTN = document.getElementById('fail-play-again');
 const nextLevelBTN = document.getElementById('win-play-next-level');
+const exitBTN = document.getElementById('exit-play-game');
 const powerLayer = document.getElementById('power-layer');
-
+const intro = document.getElementById('intro-screen');
+const readIntro = document.getElementById('read-intro');
+const introTextEng = document.getElementById('intro-txt-eng');
+const introTextRus = document.getElementById('intro-txt-rus');
+const introLangEng = document.getElementById('switch-to-eng');
+const introLangRus = document.getElementById('switch-to-rus');
 const audioIni = document.getElementById('ini-audio');
 const audioTap = document.getElementById('tap-audio');
 const audioWin = document.getElementById('win-audio');
-// const audioDivine = document.getElementById('divine-audio');
-// const audioCelebrate = document.getElementById('celeb-audio');
+const audioIntro = document.getElementById('back-audio');
+const audioDivine = document.getElementById('divine-audio');
+const audioFail = document.getElementById('fail-audio');
 const audioNewAttempt = document.getElementById('new-attempt');
 
 const player = {};
 player.level = 0;
-player.score = 0;
+player.score = 700;
 player.games = 0;
 player.visits = 0;
 player.selectedPalette = 1;
@@ -54,12 +64,36 @@ let gamePalette = []; // Random selection of colors to code later on
 let paintWithColor = {};
 let currentAttemptNumber = 0;
 
+let fieldHeight = playField.getBoundingClientRect().height;
+
+readIntro.addEventListener('click', (event) => {
+    event.stopPropagation();
+    introTextEng.style.display = 'block';
+    audioIntro.play();
+    audioIntro.volume = 0.3;
+})
+
+introLangRus.addEventListener('click', (event) => {
+    event.stopPropagation();
+    introTextEng.style.display = 'none';
+    introTextRus.style.display = 'block';
+})
+
+introLangEng.addEventListener('click', (event) => {
+    event.stopPropagation();
+    introTextEng.style.display = 'block';
+    introTextRus.style.display = 'none';
+})
+
 startBTN.addEventListener('click', (event) => {
     event.stopPropagation();
-    startBTN.style.display = 'none';
-    audioIni.play();
+    intro.style.display = 'none';
     gameIni();
 });
+
+exitBTN.addEventListener('click', () => {
+    location.reload ();
+})
 
 checkBTN.addEventListener('click', (event) => {
     event.stopPropagation();
@@ -76,9 +110,10 @@ checkBTN.addEventListener('click', (event) => {
     resultPlace[currentAttemptNumber].textContent = check.placeMatch;
     resultColor[currentAttemptNumber].textContent = check.colorMatch;
     // Lock current attempt and create new attempt
-    // console.log('check.placeMatch =', check.placeMatch, 'gameLevel[selectedLevel].positions =', gameLevel[selectedLevel].positions);
-    if (check.placeMatch == gameLevel[selectedLevel].positions) {
+        if (check.placeMatch == gameLevel[selectedLevel].positions) {
         winWindow();
+    } else if (currentAttemptNumber == 6) {
+        failWindow();
     } else {
         startNewAttempt();
     }
@@ -88,34 +123,59 @@ function winWindow() {
     checkBTN.style.display = 'none';
     powerLayer.style.display = 'flex';
     youWinBTN.style.display = 'flex';
+    if (currentAttemptNumber < 5) audioDivine.play();
     audioWin.play();
 }
 
-playAgainBTN.addEventListener('click', () => {
+function failWindow() {
+    checkBTN.style.display = 'none';
+    powerLayer.style.display = 'flex';
+    youFailBTN.style.display = 'flex';
+    audioFail.play();
+}
+
+winAgainBTN.addEventListener('click', restartGame);
+failAgainBTN.addEventListener('click', restartGame);
+
+function restartGame() {
     powerLayer.style.display = 'none';
     youWinBTN.style.display = 'none';
     audioNewAttempt.play();
     cleanField();
-    gameIni()
-});
+}
 
 nextLevelBTN.addEventListener('click', () => {
+    powerLayer.style.display = 'none';
+    youWinBTN.style.display = 'none';
     selectedLevel++;
     audioNewAttempt.play();
     cleanField();
-    gameIni();
+
 });
 
 function cleanField() {
-    // Remove old attempts
-    for(let attmp of attempt) {
-        attmp.style.transform = 'translateX(150%)';
+    for(let i = 1; i < attempt.length; i++) {
+        attempt[i].remove();
     }
-    attempt = [];
+    currentAttemptNumber = 0;
+    startNewAttempt();
+    attempt[0].remove();
+    player.score = 700;
 
-    // Clean palette
+    attemptNumber[currentAttemptNumber].textContent = currentAttemptNumber;
+    attemptNumber = document.querySelectorAll('.attempt-number');
+    colorBox = document.querySelectorAll('.color-box');
+    color = document.querySelectorAll('.color-box > .color');
+    resultBox = document.querySelectorAll('.attempt-result-box');
+    resultPlace = document.querySelectorAll('.result-place');
+    resultColor = document.querySelectorAll('.result-color');
+    shutter = document.querySelectorAll('.shutter');
 
-    
+    currentAttemptNumber = 0;
+    attempt = document.querySelectorAll('.attempt');
+    gameIni();
+
+    // Clean palette    
 }
 
 function placeMatchCheck(check) {
@@ -171,22 +231,28 @@ function startNewAttempt() {
     shutter = document.querySelectorAll('.shutter');
 
     currentAttemptNumber++;
+    player.score = player.score - 100;
+    score.textContent = player.score;
+
     shutter[currentAttemptNumber].style.display = 'none';
     attemptNumber[currentAttemptNumber].textContent = currentAttemptNumber + 1;
     resultPlace[currentAttemptNumber].textContent = '';
     resultColor[currentAttemptNumber].textContent = '';
 
-    for (let i = 0; i < attempt.length; i++) {
-        console.log('attemptNumber[currentAttemptNumber].textContent =', attemptNumber[currentAttemptNumber].textContent, 'i =', 0);
+    for (let i = 0; i < attempt.length; i++) {        
         attempt[Number(attemptNumber[currentAttemptNumber - i].textContent) - 1].style.order = i;
     }
 
-    console.log('gameLevel[selectedLevel].positions =', gameLevel[selectedLevel].positions);
     for (let i = 0; i < gameLevel[selectedLevel].positions; i++) {
         colorBox[currentAttemptNumber].children[i].style.backgroundColor = 'gray';
     };
 
     numOfChoices = 0;
+    checkBTN.style.top = `${((fieldHeight - (90 * (currentAttemptNumber + 1))) * 0.5)}px`;
+    
+    if (parseInt(checkBTN.style.top) <= 100) {
+        checkBTN.style.top = '50%';
+    } 
 }
 
 function gameIni() {
@@ -215,6 +281,19 @@ function gameIni() {
         secretColors[i].style.backgroundColor = secretCode[i];
     }
 
+    colorBox[currentAttemptNumber].addEventListener('click', (event) => {
+        event.stopImmediatePropagation();
+        console.log('colorBox clicked');
+        if (!event.target.classList.contains('color')) return;
+        
+        if (event.target.style.backgroundColor == 'gray' || event.target.style.backgroundColor == '') numOfChoices++;
+        event.target.style.backgroundColor = paintWithColor.color;
+        yourChoice[event.target.id[6] - 1] = paintWithColor.color;
+    
+        if (numOfChoices == secretCode.length) checkBTN.style.display = 'flex';
+        audioTap.play();
+    });
+
     if (player.visits == 0) playDemo();
 
     // show Player settings and stat (and secret code in design ver)
@@ -229,21 +308,11 @@ function codeGenerator() {
     }
 }
 
-function playDemo() {};
-
-
-anywhere.addEventListener('click', () => {
-    audioIni.pause();
-    audioWin.pause();
-});
-
 palette.addEventListener('click', (event) => {
-
+    event.stopPropagation();
     if (!event.target.classList.contains('palette-color-box')) return;
-
     let newColor = gamePalette[event.target.id[8] - 1];
     if (paintWithColor.color == newColor) return;
-
     if (paintWithColor.object !== undefined) paintWithColor.object.style.border = 'none';
 
     paintWithColor.object = event.target;
@@ -254,15 +323,12 @@ palette.addEventListener('click', (event) => {
 
 let numOfChoices = 0;
 
-colorBox[currentAttemptNumber].addEventListener('click', (event) => {
-    if (!event.target.classList.contains('color')) return;
+anywhere.addEventListener('click', () => {
+    audioIni.pause();
+    audioWin.pause();
+    audioIntro.pause();
+    introTextEng.style.display = 'none';
+    introTextRus.style.display = 'none';
+});
 
-    console.log('event.target.style.backgroundColor =', event.target.style.backgroundColor, 'numOfChoices =', numOfChoices);
-    
-    if (event.target.style.backgroundColor == 'gray' || event.target.style.backgroundColor == '') numOfChoices++;
-    event.target.style.backgroundColor = paintWithColor.color;
-    yourChoice[event.target.id[6] - 1] = paintWithColor.color;
-
-    if (numOfChoices == secretCode.length) checkBTN.style.display = 'flex';
-    audioTap.play();
-})
+function playDemo() {};

@@ -8,26 +8,95 @@
 
 body {
     display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     background-color: green;
+    height: 100vh;
+}
+
+#intro-screen {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    /* background-image: rgba(28, 53, 100, 0.5), url(./assets/img/master_mind_small.png); */
+    background-color: rgb(28, 53, 100);
+    z-index: 1;
+}
+
+[id^="intro-txt"] {
+    position: absolute;
+    display: none;
+    width: 30%;
+    height: auto;
+    padding: 20px;
+    color: #0C0C0E;
+    font-size: 20px;
+    text-align: justify;
+    background-color: bisque;
+    border-radius: 10px;
+    z-index: 3;
+}
+
+[id^="intro-txt"] p:not(:first-child) {
+    margin-top: 10px;
+}
+
+[id^="intro-txt"] p:last-child {
+    color: tomato;
+}
+
+[id^="switch-to-"] {
+    padding: 5px;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.intro-btn {
+    color: wheat;
+    font-size: 40px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#settings-svg {
+    width: 50px;
+    height: auto;
+    fill: rgb(57, 56, 56);
+    cursor: pointer;
 }
 
 
 header {
+    position: relative;
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: space-around;
-    position: sticky;
+    justify-content: center;
     top: 0;
-    height: 10vh;
+    height: 8vh;
     width: 100%;
     padding: 30px 10px;
     color: wheat;
     background-color: rgb(161, 161, 161);
-    z-index: 2;
+    /* z-index: 2; */
+}
+
+
+#header-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: var(--main-width);
 }
 
 #score-display {
@@ -35,16 +104,20 @@ header {
     flex-direction: row;
     gap: 20px;
     justify-content: space-between;
-    align-items: center;
+    align-items: center;    
+    width: auto;
+    font-size: 30px;
 }
 
 #secret-code {
+    position: absolute;
+    right: 10px;
     display: none;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
     gap: 10px;
-    padding: 10px 20px;
+    padding: 5px 20px;
     background-color:deepskyblue;
     border-radius: 10px;
     border: 2px solid white;
@@ -120,7 +193,7 @@ main {
     z-index: 2;
 }
 
-#win-window {
+#win-window, #fail-window {
     display: none;
     flex-direction: column;
     align-items: center;
@@ -144,7 +217,7 @@ main {
     cursor: pointer;
 }
 
-[id^='win-play-']:hover {
+[id^='-play-']:hover {
     transform: scale(1.05);
     transition: 0.5s;
 }
@@ -320,7 +393,7 @@ footer {
     box-sizing: border-box;
     width: 100%;
     padding: 10px 40px;
-    height: 10vh;
+    height: 8vh;
     background-color: #0C0C0E;
 }
 

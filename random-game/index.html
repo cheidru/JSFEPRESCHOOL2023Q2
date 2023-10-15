@@ -7,17 +7,66 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="power-layer">
+    <div id="intro-screen">
+        <div id="read-intro" class="intro-btn">Read Intro</div>
+        <div id="register-btn" class="intro-btn">Register</div>        
+        <div id="start-btn" class="intro-btn">Start playing</div>
+        <audio src="./assets/audio/background_mini.ogg" id="ini-audio"></audio>
+        <audio src="./assets/audio/background.ogg" id="back-audio"></audio>
+
+        <div id="intro-txt-eng">
+            <div id="switch-to-rus">Switch to Russian</div>
+            <p>Master Mind is a logic game where computer generates an n-position code 
+                of several pre-determined colors and player should guess the code. 
+                The code can consist of all colors or just a single color of the palette.</p>
+            <p>To guess the code player is given 7 attempts. After an attempt is complete,
+                computer shows how many attempt positions have the same color and place as 
+                the code and how many remaining positions have the same color but different place.</p>
+            <p>Player has 700 points of score in the beginning of the game and every attempt reduce 
+                the score by 100 points.</p>
+            <p>After player wins the game he is allowed to go forward to the next level.</p>
+            <p>You may prefer to <a href="#">register</a> to save your achievements</p>
+            <p><i>Click any key</i></p>
+            <p>Don't forget to put your head-set on!</p>
+        </div>
+
+        <div id="intro-txt-rus">
+            <div id="switch-to-eng">Переключить на английский</div>
+            <p>Master Mind - это логическая игра в которой компьютер генерирует код, состоящий
+                из нескольких заранее определенных цветов. В коде может использоваться только 
+                часть цветов или даже один цвет из палитры.</p>
+            <p>Игрок должен отгадать код за 7 попыток. После каждой попытки компьютер показывает
+                сколько позиций совпало по расположению и цвету, и сколько из оставшихся позиций
+                имело нужный цвет но распологалось в другом месте.</p>
+            <p>В начале раунда игроку дается 700 баллов и за каждую попытку эта цифра уменьшается на 100.</p>
+            <p>После того как игрок отгадал код, он может перейти на следующий уровень.</p>
+            <p>Вы можете <a href="#">зарегистрироваться</a> чтобы сохранить свои результаты</p>
+            <p><i>Нажмите любую кнопку</i></p>
+            <p>Не забудьте надеть наушники!</p>
+        </div>
+
+        <div id="register">
+            
+        </div>
     </div>
+    <div id="power-layer"></div>
 
     <header>
-        <h1>Master Mind</h1>
-        <div id="score-display">
-            <div id="statistics">Your score is
-                <div id="score"></div>               
+        <div id="header-wrapper">
+            <h1>Master Mind</h1>
+            <div id="score-display">
+                <div>Your score is</div>
+                <div id="score">700</div> 
             </div>
-            <div id="settings"></div>
+
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="settings-svg">
+                <g>
+                    <path fill="none" d="M0 0h24v24H0z"/>
+                    <path d="M2 12c0-.865.11-1.703.316-2.504A3 3 0 0 0 4.99 4.867a9.99 9.99 0 0 1 4.335-2.505 3 3 0 0 0 5.348 0 9.99 9.99 0 0 1 4.335 2.505 3 3 0 0 0 2.675 4.63c.206.8.316 1.638.316 2.503 0 .865-.11 1.703-.316 2.504a3 3 0 0 0-2.675 4.629 9.99 9.99 0 0 1-4.335 2.505 3 3 0 0 0-5.348 0 9.99 9.99 0 0 1-4.335-2.505 3 3 0 0 0-2.675-4.63C2.11 13.704 2 12.866 2 12zm4.804 3c.63 1.091.81 2.346.564 3.524.408.29.842.541 1.297.75A4.993 4.993 0 0 1 12 18c1.26 0 2.438.471 3.335 1.274.455-.209.889-.46 1.297-.75A4.993 4.993 0 0 1 17.196 15a4.993 4.993 0 0 1 2.77-2.25 8.126 8.126 0 0 0 0-1.5A4.993 4.993 0 0 1 17.195 9a4.993 4.993 0 0 1-.564-3.524 7.989 7.989 0 0 0-1.297-.75A4.993 4.993 0 0 1 12 6a4.993 4.993 0 0 1-3.335-1.274 7.99 7.99 0 0 0-1.297.75A4.993 4.993 0 0 1 6.804 9a4.993 4.993 0 0 1-2.77 2.25 8.126 8.126 0 0 0 0 1.5A4.993 4.993 0 0 1 6.805 15zM12 15a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0-2a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                </g>
+            </svg>
         </div>
+
 
         <div id="secret-code">
             <div class="color" id="secret-color-1"></div>
@@ -30,18 +79,18 @@
     </header>
 
     <main>
-        <!-- <audio src="./assets/audio/background.ogg" id="back-audio"></audio> -->
-        <audio src="./assets/audio/background_mini.ogg" id="ini-audio"></audio>
+
+
         <audio src="./assets/audio/win.ogg" id="win-audio"></audio>
         <audio src="./assets/audio/tap.ogg" id="tap-audio"></audio>
         <!-- <audio src="./assets/audio/palette.ogg" id="palette"></audio> -->
         <audio src="./assets/audio/new-attempt.ogg" id="new-attempt"></audio>
         <!-- <audio src="./assets/audio/celebration.ogg" id="celeb-audio"></audio> -->
-        <!-- <audio src="./assets/audio/divine.ogg" id="divine-audio"></audio> -->
+        <audio src="./assets/audio/divine.ogg" id="divine-audio"></audio>
 
         <div id="play-field-wrapper">
-            <div id="start-window">Start playing</div>
             <div id="check-window">Check the match</div>
+
             <div id="win-window">
                 <p>Great! You win!</p>
                 <div id="win-buttons">
@@ -49,6 +98,16 @@
                     <div id="win-play-next-level">Go to the next level?</div>
                 </div>
             </div>
+
+            <div id="fail-window">
+                <audio src="./assets/audio/fail.mp3" id="fail-audio"></audio>
+                <p>Ooops! You fail!</p>
+                <div id="win-buttons">
+                    <div id="fail-play-again">Play again?</div>
+                    <div id="exit-play-game">Exit the game?</div>
+                </div>
+            </div>
+
             
             <div id="palette">
                 <div class="palette-color-box" id="palette-1"></div>
