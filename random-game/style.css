@@ -60,7 +60,8 @@ main {
     gap: 40px;
     width: auto;
     height: auto;
-    margin-top: 40vh;
+    margin-top: 30vh;
+    margin-left: 45vw;
 }
 
 [id^="intro-txt"] {
