@@ -38,7 +38,6 @@ const audioIntro = document.getElementById('back-audio');
 const audioDivine = document.getElementById('divine-audio');
 const audioFail = document.getElementById('fail-audio');
 const audioNewAttempt = document.getElementById('new-attempt');
-const registerWindow = document.getElementById('register-popup');
 
 const player = {};
 player.level = 0;
@@ -346,6 +345,8 @@ anywhere.addEventListener('click', () => {
     audioIntro.pause();
     introTextEng.style.display = 'none';
     introTextRus.style.display = 'none';
+    introPowerLayer.style.display = 'none';
+    registerWindow.style.display = 'none';
 });
 
 function playDemo() {};

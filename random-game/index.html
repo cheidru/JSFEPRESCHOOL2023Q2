@@ -11,6 +11,9 @@
         <audio src="./assets/audio/background_mini.ogg" id="ini-audio"></audio>
         <audio src="./assets/audio/background.ogg" id="back-audio"></audio>
 
+
+        <div id="intro-power-layer"></div>
+
         <div id="intro-screen-wrapper">
             <div id="register-btn" class="intro-btn">Register</div>  
             <div id="read-intro" class="intro-btn">Read Intro</div>
@@ -29,7 +32,7 @@
             <p>Player has 700 points of score in the beginning of the game and every attempt reduce 
                 the score by 100 points.</p>
             <p>After player wins the game he is allowed to go forward to the next level.</p>
-            <p>You may prefer to <a href="#">register</a> to save your achievements</p>
+            <p>You may prefer to <a href="#" id="go-to-login-eng">register</a> to save your achievements</p>
             <p><i>Click any key</i></p>
             <p>Don't forget to put your head-set on!</p>
         </div>
@@ -44,7 +47,7 @@
                 имело нужный цвет но распологалось в другом месте.</p>
             <p>В начале раунда игроку дается 700 баллов и за каждую попытку эта цифра уменьшается на 100.</p>
             <p>После того как игрок отгадал код, он может перейти на следующий уровень.</p>
-            <p>Вы можете <a href="#">зарегистрироваться</a> чтобы сохранить свои результаты</p>
+            <p>Вы можете <a href="#" id="go-to-login-rus">зарегистрироваться</a> чтобы сохранить свои результаты</p>
             <p><i>Нажмите любую кнопку</i></p>
             <p>Не забудьте надеть наушники!</p>
         </div>
@@ -52,7 +55,7 @@
 
         <div id="register-popup">
             <div class="popup-wrapper">
-                <div class="popup-title">Register</div>
+                <div id="popup-title">Register or Log In</div>
 
                 <label for="name" class="popup-label">Name</label>
                 <input type="text" class="popup-input" id="first-name" pattern="[A-Za-zА-Яа-яЁё]" autocomplete="given-name">
@@ -60,9 +63,9 @@
                 <label for="register-password" class="popup-label">Password</label>
                 <input type="text" class="popup-input" id="register-password">
 
-                <div class="popup-btn-wrapper">
-                    <button id="register-signup-btn">Register</button>
-                    <button id="register-signup-btn">Log In</button>
+                <div id="popup-btn-wrapper">
+                    <button class="popup-button" id="register-btn">Register</button>
+                    <button class="popup-button" id="signup-btn">Log In</button>
                 </div>
             </div>
         </div>
@@ -98,12 +101,9 @@
                 <div class="color" id="secret-color-6"></div>
             </div>
         </div>
-
     </header>
 
     <main>
-
-
         <audio src="./assets/audio/win.ogg" id="win-audio"></audio>
         <audio src="./assets/audio/tap.ogg" id="tap-audio"></audio>
         <!-- <audio src="./assets/audio/palette.ogg" id="palette"></audio> -->
@@ -119,7 +119,7 @@
                 <div id="win-buttons">
                     <div id="win-play-again">Play again?</div>
                     <div id="win-play-next-level">Go to the next level?</div>
-                    <div id="win-play-exit">Exit ~game?</div>
+                    <div id="win-play-exit">Exit game?</div>
                 </div>
             </div>
 
@@ -180,6 +180,8 @@
         </div> 
     </footer>
     
-    <script src="index.js"></script>
+    <script src="./js/index.js"></script>
+    <script src="./js/register.js"></script>
+    <script src="./js/demo.js"></script>
 </body>
 </html>
