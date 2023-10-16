@@ -1,3 +1,16 @@
+@font-face {
+    font-family: 'Forum';
+    src: url('./assets/fonts/Forum-Regular.ttf');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('./assets/fonts/Inter-Regular.ttf');
+    font-weight: 400;
+    font-style: normal;
+}
 
 * {
     margin: 0;
@@ -14,6 +27,11 @@ body {
     align-items: center;
     background-color: green;
     height: 100vh;
+    font-family: Forum;
+}
+
+main {
+    font-family: Inter;
 }
 
 #intro-screen {
@@ -88,12 +106,76 @@ body {
     cursor: pointer;
 }
 
+
 #register-popup {
     display: none;
-    flex-direction: column;
+    position: absolute;
+    width: 250px;
+    height: auto;
+    padding: 20px 25px;
+    background-color: white;
+    z-index: 2;
+}
+
+#popup-wrapper {
+    width: 100%;
+    padding: 0;
+}
+
+#popup-title {
+    margin-bottom: 20px;
+    text-align: center;   
+    font-family: Forum;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 20px; /* 100% */
+    letter-spacing: 0.4px;
+}
+
+.popup-label {
+    text-align: center;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 133.333% */
+    letter-spacing: 0.3px;
+}
+
+.popup-input {
+    box-sizing: border-box;
     width: 200px;
-    height: 300px;
-    background-color: bisque;
+    height: 20px;
+    padding: 0;    
+    margin: 10px 0;
+    flex-shrink: 0;
+    border: 1px solid #BB945F;
+}
+
+#popup-btn-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.popup-button {
+    box-sizing: border-box;
+    width: 75px;
+    height: 30px;
+    flex-shrink: 0;
+    margin: 10px 0;
+    border-radius: 2px;
+    border: 1px solid #0C0C0E;
+    color: #0C0C0E;
+    text-align: center;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1px;
+    background: white;
 }
 
 header {
@@ -181,6 +263,17 @@ header {
     border-radius: 5px;
 }
 
+#popup-title {
+    margin-bottom: 20px;
+    text-align: center;   
+    font-family: Forum;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 20px; /* 100% */
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
 main {
     position: relative;
     width: calc(var(--main-width) + 80px) ;
@@ -190,7 +283,7 @@ main {
     /* background-color: goldenrod; */
 }
 
-#power-layer {
+#power-layer, #intro-power-layer {
     position: absolute;
     top: 0;
     left: 0;
@@ -209,7 +302,7 @@ main {
     flex-direction: row;
     height: 100%;
     width: 100%;
-    border-radius: 15px;
+    border-radius: 30px;
     overflow: hidden;
 }
 
@@ -383,51 +476,6 @@ main {
     background-color: rgba(128, 128, 128, 0.3);
     z-index: 1;
 }
-
-/* 
-#ball {
-    position: absolute;
-    bottom: 60px;
-    left: 40px;    
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: white;
-} */
-/* 
-#launch-pad {
-    position: absolute;
-    bottom: 40px;
-    left: 0;
-    width: 100px;
-    height: 20px;
-    background-color:aqua;
-    border: 2px solid blue;
-    cursor: pointer;
-} */
-
-/* #power-layer {
-    display: none;
-    position: fixed;
-    align-items: center;
-    justify-content: center;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color:rgba(0, 0, 0, 0.8);
-    z-index: 2;
-} */
-
-
-#splashBox {
-    display: none;
-    width: auto;
-    height: calc(100vmin);
-    transform: translate(0, 0);
-    z-index: 3;
-}
-
 
 footer {
     display: flex;
