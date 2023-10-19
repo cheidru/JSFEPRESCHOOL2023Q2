@@ -524,3 +524,14 @@ footer a {
     border-radius: 5px;
 }
 
+@media (max-width: 600px) {
+    
+    #intro-screen {
+        background-image: url(./assets/img/master-mind-compact.svg), linear-gradient(to bottom, rgb(16, 31, 58) 60%, rgb(49, 77, 128));
+    }
+
+    #intro-screen-wrapper {
+        margin-left: 0;
+    }
+}
+
