@@ -80,8 +80,8 @@ function check_LogIn_Register_Input(status) {
 }
 
 
-// Check if localStorage has players with name/password contained in keyObject
-// Returns an array with object from localStore which meets keyObject keys, otherwise empty array
+// Check if localStorage has players with name/password contained in playerObject
+// Returns an array with object from localStore which meets playerObject keys, otherwise empty array
 function checkLocalStore(playerObject) {
     let result = [];
     // There's no 'readers' key in localStorage
@@ -110,21 +110,21 @@ function checkLocalStore(playerObject) {
 
 
 // Update user profile data
-function updateLocalStorageData(newplayer) {
+function updateLocalStorageData(newPlayer) {
     let arrPlayers = [];
 
     if (localStorage.getItem('readers') === null) {
         // There's no 'readers' key in localStorage
-        arrPlayers.push(newplayer);
+        arrPlayers.push(newPlayer);
     } else {    
         let storedPlayers = JSON.parse(localStorage.getItem('players'))
 
         // check each reader against activeUser
         for(player in storedPlayers) {
-            if (player.name == newpayer.name 
+            if (player.name == newPayer.name 
                 && reader.password == activeUser.password) {
                     // Update with activeUser data
-                    arrPlayers.push(newplayer);
+                    arrPlayers.push(newPlayer);
             } else {
                 arrPlayers.push(player);
             }

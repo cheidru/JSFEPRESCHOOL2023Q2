@@ -212,7 +212,36 @@ main {
     background-size: cover;
     background-repeat: no-repeat;
     border-radius: 10px;
+    z-index: 3;
+}
+
+#demo-popup {
+    position: absolute;
+    display: none;
+    align-items: center;
+    width: 300px;
+    height: auto;
+    padding: 20px;
+    justify-content: center;
+    background-color: wheat;
+    border-radius: 5px;
     z-index: 2;
+}
+
+@keyframes color-select1 {
+    59% {transform: translateX(-75px);}
+    to {transform: translate(-75px, 10px);}
+  }
+
+@keyframes color-select2 {
+    50% {transform: translate(-75px, 0);}
+    to {transform: translateX(0);}
+}
+
+@keyframes color-box-select {
+    from {transform: translateX(0);}
+    50% {transform: translateX(130px);}
+    to {transform: translate(130px, 230px) rotate(-90deg);}
 }
 
 header {
