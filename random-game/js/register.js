@@ -3,6 +3,7 @@ const goRegisterEng = document.getElementById('go-to-login-eng');
 const goRegisterRus = document.getElementById('go-to-login-rus');
 const goRegisterBTN = document.getElementById('register-btn');
 const introPowerLayer = document.getElementById('intro-power-layer');
+const message = document.getElementById('reg-message');
 
 goRegisterRus.onclick = (event) => {
     event.stopPropagation();
@@ -18,41 +19,64 @@ goRegisterBTN.onclick = (event) => {event.stopPropagation(); goRegister()};
 registerWindow.onclick = (event) => {event.stopPropagation()};
 
 function goRegister() {
+    if (playerRegistered) return;
     introPowerLayer.style.display = 'flex';
     registerWindow.style.display = 'block';
 }
 
 
-const registerBTN = document.getElementById('register-btn');
+const registerBTN = document.getElementById('reg-btn');
 const logInBTN = document.getElementById('signup-btn');
 const registerName = document.getElementById('name');
 const registerPass = document.getElementById('password');
 
-let players = []; // Array to store player info objects in LocalStore
 let player = {}; // Player info object to store in players array
 player.name = "";
 player.password = "";
 player.visits = 0;
 player.score = [];
 
-registerBTN.onclick = () => check_LogIn_Register_Input('new');
-logInBTN.onclick = () => check_LogIn_Register_Input('old');
-let checkInput = {};
+let dummyPlayerExists = false;
+let playerRegistered = false;
 
-function check_LogIn_Register_Input(user) {
-    checkInput.name = registerName.value;
-    checkInput.password = registerPass.value;
+let dummyPlayer = {
+    name: 'anonymous',
+    password: '',
+    visits: 10,
+    score: [100, 100, 200, 200, 200, 200, 300, 300, 300, 400, 400]
+}
 
-    let registrationResult = checkLocalStore(checkInput);
+if(dummyPlayerExists == false) {
+    updateLocalStorageData(dummyPlayer);
+    dummyPlayerExists = true;
+}
 
-    if (registrationResult > 0) {
-        // You successfuly logged in
+registerBTN.onclick = () => check_LogIn_Register_Input('register');
+
+logInBTN.onclick = () => check_LogIn_Register_Input('login');
+
+function check_LogIn_Register_Input(status) {
+    player.name = registerName.value;
+    player.password = registerPass.value;
+    registerWindow.style.display = 'none';
+    let registrationResult = checkLocalStore(player);
+    console.log('registrationResult =', registrationResult);
+    message.style.display = 'flex';
+
+    if (registrationResult > 0 && status == 'login') {
+        message.textContent = 'You logged in';
+    } else if (registrationResult > 0 && status == 'register') {
+        message.textContent = 'You are already registered';
+    } else if (registrationResult == 0 && status == 'login') {
+        message.textContent = "You were not registered. But you're registered now.";
+        updateLocalStorageData(player);
     } else {
-        // You are successfuly registered
-        let messageInnerHTML = "<p>Please, check your input:</p> There is no such reader registered <br>or card number is not correct";
-        let windowWidth = '300px';
-        messageWindow(messageInnerHTML, windowWidth);    
+        message.textContent = 'You are registered';
+        updateLocalStorageData(player);
     }
+
+    playerRegistered = true;
+    goRegisterBTN.style.opacity = '0.5';
 }
 
 
@@ -86,28 +110,26 @@ function checkLocalStore(playerObject) {
 
 
 // Update user profile data
-function updateLocalStorageData() {
-    let arrReaders = [];
+function updateLocalStorageData(newplayer) {
+    let arrPlayers = [];
 
     if (localStorage.getItem('readers') === null) {
         // There's no 'readers' key in localStorage
-        arrReaders.push(activeUser);
+        arrPlayers.push(newplayer);
     } else {    
-        let storedReaders = JSON.parse(localStorage.getItem('readers'))
+        let storedPlayers = JSON.parse(localStorage.getItem('players'))
 
         // check each reader against activeUser
-        for(reader of storedReaders) {
-            if (reader.firstName == activeUser.firstName 
-                && reader.lastName == activeUser.lastName
-                && reader.password == activeUser.password
-                && reader.cardCode == activeUser.cardCode) {
+        for(player in storedPlayers) {
+            if (player.name == newpayer.name 
+                && reader.password == activeUser.password) {
                     // Update with activeUser data
-                    arrReaders.push(activeUser);
+                    arrPlayers.push(newplayer);
             } else {
-                    arrReaders.push(reader);
+                arrPlayers.push(player);
             }
         }
     }
-    let newReadersString = JSON.stringify(arrReaders)   
-    localStorage.setItem('readers', newReadersString);
+    let newPlayersString = JSON.stringify(arrPlayers)   
+    localStorage.setItem('players', newPlayersString);
 }

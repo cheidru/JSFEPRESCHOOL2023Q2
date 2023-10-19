@@ -64,13 +64,13 @@
                 <input type="text" class="popup-input" id="password">
 
                 <div id="popup-btn-wrapper">
-                    <button class="popup-button" id="register-btn">Register</button>
+                    <button class="popup-button" id="reg-btn">Register</button>
                     <button class="popup-button" id="signup-btn">Log In</button>
                 </div>
             </div>
         </div>
 
-
+        <div id="reg-message"></div>
     </div>
     <div id="power-layer"></div>
 
@@ -79,7 +79,8 @@
             <h1>Master Mind</h1>
             <div id="score-display">
                 <div>Your score is</div>
-                <div id="score">700</div> 
+                <div id="score">700</div>
+                <div>Check the match</div>
             </div>
 
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="settings-svg">
@@ -104,6 +105,7 @@
     </header>
 
     <main>
+        <div id="demo-hand"></div>
         <audio src="./assets/audio/win.ogg" id="win-audio"></audio>
         <audio src="./assets/audio/tap.ogg" id="tap-audio"></audio>
         <!-- <audio src="./assets/audio/palette.ogg" id="palette"></audio> -->
@@ -112,6 +114,11 @@
         <audio src="./assets/audio/divine.ogg" id="divine-audio"></audio>
 
         <div id="play-field-wrapper">
+
+
+
+
+
             <div id="check-window">Check the match</div>
 
             <div id="win-window">
@@ -131,7 +138,6 @@
                     <div id="exit-play-game">Exit the game?</div>
                 </div>
             </div>
-
             
             <div id="palette">
                 <div class="palette-color-box" id="palette-1"></div>
@@ -157,6 +163,12 @@
                         <div class="color result-color" id="result-color-1" title="Color match"></div>
 
                     </div>
+                </div>
+
+                <div id="display-result">
+                    <div>Your total score</div>
+                    <div>Show best results</div>
+
                 </div>
             </div>
 

@@ -39,12 +39,12 @@ const audioDivine = document.getElementById('divine-audio');
 const audioFail = document.getElementById('fail-audio');
 const audioNewAttempt = document.getElementById('new-attempt');
 
-const player = {};
-player.level = 0;
-player.score = 700;
-player.games = 0;
-player.visits = 0;
-player.selectedPalette = 1;
+const activePlayer = {};
+activePlayer.level = 0;
+activePlayer.score = 700;
+activePlayer.games = 0;
+activePlayer.visits = 0;
+activePlayer.selectedPalette = 1;
 
 const colorPalette = [
     ['white', 'black'],
@@ -58,7 +58,7 @@ const gameLevel = [
     {colors: 4, positions: 6, palette: colorPalette[1]}
 ];
 
-let selectedLevel = player.level;
+let selectedLevel = activePlayer.level;
 
 // This is the code to puzzle out
 let secretCode = [];
@@ -179,7 +179,7 @@ function cleanField() {
     currentAttemptNumber = 0;
     startNewAttempt();
     attempt[0].remove();
-    player.score = 700;
+    activePlayer.score = 700;
 
     attemptNumber[currentAttemptNumber].textContent = currentAttemptNumber;
     attemptNumber = document.querySelectorAll('.attempt-number');
@@ -249,8 +249,8 @@ function startNewAttempt() {
     shutter = document.querySelectorAll('.shutter');
 
     currentAttemptNumber++;
-    player.score = player.score - 100;
-    score.textContent = player.score;
+    activePlayer.score = activePlayer.score - 100;
+    score.textContent = activePlayer.score;
 
     shutter[currentAttemptNumber].style.display = 'none';
     attemptNumber[currentAttemptNumber].textContent = currentAttemptNumber + 1;
@@ -275,7 +275,7 @@ function startNewAttempt() {
 
 function gameIni() {
     // fill in palette with colors
-    gamePalette = colorPalette[player.selectedPalette];
+    gamePalette = colorPalette[activePlayer.selectedPalette];
     if (selectedLevel == 0) gamePalette = colorPalette[0];
 
     for (let i = 0; i < gameLevel[selectedLevel].colors; i++) {
@@ -310,9 +310,9 @@ function gameIni() {
         audioTap.play();
     });
 
-    if (player.visits == 0) playDemo();
+    if (activePlayer.visits == 0) playDemo();
 
-    // show Player settings and stat (and secret code in design ver)
+    // show activePlayer settings and stat (and secret code in design ver)
 }
 
 function codeGenerator() {
@@ -347,6 +347,7 @@ anywhere.addEventListener('click', () => {
     introTextRus.style.display = 'none';
     introPowerLayer.style.display = 'none';
     registerWindow.style.display = 'none';
+    message.style.display = 'none';
 });
 
 function playDemo() {};
