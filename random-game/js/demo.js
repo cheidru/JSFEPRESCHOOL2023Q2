@@ -9,14 +9,24 @@ demoText[2] = 'Click "Check the match" to show result'
 demoText[3] = 'If you are lost, click "Show code" to cheat the game'
 demoText[4] = 'Push "ESC" button if you got sick of the game'
 
-let demoKeyFrame = [];
-demoKeyFrame[0] = `
-    @keyframes color-select {
-    from {}
-    80% {transform: translateX(-75px);}
-    to {transform: translateY(5px);}
-  }`
+let targetCoordinate = [];
+targetCoordinate[0] = {
+    x: paletteColorBox[0].getBoundingClientRect().right,
+    y: paletteColorBox[0].getBoundingClientRect().bottom,
 
+}
+
+let handOffset = [];
+handOffset[0] = {
+    x: paletteColorBox[0].getBoundingClientRect().right * 0.5,
+    y: 100
+}
+
+let tipOffset = [];
+tipOffset[0] = {
+    x: 900,
+    y: 350
+}
 
 
 demo.onclick = (event) => {
@@ -25,12 +35,12 @@ demo.onclick = (event) => {
     gameIni();
     powerLayer.style.display = 'flex';
     paletteColorBox[0].style.zIndex = '2';
-    paletteColorBox[0].getBoundingClientRect().right
     hand.style.display = 'block';
-    hand.style.right = (paletteColorBox[0].getBoundingClientRect().right + 450) + 'px';
-    hand.style.bottom = (paletteColorBox[0].getBoundingClientRect().bottom - 40) + 'px';
-    tip.style.right = (paletteColorBox[0].getBoundingClientRect().right + 100) + 'px';
-    tip.style.bottom = (paletteColorBox[0].getBoundingClientRect().bottom - 100) + 'px';
+    
+    hand.style.left = (paletteColorBox[0].getBoundingClientRect().right + 40) + 'px';
+    hand.style.bottom = (paletteColorBox[0].getBoundingClientRect().bottom + 40) + 'px';
+    tip.style.left = (paletteColorBox[0].getBoundingClientRect().right + 150) + 'px';
+    tip.style.bottom = paletteColorBox[0].getBoundingClientRect().bottom + 'px';
     tip.textContent = demoText[0];
     tip.style.display = 'flex';
 
@@ -43,19 +53,43 @@ demo.onclick = (event) => {
         hand.style.transform = 'translate(-75px, 10px)';
         hand.style.animationName = 'color-select2';
         hand.style.animationDuration = '1s';
-        hand.style.animationFillMode = 'forwards';}, 800);
+        hand.style.animationFillMode = 'forwards';
+    }, 1000);
 
     setTimeout(() => {
-        tip.style.transition = '2s';
-        tip.style.right = (paletteColorBox[0].getBoundingClientRect().right - 100) + 'px';
-        tip.textContent = demoText[1];
+        tip.style.display = 'none';
         attempt[0].style.zIndex = '2';
-        hand.style.animationName = 'color-box-select';
-        hand.style.animationDuration = '3s';
-        hand.style.animationFillMode = 'forwards';}, 2000);
+        hand.style.animationName = 'color-box-select1';
+        hand.style.animationDuration = '2s';
+        hand.style.animationFillMode = 'forwards';
+    }, 3000);
+
+    setTimeout(() => {
+        tip.style.left = (color[0].getBoundingClientRect().right + 200) + 'px';
+        tip.style.bottom = (window.innerHeight - color[0].getBoundingClientRect().bottom + 200) + 'px';
+        tip.textContent = demoText[1];
+        tip.style.display = 'flex';
+    }, 4000);
 
 
 
+
+    setTimeout(() => {
+        for(let i = 1; i < 4; i++) {
+            setTimeout(() => {
+                hand.style.left = (color[i-1].getBoundingClientRect().right - 40) + 'px';
+                color[i-1].style.backgroundColor = 'white';
+                hand.style.animationDuration = '2s';
+                hand.style.animationFillMode = 'forwards';
+                hand.style.animationName = 'color-box-select2';  
+            }, 1000 * i);
+         
+            }
+    }, 5000);
+
+    setTimeout(() => {
+        color[3].style.backgroundColor = 'white';
+    }, 8500);
 
     // Показать руку, один цвет палитры
     // Рука перемещается к палитре и 
