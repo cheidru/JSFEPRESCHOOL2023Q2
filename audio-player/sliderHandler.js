@@ -39,8 +39,8 @@ function sliderMoveHandler(thumbObject, trackObject, sliderMaxValue, thumbPositi
                     thumbObject.style.transform = `translateX(${trackObject.getBoundingClientRect().width}px)`
                     trackPosition = audioList[audioTrack.number].time;
                 } else {
-                    thumbObject.style.transform = `translateX(${event.pageX - startPosition}px)`;
-                    trackPosition = (event.pageX - startPosition) / sliderUnit;
+                    thumbObject.style.transform = `translateX(${event.pageX - startPosition + thumbOffset / 2 - poinerWidth}px)`;
+                    trackPosition = (event.pageX - startPosition + thumbOffset / 2 - poinerWidth) / sliderUnit;
                 }
                 thumbPosition.position = trackPosition;
                 audioTrack.currentTime = trackPosition;

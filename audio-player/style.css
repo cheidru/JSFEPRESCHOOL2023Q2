@@ -139,7 +139,8 @@ body {
 
 #progress-bar-wrapper {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: start;
     flex-grow: 1;
     width: auto;
 }
@@ -209,12 +210,26 @@ body {
     border-radius: 10px;
     cursor: pointer;
     user-select: none;
+    order: 1;
+}
+
+#song-text-wrapper {
+    display: none;
+    margin-bottom: 10px;
+    height: 1.5rem;
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
 }
 
 #song-text {
-    visibility: hidden;
+    display: inline-block;
     height: 100%;
-    cursor: pointer;
+    width: max-content;
+    text-align: center;
+    font-family: 'Inter';
+    font-size: 1.2rem;
+    user-select: none;
 }
 
 #lyrics:hover {

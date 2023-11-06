@@ -12,48 +12,64 @@ const progressBarThumb = document.getElementById('thumb-wrapper');
 const author = document.getElementById('author');
 const title = document.getElementById('song-name');
 const lyricsBTN = document.getElementById('lyrics');
-const lyricsDisplay = document.getElementById('song-text');
+const lyricsDisplay = document.getElementById('song-text-wrapper');
+const lyricsText = document.getElementById('song-text');
 
 
 let audioList = [
     {src: './assets/audio/doris_day-tic_tic__tic.mp3',
-     time: 157,
+     time: 156,
      img: './assets/img/doris_day.jpg', 
      author: 'Doris Day', 
-     title: 'Tic, Tic, Tic'
+     title: 'Tic, Tic, Tic',
+     // lyricsGaps where music plays but singer doesn't sing
+     lyricsGaps: [{start: 0, duration: 3.40}, {start: 150, duration: 6}],
+     tempoKey: 2250 
     },
     {src: './assets/audio/sixty_minute_man.mp3', 
      time: 151, 
      img: './assets/img/billy_ward_the_dominoes.jpg', 
      author: 'Billy Ward', 
-     title: 'Sixty Minute Man'
+     title: 'Sixty Minute Man',
+     lyricsGaps: [{start: 0, duration: 0}, {start: 0, duration: 0}, {start: 0, duration: 0},],
+     tempoKey: 2250
     },
     {src: './assets/audio/nat-king-cole-unforgettable.mp3', 
      time: 208, 
      img: './assets/img/NatKingCole.jpg', 
      author: 'Nat King Cole', 
-     title: 'Unforgettable'
+     title: 'Unforgettable',
+     lyricsGaps: [{start: 0, duration: 0}, {start: 0, duration: 0}, {start: 0, duration: 0},],
+     tempoKey: 2250
     },
     {src: './assets/audio/uranium_fever.mp3', 
     time: 139, 
     img: './assets/img/EltonBritt.jpg', 
     author: 'Elton Britt', 
-    title: 'Uranium Fever'
+    title: 'Uranium Fever',
+    lyricsGaps: [{start: 0, duration: 0}, {start: 0, duration: 0}, {start: 0, duration: 0},],
+    tempoKey: 2250
     }
 ];
 
 // Object property can be updated from within of any function. No need to return the value
+
+// Initialise
 let startPlayAt = {
     position: 0
 }
-
 let thumbOffset = 0;
-
-// Initialise
-
+let lyricsGap = {};
+lyricsGap.start = 0;
+lyricsGap.end = 0;
+let poinerWidth = 2;
 let intervalsId = 0;
 audioTrack.number = 0;
 let durationRounded = 0;
+let activeLyrics = {};
+
+// Offset of lyrics position relative to audioTrack.currentTime considering total gaps passed
+let lyricsGapOffset = 0;
 
 author.textContent = audioList[audioTrack.number].author;
 title.textContent = audioList[audioTrack.number].title;
@@ -61,9 +77,19 @@ songCover.src = audioList[audioTrack.number].img;
 durationRounded = audioList[audioTrack.number].time;
 audioTrack.src = audioList[audioTrack.number].src;
 
-playBTN.addEventListener('click', () => {
-    audioTrack.paused ? playLoops() : stopPlaying()
-});
+playBTN.addEventListener('click', audioPlayPause);
+
+document.addEventListener('keydown', (e) => {
+    if(e.code === 'Space') {
+        e.preventDefault();
+        audioPlayPause();
+    }
+
+})
+
+function audioPlayPause() {
+    audioTrack.paused ? playLoops() : stopPlaying();
+}
 
 forwardBTN.addEventListener('click', (e) => {
     changeAudio(1);
@@ -75,16 +101,62 @@ backwardBTN.addEventListener('click', (e) => {
     playLoops();
 })
 
-// lyricsBTN.addEventListener('dblclick', () => {
-//         lyricsBTN.style.visibility = 'hidden';
-//         lyricsDisplay.style.visibility = 'show';
-//         lyricsDisplay.style.width = (sliderThumb.getBoundingClientRect().width + 20) + 'px';
-// })
+lyricsBTN.addEventListener('dblclick', () => {
+        lyricsBTN.style.display = 'none';
+        lyricsDisplay.style.width = (progressBarTrack.getBoundingClientRect().width + 20) + 'px';
+        // lyricsDisplay.style.order = '1';
+        lyricsDisplay.style.display = 'block';
+        playLyrics();
+})
 
-// lyricsDisplay.addEventListener('dblclick', () => {
-//     lyricsBTN.style.visibility = 'show';
-//     lyricsDisplay.style.visibility = 'hidden';
-// })
+lyricsDisplay.addEventListener('dblclick', () => {
+    lyricsBTN.style.display = 'block';
+    lyricsDisplay.style.display = 'none';
+})
+
+function playLyrics() {
+    // activeLyrics.len = audioList[audioTrack.number].lyrics.split('').join().length;
+    // activeLyrics.tempo = (audioTrack.duration / activeLyrics.len) * audioList[audioTrack.number].tempoKey;
+    let lyrStr = audioList[audioTrack.number].lyrics.replace(/\n/g, ' ').trim();
+    activeLyrics.words = lyrStr.split(' ');
+    activeLyrics.lyricsGapIndex = 0;
+    activeLyrics.lyricsStringIndex = 0;
+    wordsToStrings();
+    activeLyrics.stringChangeInterval = audioTrack.duration / activeLyrics.strings.length;
+    lyricsText.textContent = activeLyrics.strings[0];
+    lyricsGap.start = audioList[audioTrack.number].lyricsGaps[0].start;
+    lyricsGapOffset = audioList[audioTrack.number].lyricsGaps[0].duration;
+    lyricsGap.end = lyricsGap.start + lyricsGapOffset;
+
+}
+
+function wordsToStrings() {
+    // Make array of strings who's width fit wrapper
+    activeLyrics.strings = [];
+    // lyricsBTN.style.zIndex = '1';
+    // lyricsDisplay.style.display = 'block';
+    // lyricsDisplay.style.zIndex = '0';
+    lyricsText.style.color = 'rgba(255, 249, 196)';
+    let frameWidth = progressBarTrack.getBoundingClientRect().width;
+
+    let i = 0;
+    while (i < activeLyrics.words.length) {
+        let tmpArr = [];
+        for(; i < activeLyrics.words.length; i++) {
+            tmpArr.push(activeLyrics.words[i]);
+            lyricsText.textContent = tmpArr.join(' ');
+            if (lyricsText.getBoundingClientRect().width + 20 >= frameWidth) {
+                i--;
+                tmpArr.pop();
+                activeLyrics.strings.push(tmpArr.join(' '));
+                lyricsText.textContent = '';
+                break;
+            }
+        }
+    }
+    lyricsText.style.color = 'unset';
+}
+
 
 function changeAudio(number) {
     audioTrack.number = audioTrack.number + number < 0 ? 3 : audioTrack.number + number > 3 ? 0 : audioTrack.number + number;
@@ -97,7 +169,7 @@ function changeAudio(number) {
     startPlayAt.position = 0;
     playTime.textContent = `0 / ${durationRounded}`;
     progressBarThumb.style.transform = 'translateX(0)';
-    
+    playLyrics();
 // Parameters function sliderMoveHandler(thumbObject, trackObject, sliderMaxValue, thumbPosition, offsetKey, sliderHandlerFoo, valueDisplayObject, valueDisplayTextFormat)    
     sliderMoveHandler(sliderThumb, progressBarTrack, durationRounded, startPlayAt, 1, undefined, timeIndicator, playTimeFormat);
 }
@@ -140,15 +212,34 @@ function playLoops() {
         // Add 0.001 to avoid endless cycle because audioList[audioTrack.number].time manually set to integer
         if ((progressBarThumbPosition + 0.001) < 1) {
             progressBarThumb.style.transform = `translateX(${(progressBarThumbPosition * progressBarTrack.getBoundingClientRect().width)}px)`;
+            // Move subtitles if not gap in singing
+            if(audioTrack.currentTime < lyricsGap.start || audioTrack.currentTime > lyricsGap.end || activeLyrics.lyricsGapIndex == -1) {
+                if(audioTrack.currentTime > lyricsGap.end && activeLyrics.lyricsGapIndex != -1) {
+                    activeLyrics.lyricsGapIndex = activeLyrics.lyricsGapIndex + 1 >= audioList[audioTrack.number].lyricsGaps.length ? -1 : activeLyrics.lyricsGapIndex + 1;
+                    if(activeLyrics.lyricsGapIndex >= 0) {
+                        lyricsGap.start = audioList[audioTrack.number].lyricsGaps[activeLyrics.lyricsGapIndex].start;
+                        // lyricsGapOffset = lyricsGapOffset + ;
+                        lyricsGap.end = lyricsGap.start + audioList[audioTrack.number].lyricsGaps[activeLyrics.lyricsGapIndex].duration;
+                    }
+                }
+                if(activeLyrics.lyricsStringIndex >= activeLyrics.stringChangeInterval * (activeLyrics.lyricsStringIndex + 1)) {
+                    activeLyrics.lyricsStringIndex++;
+                    lyricsText.textContent = activeLyrics.strings[activeLyrics.lyricsStringIndex];
+                }
+
+                // lyricsText.style.transform = `translateX(-${(activeLyrics.tempo * (audioTrack.currentTime - lyricsGapOffset))}px)`;
+            }
+            // console.log(audioTrack.currentTime, lyricsGap.start, lyricsGap.end, lyricsGapOffset);
         } else {
             clearInterval(intervalsId);
             playBTN.classList.remove('pause');
             playBTN.classList.add('play');
             startPlayAt.position = 0;
             progressBarThumb.style.transform = 'translateX(0)';
+            // Move subtitles
+            lyricsText.style.transform = 'translateX(0)';
             playTime.textContent = playTimeFormat(startPlayAt.position, audioList[audioTrack.number].time);
         }
-        console.log('progressBarThumbPosition =', progressBarThumbPosition);
     }, 30);
 
 }
