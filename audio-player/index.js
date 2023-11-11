@@ -6,7 +6,6 @@ const playBTN = document.getElementById('play-btn');
 const songCover = document.getElementById('cover-img');
 const sliderThumb = document.getElementById('thumb-wrapper');
 const timeIndicator = document.getElementById('player-time');
-const playTime = document.getElementById('player-time');
 const progressBarTrack = document.getElementById('scale');
 const progressBarThumb = document.getElementById('thumb-wrapper');
 const author = document.getElementById('author');
@@ -24,6 +23,7 @@ let audioList = [
      title: 'Tic, Tic, Tic',
      // lyricsGaps where music plays but singer doesn't sing
      lyricsGaps: [{start: 0, duration: 3.40}, {start: 150, duration: 6}],
+     lyricsDuration: 145,
      tempoKey: 2250 
     },
     {src: './assets/audio/sixty_minute_man.mp3', 
@@ -32,6 +32,7 @@ let audioList = [
      author: 'Billy Ward', 
      title: 'Sixty Minute Man',
      lyricsGaps: [{start: 0, duration: 0}, {start: 0, duration: 0}, {start: 0, duration: 0},],
+     lyricsDuration: 0,
      tempoKey: 2250
     },
     {src: './assets/audio/nat-king-cole-unforgettable.mp3', 
@@ -104,8 +105,7 @@ backwardBTN.addEventListener('click', (e) => {
 lyricsBTN.addEventListener('dblclick', () => {
         lyricsBTN.style.display = 'none';
         lyricsDisplay.style.width = (progressBarTrack.getBoundingClientRect().width + 20) + 'px';
-        // lyricsDisplay.style.order = '1';
-        lyricsDisplay.style.display = 'block';
+        lyricsDisplay.style.display = 'flex';
         playLyrics();
 })
 
@@ -122,7 +122,14 @@ function playLyrics() {
     activeLyrics.lyricsGapIndex = 0;
     activeLyrics.lyricsStringIndex = 0;
     wordsToStrings();
-    activeLyrics.stringChangeInterval = audioTrack.duration / activeLyrics.strings.length;
+
+
+
+
+    activeLyrics.stringChangeInterval = audioList[audioTrack.number].lyricsDuration / activeLyrics.strings.length;
+
+
+
     lyricsText.textContent = activeLyrics.strings[0];
     lyricsGap.start = audioList[audioTrack.number].lyricsGaps[0].start;
     lyricsGapOffset = audioList[audioTrack.number].lyricsGaps[0].duration;
@@ -133,9 +140,6 @@ function playLyrics() {
 function wordsToStrings() {
     // Make array of strings who's width fit wrapper
     activeLyrics.strings = [];
-    // lyricsBTN.style.zIndex = '1';
-    // lyricsDisplay.style.display = 'block';
-    // lyricsDisplay.style.zIndex = '0';
     lyricsText.style.color = 'rgba(255, 249, 196)';
     let frameWidth = progressBarTrack.getBoundingClientRect().width;
 
@@ -146,7 +150,6 @@ function wordsToStrings() {
             tmpArr.push(activeLyrics.words[i]);
             lyricsText.textContent = tmpArr.join(' ');
             if (lyricsText.getBoundingClientRect().width + 20 >= frameWidth) {
-                i--;
                 tmpArr.pop();
                 activeLyrics.strings.push(tmpArr.join(' '));
                 lyricsText.textContent = '';
@@ -167,14 +170,14 @@ function changeAudio(number) {
     durationRounded = audioList[audioTrack.number].time;
     stopPlaying();
     startPlayAt.position = 0;
-    playTime.textContent = `0 / ${durationRounded}`;
+    timeIndicator.textContent = `0 / ${durationRounded}`;
     progressBarThumb.style.transform = 'translateX(0)';
     playLyrics();
 // Parameters function sliderMoveHandler(thumbObject, trackObject, sliderMaxValue, thumbPosition, offsetKey, sliderHandlerFoo, valueDisplayObject, valueDisplayTextFormat)    
-    sliderMoveHandler(sliderThumb, progressBarTrack, durationRounded, startPlayAt, 1, undefined, timeIndicator, playTimeFormat);
+    sliderMoveHandler(sliderThumb, progressBarTrack, durationRounded, startPlayAt, 1, undefined, timeIndicator, timeIndicatorFormat);
 }
 
-let playTimeFormat = function makePlayerTimeFormatString(trackPosition, durationRounded) {
+let timeIndicatorFormat = function makePlayerTimeFormatString(trackPosition, durationRounded) {
     // ToDo
     // Add hours for real application if needed
     const currentTime = Math.round(trackPosition);
@@ -196,7 +199,7 @@ function stopPlaying() {
     playBTN.classList.add('play');
 }
 
-sliderMoveHandler(sliderThumb, progressBarTrack, audioList[audioTrack.number].time, startPlayAt, 1, undefined, timeIndicator, playTimeFormat);
+sliderMoveHandler(sliderThumb, progressBarTrack, audioList[audioTrack.number].time, startPlayAt, 1, undefined, timeIndicator, timeIndicatorFormat);
 
 function playLoops() {
     audioTrack.currentTime = startPlayAt.position == audioList[audioTrack.number].time ? 0 : startPlayAt.position;
@@ -206,7 +209,7 @@ function playLoops() {
 
     intervalsId = setInterval(() => {
         // display current play time on screen
-        playTime.textContent = playTimeFormat(audioTrack.currentTime, audioList[audioTrack.number].time);
+        timeIndicator.textContent = timeIndicatorFormat(audioTrack.currentTime, audioList[audioTrack.number].time);
         // move progress bar Thumb according to the current play time
         let progressBarThumbPosition = audioTrack.currentTime/audioList[audioTrack.number].time;
         // Add 0.001 to avoid endless cycle because audioList[audioTrack.number].time manually set to integer
@@ -222,7 +225,7 @@ function playLoops() {
                         lyricsGap.end = lyricsGap.start + audioList[audioTrack.number].lyricsGaps[activeLyrics.lyricsGapIndex].duration;
                     }
                 }
-                if(activeLyrics.lyricsStringIndex >= activeLyrics.stringChangeInterval * (activeLyrics.lyricsStringIndex + 1)) {
+                if(audioTrack.currentTime >= activeLyrics.stringChangeInterval * (activeLyrics.lyricsStringIndex + 1)) {
                     activeLyrics.lyricsStringIndex++;
                     lyricsText.textContent = activeLyrics.strings[activeLyrics.lyricsStringIndex];
                 }
@@ -238,7 +241,7 @@ function playLoops() {
             progressBarThumb.style.transform = 'translateX(0)';
             // Move subtitles
             lyricsText.style.transform = 'translateX(0)';
-            playTime.textContent = playTimeFormat(startPlayAt.position, audioList[audioTrack.number].time);
+            timeIndicator.textContent = timeIndicatorFormat(startPlayAt.position, audioList[audioTrack.number].time);
         }
     }, 30);
 

@@ -215,6 +215,8 @@ body {
 
 #song-text-wrapper {
     display: none;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 10px;
     height: 1.5rem;
     width: 100%;
