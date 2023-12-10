@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="106.53899mm"
+   height="27.843689mm"
+   viewBox="-5 0 116.53899 27.843689"
+   version="1.1"
+   id="svg577"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs574">
+    <linearGradient
+       id="linearGradient10672">
+      <stop
+         style="stop-color:#f9f82f;stop-opacity:1;"
+         offset="0"
+         id="stop10668" />
+      <stop
+         style="stop-color:#ff0b26;stop-opacity:1;"
+         offset="1"
+         id="stop10670" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient10641">
+      <stop
+         style="stop-color:#f215ab;stop-opacity:1;"
+         offset="0"
+         id="stop10637" />
+      <stop
+         style="stop-color:#ff5548;stop-opacity:1;"
+         offset="1"
+         id="stop10639" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient9640">
+      <stop
+         style="stop-color:#18f3a5;stop-opacity:1;"
+         offset="0"
+         id="stop9638" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#linearGradient10641"
+       id="linearGradient10643"
+       x1="43.625374"
+       y1="127.16017"
+       x2="150.16437"
+       y2="127.16017"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       xlink:href="#linearGradient10672"
+       id="linearGradient10674"
+       x1="43.625374"
+       y1="127.16017"
+       x2="150.16437"
+       y2="127.16017"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-43.625372,-113.23833)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.2889px;font-family:'Cooper Black';-inkscape-font-specification:'Cooper Black, ';fill:#000000;stroke:none;stroke-width:0.348456;stroke-linecap:round;stroke-linejoin:round"
+       x="18.559086"
+       y="57.752945"
+       id="text913"><tspan
+         id="tspan911"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.2889px;font-family:'Cooper Black';-inkscape-font-specification:'Cooper Black, ';fill:#000000;stroke:none;stroke-width:0.348456"
+         x="18.559086"
+         y="57.752945">Master Mind</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.2889px;font-family:'Freestyle Script';-inkscape-font-specification:'Freestyle Script';fill:#000000;stroke:none;stroke-width:0.348456;stroke-linecap:round;stroke-linejoin:round"
+       x="16.727598"
+       y="69.230278"
+       id="text1623"><tspan
+         id="tspan1621"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Freestyle Script';-inkscape-font-specification:'Freestyle Script';stroke-width:0.348456"
+         x="16.727598"
+         y="69.230278">Master Mind</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.2889px;font-family:'Monotype Corsiva';-inkscape-font-specification:'Monotype Corsiva';fill:#000000;stroke:none;stroke-width:0.348456;stroke-linecap:round;stroke-linejoin:round"
+       x="16.971796"
+       y="82.294891"
+       id="text1627"><tspan
+         id="tspan1625"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Monotype Corsiva';-inkscape-font-specification:'Monotype Corsiva';stroke-width:0.348456"
+         x="16.971796"
+         y="82.294891">Master Mind</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.1752px;font-family:Ravie;-inkscape-font-specification:Ravie;letter-spacing:1.05833px;word-spacing:1.05833px;fill:url(#linearGradient10674);fill-opacity:1;stroke:url(#linearGradient10643);stroke-width:0.344946;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       id="text1631"><textPath
+         xlink:href="#path7517"
+         id="textPath10430"
+         style="fill:url(#linearGradient10674);fill-opacity:1;stroke:url(#linearGradient10643)"><tspan
+           id="tspan1629"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ravie;-inkscape-font-specification:Ravie;fill:url(#linearGradient10674);fill-opacity:1;stroke:url(#linearGradient10643);stroke-width:0.344946;stroke-opacity:1">Master Mind</tspan></textPath></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.2889px;font-family:'Bernard MT Condensed';-inkscape-font-specification:'Bernard MT Condensed, ';fill:#000000;stroke:none;stroke-width:0.348456;stroke-linecap:round;stroke-linejoin:round"
+       x="19.047483"
+       y="110.62191"
+       id="text1635"><tspan
+         id="tspan1633"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Bernard MT Condensed';-inkscape-font-specification:'Bernard MT Condensed, ';stroke-width:0.348456"
+         x="19.047483"
+         y="110.62191">Master Mind</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.2889px;font-family:Arial;-inkscape-font-specification:Arial;fill:#000000;stroke:none;stroke-width:0.348456;stroke-linecap:round;stroke-linejoin:round"
+       x="17.82649"
+       y="33.699394"
+       id="text1639"><tspan
+         id="tspan1637"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;stroke-width:0.348456"
+         x="17.82649"
+         y="33.699394">Master Mind</tspan></text>
+    <path
+       style="fill:none;stroke:none;stroke-width:0.826511;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       d="m 44.553803,125.73393 c 10.654035,6.38049 21.307825,12.76083 29.943251,14.30046 8.635425,1.53963 15.251787,-1.76086 20.739409,-5.42031 5.487617,-3.65945 9.846287,-7.67742 15.637687,-10.04498 5.79141,-2.36755 13.01522,-3.08506 19.6526,-0.96833 6.63738,2.11673 12.68854,7.06747 15.61115,9.50705 2.92262,2.43958 2.7164,2.36784 2.50981,2.29596"
+       id="path7517" />
+  </g>
+</svg>
