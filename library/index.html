@@ -8,8 +8,15 @@
     <title>Welcome to the Brooklyn Library</title>
 </head>
 <body>
+
     <div id="main-wrapper">
-        <header>
+
+        <div id="error-message-box" class="hidden-popup"></div>
+        <div id="error-power-layer" class="hidden-popup"></div>
+    
+        <div id="power-layer" class="hidden-popup"></div>
+
+        <header>          
             <h1 id="header-title">Brooklyn Public Library</h1>
             <div id="nav-wrapper">
                 <nav>
@@ -21,9 +28,161 @@
                         <li><a href="#library-card">Library Сard</a></li>
                     </ul>
                 </nav>
-                <a id="profile" href="#"><img src="./assets/img/icon_profile.svg" alt="profile" id="profile-svg"></a>
-                <div class="burger-button"> </div>                
+                <div id="profile"><img src="./assets/img/icon_profile.svg" alt="profile"></div>
+                <div class="burger-button"> </div>
+
+                
+                <!-- Modal windows START -->
+                <div id="login-ini-popup" class="hidden-popup">
+                    <p>Profile</p>
+                    <p id="login-btn">Log in</p>
+                    <p id="register-btn">Register</p>
+                </div>
+
+                <div id="profile-mini-popup" class="hidden-popup">
+                    <p id="profile-minipopup-title">Profile</p>
+                    <p id="my-profile-btn">My profile</p>
+                    <p id="log-out-btn">Log Out</p>
+                </div>
             </div>
+
+            <div id="login-popup" class="hidden-popup">
+                <img class="close-window-btn" width=15 height=15 src="./assets/img/close_btn.svg" alt="close-window">
+                
+                <div class="popup-wrapper">
+                    <div class="popup-title">login</div>
+
+                    <label for="login-e-mail" class="popup-label">E-mail or readers card</label>
+                    <input type="text" class="popup-input" id="login-e-mail">
+
+                    <label for="log-in-password" class="popup-label">Password</label>
+                    <input type="text" class="popup-input" id="log-in-password">
+
+                    <button class="popup-button" id="login-login-btn">Log In</button>
+
+                    <div class="popup-bottom-line-wrapper">
+                        <div>Don't have an account?</div>
+                        <a href="#" id="go-to-register">Register</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="register-popup" class="hidden-popup">
+                <img class="close-window-btn" width=15 height=15 src="./assets/img/close_btn.svg" alt="close-window">
+                
+                <div class="popup-wrapper">
+                    <div class="popup-title">Register</div>
+
+                    <label for="first-name" class="popup-label">First name</label>
+                    <input type="text" class="popup-input" id="first-name" pattern="[A-Za-zА-Яа-яЁё]" autocomplete="given-name">
+
+                    <label for="last-name" class="popup-label">Last name</label>
+                    <input type="text" class="popup-input" id="last-name" pattern="[A-Za-zА-Яа-яЁё]" autocomplete="family-name">
+                    
+                    <label for="register-e-mail" class="popup-label">E-mail</label>
+                    <input type="text" class="popup-input" id="register-e-mail">
+
+                    <label for="register-password" class="popup-label">Password</label>
+                    <input type="text" class="popup-input" id="register-password">
+
+                    <button class="popup-button" id="register-signup-btn">Sign Up</button>
+
+                    <div class="popup-bottom-line-wrapper">
+                        <div>Already have an account?</div>
+                        <a href="#" id="go-to-login">Login</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="my-profile-popup" class="hidden-popup">
+                <div id="my-profile-black-field">
+                    <div id="id-box">jd</div>
+                    <div id="name-box">john doe</div>
+                </div>
+                <div id="my-profile-white-field">
+                    <img class="close-window-btn" width=15 height=15 src="./assets/img/close_btn.svg" alt="close-window">
+                    <div id="white-field-wrapper">
+                        <div class="big-popup-title">My profile</div>
+                        <div id="white-field-stats">
+                            <div id="my-profile-visits">
+                                <div class="stats-title">Visits</div>
+                                <div class="stats-icon"><img src="./assets/img/visits.svg" alt="visits"></div>
+                                <div id="my-profile-visits-value" class="stats-value">23</div>
+                            </div>
+                            <div id="my-profile-bonuses">
+                                <div class="stats-title">Bonuses</div>
+                                <div class="stats-icon"><img src="./assets/img/bonuses.svg" alt="bonuses"></div>
+                                <div id="my-profile-bonuses-value" class="stats-value">1240</div>
+                            </div>
+                            <div id="my-profile-books">
+                                <div class="stats-title">Books</div>
+                                <div class="stats-icon"><img src="./assets/img/books.svg" alt="books"></div>
+                                <div id="my-profile-books-value" class="stats-value">2</div>
+                            </div>
+                        </div>
+                        <div id="white-field-rented-books">
+                            <div id="rented-books-title">Rented books</div>
+                            <div id="rented-books-list">
+                                <ul id="my-profile-ul">
+                                    <!-- <li><span>The Last Queen, Clive Irving</span></li>
+                                    <li><span>Dominicana, Angie Cruz</span></li> -->
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="white-field-card-number">
+                            <div id="card-number-title">Card number</div>
+                            <div id="card-number-code"></div>
+                            <div id="card-number-copy"><img src="./assets/img/icon_copy.svg" alt="copy-card-number"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="buy-a-card-popup" class="hidden-popup">
+                <div id="buy-a-card-header">
+                    <div class="big-popup-title">Buy a library card</div>
+                    <img class="close-window-btn" width=15 height=15 src="./assets/img/close_btn_white.svg" alt="close-window">
+                </div>
+
+                <div id="buy-a-card-wrapper">
+                    <form id="carddata">
+                        <label for="credit-card-number" class="popup-label">Bank card number</label>
+                        <input type="text" name="credit-card-number" id="credit-card-number" class="popup-input">
+
+                        <label for="exp-code" class="popup-label">Expiration code</label>
+                        <div id="exp-code-double-field">
+                            <input type="text" name="exp-code" id="exp-code" class="popup-input short-field">
+                            <input type="text" name="exp-code-ext" id="exp-code-ext" class="popup-input short-field">
+                        </div>
+
+                        <label for="cvc" class="popup-label">CVC</label><br>
+                        <input type="text" name="cvc" id="cvc" class="popup-input short-field"><br>
+
+                        <label for="holder-name" class="popup-label">Cardholder name</label>
+                        <input type="text" name="holder-name" id="holder-name" class="popup-input">
+
+                        <label for="postal" class="popup-label">Postal code</label>
+                        <input type="text" name="postal" id="postal" class="popup-input"><br>
+
+                        <label for="city" class="popup-label">City / Town</label>
+                        <input type="text" name="city" id="city" class="popup-input">
+
+                        <div id="credit-card-data-button">
+                            <button class="popup-button" id="credit-card-submit-btn" disabled>Buy</button>
+                            <p id="card-price">$ 25.00</p>
+                        </div>
+                    </form>
+                    
+                    <p id="buy-a-card-intro">If you are live, work, attend school, or pay property taxes in 
+                        New York State, you can get a $25 digital library card right 
+                        now using this online form. Visitors to New York State can 
+                        also use this form to apply for a temporary card.
+                    </p>
+                </div>
+            </div>
+            <!-- Modal windows END -->
+
         </header>
 
         <main>
@@ -41,24 +200,28 @@
             <section id="about">
                 <h2>About</h2>
 
-                <p>The Brooklyn Library is a free workspace, a large number of books and a cozy coffee shop inside</p>                
+                <p>The Brooklyn Library is a free workspace, a large number of books and a cozy coffee shop inside</p>
+                
+                <img src="./assets/img/about/Arrow-to-the-left.svg" alt="left-arrow" id="left-arrow" class="about-more-controls arrow arrow-disabled">
+                <img src="./assets/img/about/Arrow-to-the-right.svg" alt="right-arrow" id="right-arrow" class="about-more-controls arrow">
+                <div id="carousel-frame">
+                    <div id="carousel">
+                        <img src="./assets/img/about/About-image1.jpg" alt="img1">
+                        <img src="./assets/img/about/About-image2.jpg" alt="img2">
+                        <img src="./assets/img/about/About-image3.jpg" alt="img3">
+                        <img src="./assets/img/about/About-image4.jpg" alt="img4">
+                        <img src="./assets/img/about/About-image5.jpg" alt="img5">
+                    </div>
 
-                <div id="carousel">
-                    <img src="./assets/img/about/Arrow-to-the-left.svg" alt="left-arrow" class="about-more-controls" id="left-arrow">
-                    <img src="./assets/img/about/About-image1.jpg" alt="img1">
-                    <img src="./assets/img/about/About-image2.jpg" alt="img2" class="hidden-1078px">
-                    <img src="./assets/img/about/About-image3.jpg" alt="img3" class="hidden-1078px">
-                    <img src="./assets/img/about/About-image4.jpg" alt="img4" class="hidden">
-                    <img src="./assets/img/about/About-image5.jpg" alt="img5" class="hidden">
-                    <img src="./assets/img/about/Arrow-to-the-right.svg" alt="right-arrow" class="about-more-controls" id="right-arrow">
                 </div>
+                
 
                 <ul id="carousel-pagination">
-                    <li class="carousel-bullet-box"><div class="carousel-bullet"></div></li>
-                    <li class="carousel-bullet-box"><div class="carousel-bullet"></div></li>
-                    <li class="carousel-bullet-box"><div class="carousel-bullet"></div></li>
-                    <li class="carousel-bullet-box"><div class="carousel-bullet about-more-controls"></div></li>
-                    <li class="carousel-bullet-box"><div class="carousel-bullet about-more-controls"></div></li>
+                    <li class="carousel-bullet-box"><div class="carousel-bullet active-bullet" data-bulindex="1"></div></li>
+                    <li class="carousel-bullet-box"><div class="carousel-bullet" data-bulindex="2"></div></li>
+                    <li class="carousel-bullet-box"><div class="carousel-bullet" data-bulindex="3"></div></li>
+                    <li class="carousel-bullet-box"><div class="carousel-bullet about-more-controls" data-bulindex="4"></div></li>
+                    <li class="carousel-bullet-box"><div class="carousel-bullet about-more-controls" data-bulindex="5"></div></li>
                 </ul>
 
             </section>
@@ -92,7 +255,7 @@
                     </fieldset>
 
                     <div id="favorites-items-wrapper">
-                        <div class="favorite-item" id="item1">
+                        <div class="favorite-item assignOrder1" id="item1">
 
                             <p class="staff-picks">Staff Picks</p>
 
@@ -110,8 +273,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book1.jpg" alt="favorite book 1">
                         </div>
 
-
-                        <div class="favorite-item" id="item2">
+                        <div class="favorite-item assignOrder2" id="item2">
 
                             <p class="staff-picks">Staff Picks</p>
 
@@ -128,8 +290,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book2.jpg" alt="favorite book 2">
                         </div>
 
-
-                        <div class="favorite-item" id="item3">
+                        <div class="favorite-item assignOrder3" id="item3">
 
                             <p class="staff-picks">Staff Picks</p>
 
@@ -145,8 +306,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book3.jpg" alt="favorite book 3">
                         </div>
 
-
-                        <div class="favorite-item" id="item4">
+                        <div class="favorite-item assignOrder4" id="item4">
 
                             <p class="staff-picks">Staff Picks</p>
 
@@ -157,16 +317,11 @@
                                 (and her family) exploring how the Windsors have evolved 
                                 and thrived as the modern world has changed around them.
                             </p>
-                            <button class="favorite-button" disabled>Own</button>
+                            <button class="favorite-button">Buy</button>
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book4.jpg" alt="favorite book 4">
                         </div>
 
-                    </div>
-
-
-                    <div class="hidden">
-
-                        <div class="favorite-item" id="item5">
+                        <div class="favorite-item hidden-element" id="item5">
 
                             <p class="staff-picks">Staff Picks</p>
 
@@ -181,7 +336,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book5.jpg" alt="favorite book 5">
                         </div>
 
-                        <div class="favorite-item" id="item6">
+                        <div class="favorite-item hidden-element" id="item6">
 
                             <p class="staff-picks">Staff Picks</p>                        
                             
@@ -196,7 +351,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book6.jpg" alt="favorite book 6">
                         </div>
 
-                        <div class="favorite-item" id="item7">                        
+                        <div class="favorite-item hidden-element" id="item7">                        
                             
                             <p class="staff-picks">Staff Picks</p>
 
@@ -213,7 +368,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book7.jpg" alt="favorite book 7">
                         </div>
 
-                        <div class="favorite-item" id="item8">
+                        <div class="favorite-item hidden-element" id="item8">
 
                             <p class="staff-picks">Staff Picks</p>                        
                             
@@ -228,7 +383,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book8.jpg" alt="favorite book 8">
                         </div>
 
-                        <div class="favorite-item" id="item9">
+                        <div class="favorite-item hidden-element" id="item9">
 
                             <p class="staff-picks">Staff Picks</p>                        
                             
@@ -245,7 +400,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book9.jpg" alt="favorite book 9">
                         </div>
 
-                        <div class="favorite-item" id="item10">
+                        <div class="favorite-item hidden-element" id="item10">
 
                             <p class="staff-picks">Staff Picks</p>                        
                             
@@ -261,7 +416,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book10.jpg" alt="favorite book 10">
                         </div>
 
-                        <div class="favorite-item" id="item11">
+                        <div class="favorite-item hidden-element" id="item11">
 
                             <p class="staff-picks">Staff Picks</p>
                             
@@ -276,7 +431,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book11.jpg" alt="favorite book 11">
                         </div>
 
-                        <div class="favorite-item" id="item12">
+                        <div class="favorite-item hidden-element" id="item12">
 
                             <p class="staff-picks">Staff Picks</p>                        
                             
@@ -293,7 +448,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book12.jpg" alt="favorite book 12">
                         </div>
 
-                        <div class="favorite-item" id="item13">
+                        <div class="favorite-item hidden-element" id="item13">
 
                             <p class="staff-picks">Staff Picks</p>
                                                     
@@ -310,7 +465,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book13.jpg" alt="favorite book 13">
                         </div>
 
-                        <div class="favorite-item" id="item14">
+                        <div class="favorite-item hidden-element" id="item14">
 
                             <p class="staff-picks">Staff Picks</p>                        
                             
@@ -326,7 +481,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book14.jpg" alt="favorite book 14">
                         </div>
 
-                        <div class="favorite-item" id="item15">
+                        <div class="favorite-item hidden-element" id="item15">
 
                             <p class="staff-picks">Staff Picks</p>                        
                             
@@ -342,7 +497,7 @@
                             <img class="favorite-book" src="./assets/img/favorite/Favorite-Book15.jpg" alt="favorite book 15">
                         </div>
 
-                        <div class="favorite-item" id="item16">
+                        <div class="favorite-item hidden-element" id="item16">
 
                             <p class="staff-picks">Staff Picks</p>                        
                             
@@ -481,10 +636,31 @@
                         <form id="find-card-form" action="#">
                             <div id="find-card-form-input">
                                 <p>Brooklyn Public Library</p>
-                                <input type="text" pattern="[A-Za-z0-9]" placeholder="Reader's name">
-                                <input type="text" pattern="[A-Za-z0-9]" placeholder="Card number">
+                                <input type="text" id="library-card-reader-name" placeholder="Reader's name">
+                                <input type="text" id="library-card-number" placeholder="Card number">
                             </div>
-                            <button>Check the card</button>
+
+                            <div id="library-card-stats" class="hidden-element">
+                                <div id="card-stats-visits">
+                                    <p>Visits</p>
+                                    <img src="./assets/img/visits.svg" alt="visits">
+                                    <p id="card-stats-visits-value">0</p>
+                                </div>
+
+                                <div id="card-stats-bonuses">
+                                    <p>Bonuses</p>
+                                    <img src="./assets/img/bonuses.svg" alt="bonuses">
+                                    <p id="card-stats-bonuses-value">0</p>
+                                </div>
+                                
+                                <div id="card-stats-books">
+                                    <p>Books</p>
+                                    <img src="./assets/img/books.svg" alt="books">
+                                    <p id="card-stats-books-value">0</p>                                    
+                                </div>                                
+                            </div>
+
+                            <button id="check-the-card-btn">Check the card</button>
                         </form>
                     </div>
                     
@@ -497,12 +673,24 @@
                         </p>
 
                         <div id="get-a-card-buttons">
-                            <button>Sign Up</button>
-                            <button>Log in</button>
+                            <button id="sign-up-btn">Sign Up</button>
+                            <button id="log-in-btn">Log in</button>
                         </div>
-
                     </div>
-                </div>
+
+                    <div id="visit-your-profile" class="hidden-element">
+                        <p id="visit-your-profile-title">Visit your profile</p>
+                        <p id="visit-your-profile-text">
+                            With a digital library card you get free access to 
+                            the Library’s wide array of digital resources including 
+                            e-books, databases, educational resources, and more.
+                        </p>
+    
+                        <div id="visit-your-profile-button">
+                            <button id="visit-your-profile-btn">Profile</button>
+                        </div>
+                    </div>
+                </div>                                  
             </section>
         </main>
 
@@ -530,10 +718,12 @@
                 <p><a href="https://rs.school/js-stage0/">The Rolling Scopes School</a></p>
                 <p><a href="https://github.com/cheidru">Igor Checheurov</a></p>
             </div>
-
         </footer>
+
     </div>
-    <script src="burger-menu.js"></script>
-    <script src="index.js"></script>
+
+    <script src="./js/menus.js"></script>
+    <script src="./js/validation.js"></script>    
+    <script src="./js/index.js"></script>
 </body>
 </html>
